@@ -1,3 +1,4 @@
+import 'package:bangunin_id/shared/decorations.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/auth.dart';
 
@@ -7,7 +8,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffffc000),
+      backgroundColor: AppColors().primary,
       appBar: AppBar(
         title: Text('Profile'),
         backgroundColor: Colors.transparent,
@@ -15,8 +16,8 @@ class Home extends StatelessWidget {
         elevation: 0.0,
         actions: <Widget>[
           FlatButton.icon(
-            icon: Icon(Icons.logout, color: Colors.white),
-            label: Text('Keluar', style: TextStyle(color: Colors.white)),
+            icon: Icon(Icons.logout, color: AppColors().accent1),
+            label: Text('Keluar', style: TextStyle(color: AppColors().accent1)),
             onPressed: () async {
               await _auth.signOut();
             },

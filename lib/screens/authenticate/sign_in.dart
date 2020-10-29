@@ -30,17 +30,12 @@ class _SignInState extends State<SignIn> {
       return Loading();
     } else {
       return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          statusBarIconBrightness: Brightness.dark,
-          systemNavigationBarColor: Colors.transparent,
-          systemNavigationBarIconBrightness: Brightness.dark,
-        ),
+        value: transparentAppbar(),
         child: Scaffold(
           extendBodyBehindAppBar: true,
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors().accent1,
           body: Container(
-            decoration: authBackground,
+            decoration: authBground(),
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
             child: Center(
               child: SingleChildScrollView(
@@ -48,11 +43,11 @@ class _SignInState extends State<SignIn> {
                   key: _formKey,
                   child: Column(
                     children: <Widget>[
-                      logo,
+                      authLogo(),
                       SizedBox(height: 20.0),
                       TextFormField(
                         decoration:
-                            textInputDecoration.copyWith(hintText: 'Email'),
+                            inputBoxBorder().copyWith(hintText: 'email'),
                         validator: (val) => (val.isEmpty | !val.contains('@'))
                             ? 'Masukkan email yang valid'
                             : null,
@@ -63,7 +58,7 @@ class _SignInState extends State<SignIn> {
                       SizedBox(height: 20.0),
                       TextFormField(
                         decoration:
-                            textInputDecoration.copyWith(hintText: 'Password'),
+                            inputBoxBorder().copyWith(hintText: 'Password'),
                         obscureText: true,
                         validator: (val) => val.length < 6
                             ? 'Masukkan password (6 huruf atau lebih)'
@@ -79,7 +74,7 @@ class _SignInState extends State<SignIn> {
                           child: Text(
                             'Lupa password?',
                             style: TextStyle(
-                              color: Colors.grey,
+                              color: AppColors().accent2,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -95,10 +90,10 @@ class _SignInState extends State<SignIn> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0),
                           ),
-                          color: Color(0xffffc000),
+                          color: AppColors().primary,
                           child: Text(
                             'Masuk',
-                            style: TextStyle(color: Colors.black),
+                            style: TextStyle(color: AppColors().accent1),
                           ),
                           onPressed: () async {
                             if (_formKey.currentState.validate()) {
@@ -128,7 +123,7 @@ class _SignInState extends State<SignIn> {
                           child: Text(
                             'Belum memiliki akun? Klik di sini.',
                             style: TextStyle(
-                              color: Colors.grey,
+                              color: AppColors().accent2,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
