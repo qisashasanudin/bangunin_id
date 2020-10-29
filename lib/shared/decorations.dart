@@ -35,7 +35,7 @@ SystemUiOverlayStyle transparentAppbarAndNavbar() {
   );
 }
 
-ClipRRect authLogo() {
+ClipRRect loginLogo() {
   return ClipRRect(
     borderRadius: BorderRadius.circular(16.0),
     child: Image.asset(
@@ -47,7 +47,7 @@ ClipRRect authLogo() {
   );
 }
 
-BoxDecoration authBground() {
+BoxDecoration loginBground() {
   return BoxDecoration(
     image: DecorationImage(
       alignment: Alignment.bottomCenter,

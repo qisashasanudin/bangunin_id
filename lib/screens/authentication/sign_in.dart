@@ -3,22 +3,21 @@ import 'package:flutter/services.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/shared/decorations.dart';
 
-class Register extends StatefulWidget {
+class SignIn extends StatefulWidget {
   final Function toggleView;
-  Register({
+  SignIn({
     @required this.toggleView,
   });
 
   @override
-  _RegisterState createState() => _RegisterState();
+  _SignInState createState() => _SignInState();
 }
 
-class _RegisterState extends State<Register> {
+class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
-  bool hidePass = true;
-  bool hidePassConfir = true;
+  bool hidePassword = true;
 
   //text field state
   String email = '';
@@ -36,7 +35,7 @@ class _RegisterState extends State<Register> {
           extendBodyBehindAppBar: true,
           backgroundColor: AppColors().accent1,
           body: Container(
-            decoration: authBground(),
+            decoration: loginBground(),
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
             child: Center(
               child: SingleChildScrollView(
@@ -44,7 +43,7 @@ class _RegisterState extends State<Register> {
                   key: _formKey,
                   child: Column(
                     children: <Widget>[
-                      authLogo(),
+                      loginLogo(),
                       SizedBox(height: 20.0),
                       TextFormField(
                         decoration:
@@ -60,8 +59,8 @@ class _RegisterState extends State<Register> {
                       TextFormField(
                         decoration: inputBoxBorder().copyWith(
                             hintText: 'Password',
-                            suffixIcon: togglePassVisibility()),
-                        obscureText: hidePass,
+                            suffixIcon: togglePasswordVisibility()),
+                        obscureText: hidePassword,
                         validator: (val) => val.length < 6
                             ? 'Masukkan password (6 huruf atau lebih)'
                             : null,
@@ -69,15 +68,21 @@ class _RegisterState extends State<Register> {
                           setState(() => password = val);
                         },
                       ),
-                      SizedBox(height: 20.0),
-                      TextFormField(
-                        decoration: inputBoxBorder().copyWith(
-                            hintText: 'Konfirmasi password',
-                            suffixIcon: togglePassConfirVisibility()),
-                        obscureText: hidePassConfir,
-                        validator: (val) => val != password
-                            ? 'Kedua password harus sama'
-                            : null,
+                      SizedBox(height: 10.0),
+                      InkWell(
+                        child: Container(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            'Lupa password?',
+                            style: TextStyle(
+                              color: AppColors().accent2,
+                              //fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        onTap: () async {
+                          //Belum jadi, harusnya ada screen ganti password
+                        },
                       ),
                       SizedBox(height: 20.0),
                       SizedBox(
@@ -88,7 +93,7 @@ class _RegisterState extends State<Register> {
                           ),
                           color: AppColors().primary,
                           child: Text(
-                            'Daftar',
+                            'Masuk',
                             style: TextStyle(color: AppColors().accent1),
                           ),
                           onPressed: () async {
@@ -96,11 +101,12 @@ class _RegisterState extends State<Register> {
                               setState(() {
                                 loading = true;
                               });
-                              dynamic result = await _auth.registerWithEmail(
-                                  email, password);
+                              dynamic result =
+                                  await _auth.signInWithEmail(email, password);
                               if (result == null) {
                                 setState(() {
-                                  error = 'Registrasi tidak berhasil.';
+                                  error =
+                                      'Login tidak berhasil. Periksa kembali email, password, dan koneksi internet anda.';
                                   loading = false;
                                 });
                               }
@@ -116,7 +122,7 @@ class _RegisterState extends State<Register> {
                       InkWell(
                         child: Container(
                           child: Text(
-                            'Sudah memiliki akun? Klik di sini.',
+                            'Belum memiliki akun? Klik di sini.',
                             style: TextStyle(
                               color: AppColors().accent2,
                               //fontWeight: FontWeight.bold,
@@ -138,29 +144,15 @@ class _RegisterState extends State<Register> {
     }
   }
 
-  GestureDetector togglePassVisibility() {
+  GestureDetector togglePasswordVisibility() {
     return GestureDetector(
       child: Icon(
-        (hidePass ? Icons.visibility : Icons.visibility_off),
+        (hidePassword ? Icons.visibility : Icons.visibility_off),
         color: Colors.grey,
       ),
       onTap: () {
         setState(() {
-          hidePass = !hidePass;
-        });
-      },
-    );
-  }
-
-  GestureDetector togglePassConfirVisibility() {
-    return GestureDetector(
-      child: Icon(
-        (hidePassConfir ? Icons.visibility : Icons.visibility_off),
-        color: Colors.grey,
-      ),
-      onTap: () {
-        setState(() {
-          hidePassConfir = !hidePassConfir;
+          hidePassword = !hidePassword;
         });
       },
     );
