@@ -24,7 +24,7 @@ var textInputDecoration = InputDecoration(
 var authenticationBackground = BoxDecoration(
   image: DecorationImage(
     alignment: Alignment.bottomCenter,
-    image: AssetImage("assets/img/authbg.jpg"),
+    image: AssetImage('assets/img/authbg.jpg'),
     colorFilter:
         new ColorFilter.mode(Colors.black.withOpacity(0.4), BlendMode.dstATop),
   ),
