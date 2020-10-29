@@ -31,7 +31,7 @@ var logo = ClipRRect(
   ),
 );
 
-var authenticationBackground = BoxDecoration(
+var authBackground = BoxDecoration(
   image: DecorationImage(
     alignment: Alignment.bottomCenter,
     image: AssetImage('assets/img/auth_bg.jpg'),

@@ -9,7 +9,7 @@ class SignIn extends StatefulWidget {
   SignIn({
     @required this.toggleView,
   });
-  
+
   @override
   _SignInState createState() => _SignInState();
 }
@@ -40,7 +40,7 @@ class _SignInState extends State<SignIn> {
           extendBodyBehindAppBar: true,
           backgroundColor: Colors.white,
           body: Container(
-            decoration: authenticationBackground,
+            decoration: authBackground,
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
             child: Center(
               child: SingleChildScrollView(

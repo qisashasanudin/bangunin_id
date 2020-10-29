@@ -41,7 +41,7 @@ class _RegisterState extends State<Register> {
           extendBodyBehindAppBar: true,
           backgroundColor: Colors.white,
           body: Container(
-            decoration: authenticationBackground,
+            decoration: authBackground,
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
             child: Center(
               child: SingleChildScrollView(
