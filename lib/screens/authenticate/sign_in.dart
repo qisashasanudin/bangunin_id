@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:bangunin_id/services/auth.dart';
-import 'package:bangunin_id/shared/constants.dart';
+import 'package:bangunin_id/shared/decorations.dart';
 import 'package:bangunin_id/shared/loading.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
-  SignIn({this.toggleView});
-
+  SignIn({
+    @required this.toggleView,
+  });
+  
   @override
   _SignInState createState() => _SignInState();
 }
@@ -46,18 +48,14 @@ class _SignInState extends State<SignIn> {
                   key: _formKey,
                   child: Column(
                     children: <Widget>[
-                      Image.asset(
-                        "assets/img/logo.jpg",
-                        height: 120,
-                        width: 120,
-                        fit: BoxFit.fill,
-                      ),
+                      logo,
                       SizedBox(height: 20.0),
                       TextFormField(
                         decoration:
                             textInputDecoration.copyWith(hintText: 'Email'),
-                        validator: (val) =>
-                            val.isEmpty ? 'Masukkan email' : null,
+                        validator: (val) => (val.isEmpty | !val.contains('@'))
+                            ? 'Masukkan email yang valid'
+                            : null,
                         onChanged: (val) {
                           setState(() => email = val);
                         },
@@ -86,7 +84,9 @@ class _SignInState extends State<SignIn> {
                             ),
                           ),
                         ),
-                        onTap: () {},
+                        onTap: () async {
+                          //Belum jadi, harusnya ada screen ganti password
+                        },
                       ),
                       SizedBox(height: 20.0),
                       SizedBox(
@@ -95,7 +95,7 @@ class _SignInState extends State<SignIn> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0),
                           ),
-                          color: Colors.yellow[700],
+                          color: Color(0xffffc000),
                           child: Text(
                             'Masuk',
                             style: TextStyle(color: Colors.black),
@@ -126,9 +126,9 @@ class _SignInState extends State<SignIn> {
                       InkWell(
                         child: Container(
                           child: Text(
-                            'Belum memiliki akun? Daftar di sini.',
+                            'Belum memiliki akun? Klik di sini.',
                             style: TextStyle(
-                              color: Colors.yellow[800],
+                              color: Colors.grey,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

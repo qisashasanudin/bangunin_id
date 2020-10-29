@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:bangunin_id/services/auth.dart';
-import 'package:bangunin_id/shared/constants.dart';
+import 'package:bangunin_id/shared/decorations.dart';
 import 'package:bangunin_id/shared/loading.dart';
 
 class Register extends StatefulWidget {
   final Function toggleView;
-  Register({this.toggleView});
+  Register({
+    @required this.toggleView,
+  });
 
   @override
   _RegisterState createState() => _RegisterState();
@@ -47,18 +49,14 @@ class _RegisterState extends State<Register> {
                   key: _formKey,
                   child: Column(
                     children: <Widget>[
-                      Image.asset(
-                        "assets/img/logo.jpg",
-                        height: 120,
-                        width: 120,
-                        fit: BoxFit.fill,
-                      ),
+                      logo,
                       SizedBox(height: 20.0),
                       TextFormField(
                         decoration:
                             textInputDecoration.copyWith(hintText: 'Email'),
-                        validator: (val) =>
-                            val.isEmpty ? 'Masukkan email' : null,
+                        validator: (val) => (val.isEmpty | !val.contains('@'))
+                            ? 'Masukkan email yang valid'
+                            : null,
                         onChanged: (val) {
                           setState(() => email = val);
                         },
@@ -91,7 +89,7 @@ class _RegisterState extends State<Register> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0),
                           ),
-                          color: Colors.yellow[700],
+                          color: Color(0xffffc000),
                           child: Text(
                             'Daftar',
                             style: TextStyle(color: Colors.black),
@@ -121,9 +119,9 @@ class _RegisterState extends State<Register> {
                       InkWell(
                         child: Container(
                           child: Text(
-                            'Sudah memiliki akun? Login di sini.',
+                            'Sudah memiliki akun? Klik di sini.',
                             style: TextStyle(
-                              color: Colors.yellow[800],
+                              color: Colors.grey,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

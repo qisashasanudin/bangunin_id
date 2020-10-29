@@ -7,10 +7,10 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange[50],
+      backgroundColor: Color(0xffffc000),
       appBar: AppBar(
         title: Text('Profile'),
-        backgroundColor: Colors.orange[400],
+        backgroundColor: Colors.transparent,
         centerTitle: true,
         elevation: 0.0,
         actions: <Widget>[

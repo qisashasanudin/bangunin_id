@@ -21,10 +21,20 @@ var textInputDecoration = InputDecoration(
   ),
 );
 
+var logo = ClipRRect(
+  borderRadius: BorderRadius.circular(16.0),
+  child: Image.asset(
+    "assets/img/logo.jpg",
+    height: 120,
+    width: 120,
+    fit: BoxFit.fill,
+  ),
+);
+
 var authenticationBackground = BoxDecoration(
   image: DecorationImage(
     alignment: Alignment.bottomCenter,
-    image: AssetImage('assets/img/authbg.jpg'),
+    image: AssetImage('assets/img/auth_bg.jpg'),
     colorFilter:
         new ColorFilter.mode(Colors.black.withOpacity(0.4), BlendMode.dstATop),
   ),
