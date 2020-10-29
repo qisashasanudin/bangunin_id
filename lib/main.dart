@@ -4,8 +4,6 @@ import 'package:bangunin_id/screens/screen_wrapper.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:provider/provider.dart';
 
-
-
 void main() {
   runApp(MyApp());
 }

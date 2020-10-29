@@ -117,7 +117,7 @@ class _RegisterState extends State<Register> {
                             'Sudah memiliki akun? Klik di sini.',
                             style: TextStyle(
                               color: AppColors().accent2,
-                              fontWeight: FontWeight.bold,
+                              //fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),

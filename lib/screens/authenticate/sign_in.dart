@@ -75,7 +75,7 @@ class _SignInState extends State<SignIn> {
                             'Lupa password?',
                             style: TextStyle(
                               color: AppColors().accent2,
-                              fontWeight: FontWeight.bold,
+                              //fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -124,7 +124,7 @@ class _SignInState extends State<SignIn> {
                             'Belum memiliki akun? Klik di sini.',
                             style: TextStyle(
                               color: AppColors().accent2,
-                              fontWeight: FontWeight.bold,
+                              //fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
