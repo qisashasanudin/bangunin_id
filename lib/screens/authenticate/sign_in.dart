@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/shared/decorations.dart';
-import 'package:bangunin_id/shared/loading.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -18,6 +17,7 @@ class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
+  bool hidePassword = true;
 
   //text field state
   String email = '';
@@ -27,10 +27,10 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     if (loading) {
-      return Loading();
+      return LoadingScreen();
     } else {
       return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: transparentAppbar(),
+        value: transparentAppbarAndNavbar(),
         child: Scaffold(
           extendBodyBehindAppBar: true,
           backgroundColor: AppColors().accent1,
@@ -47,7 +47,7 @@ class _SignInState extends State<SignIn> {
                       SizedBox(height: 20.0),
                       TextFormField(
                         decoration:
-                            inputBoxBorder().copyWith(hintText: 'email'),
+                            inputBoxBorder().copyWith(hintText: 'Email'),
                         validator: (val) => (val.isEmpty | !val.contains('@'))
                             ? 'Masukkan email yang valid'
                             : null,
@@ -57,9 +57,10 @@ class _SignInState extends State<SignIn> {
                       ),
                       SizedBox(height: 20.0),
                       TextFormField(
-                        decoration:
-                            inputBoxBorder().copyWith(hintText: 'Password'),
-                        obscureText: true,
+                        decoration: inputBoxBorder().copyWith(
+                            hintText: 'Password',
+                            suffixIcon: togglePasswordVisibility()),
+                        obscureText: hidePassword,
                         validator: (val) => val.length < 6
                             ? 'Masukkan password (6 huruf atau lebih)'
                             : null,
@@ -141,5 +142,19 @@ class _SignInState extends State<SignIn> {
         ),
       );
     }
+  }
+
+  GestureDetector togglePasswordVisibility() {
+    return GestureDetector(
+      child: Icon(
+        (hidePassword ? Icons.visibility : Icons.visibility_off),
+        color: Colors.grey,
+      ),
+      onTap: () {
+        setState(() {
+          hidePassword = !hidePassword;
+        });
+      },
+    );
   }
 }

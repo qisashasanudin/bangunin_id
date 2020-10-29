@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/shared/decorations.dart';
-import 'package:bangunin_id/shared/loading.dart';
 
 class Register extends StatefulWidget {
   final Function toggleView;
@@ -18,9 +17,10 @@ class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
+  bool hidePass = true;
+  bool hidePassConfir = true;
 
   //text field state
-  String name = '';
   String email = '';
   String password = '';
   String error = '';
@@ -28,10 +28,10 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     if (loading) {
-      return Loading();
+      return LoadingScreen();
     } else {
       return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: transparentAppbar(),
+        value: transparentAppbarAndNavbar(),
         child: Scaffold(
           extendBodyBehindAppBar: true,
           backgroundColor: AppColors().accent1,
@@ -58,9 +58,10 @@ class _RegisterState extends State<Register> {
                       ),
                       SizedBox(height: 20.0),
                       TextFormField(
-                        decoration:
-                            inputBoxBorder().copyWith(hintText: 'Password'),
-                        obscureText: true,
+                        decoration: inputBoxBorder().copyWith(
+                            hintText: 'Password',
+                            suffixIcon: togglePassVisibility()),
+                        obscureText: hidePass,
                         validator: (val) => val.length < 6
                             ? 'Masukkan password (6 huruf atau lebih)'
                             : null,
@@ -70,9 +71,10 @@ class _RegisterState extends State<Register> {
                       ),
                       SizedBox(height: 20.0),
                       TextFormField(
-                        decoration: inputBoxBorder()
-                            .copyWith(hintText: 'Konfirmasi password'),
-                        obscureText: true,
+                        decoration: inputBoxBorder().copyWith(
+                            hintText: 'Konfirmasi password',
+                            suffixIcon: togglePassConfirVisibility()),
+                        obscureText: hidePassConfir,
                         validator: (val) => val != password
                             ? 'Kedua password harus sama'
                             : null,
@@ -134,5 +136,33 @@ class _RegisterState extends State<Register> {
         ),
       );
     }
+  }
+
+  GestureDetector togglePassVisibility() {
+    return GestureDetector(
+      child: Icon(
+        (hidePass ? Icons.visibility : Icons.visibility_off),
+        color: Colors.grey,
+      ),
+      onTap: () {
+        setState(() {
+          hidePass = !hidePass;
+        });
+      },
+    );
+  }
+
+  GestureDetector togglePassConfirVisibility() {
+    return GestureDetector(
+      child: Icon(
+        (hidePassConfir ? Icons.visibility : Icons.visibility_off),
+        color: Colors.grey,
+      ),
+      onTap: () {
+        setState(() {
+          hidePassConfir = !hidePassConfir;
+        });
+      },
+    );
   }
 }

@@ -11,9 +11,9 @@ class ScreenWrapper extends StatefulWidget {
 }
 
 class _ScreenWrapperState extends State<ScreenWrapper> {
-  bool showSignIn = true;
+  bool signInScreen = true;
   void toggleView() {
-    setState(() => showSignIn = !showSignIn);
+    setState(() => signInScreen = !signInScreen);
   }
 
   @override
@@ -21,7 +21,7 @@ class _ScreenWrapperState extends State<ScreenWrapper> {
     final user = Provider.of<User>(context);
     //return either SignIn, Register, or Home widget
     if (user == null) {
-      if (showSignIn == true) {
+      if (signInScreen == true) {
         return SignIn(toggleView: toggleView);
       } else {
         return Register(toggleView: toggleView);
