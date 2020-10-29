@@ -9,13 +9,14 @@ class Home extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.orange[50],
       appBar: AppBar(
-        title: Text('Profile Mandor'),
+        title: Text('Profile'),
         backgroundColor: Colors.orange[400],
+        centerTitle: true,
         elevation: 0.0,
         actions: <Widget>[
           FlatButton.icon(
-            icon: Icon(Icons.person),
-            label: Text('logout'),
+            icon: Icon(Icons.logout, color: Colors.white),
+            label: Text('Keluar', style: TextStyle(color: Colors.white)),
             onPressed: () async {
               await _auth.signOut();
             },
