@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class AppColors {
   final primary = const Color(0xffffc000);
@@ -9,21 +8,6 @@ class AppColors {
   final accent3 = Colors.grey;
 
   const AppColors();
-}
-
-class LoadingScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: AppColors().accent1,
-      child: Center(
-        child: SpinKitWanderingCubes(
-          color: AppColors().primary,
-          size: 50.0,
-        ),
-      ),
-    );
-  }
 }
 
 SystemUiOverlayStyle transparentAppbarAndNavbar() {

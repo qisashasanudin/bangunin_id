@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/shared/decorations.dart';
+import 'package:bangunin_id/screens/transition/loading.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
