@@ -83,9 +83,6 @@ class _RegisterState extends State<Register> {
                         validator: (val) => val != password
                             ? 'Kedua password harus sama'
                             : null,
-                        onChanged: (val) {
-                          setState(() => password = val);
-                        },
                       ),
                       SizedBox(height: 20.0),
                       SizedBox(
