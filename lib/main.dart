@@ -1,9 +1,9 @@
-import 'package:bangunin_id/screens/home/projects/new_project.dart';
-import 'package:bangunin_id/screens/home/projects/project_details.dart';
-import 'package:bangunin_id/screens/home/tab_account.dart';
-import 'package:bangunin_id/screens/home/tab_home.dart';
-import 'package:bangunin_id/screens/home/tab_settings.dart';
 import 'package:bangunin_id/screens/main_page_wrapper.dart';
+import 'package:bangunin_id/screens/mainmenu/projects/new_project.dart';
+import 'package:bangunin_id/screens/mainmenu/projects/project_details.dart';
+import 'package:bangunin_id/screens/mainmenu/tab_account.dart';
+import 'package:bangunin_id/screens/mainmenu/tab_home.dart';
+import 'package:bangunin_id/screens/mainmenu/tab_settings.dart';
 import 'package:bangunin_id/screens/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/models/user.dart';

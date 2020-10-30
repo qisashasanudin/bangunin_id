@@ -1,15 +1,15 @@
-import 'package:bangunin_id/screens/home/tab_account.dart';
-import 'package:bangunin_id/screens/home/tab_home.dart';
-import 'package:bangunin_id/screens/home/tab_settings.dart';
+import 'package:bangunin_id/screens/mainmenu/tab_account.dart';
+import 'package:bangunin_id/screens/mainmenu/tab_home.dart';
+import 'package:bangunin_id/screens/mainmenu/tab_settings.dart';
 import 'package:bangunin_id/shared/decorations.dart';
 import 'package:flutter/material.dart';
 
-class MainMenu extends StatefulWidget {
+class MainMenuNav extends StatefulWidget {
   @override
-  _MainMenuState createState() => _MainMenuState();
+  _MainMenuNavState createState() => _MainMenuNavState();
 }
 
-class _MainMenuState extends State<MainMenu> {
+class _MainMenuNavState extends State<MainMenuNav> {
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = <Widget>[
     Home(),
