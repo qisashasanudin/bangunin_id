@@ -3,7 +3,7 @@ import 'package:bangunin_id/screens/home/projects/project_details.dart';
 import 'package:bangunin_id/screens/home/tab_account.dart';
 import 'package:bangunin_id/screens/home/tab_home.dart';
 import 'package:bangunin_id/screens/home/tab_settings.dart';
-import 'package:bangunin_id/screens/main_page_wrapper.dart';
+import 'package:bangunin_id/screens/main_menu_wrapper.dart';
 import 'package:bangunin_id/screens/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/models/user.dart';
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/splashscreen',
         routes: {
           '/splashscreen': (context) => SplashScreen(),
-          '/mainpage': (context) => MainPageWrapper(),
+          '/mainmenu': (context) => MainMenuWrapper(),
           '/home': (context) => Home(),
           '/account': (context) => Account(),
           '/settings': (context) => Settings(),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:bangunin_id/shared/decorations.dart';
-import 'package:bangunin_id/screens/main_page_wrapper.dart';
+import 'package:bangunin_id/screens/main_menu_wrapper.dart';
 import '../shared/decorations.dart';
-import 'main_page_wrapper.dart';
+import 'main_menu_wrapper.dart';
 
 class SplashScreen extends StatefulWidget {
   _SplashScreen createState() => _SplashScreen();
@@ -20,7 +20,7 @@ class _SplashScreen extends State<SplashScreen> {
     return Timer(duration, () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => MainPageWrapper()),
+        MaterialPageRoute(builder: (context) => MainMenuWrapper()),
       );
     });
   }

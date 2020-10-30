@@ -4,12 +4,12 @@ import 'package:bangunin_id/screens/home/tab_settings.dart';
 import 'package:bangunin_id/shared/decorations.dart';
 import 'package:flutter/material.dart';
 
-class MainPage extends StatefulWidget {
+class MainMenu extends StatefulWidget {
   @override
-  _MainPageState createState() => _MainPageState();
+  _MainMenuState createState() => _MainMenuState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainMenuState extends State<MainMenu> {
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = <Widget>[
     Home(),
