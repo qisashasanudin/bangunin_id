@@ -142,12 +142,12 @@ class _SignInState extends State<SignIn> {
           'Masuk',
           style: TextStyle(color: AppColors().accent1),
         ),
-        onPressed: submitData,
+        onPressed: uploadData,
       ),
     );
   }
 
-  void submitData() async {
+  void uploadData() async {
     if (_formKey.currentState.validate()) {
       setState(() {
         loading = true;
