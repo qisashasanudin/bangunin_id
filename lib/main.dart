@@ -5,6 +5,7 @@ import 'package:bangunin_id/screens/home/new_project.dart';
 import 'package:bangunin_id/screens/home/project_details.dart';
 import 'package:bangunin_id/screens/home/account_settings.dart';
 import 'package:bangunin_id/services/auth.dart';
+import 'package:bangunin_id/shared/decorations.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -19,6 +20,13 @@ class MyApp extends StatelessWidget {
       value: AuthService().user,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        title: 'Bangunin.id',
+        theme: ThemeData(
+          brightness: Brightness.light,
+          primaryColor: AppColors().primary,
+          accentColor: AppColors().accent1,
+          //fontFamily: 'Georgia',
+        ),
         initialRoute: '/home',
         routes: {
           '/home': (context) => HomepageWrapper(),
