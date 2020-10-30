@@ -4,4 +4,9 @@
     <item android:drawable="@color/kuning_bangunin_id" />
 
     <!-- You can insert your own image assets here -->
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@mipmap/ic_launcher" />
+    </item>
 </layer-list>
