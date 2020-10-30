@@ -47,39 +47,11 @@ class _RegisterState extends State<Register> {
                     children: <Widget>[
                       loginLogo(),
                       SizedBox(height: 40.0),
-                      TextFormField(
-                        decoration:
-                            inputBoxBorder().copyWith(hintText: 'Email'),
-                        validator: (val) => (val.isEmpty | !val.contains('@'))
-                            ? 'Masukkan email yang valid'
-                            : null,
-                        onChanged: (val) {
-                          setState(() => email = val);
-                        },
-                      ),
+                      emailForm(),
                       SizedBox(height: 20.0),
-                      TextFormField(
-                        decoration: inputBoxBorder().copyWith(
-                            hintText: 'Password',
-                            suffixIcon: togglePassVisibility()),
-                        obscureText: _hidePass,
-                        validator: (val) => val.length < 6
-                            ? 'Masukkan password (6 huruf atau lebih)'
-                            : null,
-                        onChanged: (val) {
-                          setState(() => password = val);
-                        },
-                      ),
+                      passwordForm(),
                       SizedBox(height: 20.0),
-                      TextFormField(
-                        decoration: inputBoxBorder().copyWith(
-                            hintText: 'Konfirmasi password',
-                            suffixIcon: togglePassConfirVisibility()),
-                        obscureText: _hidePassConfir,
-                        validator: (val) => val != password
-                            ? 'Kedua password harus sama'
-                            : null,
-                      ),
+                      passwordConfirForm(),
                       SizedBox(height: 20.0),
                       SizedBox(
                         width: double.infinity,
@@ -114,32 +86,7 @@ class _RegisterState extends State<Register> {
                         style: TextStyle(color: Colors.red, fontSize: 14.0),
                       ),
                       SizedBox(height: 20.0),
-                      InkWell(
-                        child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                "Sudah memiliki akun? ",
-                                style: TextStyle(
-                                  color: AppColors().accent2,
-                                ),
-                              ),
-                              Text(
-                                "Login di sini.",
-                                style: TextStyle(
-                                  color: AppColors().accent2,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onTap: () {
-                          widget.toggleView();
-                        },
-                      ),
+                      switchToLogin(),
                     ],
                   ),
                 ),
@@ -149,6 +96,31 @@ class _RegisterState extends State<Register> {
         ),
       );
     }
+  }
+
+  TextFormField emailForm() {
+    return TextFormField(
+      decoration: inputBoxBorder().copyWith(hintText: 'Email'),
+      validator: (val) => (val.isEmpty | !val.contains('@'))
+          ? 'Masukkan email yang valid'
+          : null,
+      onChanged: (val) {
+        setState(() => email = val);
+      },
+    );
+  }
+
+  TextFormField passwordForm() {
+    return TextFormField(
+      decoration: inputBoxBorder()
+          .copyWith(hintText: 'Password', suffixIcon: togglePassVisibility()),
+      obscureText: _hidePass,
+      validator: (val) =>
+          val.length < 6 ? 'Masukkan password (6 huruf atau lebih)' : null,
+      onChanged: (val) {
+        setState(() => password = val);
+      },
+    );
   }
 
   GestureDetector togglePassVisibility() {
@@ -165,6 +137,16 @@ class _RegisterState extends State<Register> {
     );
   }
 
+  TextFormField passwordConfirForm() {
+    return TextFormField(
+      decoration: inputBoxBorder().copyWith(
+          hintText: 'Konfirmasi password',
+          suffixIcon: togglePassConfirVisibility()),
+      obscureText: _hidePassConfir,
+      validator: (val) => val != password ? 'Kedua password harus sama' : null,
+    );
+  }
+
   GestureDetector togglePassConfirVisibility() {
     return GestureDetector(
       child: Icon(
@@ -175,6 +157,35 @@ class _RegisterState extends State<Register> {
         setState(() {
           _hidePassConfir = !_hidePassConfir;
         });
+      },
+    );
+  }
+
+  InkWell switchToLogin() {
+    return InkWell(
+      child: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              "Sudah memiliki akun? ",
+              style: TextStyle(
+                color: AppColors().accent2,
+              ),
+            ),
+            Text(
+              "Login di sini.",
+              style: TextStyle(
+                color: AppColors().accent2,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+      onTap: () {
+        widget.toggleView();
       },
     );
   }

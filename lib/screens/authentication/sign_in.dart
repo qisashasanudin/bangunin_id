@@ -48,46 +48,11 @@ class _SignInState extends State<SignIn> {
                     children: <Widget>[
                       loginLogo(),
                       SizedBox(height: 40.0),
-                      TextFormField(
-                        decoration:
-                            inputBoxBorder().copyWith(hintText: 'Email'),
-                        initialValue: email,
-                        validator: (val) => (val.isEmpty | !val.contains('@'))
-                            ? 'Masukkan email yang valid'
-                            : null,
-                        onChanged: (val) {
-                          setState(() => email = val);
-                        },
-                      ),
+                      emailForm(),
                       SizedBox(height: 20.0),
-                      TextFormField(
-                        decoration: inputBoxBorder().copyWith(
-                            hintText: 'Password',
-                            suffixIcon: togglePassVisibility()),
-                        obscureText: _hidePass,
-                        validator: (val) => val.length < 6
-                            ? 'Masukkan password (6 huruf atau lebih)'
-                            : null,
-                        onChanged: (val) {
-                          setState(() => password = val);
-                        },
-                      ),
+                      passwordForm(),
                       SizedBox(height: 10.0),
-                      InkWell(
-                        child: Container(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            'Lupa password?',
-                            style: TextStyle(
-                              color: AppColors().accent2,
-                              //fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        onTap: () async {
-                          //Belum jadi, harusnya ada screen ganti password
-                        },
-                      ),
+                      forgotPassword(),
                       SizedBox(height: 20.0),
                       SizedBox(
                         width: double.infinity,
@@ -123,32 +88,7 @@ class _SignInState extends State<SignIn> {
                         style: TextStyle(color: Colors.red, fontSize: 14.0),
                       ),
                       SizedBox(height: 20.0),
-                      InkWell(
-                        child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                "Belum memiliki akun? ",
-                                style: TextStyle(
-                                  color: AppColors().accent2,
-                                ),
-                              ),
-                              Text(
-                                "Daftar di sini.",
-                                style: TextStyle(
-                                  color: AppColors().accent2,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onTap: () {
-                          widget.toggleView();
-                        },
-                      ),
+                      switchToRegister(),
                     ],
                   ),
                 ),
@@ -158,6 +98,32 @@ class _SignInState extends State<SignIn> {
         ),
       );
     }
+  }
+
+  TextFormField emailForm() {
+    return TextFormField(
+      decoration: inputBoxBorder().copyWith(hintText: 'Email'),
+      initialValue: email,
+      validator: (val) => (val.isEmpty | !val.contains('@'))
+          ? 'Masukkan email yang valid'
+          : null,
+      onChanged: (val) {
+        setState(() => email = val);
+      },
+    );
+  }
+
+  TextFormField passwordForm() {
+    return TextFormField(
+      decoration: inputBoxBorder()
+          .copyWith(hintText: 'Password', suffixIcon: togglePassVisibility()),
+      obscureText: _hidePass,
+      validator: (val) =>
+          val.length < 6 ? 'Masukkan password (6 huruf atau lebih)' : null,
+      onChanged: (val) {
+        setState(() => password = val);
+      },
+    );
   }
 
   GestureDetector togglePassVisibility() {
@@ -170,6 +136,53 @@ class _SignInState extends State<SignIn> {
         setState(() {
           _hidePass = !_hidePass;
         });
+      },
+    );
+  }
+
+  InkWell forgotPassword() {
+    return InkWell(
+      child: Container(
+        alignment: Alignment.centerRight,
+        child: Text(
+          'Lupa password?',
+          style: TextStyle(
+            color: AppColors().accent2,
+            //fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      onTap: () async {
+        //Belum jadi, harusnya ada screen ganti password
+      },
+    );
+  }
+
+  InkWell switchToRegister() {
+    return InkWell(
+      child: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              "Belum memiliki akun? ",
+              style: TextStyle(
+                color: AppColors().accent2,
+              ),
+            ),
+            Text(
+              "Daftar di sini.",
+              style: TextStyle(
+                color: AppColors().accent2,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+      onTap: () {
+        widget.toggleView();
       },
     );
   }
