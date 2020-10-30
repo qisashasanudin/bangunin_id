@@ -25,7 +25,6 @@ class _AccountState extends State<Account> {
             label: Text('Keluar', style: TextStyle(color: AppColors().accent1)),
             onPressed: () async {
               await _auth.signOut();
-              Navigator.of(context).pop();
             },
           )
         ],
