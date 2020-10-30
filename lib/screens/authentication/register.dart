@@ -53,34 +53,7 @@ class _RegisterState extends State<Register> {
                       SizedBox(height: 20.0),
                       passwordConfirForm(),
                       SizedBox(height: 20.0),
-                      SizedBox(
-                        width: double.infinity,
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          color: AppColors().primary,
-                          child: Text(
-                            'Daftar',
-                            style: TextStyle(color: AppColors().accent1),
-                          ),
-                          onPressed: () async {
-                            if (_formKey.currentState.validate()) {
-                              setState(() {
-                                loading = true;
-                              });
-                              dynamic result = await _auth.registerWithEmail(
-                                  email, password);
-                              if (result == null) {
-                                setState(() {
-                                  error = 'Registrasi tidak berhasil.';
-                                  loading = false;
-                                });
-                              }
-                            }
-                          },
-                        ),
-                      ),
+                      registerButton(),
                       Text(
                         error,
                         style: TextStyle(color: Colors.red, fontSize: 14.0),
@@ -159,6 +132,38 @@ class _RegisterState extends State<Register> {
         });
       },
     );
+  }
+
+  SizedBox registerButton() {
+    return SizedBox(
+      width: double.infinity,
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        color: AppColors().primary,
+        child: Text(
+          'Daftar',
+          style: TextStyle(color: AppColors().accent1),
+        ),
+        onPressed: submitData,
+      ),
+    );
+  }
+
+  void submitData() async {
+    if (_formKey.currentState.validate()) {
+      setState(() {
+        loading = true;
+      });
+      dynamic result = await _auth.registerWithEmail(email, password);
+      if (result == null) {
+        setState(() {
+          error = 'Registrasi tidak berhasil.';
+          loading = false;
+        });
+      }
+    }
   }
 
   InkWell switchToLogin() {

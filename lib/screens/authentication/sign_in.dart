@@ -54,35 +54,7 @@ class _SignInState extends State<SignIn> {
                       SizedBox(height: 10.0),
                       forgotPassword(),
                       SizedBox(height: 20.0),
-                      SizedBox(
-                        width: double.infinity,
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          color: AppColors().primary,
-                          child: Text(
-                            'Masuk',
-                            style: TextStyle(color: AppColors().accent1),
-                          ),
-                          onPressed: () async {
-                            if (_formKey.currentState.validate()) {
-                              setState(() {
-                                loading = true;
-                              });
-                              dynamic result =
-                                  await _auth.signInWithEmail(email, password);
-                              if (result == null) {
-                                setState(() {
-                                  error =
-                                      'Login tidak berhasil. Periksa kembali email, password, dan koneksi internet anda.';
-                                  loading = false;
-                                });
-                              }
-                            }
-                          },
-                        ),
-                      ),
+                      loginButton(),
                       Text(
                         error,
                         style: TextStyle(color: Colors.red, fontSize: 14.0),
@@ -156,6 +128,39 @@ class _SignInState extends State<SignIn> {
         //Belum jadi, harusnya ada screen ganti password
       },
     );
+  }
+
+  SizedBox loginButton() {
+    return SizedBox(
+      width: double.infinity,
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        color: AppColors().primary,
+        child: Text(
+          'Masuk',
+          style: TextStyle(color: AppColors().accent1),
+        ),
+        onPressed: submitData,
+      ),
+    );
+  }
+
+  void submitData() async {
+    if (_formKey.currentState.validate()) {
+      setState(() {
+        loading = true;
+      });
+      dynamic result = await _auth.signInWithEmail(email, password);
+      if (result == null) {
+        setState(() {
+          error =
+              'Login tidak berhasil. Periksa kembali email, password, dan koneksi internet anda.';
+          loading = false;
+        });
+      }
+    }
   }
 
   InkWell switchToRegister() {
