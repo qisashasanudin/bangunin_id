@@ -23,9 +23,21 @@ ClipRRect loginLogo() {
   return ClipRRect(
     borderRadius: BorderRadius.circular(10.0),
     child: Image.asset(
-      "assets/img/logo.jpg",
+      "assets/img/logohd.jpg",
       height: 120,
       width: 120,
+      fit: BoxFit.fill,
+    ),
+  );
+}
+
+ClipRRect loginLogo2() {
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(10.0),
+    child: Image.asset(
+      "assets/img/logohd.jpg",
+      height: 200,
+      width: 200,
       fit: BoxFit.fill,
     ),
   );
