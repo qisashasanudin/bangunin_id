@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/shared/decorations.dart';
 import 'package:bangunin_id/screens/transition/loading.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -22,29 +21,11 @@ class _SignInState extends State<SignIn> {
   bool _hidePass = true;
 
   //text field state
+
   String email = '';
   String password = '';
   String error = '';
-
-  Future<String> _getEmailFromSharedPref() async {
-    final prefs = await SharedPreferences.getInstance();
-    final lastEmail = prefs.getString('lastEmail');
-    if (lastEmail == null) {
-      return null;
-    } else {
-      return lastEmail;
-    }
-  }
-
-  Future<void> _removeEmail() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('lastEmail', null);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  TextEditingController emailController = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +51,7 @@ class _SignInState extends State<SignIn> {
                       TextFormField(
                         decoration:
                             inputBoxBorder().copyWith(hintText: 'Email'),
+                        initialValue: email,
                         validator: (val) => (val.isEmpty | !val.contains('@'))
                             ? 'Masukkan email yang valid'
                             : null,
