@@ -4,9 +4,9 @@
     <item android:drawable="@color/kuning_bangunin_id" />
 
     <!-- You can insert your own image assets here -->
-    <item>
+    <!-- <item>
         <bitmap
             android:gravity="center"
             android:src="@mipmap/bangunin_id_launcher" />
-    </item>
+    </item> -->
 </layer-list>
