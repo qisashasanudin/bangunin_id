@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:bangunin_id/shared/decorations.dart';
-import '../shared/decorations.dart';
+import '../../shared/decorations.dart';
 
 class SplashScreen extends StatefulWidget {
   _SplashScreen createState() => _SplashScreen();

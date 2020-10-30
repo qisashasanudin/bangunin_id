@@ -4,7 +4,7 @@ import 'package:bangunin_id/screens/mainmenu/projects/project_details.dart';
 import 'package:bangunin_id/screens/mainmenu/tab_account.dart';
 import 'package:bangunin_id/screens/mainmenu/tab_home.dart';
 import 'package:bangunin_id/screens/mainmenu/tab_settings.dart';
-import 'package:bangunin_id/screens/splashscreen.dart';
+import 'package:bangunin_id/screens/transition/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/models/user.dart';
 import 'package:bangunin_id/services/auth.dart';
