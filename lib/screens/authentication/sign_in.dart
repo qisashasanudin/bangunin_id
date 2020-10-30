@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/shared/decorations.dart';
 import 'package:bangunin_id/screens/transition/loading.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -18,12 +19,32 @@ class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
-  bool hidePassword = true;
+  bool _hidePass = true;
 
   //text field state
   String email = '';
   String password = '';
   String error = '';
+
+  Future<String> _getEmailFromSharedPref() async {
+    final prefs = await SharedPreferences.getInstance();
+    final lastEmail = prefs.getString('lastEmail');
+    if (lastEmail == null) {
+      return null;
+    } else {
+      return lastEmail;
+    }
+  }
+
+  Future<void> _removeEmail() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('lastEmail', null);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +82,7 @@ class _SignInState extends State<SignIn> {
                         decoration: inputBoxBorder().copyWith(
                             hintText: 'Password',
                             suffixIcon: togglePassVisibility()),
-                        obscureText: hidePassword,
+                        obscureText: _hidePass,
                         validator: (val) => val.length < 6
                             ? 'Masukkan password (6 huruf atau lebih)'
                             : null,
@@ -122,12 +143,24 @@ class _SignInState extends State<SignIn> {
                       SizedBox(height: 20.0),
                       InkWell(
                         child: Container(
-                          child: Text(
-                            'Belum memiliki akun? Klik di sini.',
-                            style: TextStyle(
-                              color: AppColors().accent2,
-                              //fontWeight: FontWeight.bold,
-                            ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                "Belum memiliki akun? ",
+                                style: TextStyle(
+                                  color: AppColors().accent2,
+                                ),
+                              ),
+                              Text(
+                                "Daftar di sini.",
+                                style: TextStyle(
+                                  color: AppColors().accent2,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         onTap: () {
@@ -148,12 +181,12 @@ class _SignInState extends State<SignIn> {
   GestureDetector togglePassVisibility() {
     return GestureDetector(
       child: Icon(
-        (hidePassword ? Icons.visibility : Icons.visibility_off),
+        (_hidePass ? Icons.visibility : Icons.visibility_off),
         color: Colors.grey,
       ),
       onTap: () {
         setState(() {
-          hidePassword = !hidePassword;
+          _hidePass = !_hidePass;
         });
       },
     );

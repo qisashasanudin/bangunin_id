@@ -18,8 +18,8 @@ class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
-  bool hidePass = true;
-  bool hidePassConfir = true;
+  bool _hidePass = true;
+  bool _hidePassConfir = true;
 
   //text field state
   String email = '';
@@ -62,7 +62,7 @@ class _RegisterState extends State<Register> {
                         decoration: inputBoxBorder().copyWith(
                             hintText: 'Password',
                             suffixIcon: togglePassVisibility()),
-                        obscureText: hidePass,
+                        obscureText: _hidePass,
                         validator: (val) => val.length < 6
                             ? 'Masukkan password (6 huruf atau lebih)'
                             : null,
@@ -75,7 +75,7 @@ class _RegisterState extends State<Register> {
                         decoration: inputBoxBorder().copyWith(
                             hintText: 'Konfirmasi password',
                             suffixIcon: togglePassConfirVisibility()),
-                        obscureText: hidePassConfir,
+                        obscureText: _hidePassConfir,
                         validator: (val) => val != password
                             ? 'Kedua password harus sama'
                             : null,
@@ -116,12 +116,24 @@ class _RegisterState extends State<Register> {
                       SizedBox(height: 20.0),
                       InkWell(
                         child: Container(
-                          child: Text(
-                            'Sudah memiliki akun? Klik di sini.',
-                            style: TextStyle(
-                              color: AppColors().accent2,
-                              //fontWeight: FontWeight.bold,
-                            ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                "Sudah memiliki akun? ",
+                                style: TextStyle(
+                                  color: AppColors().accent2,
+                                ),
+                              ),
+                              Text(
+                                "Login di sini.",
+                                style: TextStyle(
+                                  color: AppColors().accent2,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         onTap: () {
@@ -142,12 +154,12 @@ class _RegisterState extends State<Register> {
   GestureDetector togglePassVisibility() {
     return GestureDetector(
       child: Icon(
-        (hidePass ? Icons.visibility : Icons.visibility_off),
+        (_hidePass ? Icons.visibility : Icons.visibility_off),
         color: Colors.grey,
       ),
       onTap: () {
         setState(() {
-          hidePass = !hidePass;
+          _hidePass = !_hidePass;
         });
       },
     );
@@ -156,12 +168,12 @@ class _RegisterState extends State<Register> {
   GestureDetector togglePassConfirVisibility() {
     return GestureDetector(
       child: Icon(
-        (hidePassConfir ? Icons.visibility : Icons.visibility_off),
+        (_hidePassConfir ? Icons.visibility : Icons.visibility_off),
         color: Colors.grey,
       ),
       onTap: () {
         setState(() {
-          hidePassConfir = !hidePassConfir;
+          _hidePassConfir = !_hidePassConfir;
         });
       },
     );
