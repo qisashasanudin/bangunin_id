@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/splashscreen',
         routes: {
           '/splashscreen': (context) => SplashScreen(),
-          '/mainmenu': (context) => MainPageWrapper(),
+          '/mainpage': (context) => MainPageWrapper(),
           '/home': (context) => Home(),
           '/account': (context) => Account(),
           '/settings': (context) => Settings(),
