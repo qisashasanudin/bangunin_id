@@ -46,7 +46,7 @@ class _RegisterState extends State<Register> {
                   child: Column(
                     children: <Widget>[
                       loginLogo(),
-                      SizedBox(height: 20.0),
+                      SizedBox(height: 40.0),
                       TextFormField(
                         decoration:
                             inputBoxBorder().copyWith(hintText: 'Email'),

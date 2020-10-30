@@ -21,7 +21,7 @@ SystemUiOverlayStyle transparentAppbarAndNavbar() {
 
 ClipRRect loginLogo() {
   return ClipRRect(
-    borderRadius: BorderRadius.circular(16.0),
+    borderRadius: BorderRadius.circular(10.0),
     child: Image.asset(
       "assets/img/logo.jpg",
       height: 120,

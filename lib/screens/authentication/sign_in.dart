@@ -45,7 +45,7 @@ class _SignInState extends State<SignIn> {
                   child: Column(
                     children: <Widget>[
                       loginLogo(),
-                      SizedBox(height: 20.0),
+                      SizedBox(height: 40.0),
                       TextFormField(
                         decoration:
                             inputBoxBorder().copyWith(hintText: 'Email'),
@@ -60,7 +60,7 @@ class _SignInState extends State<SignIn> {
                       TextFormField(
                         decoration: inputBoxBorder().copyWith(
                             hintText: 'Password',
-                            suffixIcon: togglePasswordVisibility()),
+                            suffixIcon: togglePassVisibility()),
                         obscureText: hidePassword,
                         validator: (val) => val.length < 6
                             ? 'Masukkan password (6 huruf atau lebih)'
@@ -145,7 +145,7 @@ class _SignInState extends State<SignIn> {
     }
   }
 
-  GestureDetector togglePasswordVisibility() {
+  GestureDetector togglePassVisibility() {
     return GestureDetector(
       child: Icon(
         (hidePassword ? Icons.visibility : Icons.visibility_off),

@@ -5,12 +5,12 @@ import 'package:bangunin_id/models/user.dart';
 import 'package:bangunin_id/screens/home/home.dart';
 import 'package:provider/provider.dart';
 
-class ScreenWrapper extends StatefulWidget {
+class HomepageWrapper extends StatefulWidget {
   @override
-  _ScreenWrapperState createState() => _ScreenWrapperState();
+  _HomepageWrapperState createState() => _HomepageWrapperState();
 }
 
-class _ScreenWrapperState extends State<ScreenWrapper> {
+class _HomepageWrapperState extends State<HomepageWrapper> {
   bool signInScreen = true;
   void toggleView() {
     setState(() => signInScreen = !signInScreen);
