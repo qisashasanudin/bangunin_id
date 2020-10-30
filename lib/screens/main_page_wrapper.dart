@@ -1,16 +1,19 @@
 import 'package:bangunin_id/screens/authentication/register.dart';
 import 'package:bangunin_id/screens/authentication/sign_in.dart';
+import 'package:bangunin_id/screens/home/mainpage.dart';
+import 'package:bangunin_id/screens/home/tab_home.dart';
+import 'package:bangunin_id/screens/home/tab_settings.dart';
+import 'package:bangunin_id/screens/home/tab_account.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/models/user.dart';
-import 'package:bangunin_id/screens/home/home.dart';
 import 'package:provider/provider.dart';
 
-class HomepageWrapper extends StatefulWidget {
+class MainPageWrapper extends StatefulWidget {
   @override
-  _HomepageWrapperState createState() => _HomepageWrapperState();
+  _MainPageWrapperState createState() => _MainPageWrapperState();
 }
 
-class _HomepageWrapperState extends State<HomepageWrapper> {
+class _MainPageWrapperState extends State<MainPageWrapper> {
   bool signInScreen = true;
   void toggleView() {
     setState(() => signInScreen = !signInScreen);
@@ -27,7 +30,7 @@ class _HomepageWrapperState extends State<HomepageWrapper> {
         return Register(toggleView: toggleView);
       }
     } else {
-      return Home();
+      return MainPage();
     }
   }
 }

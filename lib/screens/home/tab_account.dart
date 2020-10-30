@@ -2,7 +2,12 @@ import 'package:bangunin_id/shared/decorations.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/auth.dart';
 
-class AccountSettings extends StatelessWidget {
+class Account extends StatefulWidget {
+  @override
+  _AccountState createState() => _AccountState();
+}
+
+class _AccountState extends State<Account> {
   final AuthService _auth = AuthService();
 
   @override
@@ -10,7 +15,7 @@ class AccountSettings extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors().primary,
       appBar: AppBar(
-        title: Text('Pengaturan Akun'),
+        title: Text('Akun'),
         backgroundColor: Colors.transparent,
         centerTitle: true,
         elevation: 0.0,

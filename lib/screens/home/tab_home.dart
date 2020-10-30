@@ -1,7 +1,12 @@
 import 'package:bangunin_id/shared/decorations.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,14 +23,6 @@ class Home extends StatelessWidget {
         child: Center(
           child: Column(
             children: <Widget>[
-              FlatButton.icon(
-                icon: Icon(Icons.person, color: AppColors().accent1),
-                label:
-                    Text('Akun', style: TextStyle(color: AppColors().accent1)),
-                onPressed: () async {
-                  Navigator.of(context).pushNamed('/account');
-                },
-              ),
               SizedBox(height: 20.0),
               SizedBox(
                 width: double.infinity,
