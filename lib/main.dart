@@ -1,8 +1,8 @@
-import 'package:bangunin_id/screens/home/tab_home.dart';
-import 'package:bangunin_id/screens/home/tab_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/models/user.dart';
 import 'package:bangunin_id/screens/main_page_wrapper.dart';
+import 'package:bangunin_id/screens/home/tab_home.dart';
+import 'package:bangunin_id/screens/home/tab_settings.dart';
 import 'package:bangunin_id/screens/home/projects/new_project.dart';
 import 'package:bangunin_id/screens/home/projects/project_details.dart';
 import 'package:bangunin_id/screens/home/tab_account.dart';

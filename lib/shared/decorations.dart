@@ -64,3 +64,31 @@ InputDecoration inputBoxBorder() {
     ),
   );
 }
+
+class CoverImageGradient extends StatelessWidget {
+  const CoverImageGradient({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: MediaQuery.of(context).size.height / 3,
+      decoration: BoxDecoration(
+        color: AppColors().accent1,
+        gradient: LinearGradient(
+            begin: FractionalOffset.topCenter,
+            end: FractionalOffset.bottomCenter,
+            colors: [
+              AppColors().accent2.withOpacity(0.7),
+              AppColors().accent1.withOpacity(0.0),
+            ],
+            stops: [
+              0.0,
+              0.5
+            ]),
+      ),
+    );
+  }
+}

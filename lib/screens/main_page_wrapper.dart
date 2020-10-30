@@ -1,9 +1,6 @@
 import 'package:bangunin_id/screens/authentication/register.dart';
 import 'package:bangunin_id/screens/authentication/sign_in.dart';
 import 'package:bangunin_id/screens/home/mainpage.dart';
-import 'package:bangunin_id/screens/home/tab_home.dart';
-import 'package:bangunin_id/screens/home/tab_settings.dart';
-import 'package:bangunin_id/screens/home/tab_account.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/models/user.dart';
 import 'package:provider/provider.dart';

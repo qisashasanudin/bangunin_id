@@ -29,6 +29,7 @@ class _MainPageState extends State<MainPage> {
       backgroundColor: AppColors().primary,
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: AppColors().accent1,
         currentIndex: _selectedIndex,
         onTap: _onItemTap,
         items: const <BottomNavigationBarItem>[
