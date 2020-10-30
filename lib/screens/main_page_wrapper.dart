@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:bangunin_id/models/user.dart';
 import 'package:provider/provider.dart';
 
-class MainMenuWrapper extends StatefulWidget {
+class MainPageWrapper extends StatefulWidget {
   @override
-  _MainMenuWrapperState createState() => _MainMenuWrapperState();
+  _MainPageWrapperState createState() => _MainPageWrapperState();
 }
 
-class _MainMenuWrapperState extends State<MainMenuWrapper> {
+class _MainPageWrapperState extends State<MainPageWrapper> {
   bool signInScreen = true;
   void toggleView() {
     setState(() => signInScreen = !signInScreen);
