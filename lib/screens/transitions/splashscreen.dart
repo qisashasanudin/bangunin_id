@@ -35,4 +35,16 @@ class _SplashScreen extends State<SplashScreen> {
       ),
     );
   }
+
+  ClipRRect splashScreenLogo() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10.0),
+      child: Image.asset(
+        "assets/img/logo.jpg",
+        height: 200,
+        width: 200,
+        fit: BoxFit.fill,
+      ),
+    );
+  }
 }
