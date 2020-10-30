@@ -86,7 +86,7 @@ class _HomeState extends State<Home> {
     return Positioned(
       bottom: -50,
       child: Card(
-        elevation: 2,
+        elevation: 10,
         shape: CircleBorder(),
         child: Padding(
           padding: const EdgeInsets.all(5.0),
