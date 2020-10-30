@@ -106,7 +106,7 @@ class _HomeState extends State<Home> {
         child: Text('Pengguna baru'),
       ),
       subtitle: Center(
-        child: Text('Peran belum dikonfigurai'),
+        child: Text('Peran belum dikonfigurasi'),
       ),
     );
   }
