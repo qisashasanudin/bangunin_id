@@ -23,7 +23,7 @@ ClipRRect loginLogo() {
   return ClipRRect(
     borderRadius: BorderRadius.circular(10.0),
     child: Image.asset(
-      "assets/img/logohd.jpg",
+      "assets/img/logo.jpg",
       height: 120,
       width: 120,
       fit: BoxFit.fill,
@@ -31,11 +31,11 @@ ClipRRect loginLogo() {
   );
 }
 
-ClipRRect loginLogo2() {
+ClipRRect splashScreenLogo() {
   return ClipRRect(
     borderRadius: BorderRadius.circular(10.0),
     child: Image.asset(
-      "assets/img/logohd.jpg",
+      "assets/img/logo.jpg",
       height: 200,
       width: 200,
       fit: BoxFit.fill,

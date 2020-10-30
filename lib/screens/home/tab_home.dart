@@ -46,6 +46,7 @@ class _HomeState extends State<Home> {
                           padding: const EdgeInsets.all(5.0),
                           child: CircleAvatar(
                             radius: 75,
+                            backgroundColor: AppColors().primary,
                             backgroundImage: AssetImage(
                                 'assets/img/profile_pic_default.jpg'),
                           ),
@@ -57,10 +58,10 @@ class _HomeState extends State<Home> {
                 SizedBox(height: 50.0),
                 ListTile(
                   title: Center(
-                    child: Text('Mandor Ajo'),
+                    child: Text('Pengguna baru'),
                   ),
                   subtitle: Center(
-                    child: Text('Mandor Bangunin.id'),
+                    child: Text('Peran belum dikonfigurai'),
                   ),
                 ),
                 SizedBox(height: 20.0),
