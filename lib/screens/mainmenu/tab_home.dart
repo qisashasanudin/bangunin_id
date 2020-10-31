@@ -19,7 +19,7 @@ class Home extends StatelessWidget {
             child: userInfo(),
           ),
           SliverToBoxAdapter(
-            child: SizedBox(height: 20.0),
+            child: SizedBox(height: 10.0),
           ),
           SliverList(
             delegate: infiniteList(context),
@@ -62,15 +62,24 @@ SliverChildBuilderDelegate infiniteList(BuildContext context) {
   return SliverChildBuilderDelegate(
     (BuildContext context, index) {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-        child: ListTile(
-          tileColor: AppColors().accent3,
-          title: Text("Proyek $index"),
-          subtitle: Text("Dibuat tanggal -"),
-          trailing: Text("In - progress"),
-          onTap: () async {
-            Navigator.of(context).pushNamed('/projectdetails');
-          },
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        child: Container(
+          decoration: BoxDecoration(
+            color: AppColors().accent3,
+            borderRadius: BorderRadius.circular(100),
+          ),
+          child: ListTile(
+            dense: true,
+            title: Text("Proyek $index"),
+            subtitle: Text("Deadline: -"),
+            trailing: Text(
+              "In - progress",
+              style: TextStyle(color: Colors.red),
+            ),
+            onTap: () async {
+              Navigator.of(context).pushNamed('/projectdetails');
+            },
+          ),
         ),
       );
     },
@@ -96,7 +105,7 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
       children: [
         bgroundColor(context),
         coverPicture(shrinkOffset),
-        coverPictureGradient(context, shrinkOffset),
+        coverPictureGradient(context),
         pageTitle(shrinkOffset),
         profilePicture(shrinkOffset),
       ],
@@ -123,24 +132,19 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
     );
   }
 
-  Opacity coverPictureGradient(BuildContext context, double shrinkOffset) {
-    return Opacity(
-      opacity: (1 - shrinkOffset / expandedHeight),
-      child: Container(
-        width: double.infinity,
-        height: MediaQuery.of(context).size.height / 3,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: FractionalOffset.topCenter,
-              end: FractionalOffset.bottomCenter,
-              colors: [
-                AppColors().primary.withOpacity(0.5),
-                AppColors().accent1.withOpacity(0.0),
-              ],
-              stops: [
-                0.0,
-                1.0
-              ]),
+  Container coverPictureGradient(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: MediaQuery.of(context).size.height / 3,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: FractionalOffset.topCenter,
+          end: FractionalOffset.bottomCenter,
+          colors: [
+            AppColors().primary,
+            AppColors().accent1.withOpacity(0.0),
+          ],
+          stops: [0.0, 0.5],
         ),
       ),
     );
@@ -173,7 +177,7 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: CircleAvatar(
-              radius: 75,
+              radius: 70,
               backgroundColor: AppColors().primary,
               backgroundImage: AssetImage('assets/img/profile_pic_default.jpg'),
             ),
