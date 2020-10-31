@@ -1,4 +1,4 @@
-import 'package:bangunin_id/shared/decorations.dart';
+import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -85,7 +85,7 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
       children: [
         bgroundColor(context),
         coverPicture(shrinkOffset),
-        coverPictureGradient(context),
+        coverPictureGradient(context, shrinkOffset),
         pageTitle(shrinkOffset),
         profilePicture(shrinkOffset),
       ],
@@ -112,22 +112,25 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
     );
   }
 
-  Container coverPictureGradient(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: MediaQuery.of(context).size.height / 3,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            begin: FractionalOffset.topCenter,
-            end: FractionalOffset.bottomCenter,
-            colors: [
-              AppColors().primary.withOpacity(0.5),
-              AppColors().accent1.withOpacity(0.0),
-            ],
-            stops: [
-              0.0,
-              1.0
-            ]),
+  Opacity coverPictureGradient(BuildContext context, double shrinkOffset) {
+    return Opacity(
+      opacity: (1 - shrinkOffset / expandedHeight),
+      child: Container(
+        width: double.infinity,
+        height: MediaQuery.of(context).size.height / 3,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: FractionalOffset.topCenter,
+              end: FractionalOffset.bottomCenter,
+              colors: [
+                AppColors().primary.withOpacity(0.5),
+                AppColors().accent1.withOpacity(0.0),
+              ],
+              stops: [
+                0.0,
+                1.0
+              ]),
+        ),
       ),
     );
   }
