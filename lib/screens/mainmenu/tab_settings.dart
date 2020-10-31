@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: transparentAppbarAndNavbar()
           .copyWith(statusBarIconBrightness: Brightness.light),
@@ -13,7 +15,7 @@ class Settings extends StatelessWidget {
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
-              expandedHeight: 150,
+              expandedHeight: screenHeight / 4,
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
                 title: Text('Pengaturan'),

@@ -5,15 +5,17 @@ import 'package:flutter/services.dart';
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: transparentAppbarAndNavbar()
           .copyWith(statusBarIconBrightness: Brightness.light),
-          child: Scaffold(
+      child: Scaffold(
         backgroundColor: AppColors().accent1,
         body: CustomScrollView(
           slivers: [
             SliverPersistentHeader(
-              delegate: HomeAppBar(expandedHeight: 200),
+              delegate: HomeAppBar(expandedHeight: screenHeight / 3),
               pinned: true,
             ),
             SliverToBoxAdapter(
@@ -108,7 +110,7 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
       fit: StackFit.expand,
       clipBehavior: Clip.none,
       children: [
-        bgroundColor(context),
+        bgroundColor(context, shrinkOffset),
         coverPicture(shrinkOffset),
         coverPictureGradient(context, shrinkOffset),
         pageTitle(shrinkOffset),
@@ -117,10 +119,10 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
     );
   }
 
-  Container bgroundColor(BuildContext context) {
+  Container bgroundColor(BuildContext context, double shrinkOffset) {
     return Container(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height / 3,
+      height: shrinkOffset,
       decoration: BoxDecoration(
         color: AppColors().primary,
       ),
@@ -140,7 +142,7 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
   Opacity coverPictureGradient(BuildContext context, double shrinkOffset) {
     return Opacity(
       opacity: (1 - shrinkOffset / expandedHeight),
-          child: Container(
+      child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -157,8 +159,9 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
     );
   }
 
-  Center pageTitle(double shrinkOffset) {
-    return Center(
+  Positioned pageTitle(double shrinkOffset) {
+    return Positioned(
+      top: 30,
       child: Opacity(
         opacity: shrinkOffset / expandedHeight,
         child: Text(
@@ -175,7 +178,7 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
 
   Positioned profilePicture(double shrinkOffset) {
     return Positioned(
-      top: expandedHeight / 2 - shrinkOffset,
+      top: expandedHeight - 100 - shrinkOffset,
       child: Opacity(
         opacity: (1 - shrinkOffset / expandedHeight),
         child: Card(
