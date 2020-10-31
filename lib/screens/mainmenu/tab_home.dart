@@ -135,7 +135,6 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
   Container coverPictureGradient(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height / 3,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: FractionalOffset.topCenter,
@@ -150,8 +149,9 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
     );
   }
 
-  Center pageTitle(double shrinkOffset) {
-    return Center(
+  Positioned pageTitle(double shrinkOffset) {
+    return Positioned(
+      top: 30.0,
       child: Opacity(
         opacity: shrinkOffset / expandedHeight,
         child: Text(
