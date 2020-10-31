@@ -4,56 +4,50 @@ import 'package:flutter/material.dart';
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-    final List<String> entries = <String>['A', 'B', 'C', 'D', 'E', 'F'];
-    final List<String> status = <String>[
-      'In - Progress',
-      'In - Progress',
-      'Done',
-      'In - Progress',
-      'In - Progress',
-      'Done'
-    ];
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SliverPersistentHeader(
+            delegate: HomeAppBar(expandedHeight: 200),
+            pinned: true,
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(height: 60.0),
+          ),
+          SliverToBoxAdapter(
+            child: userInfo(),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(height: 20.0),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (_, index) => ListTile(
+                title: Text("Index: $index"),
+              ),
+            ),
+          )
+        ],
+      ),
+      floatingActionButton: createProjectButton(context),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
 
-    return SafeArea(
-      child: Material(
-        child: CustomScrollView(
-          slivers: [
-            SliverPersistentHeader(
-              delegate: HomeSliverAppBar(expandedHeight: 200),
-              pinned: true,
-            ),
-            SliverToBoxAdapter(
-              child: Container(
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(height: 60.0),
-                    ListTile(
-                      title: Center(
-                        child: Text('Pengguna baru'),
-                      ),
-                      subtitle: Center(
-                        child: Text('Peran belum dikonfigurasi'),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (_, index) => ListTile(
-                  title: Text("Index: $index"),
-                ),
-              ),
-            )
-          ],
+  Container userInfo() {
+    return Container(
+      child: ListTile(
+        title: Center(
+          child: Text('Pengguna baru'),
+        ),
+        subtitle: Center(
+          child: Text('Peran belum dikonfigurasi'),
         ),
       ),
     );
   }
 
-
+  
 
   FloatingActionButton createProjectButton(BuildContext context) {
     return FloatingActionButton.extended(
@@ -69,10 +63,10 @@ class Home extends StatelessWidget {
   }
 }
 
-class HomeSliverAppBar extends SliverPersistentHeaderDelegate {
+class HomeAppBar extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
 
-  HomeSliverAppBar({@required this.expandedHeight});
+  HomeAppBar({@required this.expandedHeight});
 
   @override
   Widget build(
