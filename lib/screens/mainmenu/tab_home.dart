@@ -4,6 +4,17 @@ import 'package:flutter/material.dart';
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    final List<String> entries = <String>['A', 'B', 'C', 'D', 'E', 'F'];
+    final List<String> status = <String>[
+      'In - Progress',
+      'In - Progress',
+      'Done',
+      'In - Progress',
+      'In - Progress',
+      'Done'
+    ];
+
     return SafeArea(
       child: Material(
         child: CustomScrollView(
@@ -11,6 +22,23 @@ class Home extends StatelessWidget {
             SliverPersistentHeader(
               delegate: HomeSliverAppBar(expandedHeight: 200),
               pinned: true,
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: 60.0),
+                    ListTile(
+                      title: Center(
+                        child: Text('Pengguna baru'),
+                      ),
+                      subtitle: Center(
+                        child: Text('Peran belum dikonfigurasi'),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
@@ -22,6 +50,19 @@ class Home extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  FloatingActionButton createProjectButton(BuildContext context) {
+    return FloatingActionButton.extended(
+      onPressed: () async {
+        Navigator.of(context).pushNamed('/newproject');
+      },
+      label: Text(
+        'Buat Proyek Baru',
+        style: TextStyle(color: AppColors().accent1),
+      ),
+      backgroundColor: AppColors().primary,
     );
   }
 }
@@ -42,6 +83,24 @@ class HomeSliverAppBar extends SliverPersistentHeaderDelegate {
         Image.asset(
           'assets/img/home_bg_default1.jpg',
           fit: BoxFit.cover,
+        ),
+        Container(
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height / 3,
+          decoration: BoxDecoration(
+            color: AppColors().accent1,
+            gradient: LinearGradient(
+                begin: FractionalOffset.topCenter,
+                end: FractionalOffset.bottomCenter,
+                colors: [
+                  AppColors().primary.withOpacity(0.5),
+                  AppColors().accent1.withOpacity(0.0),
+                ],
+                stops: [
+                  0.0,
+                  1.0
+                ]),
+          ),
         ),
         Center(
           child: Opacity(
