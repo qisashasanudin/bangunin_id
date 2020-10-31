@@ -3,7 +3,6 @@ import 'package:bangunin_id/screens/mainmenu/tab_home.dart';
 import 'package:bangunin_id/screens/mainmenu/tab_settings.dart';
 import 'package:bangunin_id/shared/decorations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class MainMenuNav extends StatefulWidget {
   @override
@@ -26,31 +25,27 @@ class _MainMenuNavState extends State<MainMenuNav> {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: transparentAppbarAndNavbar()
-          .copyWith(statusBarIconBrightness: Brightness.light),
-      child: Scaffold(
-        backgroundColor: AppColors().primary,
-        body: _widgetOptions.elementAt(_selectedIndex),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: AppColors().accent1,
-          currentIndex: _selectedIndex,
-          onTap: _onItemTap,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Beranda',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Pengaturan',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Akun',
-            ),
-          ],
-        ),
+    return Scaffold(
+      backgroundColor: AppColors().primary,
+      body: _widgetOptions.elementAt(_selectedIndex),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: AppColors().accent1,
+        currentIndex: _selectedIndex,
+        onTap: _onItemTap,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Beranda',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Pengaturan',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Akun',
+          ),
+        ],
       ),
     );
   }
