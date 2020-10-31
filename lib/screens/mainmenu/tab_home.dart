@@ -10,30 +10,64 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    final List<String> entries = <String>['A', 'B', 'C', 'D', 'E', 'F'];
+    final List<String> status = <String>[
+      'In - Progress',
+      'In - Progress',
+      'Done',
+      'In - Progress',
+      'In - Progress',
+      'Done'
+    ];
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: transparentAppbarAndNavbar(),
       child: Scaffold(
         extendBodyBehindAppBar: true,
         backgroundColor: AppColors().accent1,
-        appBar: profileAppBar(),
         body: Container(
-          child: Center(
-            child: Column(
-              children: <Widget>[
-                Stack(
-                  clipBehavior: Clip.none,
-                  alignment: Alignment.center,
-                  children: <Widget>[
-                    coverPicture(context),
-                    coverPictureGradient(context),
-                    profilePicture(),
-                  ],
+          height: size.height,
+          child: Column(
+            children: <Widget>[
+              Stack(
+                clipBehavior: Clip.none,
+                alignment: Alignment.center,
+                children: <Widget>[
+                  coverPicture(context),
+                  coverPictureGradient(context),
+                  profilePicture(),
+                ],
+              ),
+              SizedBox(height: 50.0),
+              userInfo(),
+              SizedBox(height: 20.0),
+              Expanded(
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  itemCount: entries.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Card(
+                      child: ListTile(
+                        tileColor: AppColors().accent3,
+                        title: Text('Project ${entries[index]}'),
+                        trailing: Text(
+                          '${status[index]}',
+                          style: TextStyle(
+                              color: (status[index] == 'Done'
+                                  ? Colors.green
+                                  : Colors.red)),
+                        ),
+                        onTap: () async {
+                          Navigator.of(context).pushNamed('/projectdetails');
+                        },
+                      ),
+                    );
+                  },
                 ),
-                SizedBox(height: 50.0),
-                userInfo(),
-                SizedBox(height: 20.0),
-              ],
-            ),
+              ),
+              SizedBox(height: 80.0),
+            ],
           ),
         ),
         floatingActionButton: createProjectButton(context),
@@ -42,22 +76,12 @@ class _HomeState extends State<Home> {
     );
   }
 
-  AppBar profileAppBar() {
-    return AppBar(
-      title: Text('Profile'),
-      backgroundColor: Colors.transparent,
-      centerTitle: true,
-      elevation: 0.0,
-      actions: <Widget>[],
-    );
-  }
-
   Image coverPicture(BuildContext context) {
     return Image(
       width: double.infinity,
       height: MediaQuery.of(context).size.height / 3,
       fit: BoxFit.cover,
-      image: AssetImage('assets/img/home_bg_default2.jpg'),
+      image: AssetImage('assets/img/home_bg_default1.jpg'),
     );
   }
 
@@ -71,12 +95,12 @@ class _HomeState extends State<Home> {
             begin: FractionalOffset.topCenter,
             end: FractionalOffset.bottomCenter,
             colors: [
-              AppColors().accent2.withOpacity(0.7),
+              AppColors().primary.withOpacity(0.5),
               AppColors().accent1.withOpacity(0.0),
             ],
             stops: [
               0.0,
-              0.5
+              1.0
             ]),
       ),
     );
