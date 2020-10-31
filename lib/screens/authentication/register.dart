@@ -32,7 +32,8 @@ class _RegisterState extends State<Register> {
       return LoadingScreen();
     } else {
       return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: transparentAppbarAndNavbar(),
+        value: transparentAppbarAndNavbar()
+            .copyWith(statusBarIconBrightness: Brightness.dark),
         child: Scaffold(
           extendBodyBehindAppBar: true,
           backgroundColor: AppColors().accent1,

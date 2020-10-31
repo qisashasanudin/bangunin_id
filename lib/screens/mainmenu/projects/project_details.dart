@@ -1,20 +1,26 @@
-import 'package:bangunin_id/shared/decorations.dart';
+import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ProjectDetails extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors().primary,
-      appBar: AppBar(
-        title: Text('Rincian Proyek'),
-        backgroundColor: Colors.transparent,
-        centerTitle: true,
-        elevation: 0.0,
-        actions: <Widget>[
-          
-        ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: transparentAppbarAndNavbar()
+          .copyWith(statusBarIconBrightness: Brightness.light),
+      child: Scaffold(
+        backgroundColor: AppColors().accent1,
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              expandedHeight: 150,
+              flexibleSpace: FlexibleSpaceBar(
+                centerTitle: true,
+                title: Text('Rincian Proyek'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,33 +1,38 @@
 import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors().accent1,
-      body: CustomScrollView(
-        slivers: [
-          SliverPersistentHeader(
-            delegate: HomeAppBar(expandedHeight: 250),
-            pinned: true,
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(height: 40.0),
-          ),
-          SliverToBoxAdapter(
-            child: userInfo(),
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(height: 10.0),
-          ),
-          SliverList(
-            delegate: infiniteList(context),
-          )
-        ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: transparentAppbarAndNavbar()
+          .copyWith(statusBarIconBrightness: Brightness.light),
+          child: Scaffold(
+        backgroundColor: AppColors().accent1,
+        body: CustomScrollView(
+          slivers: [
+            SliverPersistentHeader(
+              delegate: HomeAppBar(expandedHeight: 200),
+              pinned: true,
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(height: 50.0),
+            ),
+            SliverToBoxAdapter(
+              child: userInfo(),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(height: 10.0),
+            ),
+            SliverList(
+              delegate: infiniteList(context),
+            )
+          ],
+        ),
+        floatingActionButton: createProjectButton(context),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
-      floatingActionButton: createProjectButton(context),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
@@ -105,7 +110,7 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
       children: [
         bgroundColor(context),
         coverPicture(shrinkOffset),
-        coverPictureGradient(context),
+        coverPictureGradient(context, shrinkOffset),
         pageTitle(shrinkOffset),
         profilePicture(shrinkOffset),
       ],
@@ -132,26 +137,28 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
     );
   }
 
-  Container coverPictureGradient(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: FractionalOffset.topCenter,
-          end: FractionalOffset.bottomCenter,
-          colors: [
-            AppColors().primary,
-            AppColors().accent1.withOpacity(0.0),
-          ],
-          stops: [0.0, 0.5],
+  Opacity coverPictureGradient(BuildContext context, double shrinkOffset) {
+    return Opacity(
+      opacity: (1 - shrinkOffset / expandedHeight),
+          child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: FractionalOffset.topCenter,
+            end: FractionalOffset.bottomCenter,
+            colors: [
+              AppColors().primary,
+              AppColors().accent1.withOpacity(0.0),
+            ],
+            stops: [0.0, 0.5],
+          ),
         ),
       ),
     );
   }
 
-  Positioned pageTitle(double shrinkOffset) {
-    return Positioned(
-      top: 30.0,
+  Center pageTitle(double shrinkOffset) {
+    return Center(
       child: Opacity(
         opacity: shrinkOffset / expandedHeight,
         child: Text(

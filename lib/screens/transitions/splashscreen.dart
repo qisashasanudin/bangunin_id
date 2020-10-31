@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:bangunin_id/shared/decorations.dart';
+import 'package:flutter/services.dart';
 import '../../shared/decorations.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,15 +23,19 @@ class _SplashScreen extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors().primary,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            splashScreenLogo(),
-          ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: transparentAppbarAndNavbar()
+          .copyWith(statusBarIconBrightness: Brightness.dark),
+      child: Scaffold(
+        backgroundColor: AppColors().primary,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              splashScreenLogo(),
+            ],
+          ),
         ),
       ),
     );
