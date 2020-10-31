@@ -53,6 +53,8 @@ class Home extends StatelessWidget {
     );
   }
 
+
+
   FloatingActionButton createProjectButton(BuildContext context) {
     return FloatingActionButton.extended(
       onPressed: () async {
@@ -80,61 +82,76 @@ class HomeSliverAppBar extends SliverPersistentHeaderDelegate {
       fit: StackFit.expand,
       clipBehavior: Clip.none,
       children: [
-        Image.asset(
-          'assets/img/home_bg_default1.jpg',
-          fit: BoxFit.cover,
-        ),
-        Container(
-          width: double.infinity,
-          height: MediaQuery.of(context).size.height / 3,
-          decoration: BoxDecoration(
-            color: AppColors().accent1,
-            gradient: LinearGradient(
-                begin: FractionalOffset.topCenter,
-                end: FractionalOffset.bottomCenter,
-                colors: [
-                  AppColors().primary.withOpacity(0.5),
-                  AppColors().accent1.withOpacity(0.0),
-                ],
-                stops: [
-                  0.0,
-                  1.0
-                ]),
-          ),
-        ),
-        Center(
-          child: Opacity(
-            opacity: shrinkOffset / expandedHeight,
-            child: Text(
-              "Proyek",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
-                fontSize: 23,
-              ),
-            ),
-          ),
-        ),
-        Positioned(
-          top: expandedHeight / 2 - shrinkOffset,
-          child: Opacity(
-            opacity: (1 - shrinkOffset / expandedHeight),
-            child: Card(
-              elevation: 10,
-              shape: CircleBorder(),
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: CircleAvatar(
-                  radius: 75,
-                  backgroundColor: AppColors().primary,
-                  backgroundImage:
-                      AssetImage('assets/img/profile_pic_default.jpg'),
-                ),
-              ),
-            ),
-          ),
-        ),
+        coverPicture(),
+        coverPictureGradient(context),
+        pageTitle(shrinkOffset),
+        profilePicture(shrinkOffset),
       ],
+    );
+  }
+
+  Image coverPicture() {
+    return Image.asset(
+      'assets/img/home_bg_default1.jpg',
+      fit: BoxFit.cover,
+    );
+  }
+
+  Container coverPictureGradient(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: MediaQuery.of(context).size.height / 3,
+      decoration: BoxDecoration(
+        color: AppColors().accent1,
+        gradient: LinearGradient(
+            begin: FractionalOffset.topCenter,
+            end: FractionalOffset.bottomCenter,
+            colors: [
+              AppColors().primary.withOpacity(0.5),
+              AppColors().accent1.withOpacity(0.0),
+            ],
+            stops: [
+              0.0,
+              1.0
+            ]),
+      ),
+    );
+  }
+
+  Center pageTitle(double shrinkOffset) {
+    return Center(
+      child: Opacity(
+        opacity: shrinkOffset / expandedHeight,
+        child: Text(
+          "Proyek",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+            fontSize: 23,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Positioned profilePicture(double shrinkOffset) {
+    return Positioned(
+      top: expandedHeight / 2 - shrinkOffset,
+      child: Opacity(
+        opacity: (1 - shrinkOffset / expandedHeight),
+        child: Card(
+          elevation: 10,
+          shape: CircleBorder(),
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: CircleAvatar(
+              radius: 75,
+              backgroundColor: AppColors().primary,
+              backgroundImage: AssetImage('assets/img/profile_pic_default.jpg'),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
