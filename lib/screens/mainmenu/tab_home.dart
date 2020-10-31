@@ -22,7 +22,7 @@ class Home extends StatelessWidget {
             child: SizedBox(height: 20.0),
           ),
           SliverList(
-            delegate: infiniteList(),
+            delegate: infiniteList(context),
           )
         ],
       ),
@@ -58,11 +58,22 @@ class Home extends StatelessWidget {
   }
 }
 
-SliverChildBuilderDelegate infiniteList() {
+SliverChildBuilderDelegate infiniteList(BuildContext context) {
   return SliverChildBuilderDelegate(
-    (_, index) => ListTile(
-      title: Text("Index: $index"),
-    ),
+    (BuildContext context, index) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+        child: ListTile(
+          tileColor: AppColors().accent3,
+          title: Text("Proyek $index"),
+          subtitle: Text("Dibuat tanggal -"),
+          trailing: Text("In - progress"),
+          onTap: () async {
+            Navigator.of(context).pushNamed('/projectdetails');
+          },
+        ),
+      );
+    },
   );
 }
 
@@ -140,7 +151,7 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
       child: Opacity(
         opacity: shrinkOffset / expandedHeight,
         child: Text(
-          "Proyek",
+          "Beranda",
           style: TextStyle(
             color: AppColors().accent1,
             fontWeight: FontWeight.w700,
