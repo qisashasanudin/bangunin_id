@@ -19,6 +19,7 @@ class Settings extends StatelessWidget {
                 title: Text('Pengaturan'),
               ),
             ),
+            //Sliver-sliver lain ditulis di sini
           ],
         ),
       ),

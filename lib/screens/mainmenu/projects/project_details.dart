@@ -19,6 +19,7 @@ class ProjectDetails extends StatelessWidget {
                 title: Text('Rincian Proyek'),
               ),
             ),
+            //Sliver-sliver lain ditulis di sini
           ],
         ),
       ),
