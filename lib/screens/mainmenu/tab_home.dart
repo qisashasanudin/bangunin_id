@@ -5,14 +5,15 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors().accent1,
       body: CustomScrollView(
         slivers: [
           SliverPersistentHeader(
-            delegate: HomeAppBar(expandedHeight: 200),
+            delegate: HomeAppBar(expandedHeight: 250),
             pinned: true,
           ),
           SliverToBoxAdapter(
-            child: SizedBox(height: 60.0),
+            child: SizedBox(height: 40.0),
           ),
           SliverToBoxAdapter(
             child: userInfo(),
@@ -21,11 +22,7 @@ class Home extends StatelessWidget {
             child: SizedBox(height: 20.0),
           ),
           SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (_, index) => ListTile(
-                title: Text("Index: $index"),
-              ),
-            ),
+            delegate: infiniteList(),
           )
         ],
       ),
@@ -47,8 +44,6 @@ class Home extends StatelessWidget {
     );
   }
 
-  
-
   FloatingActionButton createProjectButton(BuildContext context) {
     return FloatingActionButton.extended(
       onPressed: () async {
@@ -63,12 +58,24 @@ class Home extends StatelessWidget {
   }
 }
 
+SliverChildBuilderDelegate infiniteList() {
+  return SliverChildBuilderDelegate(
+    (_, index) => ListTile(
+      title: Text("Index: $index"),
+    ),
+  );
+}
+
 class HomeAppBar extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
 
   HomeAppBar({@required this.expandedHeight});
 
   @override
+  double get maxExtent => expandedHeight;
+  double get minExtent => kToolbarHeight;
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
+
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Stack(
@@ -76,7 +83,8 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
       fit: StackFit.expand,
       clipBehavior: Clip.none,
       children: [
-        coverPicture(),
+        bgroundColor(context),
+        coverPicture(shrinkOffset),
         coverPictureGradient(context),
         pageTitle(shrinkOffset),
         profilePicture(shrinkOffset),
@@ -84,10 +92,23 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
     );
   }
 
-  Image coverPicture() {
-    return Image.asset(
-      'assets/img/home_bg_default1.jpg',
-      fit: BoxFit.cover,
+  Container bgroundColor(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: MediaQuery.of(context).size.height / 3,
+      decoration: BoxDecoration(
+        color: AppColors().primary,
+      ),
+    );
+  }
+
+  Opacity coverPicture(double shrinkOffset) {
+    return Opacity(
+      opacity: (1 - shrinkOffset / expandedHeight),
+      child: Image.asset(
+        'assets/img/home_bg_default1.jpg',
+        fit: BoxFit.cover,
+      ),
     );
   }
 
@@ -96,7 +117,6 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
       width: double.infinity,
       height: MediaQuery.of(context).size.height / 3,
       decoration: BoxDecoration(
-        color: AppColors().accent1,
         gradient: LinearGradient(
             begin: FractionalOffset.topCenter,
             end: FractionalOffset.bottomCenter,
@@ -119,9 +139,9 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
         child: Text(
           "Proyek",
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors().accent1,
             fontWeight: FontWeight.w700,
-            fontSize: 23,
+            fontSize: 20,
           ),
         ),
       ),
@@ -148,13 +168,4 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
       ),
     );
   }
-
-  @override
-  double get maxExtent => expandedHeight;
-
-  @override
-  double get minExtent => kToolbarHeight;
-
-  @override
-  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
 }
