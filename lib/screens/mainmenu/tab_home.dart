@@ -171,7 +171,9 @@ class UserInfo extends StatelessWidget {
                 child: Text(snapshot.data.data['name']),
               ),
               subtitle: Center(
-                child: Text('Peran belum dikonfigurasi'),
+                child: (snapshot.data.data['isSupervisor'])
+                    ? Text('Mandor')
+                    : Text('Konsumen'),
               ),
             ),
           );
