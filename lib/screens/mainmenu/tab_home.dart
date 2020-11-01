@@ -1,4 +1,5 @@
 import 'package:bangunin_id/models/user.dart';
+import 'package:bangunin_id/screens/transitions/loading.dart';
 import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +10,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
+    final userID = Provider.of<User>(context).uid;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: transparentAppbarAndNavbar()
@@ -25,7 +27,7 @@ class Home extends StatelessWidget {
               child: SizedBox(height: 50.0),
             ),
             SliverToBoxAdapter(
-              child: UserInfo(),
+              child: userInfo(userID),
             ),
             SliverToBoxAdapter(
               child: SizedBox(height: 10.0),
@@ -35,7 +37,7 @@ class Home extends StatelessWidget {
             )
           ],
         ),
-        floatingActionButton: CreateProjectButton(),
+        floatingActionButton: createProjectButton(userID), // hanya untuk mandor
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );
@@ -147,58 +149,28 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
   }
 }
 
-class UserInfo extends StatelessWidget {
-  const UserInfo({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final userID = Provider.of<User>(context).uid;
-    String tablename = 'accounts';
-
-    return StreamBuilder(
-      stream: DatabaseService(uid: userID).entitySnapshot(tablename),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return Center(child: CircularProgressIndicator());
-        } else {
-          return Container(
-            child: ListTile(
-              title: Center(
-                child: Text(snapshot.data.data['name']),
-              ),
-              subtitle: Center(
-                child: (snapshot.data.data['isSupervisor'])
-                    ? Text('Mandor')
-                    : Text('Konsumen'),
-              ),
+StreamBuilder userInfo(String userID) {
+  return StreamBuilder(
+    stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
+    builder: (context, snapshot) {
+      if (!snapshot.hasData) {
+        return LoadingScreen();
+      } else {
+        return Container(
+          child: ListTile(
+            title: Center(
+              child: Text(snapshot.data.data['name']),
             ),
-          );
-        }
-      },
-    );
-  }
-}
-
-class CreateProjectButton extends StatelessWidget {
-  const CreateProjectButton({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return FloatingActionButton.extended(
-      onPressed: () async {
-        Navigator.of(context).pushNamed('/newproject');
-      },
-      label: Text(
-        'Buat Proyek Baru',
-        style: TextStyle(color: AppColors().accent1),
-      ),
-      backgroundColor: AppColors().primary,
-    );
-  }
+            subtitle: Center(
+              child: (snapshot.data.data['isSupervisor'])
+                  ? Text('Mandor')
+                  : Text('Konsumen'),
+            ),
+          ),
+        );
+      }
+    },
+  );
 }
 
 SliverChildBuilderDelegate infiniteList(BuildContext context) {
@@ -225,6 +197,28 @@ SliverChildBuilderDelegate infiniteList(BuildContext context) {
           ),
         ),
       );
+    },
+  );
+}
+
+StreamBuilder createProjectButton(String userID) {
+  return StreamBuilder(
+    stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
+    builder: (context, snapshot) {
+      if (snapshot.hasData && snapshot.data.data['isSupervisor']) {
+        return FloatingActionButton.extended(
+          onPressed: () async {
+            Navigator.of(context).pushNamed('/newproject');
+          },
+          label: Text(
+            'Buat Proyek Baru',
+            style: TextStyle(color: AppColors().accent1),
+          ),
+          backgroundColor: AppColors().primary,
+        );
+      } else {
+        return Container();
+      }
     },
   );
 }
