@@ -77,10 +77,7 @@ class Account extends StatelessWidget {
             //Sliver-sliver lain ditulis di sini
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.edit),
-          onPressed: () {},
-        ),
+        floatingActionButton: editUserData(context),
       ),
     );
   }
@@ -200,4 +197,11 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
       ),
     );
   }
+}
+
+FloatingActionButton editUserData(context) {
+  return FloatingActionButton(
+    onPressed: () {},
+    child: Icon(Icons.edit),
+  );
 }
