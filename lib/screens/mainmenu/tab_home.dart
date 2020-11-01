@@ -184,7 +184,6 @@ SliverChildBuilderDelegate infiniteList(BuildContext context) {
             borderRadius: BorderRadius.circular(100),
           ),
           child: ListTile(
-            dense: true,
             title: Text("Proyek $index"),
             subtitle: Text("Deadline: -"),
             trailing: Text(
