@@ -1,7 +1,5 @@
 import 'package:bangunin_id/models/user.dart';
 import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:bangunin_id/services/database.dart';
