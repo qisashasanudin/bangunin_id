@@ -38,6 +38,42 @@ class Account extends StatelessWidget {
               delegate: HomeAppBar(expandedHeight: screenHeight / 3),
               pinned: true,
             ),
+            SliverList(
+              delegate: SliverChildListDelegate([
+                SizedBox(
+                  height: 50,
+                ),
+                Container(
+                  child: RaisedButton.icon(
+                    onPressed: () {},
+                    icon: Icon(Icons.call, color: Colors.white),
+                    label: Text(
+                      'Bangunin.id',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    color: Colors.green,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4)),
+                  ),
+                  margin: EdgeInsets.all(10.0),
+                  padding: EdgeInsets.only(left: 90, right: 90),
+                ),
+                ListTile(title: Text('Nama'), subtitle: Text('Hanvey Xavero')),
+                ListTile(
+                    title: Text('Telephone Number'),
+                    subtitle: Text('0818-XXXX-XXXX')),
+                ListTile(
+                    title: Text('ALamat'),
+                    subtitle: Text(
+                        'Jalan Sunter karya selatan hb 11 no 12, tanjung priuk sunter jakarta utara kecamatan pasar rebu dkk.')),
+                ListTile(
+                    title: Text('Email'),
+                    subtitle: Text('hanveyxavero888@gmail.com')),
+                ListTile(title: Text('Project Done'), subtitle: Text('2')),
+                ListTile(
+                    title: Text('Project in progress'), subtitle: Text('3')),
+              ]),
+            ),
             //Sliver-sliver lain ditulis di sini
           ],
         ),
@@ -140,13 +176,16 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: CircleAvatar(
-              child: CircleAvatar(
-                radius: 25,
-                backgroundColor: Colors.black54,
-                child: IconButton(
-                    icon: Icon(Icons.edit),
-                    color: Colors.white,
-                    onPressed: () {}),
+              child: Padding(
+                padding: EdgeInsets.only(top: 100, left: 100),
+                child: CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Colors.black54,
+                  child: IconButton(
+                      icon: Icon(Icons.edit),
+                      color: Colors.white,
+                      onPressed: () {}),
+                ),
               ),
               radius: 70,
               backgroundColor: AppColors().primary,
