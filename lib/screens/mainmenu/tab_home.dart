@@ -157,11 +157,10 @@ class UserInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userID = Provider.of<User>(context).uid;
-    Stream dataSnapshot =
-        Firestore.instance.collection('accounts').document(userID).snapshots();
+    String tablename = 'accounts';
 
     return StreamBuilder(
-      stream: dataSnapshot,
+      stream: DatabaseService(uid: userID).entitySnapshot(tablename),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center(child: CircularProgressIndicator());

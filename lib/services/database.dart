@@ -44,4 +44,8 @@ class DatabaseService {
       },
     );
   }
+
+  Stream entitySnapshot(String tablename) {
+    return Firestore.instance.collection(tablename).document(uid).snapshots();
+  }
 }
