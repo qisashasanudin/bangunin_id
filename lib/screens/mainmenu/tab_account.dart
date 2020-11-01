@@ -77,6 +77,10 @@ class Account extends StatelessWidget {
             //Sliver-sliver lain ditulis di sini
           ],
         ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.edit),
+          onPressed: () {},
+        ),
       ),
     );
   }
