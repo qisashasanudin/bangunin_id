@@ -18,15 +18,15 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
         body: TabBarView(
           children: <Widget>[
             Home(),
-            Settings(),
             Account(),
+            Settings(),
           ],
         ),
         bottomNavigationBar: TabBar(
           tabs: <Widget>[
             Tab(icon: Icon(Icons.home)),
-            Tab(icon: Icon(Icons.settings)),
             Tab(icon: Icon(Icons.person)),
+            Tab(icon: Icon(Icons.settings)),
           ],
           labelColor: AppColors().primary,
           indicator: UnderlineTabIndicator(

@@ -13,12 +13,19 @@ class ProjectDetails extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppColors().accent1,
         body: CustomScrollView(
+          physics: BouncingScrollPhysics(),
           slivers: [
             SliverAppBar(
+              stretch: true,
+              pinned: true,
               expandedHeight: screenHeight / 4,
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
                 title: Text('Rincian Proyek'),
+                stretchModes: [
+                      StretchMode.zoomBackground,
+                      StretchMode.fadeTitle,
+                    ],
               ),
             ),
             //Sliver-sliver lain ditulis di sini

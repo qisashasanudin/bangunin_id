@@ -10,7 +10,20 @@ class LoadingScreen extends StatelessWidget {
       child: Center(
         child: SpinKitWanderingCubes(
           color: AppColors().primary,
-          size: 50.0,
+        ),
+      ),
+    );
+  }
+}
+
+class LoadingText extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: AppColors().accent1,
+      child: Center(
+        child: SpinKitThreeBounce(
+          color: AppColors().primary,
         ),
       ),
     );

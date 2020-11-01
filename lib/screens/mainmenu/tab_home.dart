@@ -18,13 +18,14 @@ class Home extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppColors().accent1,
         body: CustomScrollView(
+          
           slivers: [
             SliverPersistentHeader(
               delegate: HomeAppBar(expandedHeight: screenHeight / 3),
               pinned: true,
             ),
             SliverToBoxAdapter(
-              child: SizedBox(height: 50.0),
+              child: SizedBox(height: 60.0),
             ),
             SliverToBoxAdapter(
               child: userInfo(userID),
@@ -154,17 +155,22 @@ StreamBuilder userInfo(String userID) {
     stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
     builder: (context, snapshot) {
       if (!snapshot.hasData) {
-        return LoadingScreen();
+        return LoadingText();
       } else {
         return Container(
           child: ListTile(
             title: Center(
-              child: Text(snapshot.data.data['name']),
-            ),
+                child: Text(snapshot.data.data['name'],
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
             subtitle: Center(
               child: (snapshot.data.data['isSupervisor'])
-                  ? Text('Mandor')
-                  : Text('Konsumen'),
+                  ? Text('Mandor',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold))
+                  : Text('Konsumen',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
             ),
           ),
         );
