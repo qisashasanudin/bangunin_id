@@ -4,12 +4,12 @@ import 'package:bangunin_id/screens/mainmenu/tab_settings.dart';
 import 'package:bangunin_id/shared/decorations.dart';
 import 'package:flutter/material.dart';
 
-class MainMenuNav extends StatefulWidget {
+class MainMenuTabNav extends StatefulWidget {
   @override
-  _MainMenuNavState createState() => _MainMenuNavState();
+  _MainMenuTabNavState createState() => _MainMenuTabNavState();
 }
 
-class _MainMenuNavState extends State<MainMenuNav> {
+class _MainMenuTabNavState extends State<MainMenuTabNav> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
