@@ -3,7 +3,6 @@ import 'package:bangunin_id/screens/mainmenu/tab_home.dart';
 import 'package:bangunin_id/screens/mainmenu/tab_settings.dart';
 import 'package:bangunin_id/shared/decorations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class MainMenuNav extends StatefulWidget {
   @override
@@ -11,45 +10,30 @@ class MainMenuNav extends StatefulWidget {
 }
 
 class _MainMenuNavState extends State<MainMenuNav> {
-  int _selectedIndex = 0;
-  List<Widget> _widgetOptions = <Widget>[
-    Home(),
-    Settings(),
-    Account(),
-  ];
-
-  void _onItemTap(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: transparentAppbarAndNavbar()
-          .copyWith(statusBarIconBrightness: Brightness.light),
+    return DefaultTabController(
+      length: 3,
       child: Scaffold(
-        backgroundColor: AppColors().primary,
-        body: _widgetOptions.elementAt(_selectedIndex),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: AppColors().accent1,
-          currentIndex: _selectedIndex,
-          onTap: _onItemTap,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Beranda',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Pengaturan',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Akun',
-            ),
+        body: TabBarView(
+          children: <Widget>[
+            Home(),
+            Settings(),
+            Account(),
           ],
+        ),
+        bottomNavigationBar: TabBar(
+          tabs: <Widget>[
+            Tab(icon: Icon(Icons.home)),
+            Tab(icon: Icon(Icons.settings)),
+            Tab(icon: Icon(Icons.person)),
+          ],
+          labelColor: AppColors().primary,
+          indicator: UnderlineTabIndicator(
+            borderSide: BorderSide(color: AppColors().primary, width: 4.0),
+            insets: EdgeInsets.only(bottom: 44),
+          ),
+          unselectedLabelColor: AppColors().accent3,
         ),
       ),
     );

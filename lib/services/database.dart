@@ -4,20 +4,48 @@ class DatabaseService {
   final String uid;
   DatabaseService({this.uid});
 
-  // collection reference
-  final CollectionReference projectsCollection =
-      Firestore.instance.collection('projects');
+  CollectionReference tabel;
 
-  Future updateUserData(
-      String nama, int pasir, int keramik, int batuBata, int semen) async {
-    return await projectsCollection.document(uid).setData(
+  Future writeAccountData(String email, String name, bool isSupervisor) async {
+    tabel = Firestore.instance.collection('accounts');
+    return await tabel.document(uid).setData(
       {
-        'nama': nama,
-        'pasir': pasir,
-        'keramik': keramik,
-        'batuBata': batuBata,
-        'semen': semen,
+        'email': email,
+        'name': name,
+        'isSupervisor': isSupervisor,
       },
     );
+  }
+
+  Future writeProjectData(
+      String projectName,
+      String customerName,
+      String customerEmail,
+      String customerPhone,
+      String supervisorName,
+      String supervisorEmail,
+      String supervisorPhone,
+      DateTime dateCreated,
+      String address,
+      bool isCompleted) async {
+    tabel = Firestore.instance.collection('projects');
+    return await tabel.document(uid).setData(
+      {
+        'projectName': projectName,
+        'customerName': customerName,
+        'customerEmail': customerEmail,
+        'customerPhone': customerPhone,
+        'supervisorName': supervisorName,
+        'supervisorEmail': supervisorEmail,
+        'supervisorPhone': supervisorPhone,
+        'dateCreated': dateCreated,
+        'address': address,
+        'isCompleted': isCompleted,
+      },
+    );
+  }
+
+  Stream entitySnapshot(String tablename) {
+    return Firestore.instance.collection(tablename).document(uid).snapshots();
   }
 }

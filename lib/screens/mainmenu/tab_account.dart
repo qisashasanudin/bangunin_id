@@ -8,6 +8,8 @@ class Account extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+double screenHeight = MediaQuery.of(context).size.height;
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: transparentAppbarAndNavbar()
           .copyWith(statusBarIconBrightness: Brightness.light),
@@ -16,7 +18,7 @@ class Account extends StatelessWidget {
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
-              expandedHeight: 150,
+              expandedHeight: screenHeight / 4,
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
                 title: Text('Akun'),
@@ -37,38 +39,38 @@ class Account extends StatelessWidget {
         ),
       ),
     );
-  }
 
-  Widget _profileText() {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Text(
-        'Profile',
-        style: TextStyle(
-          fontSize: 35.0,
-          letterSpacing: 1.5,
+    Padding _profileText() {
+      return Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Text(
+          'Profile',
+          style: TextStyle(
+            fontSize: 35.0,
+            letterSpacing: 1.5,
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      );
+    }
+
+    Container _circleAvatar(BuildContext context) {
+      return Container(
+        width: MediaQuery.of(context).size.width / 2,
+        height: MediaQuery.of(context).size.width / 2,
+        padding: EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.white, width: 5),
+          shape: BoxShape.circle,
           color: Colors.white,
-          fontWeight: FontWeight.w600,
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: AssetImage('img/profile_pic_default3.jpg'),
+          ),
         ),
-      ),
-    );
-  }
-
-  Widget _circleAvatar(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width / 2,
-      height: MediaQuery.of(context).size.width / 2,
-      padding: EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.white, width: 5),
-        shape: BoxShape.circle,
-        color: Colors.white,
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: AssetImage('img/profile_pic_default3.jpg'),
-        ),
-      ),
-    );
+      );
+    }
   }
 }
 
