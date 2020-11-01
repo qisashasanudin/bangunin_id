@@ -23,6 +23,7 @@ class _RegisterState extends State<Register> {
 
   //text field state
   String email = '';
+  String name = '';
   String password = '';
   String error = '';
 
@@ -49,6 +50,8 @@ class _RegisterState extends State<Register> {
                       loginLogo(),
                       SizedBox(height: 40.0),
                       emailForm(),
+                      SizedBox(height: 20.0),
+                      nameForm(),
                       SizedBox(height: 20.0),
                       passwordForm(),
                       SizedBox(height: 20.0),
@@ -80,6 +83,18 @@ class _RegisterState extends State<Register> {
           : null,
       onChanged: (val) {
         setState(() => email = val);
+      },
+    );
+  }
+
+    TextFormField nameForm() {
+    return TextFormField(
+      decoration: inputBoxBorder().copyWith(hintText: 'Nama Lengkap'),
+      validator: (val) => (val.isEmpty)
+          ? 'Masukkan nama lengkap anda'
+          : null,
+      onChanged: (val) {
+        setState(() => name = val);
       },
     );
   }
@@ -157,7 +172,7 @@ class _RegisterState extends State<Register> {
       setState(() {
         loading = true;
       });
-      dynamic result = await _auth.registerWithEmail(email, password);
+      dynamic result = await _auth.registerWithEmail(email, name, password);
       if (result == null) {
         setState(() {
           error = 'Registrasi tidak berhasil.';
