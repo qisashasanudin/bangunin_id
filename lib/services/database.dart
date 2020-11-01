@@ -12,7 +12,7 @@ class DatabaseService {
       {
         'email': email,
         'name': name,
-        'is_supervisor': isSupervisor,
+        'isSupervisor': isSupervisor,
       },
     );
   }
