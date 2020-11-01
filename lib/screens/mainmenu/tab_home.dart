@@ -156,8 +156,12 @@ class UserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userID = Provider.of<User>(context).uid;
+    Stream dataSnapshot =
+        Firestore.instance.collection('accounts').document(userID).snapshots();
+
     return StreamBuilder(
-      stream: Firestore.instance.collection('accounts').snapshots(),
+      stream: dataSnapshot,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center(child: CircularProgressIndicator());
@@ -165,7 +169,7 @@ class UserInfo extends StatelessWidget {
           return Container(
             child: ListTile(
               title: Center(
-                child: Text('Pengguna baru'),
+                child: Text(snapshot.data.data['name']),
               ),
               subtitle: Center(
                 child: Text('Peran belum dikonfigurasi'),

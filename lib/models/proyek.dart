@@ -1,3 +1,4 @@
+// belum terpakai
 class Proyek {
   final String nama;
   final int pasir;
