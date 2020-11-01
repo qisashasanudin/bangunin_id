@@ -8,7 +8,7 @@ class Account extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-double screenHeight = MediaQuery.of(context).size.height;
+    double screenHeight = MediaQuery.of(context).size.height;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: transparentAppbarAndNavbar()
@@ -18,7 +18,7 @@ double screenHeight = MediaQuery.of(context).size.height;
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
-              expandedHeight: screenHeight / 4,
+              expandedHeight: screenHeight / 20,
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
                 title: Text('Akun'),
@@ -33,6 +33,10 @@ double screenHeight = MediaQuery.of(context).size.height;
                   },
                 )
               ],
+            ),
+            SliverPersistentHeader(
+              delegate: HomeAppBar(expandedHeight: screenHeight / 3),
+              pinned: true,
             ),
             //Sliver-sliver lain ditulis di sini
           ],
@@ -71,6 +75,119 @@ double screenHeight = MediaQuery.of(context).size.height;
         ),
       );
     }
+  }
+}
+
+class HomeAppBar extends SliverPersistentHeaderDelegate {
+  final double expandedHeight;
+
+  HomeAppBar({@required this.expandedHeight});
+
+  @override
+  double get maxExtent => expandedHeight;
+  double get minExtent => kToolbarHeight;
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
+
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Stack(
+      alignment: Alignment.center,
+      fit: StackFit.expand,
+      clipBehavior: Clip.none,
+      children: [
+        bgroundColor(context, shrinkOffset),
+        coverPicture(shrinkOffset),
+        coverPictureGradient(context, shrinkOffset),
+        pageTitle(shrinkOffset),
+        profilePicture(shrinkOffset),
+      ],
+    );
+  }
+
+  Container bgroundColor(BuildContext context, double shrinkOffset) {
+    return Container(
+      width: double.infinity,
+      height: shrinkOffset,
+      decoration: BoxDecoration(
+        color: AppColors().primary,
+      ),
+    );
+  }
+
+  Opacity coverPicture(double shrinkOffset) {
+    return Opacity(
+      opacity: (1 - shrinkOffset / expandedHeight),
+      child: Image.asset(
+        'assets/img/home_bg_default2.jpg',
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+
+  Opacity coverPictureGradient(BuildContext context, double shrinkOffset) {
+    return Opacity(
+      opacity: (1 - shrinkOffset / expandedHeight),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: FractionalOffset.topCenter,
+            end: FractionalOffset.bottomCenter,
+            colors: [
+              AppColors().primary,
+              AppColors().accent1.withOpacity(0.0),
+            ],
+            stops: [0.0, 0.5],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Positioned pageTitle(double shrinkOffset) {
+    return Positioned(
+      top: 30,
+      child: Opacity(
+        opacity: shrinkOffset / expandedHeight,
+        child: Text(
+          "Beranda",
+          style: TextStyle(
+            color: AppColors().accent1,
+            fontWeight: FontWeight.w700,
+            fontSize: 20,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Positioned profilePicture(double shrinkOffset) {
+    return Positioned(
+      top: expandedHeight - 100 - shrinkOffset,
+      child: Opacity(
+        opacity: (1 - shrinkOffset / expandedHeight),
+        child: Card(
+          elevation: 10,
+          shape: CircleBorder(),
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: CircleAvatar(
+              child: CircleAvatar(
+                radius: 25,
+                backgroundColor: Colors.black54,
+                child: IconButton(
+                    icon: Icon(Icons.edit),
+                    color: Colors.white,
+                    onPressed: () {}),
+              ),
+              radius: 70,
+              backgroundColor: AppColors().primary,
+              backgroundImage: AssetImage('assets/img/profile_pic_default.jpg'),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
