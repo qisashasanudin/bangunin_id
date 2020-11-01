@@ -3,9 +3,9 @@ class User {
   User({this.uid});
 }
 
-class UserData {
-  final String uid;
-  final String nama;
-  final String tipe;
-  UserData({this.uid, this.nama, this.tipe});
+class AccountData {
+  final String email;
+  final String name;
+  final bool isSupervisor;
+  AccountData({this.email, this.name, this.isSupervisor});
 }

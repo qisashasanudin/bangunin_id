@@ -1,6 +1,11 @@
+import 'package:bangunin_id/models/user.dart';
 import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:bangunin_id/services/database.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -22,7 +27,7 @@ class Home extends StatelessWidget {
               child: SizedBox(height: 50.0),
             ),
             SliverToBoxAdapter(
-              child: userInfo(),
+              child: UserInfo(),
             ),
             SliverToBoxAdapter(
               child: SizedBox(height: 10.0),
@@ -32,65 +37,11 @@ class Home extends StatelessWidget {
             )
           ],
         ),
-        floatingActionButton: createProjectButton(context),
+        floatingActionButton: CreateProjectButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );
   }
-
-  Container userInfo() {
-    return Container(
-      child: ListTile(
-        title: Center(
-          child: Text('Pengguna baru'),
-        ),
-        subtitle: Center(
-          child: Text('Peran belum dikonfigurasi'),
-        ),
-      ),
-    );
-  }
-
-  FloatingActionButton createProjectButton(BuildContext context) {
-    return FloatingActionButton.extended(
-      onPressed: () async {
-        Navigator.of(context).pushNamed('/newproject');
-      },
-      label: Text(
-        'Buat Proyek Baru',
-        style: TextStyle(color: AppColors().accent1),
-      ),
-      backgroundColor: AppColors().primary,
-    );
-  }
-}
-
-SliverChildBuilderDelegate infiniteList(BuildContext context) {
-  return SliverChildBuilderDelegate(
-    (BuildContext context, index) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-        child: Container(
-          decoration: BoxDecoration(
-            color: AppColors().accent3,
-            borderRadius: BorderRadius.circular(100),
-          ),
-          child: ListTile(
-            dense: true,
-            title: Text("Proyek $index"),
-            subtitle: Text("Deadline: -"),
-            trailing: Text(
-              "In - progress",
-              style: TextStyle(color: Colors.red),
-            ),
-            onTap: () async {
-              Navigator.of(context).pushNamed('/projectdetails');
-            },
-          ),
-        ),
-      );
-    },
-  );
 }
 
 class HomeAppBar extends SliverPersistentHeaderDelegate {
@@ -196,4 +147,81 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
       ),
     );
   }
+}
+
+class UserInfo extends StatelessWidget {
+  const UserInfo({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: Firestore.instance.collection('accounts').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Center(child: CircularProgressIndicator());
+        } else {
+          return Container(
+            child: ListTile(
+              title: Center(
+                child: Text('Pengguna baru'),
+              ),
+              subtitle: Center(
+                child: Text('Peran belum dikonfigurasi'),
+              ),
+            ),
+          );
+        }
+      },
+    );
+  }
+}
+
+class CreateProjectButton extends StatelessWidget {
+  const CreateProjectButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton.extended(
+      onPressed: () async {
+        Navigator.of(context).pushNamed('/newproject');
+      },
+      label: Text(
+        'Buat Proyek Baru',
+        style: TextStyle(color: AppColors().accent1),
+      ),
+      backgroundColor: AppColors().primary,
+    );
+  }
+}
+
+SliverChildBuilderDelegate infiniteList(BuildContext context) {
+  return SliverChildBuilderDelegate(
+    (BuildContext context, index) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        child: Container(
+          decoration: BoxDecoration(
+            color: AppColors().accent3,
+            borderRadius: BorderRadius.circular(100),
+          ),
+          child: ListTile(
+            dense: true,
+            title: Text("Proyek $index"),
+            subtitle: Text("Deadline: -"),
+            trailing: Text(
+              "In - progress",
+              style: TextStyle(color: Colors.red),
+            ),
+            onTap: () async {
+              Navigator.of(context).pushNamed('/projectdetails');
+            },
+          ),
+        ),
+      );
+    },
+  );
 }

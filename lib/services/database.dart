@@ -6,7 +6,7 @@ class DatabaseService {
 
   CollectionReference tabel;
 
-  Future updateAccountData(String email, String name, bool isSupervisor) async {
+  Future writeAccountData(String email, String name, bool isSupervisor) async {
     tabel = Firestore.instance.collection('accounts');
     return await tabel.document(uid).setData(
       {
@@ -17,7 +17,7 @@ class DatabaseService {
     );
   }
 
-  Future updateProjectData(
+  Future writeProjectData(
       String projectName,
       String customerName,
       String customerEmail,

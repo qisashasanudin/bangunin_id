@@ -24,7 +24,7 @@ class AuthService {
       FirebaseUser user = result.user;
 
       //create a new doc for the user with the uid
-      await DatabaseService(uid: user.uid).updateAccountData(email, name, false);
+      await DatabaseService(uid: user.uid).writeAccountData(email, name, false);
 
       //returns the user uid
       return _userFromFirebaseUser(user);
@@ -45,6 +45,11 @@ class AuthService {
       print(e.toString());
       return null;
     }
+  }
+
+  //get UID
+  Future<String> getCurrentUID() async {
+    return (await _auth.currentUser()).uid;
   }
 
   //sign out
