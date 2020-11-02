@@ -53,7 +53,7 @@ class _HomeState extends State<Home> {
                   flexibleSpace: homeAppBar(screenHeight),
                 ),
                 SliverToBoxAdapter(
-                  child: SizedBox(height: 70.0),
+                  child: SizedBox(height: screenHeight/10),
                 ),
                 SliverToBoxAdapter(
                   child: userInfo(userID),
