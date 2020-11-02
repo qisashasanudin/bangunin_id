@@ -10,17 +10,22 @@ class MainMenuTabNav extends StatefulWidget {
 }
 
 class _MainMenuTabNavState extends State<MainMenuTabNav> {
+  final PageStorageBucket bucket = PageStorageBucket();
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        body: TabBarView(
-          children: <Widget>[
-            Home(),
-            Account(),
-            Settings(),
-          ],
+        body: PageStorage(
+          bucket: bucket,
+          child: TabBarView(
+            children: <Widget>[
+              Home(key: PageStorageKey('Beranda')),
+              Account(key: PageStorageKey('Akun')),
+              Settings(key: PageStorageKey('Pengaturan')),
+            ],
+          ),
         ),
         bottomNavigationBar: TabBar(
           tabs: <Widget>[

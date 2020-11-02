@@ -3,7 +3,14 @@ import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class Settings extends StatelessWidget {
+class Settings extends StatefulWidget {
+  Settings({Key key}) : super(key: key);
+
+  @override
+  _SettingsState createState() => _SettingsState();
+}
+
+class _SettingsState extends State<Settings> {
   final AuthService _auth = AuthService();
 
   @override

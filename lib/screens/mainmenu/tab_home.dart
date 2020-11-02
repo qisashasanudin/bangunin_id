@@ -7,13 +7,15 @@ import 'package:bangunin_id/services/database.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
+  Home({Key key}) : super(key: key);
+
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
   ScrollController _scrollController;
-  double scrollPosition;
+  double scrollPosition = 0;
 
   _scrollListener() {
     setState(() {
@@ -79,6 +81,11 @@ class _HomeState extends State<Home> {
 
   FlexibleSpaceBar homeAppBar(double screenHeight) {
     return FlexibleSpaceBar(
+      centerTitle: true,
+      title: Opacity(
+        opacity: 1 - scrollFadeCalculator(screenHeight / 5),
+        child: Text('Beranda'),
+      ),
       background: Container(
         child: Stack(
           alignment: Alignment.center,
@@ -89,11 +96,6 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      centerTitle: true,
-      title: Opacity(
-        opacity: 1 - scrollFadeCalculator(screenHeight / 5),
-        child: Text('Beranda'),
-      ),
       stretchModes: [
         StretchMode.zoomBackground,
         StretchMode.fadeTitle,
@@ -103,7 +105,7 @@ class _HomeState extends State<Home> {
 
   Image coverPicture() {
     return Image.asset(
-      'assets/img/home_bg_default2.jpg',
+      'assets/img/home_bg_default1.jpg',
       fit: BoxFit.cover,
     );
   }
@@ -141,7 +143,7 @@ class _HomeState extends State<Home> {
                   profilePicture(),
                   SizedBox(height: 10.0),
                   displayName(snapshot),
-                  displayRole(snapshot),
+                  displayUserType(snapshot),
                 ],
               ),
             ),
@@ -171,7 +173,7 @@ class _HomeState extends State<Home> {
         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold));
   }
 
-  Text displayRole(AsyncSnapshot snapshot) {
+  Text displayUserType(AsyncSnapshot snapshot) {
     return (snapshot.data.data['isSupervisor'])
         ? Text('Mandor', style: TextStyle(fontSize: 15))
         : Text('Konsumen', style: TextStyle(fontSize: 15));
