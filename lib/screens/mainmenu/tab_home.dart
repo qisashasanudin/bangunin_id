@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-    @override
+  @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();
@@ -59,7 +59,7 @@ class _HomeState extends State<Home> {
                   flexibleSpace: homeAppBar(screenHeight),
                 ),
                 SliverToBoxAdapter(
-                  child: SizedBox(height: 100),
+                  child: SizedBox(height: 120),
                 ),
                 SliverList(
                   delegate: infiniteList(context),
