@@ -6,7 +6,28 @@ import 'package:flutter/services.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:provider/provider.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  ScrollController _scrollController;
+  double scrollPosition;
+
+  _scrollListener() {
+    setState(() {
+      scrollPosition = (1 - _scrollController.position.pixels);
+    });
+  }
+
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    _scrollController.addListener(_scrollListener);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -22,6 +43,7 @@ class Home extends StatelessWidget {
           Scaffold(
             backgroundColor: AppColors().accent1,
             body: CustomScrollView(
+              controller: _scrollController,
               physics: BouncingScrollPhysics(),
               slivers: [
                 SliverAppBar(
@@ -49,175 +71,167 @@ class Home extends StatelessWidget {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
           ),
-          Positioned(
-            top: screenHeight / 5,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Card(
-                  elevation: 10,
-                  shape: CircleBorder(),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: CircleAvatar(
-                      radius: 70,
-                      backgroundColor: AppColors().primary,
-                      backgroundImage:
-                          AssetImage('assets/img/profile_pic_default.jpg'),
-                    ),
-                  ),
+          profilePicture(screenHeight),
+        ],
+      ),
+    );
+  }
+
+  FlexibleSpaceBar homeAppBar() {
+    return FlexibleSpaceBar(
+      background: Container(
+        child: Stack(
+          alignment: Alignment.center,
+          fit: StackFit.expand,
+          children: [
+            coverPicture(),
+            coverPictureGradient(),
+          ],
+        ),
+      ),
+      centerTitle: true,
+      title: Text('Beranda'),
+      stretchModes: [
+        StretchMode.zoomBackground,
+        StretchMode.fadeTitle,
+      ],
+    );
+  }
+
+  Image coverPicture() {
+    return Image.asset(
+      'assets/img/home_bg_default2.jpg',
+      fit: BoxFit.cover,
+    );
+  }
+
+  Container coverPictureGradient() {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: FractionalOffset.topCenter,
+          end: FractionalOffset.bottomCenter,
+          colors: [
+            AppColors().primary,
+            AppColors().accent1.withOpacity(0.0),
+          ],
+          stops: [0.0, 0.5],
+        ),
+      ),
+    );
+  }
+
+  Positioned profilePicture(double screenHeight) {
+    return Positioned(
+      top: (scrollPosition ?? 0) + screenHeight / 5,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Opacity(
+            opacity: profilePicFadeEffect(screenHeight / 5),
+            child: Card(
+              elevation: 10,
+              shape: CircleBorder(),
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: CircleAvatar(
+                  radius: 70,
+                  backgroundColor: AppColors().primary,
+                  backgroundImage:
+                      AssetImage('assets/img/profile_pic_default.jpg'),
                 ),
-              ],
+              ),
             ),
           ),
         ],
       ),
     );
   }
-}
 
-FlexibleSpaceBar homeAppBar() {
-  return FlexibleSpaceBar(
-    background: Container(
-      child: Stack(
-        alignment: Alignment.center,
-        fit: StackFit.expand,
-        children: [
-          coverPicture(),
-          coverPictureGradient(),
-        ],
-      ),
-    ),
-    centerTitle: true,
-    title: Text('Beranda'),
-    stretchModes: [
-      StretchMode.zoomBackground,
-      StretchMode.fadeTitle,
-    ],
-  );
-}
+  double profilePicFadeEffect(double h) {
+    return ((((scrollPosition ?? 0) + h) / h <= 0)
+        ? 0
+        : (((scrollPosition ?? 0) + h) / h >= 1)
+            ? 1
+            : ((scrollPosition ?? 0) + h) / h);
+  }
 
-Image coverPicture() {
-  return Image.asset(
-    'assets/img/home_bg_default2.jpg',
-    fit: BoxFit.cover,
-  );
-}
+  StreamBuilder userInfo(String userID) {
+    return StreamBuilder(
+      stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return LoadingText();
+        } else {
+          return Container(
+            child: ListTile(
+              title: Center(
+                  child: Text(snapshot.data.data['name'],
+                      style: TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold))),
+              subtitle: Center(
+                child: (snapshot.data.data['isSupervisor'])
+                    ? Text('Mandor',
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold))
+                    : Text('Konsumen',
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold)),
+              ),
+            ),
+          );
+        }
+      },
+    );
+  }
 
-Container coverPictureGradient() {
-  return Container(
-    width: double.infinity,
-    decoration: BoxDecoration(
-      gradient: LinearGradient(
-        begin: FractionalOffset.topCenter,
-        end: FractionalOffset.bottomCenter,
-        colors: [
-          AppColors().primary,
-          AppColors().accent1.withOpacity(0.0),
-        ],
-        stops: [0.0, 0.5],
-      ),
-    ),
-  );
-}
-
-// Positioned profilePicture() {
-//   return Positioned(
-//     top: screenHeight / 3,
-//     child: Stack(
-//       alignment: Alignment.center,
-//       children: [
-//         Card(
-//           elevation: 10,
-//           shape: CircleBorder(),
-//           child: Padding(
-//             padding: const EdgeInsets.all(5.0),
-//             child: CircleAvatar(
-//               radius: 70,
-//               backgroundColor: AppColors().primary,
-//               backgroundImage: AssetImage('assets/img/profile_pic_default.jpg'),
-//             ),
-//           ),
-//         ),
-//       ],
-//     ),
-//   );
-// }
-
-StreamBuilder userInfo(String userID) {
-  return StreamBuilder(
-    stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
-    builder: (context, snapshot) {
-      if (!snapshot.hasData) {
-        return LoadingText();
-      } else {
-        return Container(
-          child: ListTile(
-            title: Center(
-                child: Text(snapshot.data.data['name'],
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
-            subtitle: Center(
-              child: (snapshot.data.data['isSupervisor'])
-                  ? Text('Mandor',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold))
-                  : Text('Konsumen',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+  SliverChildBuilderDelegate infiniteList(BuildContext context) {
+    return SliverChildBuilderDelegate(
+      (BuildContext context, index) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColors().accent3,
+              borderRadius: BorderRadius.circular(100),
+            ),
+            child: ListTile(
+              title: Text("Proyek $index"),
+              subtitle: Text("Deadline: -"),
+              trailing: Text(
+                "In - progress",
+                style: TextStyle(color: Colors.red),
+              ),
+              onTap: () async {
+                Navigator.of(context).pushNamed('/projectdetails');
+              },
             ),
           ),
         );
-      }
-    },
-  );
-}
+      },
+    );
+  }
 
-SliverChildBuilderDelegate infiniteList(BuildContext context) {
-  return SliverChildBuilderDelegate(
-    (BuildContext context, index) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-        child: Container(
-          decoration: BoxDecoration(
-            color: AppColors().accent3,
-            borderRadius: BorderRadius.circular(100),
-          ),
-          child: ListTile(
-            title: Text("Proyek $index"),
-            subtitle: Text("Deadline: -"),
-            trailing: Text(
-              "In - progress",
-              style: TextStyle(color: Colors.red),
-            ),
-            onTap: () async {
-              Navigator.of(context).pushNamed('/projectdetails');
+  StreamBuilder createProjectButton(String userID) {
+    return StreamBuilder(
+      stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
+      builder: (context, snapshot) {
+        if (snapshot.hasData && snapshot.data.data['isSupervisor']) {
+          return FloatingActionButton.extended(
+            onPressed: () async {
+              Navigator.of(context).pushNamed('/newproject');
             },
-          ),
-        ),
-      );
-    },
-  );
-}
-
-StreamBuilder createProjectButton(String userID) {
-  return StreamBuilder(
-    stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
-    builder: (context, snapshot) {
-      if (snapshot.hasData && snapshot.data.data['isSupervisor']) {
-        return FloatingActionButton.extended(
-          onPressed: () async {
-            Navigator.of(context).pushNamed('/newproject');
-          },
-          label: Text(
-            'Buat Proyek Baru',
-            style: TextStyle(color: AppColors().accent1),
-          ),
-          backgroundColor: AppColors().primary,
-        );
-      } else {
-        return Container();
-      }
-    },
-  );
+            label: Text(
+              'Buat Proyek Baru',
+              style: TextStyle(color: AppColors().accent1),
+            ),
+            backgroundColor: AppColors().primary,
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
+  }
 }
