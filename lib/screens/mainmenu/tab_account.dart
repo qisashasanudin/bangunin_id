@@ -34,7 +34,6 @@ class Account extends StatelessWidget {
                 //Sliver-sliver lain ditulis di sini
               ],
             ),
-            floatingActionButton: editUserData(context),
           );
         },
       ),
@@ -123,23 +122,33 @@ class Account extends StatelessWidget {
       ListTile(
         title: Text('Nama'),
         subtitle: Text('Hanvey Xavero'),
+        trailing: Icon(Icons.edit),
+        onTap: () {},
       ),
       ListTile(
         title: Text('Email'),
         subtitle: Text('hanveyxavero888@gmail.com'),
+        trailing: Icon(Icons.edit),
+        onTap: () {},
       ),
       ListTile(
         title: Text('Password'),
         subtitle: Text('**********'),
+        trailing: Icon(Icons.edit),
+        onTap: () {},
       ),
       ListTile(
         title: Text('Telephone Number'),
         subtitle: Text('0818-XXXX-XXXX'),
+        trailing: Icon(Icons.edit),
+        onTap: () {},
       ),
       ListTile(
         title: Text('Alamat'),
         subtitle: Text(
             'Jalan Sunter karya selatan hb 11 no 12, tanjung priuk sunter jakarta utara kecamatan pasar rebu dkk.'),
+        trailing: Icon(Icons.edit),
+        onTap: () {},
       ),
       ListTile(
         title: Text('Project Done'),
@@ -150,12 +159,5 @@ class Account extends StatelessWidget {
         subtitle: Text('3'),
       ),
     ]);
-  }
-
-  FloatingActionButton editUserData(context) {
-    return FloatingActionButton(
-      onPressed: () {},
-      child: Icon(Icons.edit),
-    );
   }
 }

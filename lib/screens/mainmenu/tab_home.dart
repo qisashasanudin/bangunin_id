@@ -15,140 +15,134 @@ class Home extends StatelessWidget {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: transparentAppbarAndNavbar()
           .copyWith(statusBarIconBrightness: Brightness.light),
-      child: Scaffold(
-        backgroundColor: AppColors().accent1,
-        body: CustomScrollView(
-          
-          slivers: [
-            SliverPersistentHeader(
-              delegate: HomeAppBar(expandedHeight: screenHeight / 3),
-              pinned: true,
+      child: Stack(
+        alignment: Alignment.center,
+        clipBehavior: Clip.none,
+        children: [
+          Scaffold(
+            backgroundColor: AppColors().accent1,
+            body: CustomScrollView(
+              physics: BouncingScrollPhysics(),
+              slivers: [
+                SliverAppBar(
+                  stretch: true,
+                  pinned: true,
+                  expandedHeight: screenHeight / 4,
+                  flexibleSpace: homeAppBar(),
+                ),
+                SliverToBoxAdapter(
+                  child: SizedBox(height: 60.0),
+                ),
+                SliverToBoxAdapter(
+                  child: userInfo(userID),
+                ),
+                SliverToBoxAdapter(
+                  child: SizedBox(height: 10.0),
+                ),
+                SliverList(
+                  delegate: infiniteList(context),
+                )
+              ],
             ),
-            SliverToBoxAdapter(
-              child: SizedBox(height: 60.0),
+            floatingActionButton:
+                createProjectButton(userID), // hanya untuk mandor
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+          ),
+          Positioned(
+            top: screenHeight / 5,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Card(
+                  elevation: 10,
+                  shape: CircleBorder(),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: CircleAvatar(
+                      radius: 70,
+                      backgroundColor: AppColors().primary,
+                      backgroundImage:
+                          AssetImage('assets/img/profile_pic_default.jpg'),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            SliverToBoxAdapter(
-              child: userInfo(userID),
-            ),
-            SliverToBoxAdapter(
-              child: SizedBox(height: 10.0),
-            ),
-            SliverList(
-              delegate: infiniteList(context),
-            )
-          ],
-        ),
-        floatingActionButton: createProjectButton(userID), // hanya untuk mandor
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+          ),
+        ],
       ),
     );
   }
 }
 
-class HomeAppBar extends SliverPersistentHeaderDelegate {
-  final double expandedHeight;
-
-  HomeAppBar({@required this.expandedHeight});
-
-  @override
-  double get maxExtent => expandedHeight;
-  double get minExtent => kToolbarHeight;
-  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
-
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Stack(
-      alignment: Alignment.center,
-      fit: StackFit.expand,
-      clipBehavior: Clip.none,
-      children: [
-        bgroundColor(context, shrinkOffset),
-        coverPicture(shrinkOffset),
-        coverPictureGradient(context, shrinkOffset),
-        pageTitle(shrinkOffset),
-        profilePicture(shrinkOffset),
-      ],
-    );
-  }
-
-  Container bgroundColor(BuildContext context, double shrinkOffset) {
-    return Container(
-      width: double.infinity,
-      height: shrinkOffset,
-      decoration: BoxDecoration(
-        color: AppColors().primary,
+FlexibleSpaceBar homeAppBar() {
+  return FlexibleSpaceBar(
+    background: Container(
+      child: Stack(
+        alignment: Alignment.center,
+        fit: StackFit.expand,
+        children: [
+          coverPicture(),
+          coverPictureGradient(),
+        ],
       ),
-    );
-  }
-
-  Opacity coverPicture(double shrinkOffset) {
-    return Opacity(
-      opacity: (1 - shrinkOffset / expandedHeight),
-      child: Image.asset(
-        'assets/img/home_bg_default1.jpg',
-        fit: BoxFit.cover,
-      ),
-    );
-  }
-
-  Opacity coverPictureGradient(BuildContext context, double shrinkOffset) {
-    return Opacity(
-      opacity: (1 - shrinkOffset / expandedHeight),
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: FractionalOffset.topCenter,
-            end: FractionalOffset.bottomCenter,
-            colors: [
-              AppColors().primary,
-              AppColors().accent1.withOpacity(0.0),
-            ],
-            stops: [0.0, 0.5],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Positioned pageTitle(double shrinkOffset) {
-    return Positioned(
-      top: 30,
-      child: Opacity(
-        opacity: shrinkOffset / expandedHeight,
-        child: Text(
-          "Beranda",
-          style: TextStyle(
-            color: AppColors().accent1,
-            fontWeight: FontWeight.w700,
-            fontSize: 20,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Positioned profilePicture(double shrinkOffset) {
-    return Positioned(
-      top: expandedHeight - 100 - shrinkOffset,
-      child: Opacity(
-        opacity: (1 - shrinkOffset / expandedHeight),
-        child: Card(
-          elevation: 10,
-          shape: CircleBorder(),
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: CircleAvatar(
-              radius: 70,
-              backgroundColor: AppColors().primary,
-              backgroundImage: AssetImage('assets/img/profile_pic_default.jpg'),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+    ),
+    centerTitle: true,
+    title: Text('Beranda'),
+    stretchModes: [
+      StretchMode.zoomBackground,
+      StretchMode.fadeTitle,
+    ],
+  );
 }
+
+Image coverPicture() {
+  return Image.asset(
+    'assets/img/home_bg_default2.jpg',
+    fit: BoxFit.cover,
+  );
+}
+
+Container coverPictureGradient() {
+  return Container(
+    width: double.infinity,
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: FractionalOffset.topCenter,
+        end: FractionalOffset.bottomCenter,
+        colors: [
+          AppColors().primary,
+          AppColors().accent1.withOpacity(0.0),
+        ],
+        stops: [0.0, 0.5],
+      ),
+    ),
+  );
+}
+
+// Positioned profilePicture() {
+//   return Positioned(
+//     top: screenHeight / 3,
+//     child: Stack(
+//       alignment: Alignment.center,
+//       children: [
+//         Card(
+//           elevation: 10,
+//           shape: CircleBorder(),
+//           child: Padding(
+//             padding: const EdgeInsets.all(5.0),
+//             child: CircleAvatar(
+//               radius: 70,
+//               backgroundColor: AppColors().primary,
+//               backgroundImage: AssetImage('assets/img/profile_pic_default.jpg'),
+//             ),
+//           ),
+//         ),
+//       ],
+//     ),
+//   );
+// }
 
 StreamBuilder userInfo(String userID) {
   return StreamBuilder(
