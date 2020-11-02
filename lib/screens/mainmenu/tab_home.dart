@@ -91,7 +91,7 @@ class _HomeState extends State<Home> {
       ),
       centerTitle: true,
       title: Opacity(
-        opacity: 1 - scrollFadeCalc(screenHeight / 5),
+        opacity: 1 - scrollFade(screenHeight / 5),
         child: Text('Beranda'),
       ),
       stretchModes: [
@@ -132,7 +132,7 @@ class _HomeState extends State<Home> {
         alignment: Alignment.center,
         children: [
           Opacity(
-            opacity: scrollFadeCalc(screenHeight / 5),
+            opacity: scrollFade(screenHeight / 5),
             child: Card(
               elevation: 10,
               shape: CircleBorder(),
@@ -152,7 +152,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  double scrollFadeCalc(double h) {
+  double scrollFade(double h) {
     return ((((scrollPosition ?? 0) + h) / h <= 0)
         ? 0
         : (((scrollPosition ?? 0) + h) / h >= 1)
