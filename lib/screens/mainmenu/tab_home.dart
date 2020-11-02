@@ -5,15 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   Home({Key key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  HomeState createState() => HomeState();
 }
 
-class _HomeState extends State<Home> {
+class HomeState extends State<Home> {
   ScrollController _scrollController;
   double scrollPosition = 0;
 
@@ -23,15 +24,29 @@ class _HomeState extends State<Home> {
     });
   }
 
+  void loadScrollPos() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    scrollPosition = pref.getDouble('scrollPosition');
+  }
+
+  void saveScrollPos(double data) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setDouble('scrollPosition', data);
+  }
+
   @override
   void initState() {
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
+    print(scrollPosition);
+    loadScrollPos();
+    print(scrollPosition);
     super.initState();
   }
 
   @override
   void dispose() {
+    saveScrollPos(scrollPosition);
     _scrollController.dispose();
     super.dispose();
   }
