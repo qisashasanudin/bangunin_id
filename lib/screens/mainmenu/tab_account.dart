@@ -100,10 +100,10 @@ class Account extends StatelessWidget {
                 padding: EdgeInsets.only(top: 100, left: 100),
                 child: CircleAvatar(
                   radius: 25,
-                  backgroundColor: Colors.black54,
+                  backgroundColor: AppColors().accent2.withOpacity(0.5),
                   child: IconButton(
                       icon: Icon(Icons.edit),
-                      color: Colors.white,
+                      color: AppColors().accent1,
                       onPressed: () {}),
                 ),
               ),
