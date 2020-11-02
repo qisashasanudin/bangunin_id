@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bangunin_id/shared/decorations.dart';
 import 'package:flutter/services.dart';
 import '../../shared/decorations.dart';
-import 'package:bangunin_id/screens/mainmenu/tab_home.dart';
 
 class SplashScreen extends StatefulWidget {
   _SplashScreen createState() => _SplashScreen();
@@ -13,7 +12,6 @@ class _SplashScreen extends State<SplashScreen> {
 
   void initState() {
     super.initState();
-    HomeState().saveScrollPos(0);
     splashscreenStart();
   }
 
