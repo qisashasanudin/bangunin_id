@@ -28,6 +28,12 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
+    @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -53,13 +59,7 @@ class _HomeState extends State<Home> {
                   flexibleSpace: homeAppBar(screenHeight),
                 ),
                 SliverToBoxAdapter(
-                  child: SizedBox(height: screenHeight/10),
-                ),
-                SliverToBoxAdapter(
-                  child: userInfo(userID),
-                ),
-                SliverToBoxAdapter(
-                  child: SizedBox(height: 10.0),
+                  child: SizedBox(height: 100),
                 ),
                 SliverList(
                   delegate: infiniteList(context),
@@ -71,7 +71,7 @@ class _HomeState extends State<Home> {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
           ),
-          profilePicture(screenHeight),
+          userInfo(screenHeight, userID),
         ],
       ),
     );
@@ -91,7 +91,7 @@ class _HomeState extends State<Home> {
       ),
       centerTitle: true,
       title: Opacity(
-        opacity: 1 - scrollFade(screenHeight / 5),
+        opacity: 1 - scrollFadeCalculator(screenHeight / 5),
         child: Text('Beranda'),
       ),
       stretchModes: [
@@ -125,68 +125,64 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Positioned profilePicture(double screenHeight) {
-    return Positioned(
-      top: (scrollPosition ?? 0) + screenHeight / 5,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Opacity(
-            opacity: scrollFade(screenHeight / 5),
-            child: Card(
-              elevation: 10,
-              shape: CircleBorder(),
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: CircleAvatar(
-                  radius: screenHeight / 10,
-                  backgroundColor: AppColors().primary,
-                  backgroundImage:
-                      AssetImage('assets/img/profile_pic_default.jpg'),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  double scrollFade(double h) {
-    return ((((scrollPosition ?? 0) + h) / h <= 0)
-        ? 0
-        : (((scrollPosition ?? 0) + h) / h >= 1)
-            ? 1
-            : ((scrollPosition ?? 0) + h) / h);
-  }
-
-  StreamBuilder userInfo(String userID) {
+  StreamBuilder userInfo(double screenHeight, String userID) {
     return StreamBuilder(
       stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return LoadingText();
         } else {
-          return Container(
-            child: ListTile(
-              title: Center(
-                  child: Text(snapshot.data.data['name'],
-                      style: TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold))),
-              subtitle: Center(
-                child: (snapshot.data.data['isSupervisor'])
-                    ? Text('Mandor',
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold))
-                    : Text('Konsumen',
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold)),
+          return Positioned(
+            top: (scrollPosition ?? 0) + screenHeight / 5,
+            child: Opacity(
+              opacity: scrollFadeCalculator(screenHeight / 5),
+              child: Column(
+                children: [
+                  profilePicture(),
+                  SizedBox(height: 10.0),
+                  displayName(snapshot),
+                  displayRole(snapshot),
+                ],
               ),
             ),
           );
         }
       },
     );
+  }
+
+  Card profilePicture() {
+    return Card(
+      elevation: 10,
+      shape: CircleBorder(),
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: CircleAvatar(
+          radius: 60,
+          backgroundColor: AppColors().primary,
+          backgroundImage: AssetImage('assets/img/profile_pic_default.jpg'),
+        ),
+      ),
+    );
+  }
+
+  Text displayName(AsyncSnapshot snapshot) {
+    return Text(snapshot.data.data['name'],
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold));
+  }
+
+  Text displayRole(AsyncSnapshot snapshot) {
+    return (snapshot.data.data['isSupervisor'])
+        ? Text('Mandor', style: TextStyle(fontSize: 15))
+        : Text('Konsumen', style: TextStyle(fontSize: 15));
+  }
+
+  double scrollFadeCalculator(double h) {
+    return ((((scrollPosition ?? 0) + h) / h <= 0)
+        ? 0
+        : (((scrollPosition ?? 0) + h) / h >= 1)
+            ? 1
+            : ((scrollPosition ?? 0) + h) / h);
   }
 
   SliverChildBuilderDelegate infiniteList(BuildContext context) {

@@ -49,7 +49,7 @@ class Account extends StatelessWidget {
           children: [
             coverPicture(),
             coverPictureGradient(),
-            profilePictureEdit(screenHeight),
+            profilePictureEdit(),
           ],
         ),
       ),
@@ -86,34 +86,31 @@ class Account extends StatelessWidget {
     );
   }
 
-  Stack profilePictureEdit(double screenHeight) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Card(
-          elevation: 10,
-          shape: CircleBorder(),
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: CircleAvatar(
-              child: Padding(
-                padding: EdgeInsets.only(top: 100, left: 100),
-                child: CircleAvatar(
-                  radius: 25,
-                  backgroundColor: AppColors().accent2.withOpacity(0.5),
-                  child: IconButton(
-                      icon: Icon(Icons.edit),
-                      color: AppColors().accent1,
-                      onPressed: () {}),
-                ),
+  Center profilePictureEdit() {
+    return Center(
+      child: Card(
+        elevation: 10,
+        shape: CircleBorder(),
+        child: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: CircleAvatar(
+            radius: 60,
+            backgroundColor: AppColors().primary,
+            backgroundImage: AssetImage('assets/img/profile_pic_default.jpg'),
+            child: Padding(
+              padding: EdgeInsets.only(top: 80, left: 80),
+              child: CircleAvatar(
+                radius: 25,
+                backgroundColor: AppColors().accent2.withOpacity(0.5),
+                child: IconButton(
+                    icon: Icon(Icons.edit),
+                    color: AppColors().accent1,
+                    onPressed: () {}),
               ),
-              radius: screenHeight / 10,
-              backgroundColor: AppColors().primary,
-              backgroundImage: AssetImage('assets/img/profile_pic_default.jpg'),
             ),
           ),
         ),
-      ],
+      ),
     );
   }
 
