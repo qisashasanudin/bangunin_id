@@ -26,7 +26,7 @@ class Account extends StatelessWidget {
                   stretch: true,
                   pinned: true,
                   expandedHeight: screenHeight / 4,
-                  flexibleSpace: accountAppBar(),
+                  flexibleSpace: accountAppBar(screenHeight),
                 ),
                 SliverList(
                   delegate: accountDetails(),
@@ -40,7 +40,7 @@ class Account extends StatelessWidget {
     );
   }
 
-  FlexibleSpaceBar accountAppBar() {
+  FlexibleSpaceBar accountAppBar(double screenHeight) {
     return FlexibleSpaceBar(
       background: Container(
         child: Stack(
@@ -49,7 +49,7 @@ class Account extends StatelessWidget {
           children: [
             coverPicture(),
             coverPictureGradient(),
-            profilePictureEdit(),
+            profilePictureEdit(screenHeight),
           ],
         ),
       ),
@@ -86,7 +86,7 @@ class Account extends StatelessWidget {
     );
   }
 
-  Stack profilePictureEdit() {
+  Stack profilePictureEdit(double screenHeight) {
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -107,7 +107,7 @@ class Account extends StatelessWidget {
                       onPressed: () {}),
                 ),
               ),
-              radius: 70,
+              radius: screenHeight / 10,
               backgroundColor: AppColors().primary,
               backgroundImage: AssetImage('assets/img/profile_pic_default.jpg'),
             ),

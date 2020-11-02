@@ -50,10 +50,10 @@ class _HomeState extends State<Home> {
                   stretch: true,
                   pinned: true,
                   expandedHeight: screenHeight / 4,
-                  flexibleSpace: homeAppBar(),
+                  flexibleSpace: homeAppBar(screenHeight),
                 ),
                 SliverToBoxAdapter(
-                  child: SizedBox(height: 60.0),
+                  child: SizedBox(height: 70.0),
                 ),
                 SliverToBoxAdapter(
                   child: userInfo(userID),
@@ -77,7 +77,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  FlexibleSpaceBar homeAppBar() {
+  FlexibleSpaceBar homeAppBar(double screenHeight) {
     return FlexibleSpaceBar(
       background: Container(
         child: Stack(
@@ -90,7 +90,10 @@ class _HomeState extends State<Home> {
         ),
       ),
       centerTitle: true,
-      title: Text('Beranda'),
+      title: Opacity(
+        opacity: 1 - scrollFadeCalc(screenHeight / 5),
+        child: Text('Beranda'),
+      ),
       stretchModes: [
         StretchMode.zoomBackground,
         StretchMode.fadeTitle,
@@ -129,14 +132,14 @@ class _HomeState extends State<Home> {
         alignment: Alignment.center,
         children: [
           Opacity(
-            opacity: profilePicFadeEffect(screenHeight / 5),
+            opacity: scrollFadeCalc(screenHeight / 5),
             child: Card(
               elevation: 10,
               shape: CircleBorder(),
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: CircleAvatar(
-                  radius: 70,
+                  radius: screenHeight / 10,
                   backgroundColor: AppColors().primary,
                   backgroundImage:
                       AssetImage('assets/img/profile_pic_default.jpg'),
@@ -149,7 +152,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  double profilePicFadeEffect(double h) {
+  double scrollFadeCalc(double h) {
     return ((((scrollPosition ?? 0) + h) / h <= 0)
         ? 0
         : (((scrollPosition ?? 0) + h) / h >= 1)
