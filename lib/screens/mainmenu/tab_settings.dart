@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class Settings extends StatefulWidget {
-  Settings({Key key}) : super(key: key);
+  //Home({Key key}) : super(key: key);
 
   @override
   _SettingsState createState() => _SettingsState();
@@ -12,47 +12,70 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   final AuthService _auth = AuthService();
-
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: transparentAppbarAndNavbar()
           .copyWith(statusBarIconBrightness: Brightness.light),
-      child: Scaffold(
-        backgroundColor: AppColors().accent1,
-        body: CustomScrollView(
-          physics: BouncingScrollPhysics(),
-          slivers: [
-            SliverAppBar(
-              stretch: true,
-              pinned: true,
-              expandedHeight: screenHeight / 4,
-              flexibleSpace: FlexibleSpaceBar(
-                centerTitle: true,
-                title: Text('Pengaturan'),
-                stretchModes: [
-                  StretchMode.zoomBackground,
-                  StretchMode.fadeTitle,
-                ],
+      child: DraggableScrollableSheet(
+        initialChildSize: 0.6,
+        minChildSize: 0.3,
+        maxChildSize: 0.95,
+        builder: (context, scrollController) {
+          return Padding(
+            padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              body: Container(
+                padding: const EdgeInsets.only(top: 10.0),
+                decoration: scrollMenuDecoration(),
+                child: CustomScrollView(
+                  controller: scrollController,
+                  slivers: [pullDownMarker(), signOutButton()],
+                ),
               ),
-              actions: <Widget>[
-                exitButton(),
-              ],
             ),
-            //Sliver-sliver lain ditulis di sini
-          ],
+          );
+        },
+      ),
+    );
+  }
+
+  BoxDecoration scrollMenuDecoration() {
+    return BoxDecoration(
+      color: AppColors().accent1,
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(30.0),
+        topRight: Radius.circular(30.0),
+      ),
+      boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 10.0)],
+    );
+  }
+
+  SliverToBoxAdapter pullDownMarker() {
+    return SliverToBoxAdapter(
+      child: Center(
+        child: Container(
+          height: 8,
+          width: 50,
+          decoration: BoxDecoration(
+            color: AppColors().accent3,
+            borderRadius: BorderRadius.circular(5),
+          ),
         ),
       ),
     );
   }
 
-  FlatButton exitButton() {
-    return FlatButton.icon(
-      icon: Icon(Icons.logout, color: AppColors().accent1),
-      label: Text('Keluar', style: TextStyle(color: AppColors().accent1)),
-      onPressed: signOut,
+  SliverList signOutButton() {
+    return SliverList(
+      delegate: SliverChildListDelegate([
+        ListTile(
+          leading: Icon(Icons.logout),
+          title: Text('Keluar'),
+          onTap: signOut,
+        ),
+      ]),
     );
   }
 
