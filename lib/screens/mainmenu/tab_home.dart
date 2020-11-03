@@ -5,8 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:provider/provider.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   //Home({Key key}) : super(key: key);
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final userID = Provider.of<User>(context).uid;
