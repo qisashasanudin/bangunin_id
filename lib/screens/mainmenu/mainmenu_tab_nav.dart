@@ -135,7 +135,7 @@ Card profilePicture() {
 
 Padding profileTexts(AsyncSnapshot snapshot) {
   return Padding(
-    padding: const EdgeInsets.all(30.0),
+    padding: const EdgeInsets.all(15.0),
     child: Column(
       children: <Widget>[
         Text(
@@ -150,12 +150,10 @@ Padding profileTexts(AsyncSnapshot snapshot) {
             ? Text('Mandor',
                 style: TextStyle(
                     fontSize: 15,
-                    fontWeight: FontWeight.bold,
                     color: AppColors().accent1))
             : Text('Konsumen',
                 style: TextStyle(
                     fontSize: 15,
-                    fontWeight: FontWeight.bold,
                     color: AppColors().accent1)),
       ],
     ),

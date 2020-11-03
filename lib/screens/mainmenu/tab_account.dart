@@ -19,8 +19,11 @@ class _AccountState extends State<Account> {
       value: transparentAppbarAndNavbar()
           .copyWith(statusBarIconBrightness: Brightness.light),
       child: DraggableScrollableSheet(
-        initialChildSize: 0.6,
-        minChildSize: 0.3,
+        initialChildSize:
+            (MediaQuery.of(context).orientation == Orientation.portrait)
+                ? 0.65
+                : 0.3,
+        minChildSize: 0.2,
         maxChildSize: 0.95,
         builder: (context, scrollController) {
           return Padding(
@@ -108,6 +111,5 @@ SliverChildListDelegate accountDetails() {
       trailing: Icon(Icons.edit),
       onTap: () {},
     ),
-
   ]);
 }

@@ -18,7 +18,9 @@ class _SettingsState extends State<Settings> {
       value: transparentAppbarAndNavbar()
           .copyWith(statusBarIconBrightness: Brightness.light),
       child: DraggableScrollableSheet(
-        initialChildSize: 0.6,
+        initialChildSize: (MediaQuery.of(context).orientation == Orientation.portrait)
+                ? 0.65
+                : 0.3,
         minChildSize: 0.3,
         maxChildSize: 0.95,
         builder: (context, scrollController) {
