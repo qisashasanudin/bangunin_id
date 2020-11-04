@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:bangunin_id/services/auth.dart';
@@ -172,13 +173,11 @@ class _RegisterState extends State<Register> {
       setState(() {
         loading = true;
       });
-      dynamic result = await _auth.registerWithEmail(email, name, password);
-      if (result == null) {
-        setState(() {
-          error = 'Registrasi tidak berhasil.';
-          loading = false;
-        });
-      }
+      String result = await _auth.signUpWithEmail(email, name, password);
+      setState(() {
+        error = result;
+        loading = false;
+      });
     }
   }
 

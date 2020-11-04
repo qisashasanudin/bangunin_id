@@ -1,4 +1,4 @@
-name: bangunin_id
+nname: bangunin_id
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -28,13 +28,17 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
-  firebase_auth: ^0.14.0+5
-  cloud_firestore: ^0.12.9+4
-  provider: ^3.1.0
+  firebase_core: ^0.5.1
+  firebase_auth: ^0.18.2
+  firebase_storage: ^5.0.0
+  cloud_firestore: ^0.14.2
+  provider: ^4.3.2+2
   flutter_spinkit: ^4.1.2+1
   shared_preferences: ^0.5.12+2
   image_picker: ^0.6.7+12
   image_cropper: ^1.3.1
+  
+  permission_handler: ^5.0.1+1
 
 dev_dependencies:
   flutter_test:

@@ -20,7 +20,7 @@ class LoadingText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors().accent1,
+      color: Colors.transparent,
       child: Center(
         child: SpinKitThreeBounce(
           color: AppColors().primary,
