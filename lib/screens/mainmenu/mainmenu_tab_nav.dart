@@ -137,7 +137,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
         child: TabBarView(
           children: <Widget>[
             Home(/*key: PageStorageKey('Beranda'),*/),
-            Account(/*key: PageStorageKey('Akun'*/),
+            Account(/*key: PageStorageKey('Akun')*/),
             Settings(/*key: PageStorageKey('Pengaturan'),*/),
           ],
         ),

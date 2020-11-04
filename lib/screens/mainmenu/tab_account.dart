@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Account extends StatefulWidget {
-  //Home({Key key}) : super(key: key);
+  //Account({Key key}) : super(key: key);
   @override
   _AccountState createState() => _AccountState();
 }

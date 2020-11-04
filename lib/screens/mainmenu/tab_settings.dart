@@ -4,7 +4,7 @@ import 'package:bangunin_id/shared/scrollmenu.dart';
 import 'package:flutter/material.dart';
 
 class Settings extends StatefulWidget {
-  //Home({Key key}) : super(key: key);
+  //Settings({Key key}) : super(key: key);
   @override
   _SettingsState createState() => _SettingsState();
 }
