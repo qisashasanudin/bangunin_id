@@ -17,6 +17,30 @@ SystemUiOverlayStyle transparentAppbarAndNavbar() {
   );
 }
 
+BoxDecoration scrollMenuDecoration() {
+  return BoxDecoration(
+    color: AppColors().accent1,
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(30.0),
+      topRight: Radius.circular(30.0),
+    ),
+    boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 10.0)],
+  );
+}
+
+Center pullDownMarker() {
+  return Center(
+    child: Container(
+      height: 8,
+      width: 50,
+      decoration: BoxDecoration(
+        color: AppColors().accent3,
+        borderRadius: BorderRadius.circular(5),
+      ),
+    ),
+  );
+}
+
 ClipRRect loginLogo() {
   return ClipRRect(
     borderRadius: BorderRadius.circular(10.0),

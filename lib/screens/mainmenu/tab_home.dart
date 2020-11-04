@@ -1,7 +1,7 @@
 import 'package:bangunin_id/models/user.dart';
 import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
+import 'package:bangunin_id/shared/scrollmenu.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:provider/provider.dart';
 
@@ -12,73 +12,39 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   @override
   Widget build(BuildContext context) {
     final userID = Provider.of<User>(context).uid;
 
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: transparentAppbarAndNavbar()
-          .copyWith(statusBarIconBrightness: Brightness.light),
-      child: DraggableScrollableSheet(
-        initialChildSize: (MediaQuery.of(context).orientation == Orientation.portrait)
-                ? 0.65
-                : 0.3,
-        minChildSize: 0.2,
-        maxChildSize: 0.95,
-        builder: (context, scrollController) {
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
-            child: Scaffold(
-              backgroundColor: Colors.transparent,
-              body: Container(
-                padding: const EdgeInsets.only(top: 10.0),
-                decoration: BoxDecoration(
-                  color: AppColors().accent1,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30.0),
-                    topRight: Radius.circular(30.0),
-                  ),
-                  boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 10.0)],
-                ),
-                child: CustomScrollView(
-                  controller: scrollController,
-                  slivers: [
-                    SliverToBoxAdapter(
-                      child: pullDownMarker(),
-                    ),
-                    SliverToBoxAdapter(
-                      child: projectDone(),
-                    ),
-                    SliverToBoxAdapter(
-                      child: projectInProgress(),
-                    ),
-                    SliverList(
-                      delegate: infiniteList(context),
-                    )
-                  ],
-                ),
-              ),
-              floatingActionButton:
-                  createProjectButton(userID), // hanya untuk mandor
-              floatingActionButtonLocation:
-                  FloatingActionButtonLocation.centerFloat,
-            ),
-          );
-        },
-      ),
+    return ScrollMenu(
+      children: [
+        SliverToBoxAdapter(
+          child: pullDownMarker(),
+        ),
+        SliverToBoxAdapter(
+          child: Row(
+            children: [
+              Expanded(child: projectInProgress()),
+              Expanded(child: projectDone()),
+            ],
+          ),
+        ),
+        SliverList(
+          delegate: infiniteList(context),
+        )
+      ],
+      floatingButton: createProjectButton(userID),
     );
   }
 }
 
-Center pullDownMarker() {
-  return Center(
-    child: Container(
-      height: 8,
-      width: 50,
-      decoration: BoxDecoration(
-        color: AppColors().accent3,
-        borderRadius: BorderRadius.circular(5),
-      ),
+Padding projectInProgress() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 30),
+    child: ListTile(
+      title: Text('in-progress'),
+      subtitle: Text('3'),
     ),
   );
 }
@@ -87,18 +53,8 @@ Padding projectDone() {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 30),
     child: ListTile(
-      title: Text('Project Done'),
+      title: Text('Selesai'),
       subtitle: Text('2'),
-    ),
-  );
-}
-
-Padding projectInProgress() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 30),
-    child: ListTile(
-      title: Text('Project in progress'),
-      subtitle: Text('3'),
     ),
   );
 }
