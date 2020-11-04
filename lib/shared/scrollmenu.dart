@@ -3,20 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ScrollMenu extends StatefulWidget {
-  
   final List<Widget> children;
   final Widget floatingButton;
-  ScrollMenu({Key key, List<Widget> children, this.floatingButton}) : this.children = children ?? [];
+  ScrollMenu({Key key, List<Widget> children, this.floatingButton})
+      : this.children = children ?? [];
 
   @override
   _ScrollMenuState createState() => _ScrollMenuState();
 }
 
 class _ScrollMenuState extends State<ScrollMenu> {
-
   @override
   Widget build(BuildContext context) {
-
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: transparentAppbarAndNavbar()
           .copyWith(statusBarIconBrightness: Brightness.light),
@@ -41,6 +39,8 @@ class _ScrollMenuState extends State<ScrollMenu> {
                 ),
               ),
               floatingActionButton: widget.floatingButton,
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.centerFloat,
             ),
           );
         },
