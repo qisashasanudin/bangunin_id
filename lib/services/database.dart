@@ -6,13 +6,13 @@ class DatabaseService {
 
   CollectionReference tabel;
 
-  Future writeAccountData(String email, String name, bool isSupervisor) async {
+  Future writeAccountData(String email, String name, String role) async {
     tabel = Firestore.instance.collection('accounts');
     return await tabel.document(uid).setData(
       {
         'email': email,
         'name': name,
-        'isSupervisor': isSupervisor,
+        'role': role,
       },
     );
   }

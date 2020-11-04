@@ -114,16 +114,19 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
           Text(
             snapshot.data.data['name'],
             style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: AppColors().accent1),
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: AppColors().accent1,
+            ),
           ),
           SizedBox(height: 5),
-          (snapshot.data.data['isSupervisor'])
-              ? Text('Mandor',
-                  style: TextStyle(fontSize: 15, color: AppColors().accent1))
-              : Text('Konsumen',
-                  style: TextStyle(fontSize: 15, color: AppColors().accent1)),
+          Text(
+            snapshot.data.data['role'],
+            style: TextStyle(
+              fontSize: 15,
+              color: AppColors().accent1,
+            ),
+          ),
         ],
       ),
     );

@@ -7,6 +7,6 @@ class User {
 class AccountData {
   final String email;
   final String name;
-  final bool isSupervisor;
-  AccountData({this.email, this.name, this.isSupervisor});
+  final String role;
+  AccountData({this.email, this.name, this.role});
 }

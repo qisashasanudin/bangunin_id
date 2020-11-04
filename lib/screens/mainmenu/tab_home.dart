@@ -86,7 +86,9 @@ StreamBuilder createProjectButton(String userID) {
   return StreamBuilder(
     stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
     builder: (context, snapshot) {
-      if (snapshot.hasData && snapshot.data.data['isSupervisor']) {
+      if (snapshot.hasData &&
+          ((snapshot.data.data['role'] == 'Administrator') ||
+              (snapshot.data.data['role'] == 'Mandor'))) {
         return FloatingActionButton.extended(
           onPressed: () async {
             Navigator.of(context).pushNamed('/newproject');
