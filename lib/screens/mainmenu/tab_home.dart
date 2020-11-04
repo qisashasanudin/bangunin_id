@@ -12,7 +12,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   @override
   Widget build(BuildContext context) {
     final userID = Provider.of<User>(context).uid;
@@ -24,6 +23,7 @@ class _HomeState extends State<Home> {
         ),
         SliverToBoxAdapter(
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(child: projectInProgress()),
               Expanded(child: projectDone()),
@@ -39,23 +39,19 @@ class _HomeState extends State<Home> {
   }
 }
 
-Padding projectInProgress() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 30),
-    child: ListTile(
-      title: Text('in-progress'),
-      subtitle: Text('3'),
-    ),
+ListTile projectInProgress() {
+  return ListTile(
+    title:
+        Center(child: Text('3', style: TextStyle(fontWeight: FontWeight.bold))),
+    subtitle: Center(child: Text('Sedang berjalan')),
   );
 }
 
-Padding projectDone() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 30),
-    child: ListTile(
-      title: Text('Selesai'),
-      subtitle: Text('2'),
-    ),
+ListTile projectDone() {
+  return ListTile(
+    title:
+        Center(child: Text('2', style: TextStyle(fontWeight: FontWeight.bold))),
+    subtitle: Center(child: Text('Selesai')),
   );
 }
 
