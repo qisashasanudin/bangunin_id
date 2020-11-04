@@ -1,47 +1,62 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bangunin_id/models/user.dart';
 import 'package:bangunin_id/services/database.dart';
 
 class AuthService {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  Stream<User> get authStateChanges => _firebaseAuth.authStateChanges();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  //get UID
-  String getCurrentUID() {
-    authStateChanges;
-    return _firebaseAuth.currentUser.uid.toString();
+  //create user obj based on FirebaseUser
+  User _userFromFirebaseUser(FirebaseUser user) {
+    return user != null ? User(uid: user.uid) : null;
+  }
+
+  //auth change user stream
+  Stream<User> get user {
+    return _auth.onAuthStateChanged.map(_userFromFirebaseUser);
   }
 
   //register with email & password
-  Future signUpWithEmail(String email, String name, String password) async {
+  Future registerWithEmail(String email, String name, String password) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      //creates user data
+      AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      await DatabaseService(uid: getCurrentUID())
+      FirebaseUser user = result.user;
+
+      //create a new doc for the user with the uid
+      await DatabaseService(uid: user.uid)
           .writeAccountData(email, name, 'Konsumen');
-      return "Signed Up";
-    } on FirebaseAuthException catch (e) {
+
+      //returns the user uid
+      return _userFromFirebaseUser(user);
+    } catch (e) {
       print(e.toString());
-      return e.message;
+      return null;
     }
   }
 
   //sign in with email & password
   Future signInWithEmail(String email, String password) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-          print(getCurrentUID());
-      return "Signed in";
-    } on FirebaseAuthException catch (e) {
+      FirebaseUser user = result.user;
+      return _userFromFirebaseUser(user);
+    } catch (e) {
       print(e.toString());
-      return e.message;
+      return null;
     }
+  }
+
+  //get UID
+  Future<String> getCurrentUID() async {
+    return (await _auth.currentUser()).uid;
   }
 
   //sign out
   Future signOut() async {
     try {
-      return await _firebaseAuth.signOut();
+      return await _auth.signOut();
     } catch (e) {
       print(e.toString());
       return null;

@@ -3,13 +3,13 @@ import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
 import 'package:bangunin_id/shared/slide_up_panel.dart';
 import 'package:flutter/material.dart';
 
-class SettingsTab extends StatefulWidget {
+class Settings extends StatefulWidget {
   //Settings({Key key}) : super(key: key);
   @override
-  _SettingsTabState createState() => _SettingsTabState();
+  _SettingsState createState() => _SettingsState();
 }
 
-class _SettingsTabState extends State<SettingsTab> {
+class _SettingsState extends State<Settings> {
   final AuthService _auth = AuthService();
 
   @override

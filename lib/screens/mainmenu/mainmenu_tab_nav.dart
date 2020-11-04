@@ -1,3 +1,4 @@
+import 'package:bangunin_id/models/user.dart';
 import 'package:bangunin_id/screens/mainmenu/account/tab_account.dart';
 import 'package:bangunin_id/screens/mainmenu/home/tab_home.dart';
 import 'package:bangunin_id/screens/mainmenu/settings/tab_settings.dart';
@@ -5,8 +6,8 @@ import 'package:bangunin_id/screens/transitions/loading.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/decorations.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MainMenuTabNav extends StatefulWidget {
   @override
@@ -16,11 +17,11 @@ class MainMenuTabNav extends StatefulWidget {
 class _MainMenuTabNavState extends State<MainMenuTabNav> {
   final PageStorageBucket bucket = PageStorageBucket();
   final AuthService _auth = AuthService();
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
-    final userID = _auth.getCurrentUID();
+    final userID = Provider.of<User>(context).uid;
+
     return DefaultTabController(
       length: 3,
       child: Container(
@@ -74,20 +75,17 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
       child: StreamBuilder(
         stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
         builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text('Ada kesalahan, silahkan coba lagi.');
-          }
-
-          if (snapshot.connectionState == ConnectionState.waiting) {
+          if (!snapshot.hasData) {
             return LoadingText();
+          } else {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                profilePicture(),
+                profileTexts(snapshot),
+              ],
+            );
           }
-          return new Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              profilePicture(),
-              profileTexts(snapshot),
-            ],
-          );
         },
       ),
     );
@@ -109,21 +107,21 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
   }
 
   Padding profileTexts(AsyncSnapshot snapshot) {
-    return new Padding(
+    return Padding(
       padding: const EdgeInsets.all(15.0),
-      child: new Column(
+      child: Column(
         children: <Widget>[
-          new Text(
-            snapshot.data.data()['name'],
+          Text(
+            snapshot.data.data['name'],
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: AppColors().accent1,
             ),
           ),
-          new SizedBox(height: 5),
-          new Text(
-            snapshot.data.data()['role'],
+          SizedBox(height: 5),
+          Text(
+            snapshot.data.data['role'],
             style: TextStyle(
               fontSize: 15,
               color: AppColors().accent1,
@@ -141,9 +139,9 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
         bucket: bucket,
         child: TabBarView(
           children: <Widget>[
-            HomeTab(/*key: PageStorageKey('Beranda'),*/),
-            AccountTab(/*key: PageStorageKey('Akun')*/),
-            SettingsTab(/*key: PageStorageKey('Pengaturan'),*/),
+            Home(/*key: PageStorageKey('Beranda'),*/),
+            Account(/*key: PageStorageKey('Akun')*/),
+            Settings(/*key: PageStorageKey('Pengaturan'),*/),
           ],
         ),
       ),
