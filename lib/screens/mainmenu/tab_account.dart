@@ -1,4 +1,6 @@
 import 'package:bangunin_id/models/user.dart';
+import 'package:bangunin_id/screens/transitions/loading.dart';
+import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
 import 'package:bangunin_id/shared/scrollmenu.dart';
 import 'package:flutter/material.dart';
@@ -15,20 +17,27 @@ class _AccountState extends State<Account> {
   Widget build(BuildContext context) {
     final userID = Provider.of<User>(context).uid;
 
-    return ScrollMenu(
-      children: [
-        SliverToBoxAdapter(
-          child: pullDownMarker(),
-        ),
-        SliverList(
-          delegate: accountDetails(),
-        )
-      ],
+    return StreamBuilder<Object>(
+      stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
+      builder: (context, snapshot) {
+        return ScrollMenu(
+          children: [
+            SliverToBoxAdapter(
+              child: pullDownMarker(),
+            ),
+            (!snapshot.hasData)
+                ? (SliverToBoxAdapter(child: LoadingScreen()))
+                : (SliverList(
+                    delegate: accountDetails(snapshot),
+                  )),
+          ],
+        );
+      },
     );
   }
 }
 
-SliverChildListDelegate accountDetails() {
+SliverChildListDelegate accountDetails(AsyncSnapshot snapshot) {
   return SliverChildListDelegate([
     ListTile(
       title: Text('Foto Profil'),
@@ -38,36 +47,34 @@ SliverChildListDelegate accountDetails() {
     ListTile(
       leading: Icon(Icons.person),
       title: Text('Nama'),
-      subtitle: Text('Hanvey Xavero'),
+      subtitle: Text(snapshot.data.data['name']),
       trailing: Icon(Icons.edit),
       onTap: () {},
     ),
     ListTile(
       leading: Icon(Icons.email),
       title: Text('Email'),
-      subtitle: Text('hanveyxavero888@gmail.com'),
-      trailing: Icon(Icons.edit),
-      onTap: () {},
-    ),
-    ListTile(
-      leading: Icon(Icons.lock),
-      title: Text('Password'),
-      subtitle: Text('**********'),
+      subtitle: Text(snapshot.data.data['email']),
       trailing: Icon(Icons.edit),
       onTap: () {},
     ),
     ListTile(
       leading: Icon(Icons.phone),
       title: Text('Telephone Number'),
-      subtitle: Text('0818-XXXX-XXXX'),
+      subtitle: Text(snapshot.data.data['phone'] ?? 'Belum diisi'),
       trailing: Icon(Icons.edit),
       onTap: () {},
     ),
     ListTile(
       leading: Icon(Icons.home),
       title: Text('Alamat'),
-      subtitle: Text(
-          'Jalan Sunter karya selatan hb 11 no 12, tanjung priuk sunter jakarta utara kecamatan pasar rebu dkk.'),
+      subtitle: Text(snapshot.data.data['address'] ?? 'Belum diisi'),
+      trailing: Icon(Icons.edit),
+      onTap: () {},
+    ),
+    ListTile(
+      leading: Icon(Icons.lock),
+      title: Text('Ganti Password'),
       trailing: Icon(Icons.edit),
       onTap: () {},
     ),
