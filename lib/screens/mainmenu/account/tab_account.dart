@@ -2,7 +2,7 @@ import 'package:bangunin_id/models/user.dart';
 import 'package:bangunin_id/screens/transitions/loading.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
-import 'package:bangunin_id/shared/scrollmenu.dart';
+import 'package:bangunin_id/shared/slide_up_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +20,7 @@ class _AccountState extends State<Account> {
     return StreamBuilder<Object>(
       stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
       builder: (context, snapshot) {
-        return ScrollMenu(
+        return SlideUpPanel(
           children: [
             SliverToBoxAdapter(
               child: pullDownMarker(),

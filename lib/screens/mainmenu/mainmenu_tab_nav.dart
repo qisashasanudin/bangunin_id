@@ -1,7 +1,7 @@
 import 'package:bangunin_id/models/user.dart';
-import 'package:bangunin_id/screens/mainmenu/tab_account.dart';
-import 'package:bangunin_id/screens/mainmenu/tab_home.dart';
-import 'package:bangunin_id/screens/mainmenu/tab_settings.dart';
+import 'package:bangunin_id/screens/mainmenu/account/tab_account.dart';
+import 'package:bangunin_id/screens/mainmenu/home/tab_home.dart';
+import 'package:bangunin_id/screens/mainmenu/settings/tab_settings.dart';
 import 'package:bangunin_id/screens/transitions/loading.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';

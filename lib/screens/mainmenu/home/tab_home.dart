@@ -1,6 +1,6 @@
 import 'package:bangunin_id/models/user.dart';
 import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
-import 'package:bangunin_id/shared/scrollmenu.dart';
+import 'package:bangunin_id/shared/slide_up_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +16,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final userID = Provider.of<User>(context).uid;
 
-    return ScrollMenu(
+    return SlideUpPanel(
       children: [
         SliverToBoxAdapter(
           child: pullDownMarker(),

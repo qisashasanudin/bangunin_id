@@ -2,17 +2,17 @@ import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class ScrollMenu extends StatefulWidget {
+class SlideUpPanel extends StatefulWidget {
   final List<Widget> children;
   final Widget floatingButton;
-  ScrollMenu({Key key, List<Widget> children, this.floatingButton})
+  SlideUpPanel({Key key, List<Widget> children, this.floatingButton})
       : this.children = children ?? [];
 
   @override
-  _ScrollMenuState createState() => _ScrollMenuState();
+  _SlideUpPanelState createState() => _SlideUpPanelState();
 }
 
-class _ScrollMenuState extends State<ScrollMenu> {
+class _SlideUpPanelState extends State<SlideUpPanel> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(

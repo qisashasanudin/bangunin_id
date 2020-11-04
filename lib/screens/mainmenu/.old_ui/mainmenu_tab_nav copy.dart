@@ -1,6 +1,6 @@
-import 'package:bangunin_id/screens/mainmenu/tab_account.dart';
-import 'package:bangunin_id/screens/mainmenu/tab_home.dart';
-import 'package:bangunin_id/screens/mainmenu/tab_settings.dart';
+import 'package:bangunin_id/screens/mainmenu/account/tab_account.dart';
+import 'package:bangunin_id/screens/mainmenu/home/tab_home.dart';
+import 'package:bangunin_id/screens/mainmenu/settings/tab_settings.dart';
 import 'package:bangunin_id/shared/decorations.dart';
 import 'package:flutter/material.dart';
 
