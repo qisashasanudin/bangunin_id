@@ -60,7 +60,7 @@ SliverChildListDelegate accountDetails(AsyncSnapshot snapshot) {
     ),
     ListTile(
       leading: Icon(Icons.phone),
-      title: Text('Telephone Number'),
+      title: Text('Telepon'),
       subtitle: Text(snapshot.data.data['phone'] ?? 'Belum diisi'),
       trailing: Icon(Icons.edit),
       onTap: () {},
