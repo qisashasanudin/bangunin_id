@@ -21,12 +21,6 @@
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>"Bangunin.id needs permission for the phone's photo library to change the profile picture and add pictures to projects."</string>
-	<key>NSCameraUsageDescription</key>
-	<string>"Bangunin.id needs permission for the phone's camera to take photos for profile picture and project pictures."</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>"Bangunin.id needs permission for the phone's microphone to record videos of the projects."</string>
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
