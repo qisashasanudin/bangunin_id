@@ -28,7 +28,7 @@ class _AccountTabState extends State<AccountTab> {
             (!snapshot.hasData)
                 ? (SliverToBoxAdapter(child: LoadingScreen()))
                 : (SliverList(
-                    delegate: accountDetails(snapshot),
+                    delegate: accountDetails(context, snapshot),
                   )),
           ],
         );
@@ -37,7 +37,7 @@ class _AccountTabState extends State<AccountTab> {
   }
 }
 
-SliverChildListDelegate accountDetails(AsyncSnapshot snapshot) {
+SliverChildListDelegate accountDetails(context, snapshot) {
   return SliverChildListDelegate([
     ListTile(
       title: Text('Foto Profil'),
@@ -49,34 +49,61 @@ SliverChildListDelegate accountDetails(AsyncSnapshot snapshot) {
       title: Text('Nama'),
       subtitle: Text(snapshot.data.data()['name']),
       trailing: Icon(Icons.edit),
-      onTap: () {},
+      onTap: () {
+        String attribute = 'nama';
+        bottomSheetTextForm(context, attribute);
+      },
     ),
     ListTile(
       leading: Icon(Icons.email),
       title: Text('Email'),
       subtitle: Text(snapshot.data.data()['email']),
       trailing: Icon(Icons.edit),
-      onTap: () {},
+      onTap: () {
+        String attribute = 'email';
+        bottomSheetTextForm(context, attribute);
+      },
     ),
     ListTile(
       leading: Icon(Icons.phone),
       title: Text('Telepon'),
       subtitle: Text(snapshot.data.data()['phone'] ?? 'Belum diisi'),
       trailing: Icon(Icons.edit),
-      onTap: () {},
+      onTap: () {
+        String attribute = 'phone';
+        bottomSheetTextForm(context, attribute);
+      },
     ),
     ListTile(
       leading: Icon(Icons.home),
       title: Text('Alamat'),
       subtitle: Text(snapshot.data.data()['address'] ?? 'Belum diisi'),
       trailing: Icon(Icons.edit),
-      onTap: () {},
+      onTap: () {
+        String attribute = 'address';
+        bottomSheetTextForm(context, attribute);
+      },
     ),
     ListTile(
       leading: Icon(Icons.lock),
       title: Text('Ganti Password'),
       trailing: Icon(Icons.edit),
-      onTap: () {},
+      onTap: () {
+        String attribute = 'password';
+        bottomSheetTextForm(context, attribute);
+      },
     ),
   ]);
+}
+
+Future bottomSheetTextForm(context, String attribute) async {
+  return showModalBottomSheet(
+    context: context,
+    builder: (context) {
+      return Container(
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 60),
+        child: Text(attribute),
+      );
+    },
+  );
 }
