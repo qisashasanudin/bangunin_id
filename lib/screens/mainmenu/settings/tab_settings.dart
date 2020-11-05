@@ -10,8 +10,7 @@ class SettingsTab extends StatefulWidget {
 }
 
 class _SettingsTabState extends State<SettingsTab> {
-  final AuthService _auth = AuthService();
-
+    final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
 

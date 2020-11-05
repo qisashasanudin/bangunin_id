@@ -12,6 +12,7 @@ class MainPageWrapper extends StatefulWidget {
 
 class _MainPageWrapperState extends State<MainPageWrapper> {
   bool signInScreen = true;
+  
   void toggleView() {
     setState(() => signInScreen = !signInScreen);
   }
@@ -19,6 +20,7 @@ class _MainPageWrapperState extends State<MainPageWrapper> {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
+
     //return either SignIn, Register, or Home widget
     if (firebaseUser == null) {
       if (signInScreen == true) {

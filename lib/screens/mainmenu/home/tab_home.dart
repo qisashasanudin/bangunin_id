@@ -1,9 +1,8 @@
 import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
 import 'package:bangunin_id/shared/slide_up_panel.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/database.dart';
-import 'package:provider/provider.dart';
+import 'package:bangunin_id/services/auth.dart';
 
 class HomeTab extends StatefulWidget {
   //Home({Key key}) : super(key: key);
@@ -14,7 +13,8 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
-    final userID = Provider.of<User>(context).uid;
+    final AuthService _auth = AuthService();
+    final userID = _auth.getCurrentUID();
 
     return SlideUpPanel(
       children: [

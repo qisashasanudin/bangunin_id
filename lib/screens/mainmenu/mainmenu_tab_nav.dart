@@ -165,8 +165,4 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
       ),
     );
   }
-
-  void signOut() async {
-    await _auth.signOut();
-  }
 }
