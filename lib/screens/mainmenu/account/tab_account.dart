@@ -98,7 +98,6 @@ class _AccountTabState extends State<AccountTab> {
   Future bottomSheetTextForm(context, snapshot, String attribute) async {
     final _formKey = GlobalKey<FormState>();
     String _currentValue = snapshot.data.data()[attribute];
-    double screenHeight = MediaQuery.of(context).size.height;
 
     return showModalBottomSheet(
       shape: RoundedRectangleBorder(
@@ -155,51 +154,4 @@ class _AccountTabState extends State<AccountTab> {
       },
     );
   }
-
-  // TextFormField editForm(String _currentValue, String attribute) {
-  //   return TextFormField(
-  //     initialValue: _currentValue,
-  //     decoration: inputBoxBorder().copyWith(hintText: attribute),
-  //     validator: (val) => (val.isEmpty) ? 'Data tidak boleh kosong' : null,
-  //   );
-  // }
-
-// SizedBox submitButton(
-//     String attribute, String _currentValue, String promptText) {
-//   return SizedBox(
-//     width: double.infinity,
-//     child: RaisedButton(
-//       color: AppColors().primary,
-//       shape: RoundedRectangleBorder(
-//         borderRadius: BorderRadius.circular(20.0),
-//       ),
-//       child: Text(
-//         promptText,
-//         style: TextStyle(color: AppColors().accent1),
-//       ),
-//       onPressed: () async {
-//         if (_formKey.currentState.validate()) {
-//           String result =
-//               await DatabaseService(uid: AuthService().getCurrentUID())
-//                   .updateAccountData(attribute, _currentValue);
-//           setState(() {
-//             error = result;
-//             loading = false;
-//           });
-//         }
-//       },
-//     ),
-//   );
-// }
-
-// void uploadData(String attribute, String data) async {
-//   if (_formKey.currentState.validate()) {
-//     String result = await DatabaseService(uid: AuthService().getCurrentUID())
-//         .updateAccountData(attribute, data);
-//     setState(() {
-//       error = result;
-//       loading = false;
-//     });
-//   }
-// }
 }
