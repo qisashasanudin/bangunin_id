@@ -23,7 +23,7 @@ class _SlideUpPanelState extends State<SlideUpPanel> {
             (MediaQuery.of(context).orientation == Orientation.portrait)
                 ? 0.65
                 : 0.3,
-        minChildSize: 0.2,
+        minChildSize: 0.1,
         maxChildSize: 0.95,
         builder: (context, scrollController) {
           return Padding(
