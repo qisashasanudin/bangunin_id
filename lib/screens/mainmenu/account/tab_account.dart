@@ -54,16 +54,6 @@ class _AccountTabState extends State<AccountTab> {
         },
       ),
       ListTile(
-        leading: Icon(Icons.email),
-        title: Text('Email'),
-        subtitle: Text(snapshot.data.data()['email']),
-        trailing: Icon(Icons.edit),
-        onTap: () async {
-          String attribute = 'email';
-          bottomSheetTextForm(context, snapshot, attribute);
-        },
-      ),
-      ListTile(
         leading: Icon(Icons.phone),
         title: Text('Nomor Telepon'),
         subtitle: Text(snapshot.data.data()['phone'] ?? 'Belum diisi'),
@@ -84,13 +74,17 @@ class _AccountTabState extends State<AccountTab> {
         },
       ),
       ListTile(
+        leading: Icon(Icons.email),
+        title: Text('Email'),
+        subtitle: Text(snapshot.data.data()['email']),
+        trailing: Icon(Icons.edit),
+        onTap: () async {},
+      ),
+      ListTile(
         leading: Icon(Icons.lock),
         title: Text('Ganti Password'),
         trailing: Icon(Icons.edit),
-        onTap: () async {
-          String attribute = 'password';
-          bottomSheetTextForm(context, snapshot, attribute);
-        },
+        onTap: () async {},
       ),
     ]);
   }
