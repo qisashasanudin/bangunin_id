@@ -17,17 +17,6 @@ SystemUiOverlayStyle transparentAppbarAndNavbar() {
   );
 }
 
-BoxDecoration scrollMenuDecoration() {
-  return BoxDecoration(
-    color: AppColors().accent1,
-    borderRadius: BorderRadius.only(
-      topLeft: Radius.circular(30.0),
-      topRight: Radius.circular(30.0),
-    ),
-    boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 10.0)],
-  );
-}
-
 Center pullDownMarker() {
   return Center(
     child: Container(

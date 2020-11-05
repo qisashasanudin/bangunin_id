@@ -32,7 +32,14 @@ class _SlideUpPanelState extends State<SlideUpPanel> {
               backgroundColor: Colors.transparent,
               body: Container(
                 padding: const EdgeInsets.only(top: 10.0),
-                decoration: scrollMenuDecoration(),
+                decoration: BoxDecoration(
+                  color: AppColors().accent1,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0),
+                  ),
+                  boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 10.0)],
+                ),
                 child: CustomScrollView(
                   controller: scrollController,
                   slivers: widget.children,

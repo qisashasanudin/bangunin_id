@@ -50,8 +50,8 @@ SliverChildListDelegate accountDetails(context, snapshot) {
       subtitle: Text(snapshot.data.data()['name']),
       trailing: Icon(Icons.edit),
       onTap: () {
-        String attribute = 'nama';
-        bottomSheetTextForm(context, attribute);
+        String attribute = 'name';
+        bottomSheetTextForm(context, snapshot, attribute);
       },
     ),
     ListTile(
@@ -61,17 +61,17 @@ SliverChildListDelegate accountDetails(context, snapshot) {
       trailing: Icon(Icons.edit),
       onTap: () {
         String attribute = 'email';
-        bottomSheetTextForm(context, attribute);
+        bottomSheetTextForm(context, snapshot, attribute);
       },
     ),
     ListTile(
       leading: Icon(Icons.phone),
-      title: Text('Telepon'),
+      title: Text('Nomor Telepon'),
       subtitle: Text(snapshot.data.data()['phone'] ?? 'Belum diisi'),
       trailing: Icon(Icons.edit),
       onTap: () {
-        String attribute = 'phone';
-        bottomSheetTextForm(context, attribute);
+        String attribute = 'phoneNumber';
+        bottomSheetTextForm(context, snapshot, attribute);
       },
     ),
     ListTile(
@@ -81,7 +81,7 @@ SliverChildListDelegate accountDetails(context, snapshot) {
       trailing: Icon(Icons.edit),
       onTap: () {
         String attribute = 'address';
-        bottomSheetTextForm(context, attribute);
+        bottomSheetTextForm(context, snapshot, attribute);
       },
     ),
     ListTile(
@@ -90,19 +90,45 @@ SliverChildListDelegate accountDetails(context, snapshot) {
       trailing: Icon(Icons.edit),
       onTap: () {
         String attribute = 'password';
-        bottomSheetTextForm(context, attribute);
+        bottomSheetTextForm(context, snapshot, attribute);
       },
     ),
   ]);
 }
 
-Future bottomSheetTextForm(context, String attribute) async {
+Future bottomSheetTextForm(context, snapshot, String attribute) async {
+  final _formKey = GlobalKey<FormState>();
+  String _currentValue = snapshot.data.data()[attribute];
+  double screenHeight = MediaQuery.of(context).size.height;
+
   return showModalBottomSheet(
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.0))),
+    isScrollControlled: true,
     context: context,
     builder: (context) {
-      return Container(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 60),
-        child: Text(attribute),
+      return Padding(
+        padding: MediaQuery.of(context).viewInsets,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+          height: screenHeight / 5,
+          child: Column(
+            children: <Widget>[
+              Text(
+                attribute,
+                style: TextStyle(fontSize: 18),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextFormField(
+                decoration: inputBoxBorder().copyWith(hintText: attribute),
+                validator: (val) =>
+                    (val.isEmpty) ? 'Data tidak boleh kosong' : null,
+              ),
+            ],
+          ),
+        ),
       );
     },
   );
