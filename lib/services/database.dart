@@ -4,11 +4,10 @@ class DatabaseService {
   final String uid;
   DatabaseService({this.uid});
 
-  CollectionReference tabel;
-
   Future writeAccountData(String email, String name, String role) async {
-    tabel = Firestore.instance.collection('accounts');
-    return await tabel.document(uid).setData(
+    CollectionReference tabel =
+        FirebaseFirestore.instance.collection('accounts');
+    return await tabel.doc(uid).set(
       {
         'email': email,
         'name': name,
@@ -28,8 +27,9 @@ class DatabaseService {
       DateTime dateCreated,
       String address,
       bool isCompleted) async {
-    tabel = Firestore.instance.collection('projects');
-    return await tabel.document(uid).setData(
+    CollectionReference tabel =
+        FirebaseFirestore.instance.collection('projects');
+    return await tabel.doc(uid).set(
       {
         'projectName': projectName,
         'customerName': customerName,
@@ -46,6 +46,9 @@ class DatabaseService {
   }
 
   Stream entitySnapshot(String tablename) {
-    return Firestore.instance.collection(tablename).document(uid).snapshots();
+    return FirebaseFirestore.instance
+        .collection(tablename)
+        .doc(uid)
+        .snapshots();
   }
 }

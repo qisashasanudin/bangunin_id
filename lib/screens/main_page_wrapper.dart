@@ -1,8 +1,8 @@
 import 'package:bangunin_id/screens/authentication/register.dart';
 import 'package:bangunin_id/screens/authentication/sign_in.dart';
 import 'package:bangunin_id/screens/mainmenu/mainmenu_tab_nav.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:bangunin_id/models/user.dart';
 import 'package:provider/provider.dart';
 
 class MainPageWrapper extends StatefulWidget {
@@ -18,9 +18,9 @@ class _MainPageWrapperState extends State<MainPageWrapper> {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
+    final firebaseUser = Provider.of<User>(context);
     //return either SignIn, Register, or Home widget
-    if (user == null) {
+    if (firebaseUser == null) {
       if (signInScreen == true) {
         return SignIn(toggleView: toggleView);
       } else {
