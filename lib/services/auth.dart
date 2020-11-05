@@ -4,17 +4,14 @@ import 'package:bangunin_id/services/database.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
   //create user obj based on FirebaseUser
   User _userFromFirebaseUser(FirebaseUser user) {
     return user != null ? User(uid: user.uid) : null;
   }
-
   //auth change user stream
   Stream<User> get user {
     return _auth.onAuthStateChanged.map(_userFromFirebaseUser);
   }
-
   //register with email & password
   Future registerWithEmail(String email, String name, String password) async {
     try {
@@ -22,11 +19,9 @@ class AuthService {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-
       //create a new doc for the user with the uid
       await DatabaseService(uid: user.uid)
           .writeAccountData(email, name, 'Konsumen');
-
       //returns the user uid
       return _userFromFirebaseUser(user);
     } catch (e) {
@@ -34,7 +29,6 @@ class AuthService {
       return null;
     }
   }
-
   //sign in with email & password
   Future signInWithEmail(String email, String password) async {
     try {
@@ -47,12 +41,10 @@ class AuthService {
       return null;
     }
   }
-
   //get UID
   Future<String> getCurrentUID() async {
     return (await _auth.currentUser()).uid;
   }
-
   //sign out
   Future signOut() async {
     try {
