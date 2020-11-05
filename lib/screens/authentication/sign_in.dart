@@ -55,7 +55,7 @@ class _SignInState extends State<SignIn> {
                       SizedBox(height: 10.0),
                       forgotPassword(),
                       SizedBox(height: 20.0),
-                      loginButton(),
+                      submitButton('Login'),
                       Text(
                         error,
                         style: TextStyle(color: Colors.red, fontSize: 14.0),
@@ -131,7 +131,7 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  SizedBox loginButton() {
+  SizedBox submitButton(promptText) {
     return SizedBox(
       width: double.infinity,
       child: RaisedButton(
@@ -140,7 +140,7 @@ class _SignInState extends State<SignIn> {
         ),
         color: AppColors().primary,
         child: Text(
-          'Masuk',
+          promptText,
           style: TextStyle(color: AppColors().accent1),
         ),
         onPressed: uploadData,

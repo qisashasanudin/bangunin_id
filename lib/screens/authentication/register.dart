@@ -57,7 +57,7 @@ class _RegisterState extends State<Register> {
                       SizedBox(height: 20.0),
                       passwordConfirForm(),
                       SizedBox(height: 20.0),
-                      registerButton(),
+                      submitButton('Daftar'),
                       Text(
                         error,
                         style: TextStyle(color: Colors.red, fontSize: 14.0),
@@ -148,7 +148,7 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  SizedBox registerButton() {
+  SizedBox submitButton(promptText) {
     return SizedBox(
       width: double.infinity,
       child: RaisedButton(
@@ -157,7 +157,7 @@ class _RegisterState extends State<Register> {
         ),
         color: AppColors().primary,
         child: Text(
-          'Daftar',
+          promptText,
           style: TextStyle(color: AppColors().accent1),
         ),
         onPressed: uploadData,

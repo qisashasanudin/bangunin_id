@@ -16,6 +16,19 @@ class DatabaseService {
     );
   }
 
+  Future updateAccountData(String attribute, String data) async {
+    CollectionReference tabel =
+        FirebaseFirestore.instance.collection('accounts');
+    print(uid);
+    print(attribute);
+    print(data);
+    return await tabel.doc(uid).update(
+      {
+        attribute: data,
+      },
+    );
+  }
+
   Future writeProjectData(
       String projectName,
       String customerName,
