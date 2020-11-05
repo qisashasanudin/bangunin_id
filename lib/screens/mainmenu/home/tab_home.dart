@@ -1,17 +1,17 @@
-import 'package:bangunin_id/models/user.dart';
 import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
 import 'package:bangunin_id/shared/slide_up_panel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:provider/provider.dart';
 
-class Home extends StatefulWidget {
+class HomeTab extends StatefulWidget {
   //Home({Key key}) : super(key: key);
   @override
-  _HomeState createState() => _HomeState();
+  _HomeTabState createState() => _HomeTabState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
     final userID = Provider.of<User>(context).uid;
@@ -87,8 +87,8 @@ StreamBuilder createProjectButton(String userID) {
     stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
     builder: (context, snapshot) {
       if (snapshot.hasData &&
-          ((snapshot.data.data['role'] == 'Administrator') ||
-              (snapshot.data.data['role'] == 'Mandor'))) {
+          ((snapshot.data.data()['role'] == 'Administrator') ||
+              (snapshot.data.data()['role'] == 'Mandor'))) {
         return FloatingActionButton.extended(
           onPressed: () async {
             Navigator.of(context).pushNamed('/newproject');

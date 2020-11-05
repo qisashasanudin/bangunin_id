@@ -153,14 +153,11 @@ class _SignInState extends State<SignIn> {
       setState(() {
         loading = true;
       });
-      dynamic result = await _auth.signInWithEmail(email, password);
-      if (result == null) {
-        setState(() {
-          error =
-              'Login tidak berhasil. Periksa kembali email, password, dan koneksi internet anda.';
-          loading = false;
-        });
-      }
+      String result = await _auth.signInWithEmail(email, password);
+      setState(() {
+        error = result;
+        loading = false;
+      });
     }
   }
 

@@ -87,12 +87,10 @@ class _RegisterState extends State<Register> {
     );
   }
 
-    TextFormField nameForm() {
+  TextFormField nameForm() {
     return TextFormField(
       decoration: inputBoxBorder().copyWith(hintText: 'Nama Lengkap'),
-      validator: (val) => (val.isEmpty)
-          ? 'Masukkan nama lengkap anda'
-          : null,
+      validator: (val) => (val.isEmpty) ? 'Masukkan nama lengkap anda' : null,
       onChanged: (val) {
         setState(() => name = val);
       },
@@ -172,13 +170,11 @@ class _RegisterState extends State<Register> {
       setState(() {
         loading = true;
       });
-      dynamic result = await _auth.registerWithEmail(email, name, password);
-      if (result == null) {
-        setState(() {
-          error = 'Registrasi tidak berhasil.';
-          loading = false;
-        });
-      }
+      String result = await _auth.signUpWithEmail(email, name, password);
+      setState(() {
+        error = result;
+        loading = false;
+      });
     }
   }
 
