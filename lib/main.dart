@@ -3,6 +3,7 @@ import 'package:bangunin_id/screens/mainmenu/home/projects/new_project.dart';
 import 'package:bangunin_id/screens/mainmenu/home/projects/project_details.dart';
 import 'package:bangunin_id/screens/mainmenu/account/tab_account.dart';
 import 'package:bangunin_id/screens/mainmenu/home/tab_home.dart';
+import 'package:bangunin_id/screens/mainmenu/buy/tab_buy.dart';
 import 'package:bangunin_id/screens/mainmenu/settings/tab_settings.dart';
 import 'package:bangunin_id/screens/transitions/loading.dart';
 import 'package:bangunin_id/screens/transitions/splashscreen.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
           '/loadingscreen': (context) => LoadingScreen(),
           '/mainpage': (context) => MainPageWrapper(),
           '/home': (context) => HomeTab(),
+          '/buy': (context) => BuyTab(),
           '/account': (context) => AccountTab(),
           '/settings': (context) => SettingsTab(),
           '/newproject': (context) => NewProject(),

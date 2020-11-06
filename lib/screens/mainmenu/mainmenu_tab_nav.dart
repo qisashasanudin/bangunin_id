@@ -1,5 +1,6 @@
 import 'package:bangunin_id/screens/mainmenu/account/tab_account.dart';
 import 'package:bangunin_id/screens/mainmenu/home/tab_home.dart';
+import 'package:bangunin_id/screens/mainmenu/buy/tab_buy.dart';
 import 'package:bangunin_id/screens/mainmenu/settings/tab_settings.dart';
 import 'package:bangunin_id/screens/transitions/loading.dart';
 import 'package:bangunin_id/services/auth.dart';
@@ -22,7 +23,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
   Widget build(BuildContext context) {
     final userID = _auth.getCurrentUID();
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Container(
         decoration: BoxDecoration(
           color: AppColors().primary,
@@ -142,6 +143,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
         child: TabBarView(
           children: <Widget>[
             HomeTab(/*key: PageStorageKey('Beranda'),*/),
+            BuyTab(),
             AccountTab(/*key: PageStorageKey('Akun')*/),
             SettingsTab(/*key: PageStorageKey('Pengaturan'),*/),
           ],
@@ -152,6 +154,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
         child: TabBar(
           tabs: <Widget>[
             Tab(icon: Icon(Icons.home)),
+            Tab(icon: Icon(Icons.shop)),
             Tab(icon: Icon(Icons.person)),
             Tab(icon: Icon(Icons.settings)),
           ],
