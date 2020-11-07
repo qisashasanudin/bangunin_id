@@ -109,7 +109,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
               child: CircleAvatar(
                 radius: 50,
                 backgroundColor: AppColors().accent1,
-                backgroundImage: snapshot.data ?? AssetImage('assets/img/profile_pic_default.jpg'),
+                backgroundImage: snapshot.data,
               ),
             ),
           );
@@ -120,6 +120,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
           child: CircleAvatar(
             radius: 50,
             backgroundColor: AppColors().accent1,
+            backgroundImage: AssetImage('assets/img/profile_pic_default.jpg'),
           ),
         );
       },
