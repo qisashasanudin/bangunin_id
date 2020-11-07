@@ -5,6 +5,7 @@ import 'package:bangunin_id/screens/mainmenu/settings/tab_settings.dart';
 import 'package:bangunin_id/screens/transitions/loading.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
+import 'package:bangunin_id/services/storage.dart';
 import 'package:bangunin_id/shared/decorations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -94,18 +95,34 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
     );
   }
 
-  Card profilePicture() {
-    return Card(
-      elevation: 10,
-      shape: CircleBorder(),
-      child: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: CircleAvatar(
-          radius: 50,
-          backgroundColor: AppColors().primary,
-          backgroundImage: AssetImage('assets/img/profile_pic_default.jpg'),
-        ),
-      ),
+  FutureBuilder profilePicture() {
+    return FutureBuilder(
+      future: StorageService()
+          .getNetworkImage(context, '/assets/img/profile_pic_default.jpg'),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Card(
+            elevation: 10,
+            shape: CircleBorder(),
+            child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: CircleAvatar(
+                radius: 50,
+                backgroundColor: AppColors().accent1,
+                backgroundImage: snapshot.data,
+              ),
+            ),
+          );
+        }
+        return Card(
+          elevation: 10,
+          shape: CircleBorder(),
+          child: CircleAvatar(
+            radius: 50,
+            backgroundColor: AppColors().accent1,
+          ),
+        );
+      },
     );
   }
 
