@@ -1,6 +1,6 @@
 import 'package:bangunin_id/screens/authentication/register.dart';
 import 'package:bangunin_id/screens/authentication/sign_in.dart';
-import 'package:bangunin_id/screens/mainmenu/mainmenu_tab_nav.dart';
+import 'package:bangunin_id/screens/mainmenu/mainmenu_nav.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

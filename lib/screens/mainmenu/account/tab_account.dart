@@ -5,7 +5,9 @@ import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
 import 'package:bangunin_id/shared/slide_up_panel.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AccountTab extends StatefulWidget {
@@ -16,13 +18,11 @@ class AccountTab extends StatefulWidget {
 
 class _AccountTabState extends State<AccountTab> {
   final _formKey = GlobalKey<FormState>();
+  final userID = AuthService().getCurrentUID();
   String currentValue;
 
   @override
   Widget build(BuildContext context) {
-    final AuthService _auth = AuthService();
-    final userID = _auth.getCurrentUID();
-
     return StreamBuilder<Object>(
       stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
       builder: (context, snapshot) {
@@ -99,7 +99,8 @@ class _AccountTabState extends State<AccountTab> {
 
   Future<void> chooseImageSource(context) {
     final picker = ImagePicker();
-    File _image;
+    File _imagePath;
+    File _croppedImagePath;
 
     return showDialog(
       context: context,
@@ -111,14 +112,22 @@ class _AccountTabState extends State<AccountTab> {
                 GestureDetector(
                   child: Text('Camera'),
                   onTap: () async {
-                    takeImage(picker, _image, 'Camera');
+                    _imagePath = await takeImage(picker, 'Camera');
+                    print('imagePath: $_imagePath');
+                    _croppedImagePath = await cropProfilePicture(_imagePath);
+                    print('croppedImagePath: ${_croppedImagePath.path}');
+                    uploadImage(_croppedImagePath);
                   },
                 ),
                 SizedBox(height: 20),
                 GestureDetector(
                   child: Text('Gallery'),
                   onTap: () async {
-                    takeImage(picker, _image, 'Gallery');
+                    _imagePath = await takeImage(picker, 'Gallery');
+                    print('imagePath: $_imagePath');
+                    _croppedImagePath = await cropProfilePicture(_imagePath);
+                    print('croppedImagePath: ${_croppedImagePath.path}');
+                    uploadImage(_croppedImagePath);
                   },
                 ),
               ],
@@ -129,17 +138,50 @@ class _AccountTabState extends State<AccountTab> {
     );
   }
 
-  Future takeImage(picker, image, source) async {
+  Future takeImage(picker, source) async {
     Navigator.of(context).pop();
+    File imagePath;
     final pickedFile = await picker.getImage(
         source:
             (source == 'Camera') ? ImageSource.camera : ImageSource.gallery);
     setState(() {
       if (pickedFile != null) {
-        image = File(pickedFile.path);
+        imagePath = File(pickedFile.path);
       } else {
         print('No image selected.');
       }
+    });
+    return imagePath;
+  }
+
+  Future cropProfilePicture(source) async {
+    File cropped = await ImageCropper.cropImage(
+        sourcePath: source.path,
+        aspectRatioPresets: [CropAspectRatioPreset.square],
+        maxHeight: 512,
+        maxWidth: 512,
+        androidUiSettings: AndroidUiSettings(
+          toolbarColor: AppColors().primary,
+          toolbarWidgetColor: AppColors().accent1,
+          initAspectRatio: CropAspectRatioPreset.square,
+          lockAspectRatio: true,
+        ),
+        iosUiSettings: IOSUiSettings(
+          minimumAspectRatio: 1.0,
+          aspectRatioLockEnabled: true,
+        ));
+    setState(() {
+      source = cropped ?? source;
+    });
+    return source;
+  }
+
+  uploadImage(source) {
+    setState(() {
+      FirebaseStorage.instance
+          .ref()
+          .child('accounts/$userID/profilePicture/profilePicture.jpg')
+          .putFile(source);
     });
   }
 

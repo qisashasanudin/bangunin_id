@@ -1,9 +1,12 @@
+import 'dart:io';
+
+import 'package:bangunin_id/services/auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class StorageService extends ChangeNotifier {
   StorageService();
-  
+
   static Future<dynamic> loadImage(BuildContext context, String image) async {
     return await FirebaseStorage.instance.ref().child(image).getDownloadURL();
   }

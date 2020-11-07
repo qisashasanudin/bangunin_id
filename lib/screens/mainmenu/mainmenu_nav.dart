@@ -17,12 +17,12 @@ class MainMenuTabNav extends StatefulWidget {
 
 class _MainMenuTabNavState extends State<MainMenuTabNav> {
   final PageStorageBucket bucket = PageStorageBucket();
-  final AuthService _auth = AuthService();
+  final userID = AuthService().getCurrentUID();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
-    final userID = _auth.getCurrentUID();
+    
     return DefaultTabController(
       length: 4,
       child: Container(
@@ -98,7 +98,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
   FutureBuilder profilePicture() {
     return FutureBuilder(
       future: StorageService()
-          .getNetworkImage(context, '/assets/img/profile_pic_default.jpg'),
+          .getNetworkImage(context, 'accounts/$userID/profilePicture/profilePicture.jpg' ?? '/assets/img/profile_pic_default.jpg'),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Card(
@@ -160,7 +160,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
         child: TabBarView(
           children: <Widget>[
             HomeTab(/*key: PageStorageKey('Beranda'),*/),
-            BuyTab(),
+            BuyTab(/*key: PageStorageKey('Beli'),*/),
             AccountTab(/*key: PageStorageKey('Akun')*/),
             SettingsTab(/*key: PageStorageKey('Pengaturan'),*/),
           ],
@@ -171,7 +171,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
         child: TabBar(
           tabs: <Widget>[
             Tab(icon: Icon(Icons.home)),
-            Tab(icon: Icon(Icons.shop)),
+            Tab(icon: Icon(Icons.shopping_cart)),
             Tab(icon: Icon(Icons.person)),
             Tab(icon: Icon(Icons.settings)),
           ],
