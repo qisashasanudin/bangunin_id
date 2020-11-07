@@ -98,7 +98,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
   FutureBuilder profilePicture() {
     return FutureBuilder(
       future: StorageService()
-          .getNetworkImage(context, 'accounts/$userID/profilePicture/profilePicture.jpg' ?? '/assets/img/profile_pic_default.jpg'),
+          .getNetworkImage(context, '/accounts/$userID/profilePicture/profilePicture.jpg'),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Card(
@@ -109,7 +109,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
               child: CircleAvatar(
                 radius: 50,
                 backgroundColor: AppColors().accent1,
-                backgroundImage: snapshot.data,
+                backgroundImage: snapshot.data ?? AssetImage('assets/img/profile_pic_default.jpg'),
               ),
             ),
           );
