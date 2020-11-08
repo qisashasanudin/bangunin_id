@@ -33,8 +33,8 @@ class UploadPicture {
                     child: Text('Camera'),
                     onTap: () async {
                       Navigator.of(context).pop();
-                      await getImageFromExtApp(context, 'Camera');
-                      await cropImage(picker);
+                      imageFile = await getImageFromExtApp(context, 'Camera');
+                      croppedImageFile = await cropImage(picker);
                       await uploadImage(croppedImageFile);
                     },
                   ),
