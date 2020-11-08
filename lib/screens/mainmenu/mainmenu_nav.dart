@@ -22,7 +22,6 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
 
   @override
   Widget build(BuildContext context) {
-    
     return DefaultTabController(
       length: 4,
       child: Container(
@@ -97,30 +96,21 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
 
   FutureBuilder profilePicture() {
     return FutureBuilder(
-      future: StorageService()
-          .getNetworkImage(context, '/accounts/$userID/profilePicture/profilePicture.jpg'),
+      future: StorageService().getNetworkImageURL(
+          context, '/accounts/$userID/profilePicture/profilePicture.jpg'),
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Card(
-            elevation: 10,
-            shape: CircleBorder(),
-            child: Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: CircleAvatar(
-                radius: 50,
-                backgroundColor: AppColors().accent1,
-                backgroundImage: snapshot.data,
-              ),
-            ),
-          );
-        }
         return Card(
           elevation: 10,
           shape: CircleBorder(),
-          child: CircleAvatar(
-            radius: 50,
-            backgroundColor: AppColors().accent1,
-            backgroundImage: AssetImage('assets/img/profile_pic_default.jpg'),
+          child: Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: CircleAvatar(
+              radius: 50,
+              backgroundColor: AppColors().accent1,
+              backgroundImage: (snapshot.hasData)
+                  ? NetworkImage(snapshot.data)
+                  : AssetImage('assets/img/profile_pic_default.jpg'),
+            ),
           ),
         );
       },

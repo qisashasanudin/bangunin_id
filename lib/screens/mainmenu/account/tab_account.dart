@@ -3,8 +3,8 @@ import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
 import 'package:bangunin_id/shared/slide_up_panel.dart';
-import 'package:flutter/material.dart';
 import 'package:bangunin_id/shared/upload_picture.dart';
+import 'package:flutter/material.dart';
 
 class AccountTab extends StatefulWidget {
   //Account({Key key}) : super(key: key);
@@ -45,9 +45,9 @@ class _AccountTabState extends State<AccountTab> {
         trailing: Icon(Icons.edit),
         onTap: () async {
           UploadPicture(
-            context: context,
-            storagePath: 'accounts/$userID/profilePicture/profilePicture.jpg',
-          );
+              context: context,
+              storagePath:
+                  '/accounts/$userID/profilePicture/profilePicture.jpg');
         },
       ),
       ListTile(
