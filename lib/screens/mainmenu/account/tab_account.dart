@@ -7,10 +7,8 @@ import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
 import 'package:bangunin_id/shared/slide_up_panel.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class AccountTab extends StatefulWidget {
   //Account({Key key}) : super(key: key);
@@ -22,6 +20,10 @@ class _AccountTabState extends State<AccountTab> {
   final _formKey = GlobalKey<FormState>();
   final userID = AuthService().getCurrentUID();
   String currentValue;
+
+  var picker = ImagePicker();
+  PickedFile imageFile;
+  File croppedImageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -99,38 +101,35 @@ class _AccountTabState extends State<AccountTab> {
     ]);
   }
 
-  Future<void> chooseImageSource(context) {
-    final picker = ImagePicker();
-    File _imagePath;
-
+  Future<void> chooseImageSource(BuildContext context) {
     return showDialog(
       context: context,
-      builder: (context) {
+      builder: (BuildContext context) {
         return AlertDialog(
           content: SingleChildScrollView(
             child: ListBody(
-              children: [
+              children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: GestureDetector(
                     child: Text('Camera'),
                     onTap: () async {
                       Navigator.of(context).pop();
-                      await checkPermission();
-                      _imagePath = await takeImage(picker, 'Camera');
-                      uploadImage(_imagePath);
+                      await getImageFromExtApp(context, 'Camera');
+                      await cropImage(picker);
+                      await uploadImage(croppedImageFile);
                     },
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: GestureDetector(
                     child: Text('Gallery'),
                     onTap: () async {
                       Navigator.of(context).pop();
-                      await checkPermission();
-                      _imagePath = await takeImage(picker, 'Gallery');
-                      uploadImage(_imagePath);
+                      await getImageFromExtApp(context, 'Gallery');
+                      await cropImage(picker);
+                      await uploadImage(croppedImageFile);
                     },
                   ),
                 ),
@@ -142,12 +141,18 @@ class _AccountTabState extends State<AccountTab> {
     );
   }
 
-  Future takeImage(picker, source) async {
-    PickedFile image = await picker.getImage(
+  getImageFromExtApp(BuildContext context, String appType) async {
+    var picture = await picker.getImage(
         source:
-            (source == 'Camera') ? ImageSource.camera : ImageSource.gallery);
+            (appType == 'Camera') ? ImageSource.camera : ImageSource.gallery);
+    setState(() {
+      imageFile = picture;
+    });
+  }
+
+  Future cropImage(picker) async {
     File cropped = await ImageCropper.cropImage(
-      sourcePath: image.path,
+      sourcePath: imageFile.path,
       aspectRatioPresets: [CropAspectRatioPreset.square],
       maxHeight: 512,
       maxWidth: 512,
@@ -162,33 +167,9 @@ class _AccountTabState extends State<AccountTab> {
         aspectRatioLockEnabled: true,
       ),
     );
-    return cropped;
-  }
-
-  checkPermission() async {
-    Map<Permission, PermissionStatus> allStatus =
-        await [Permission.camera, Permission.storage].request();
-
-    if (allStatus[Permission.camera].isDenied) {
-      Fluttertoast.showToast(
-          msg: "Please provide permission to access the camera.",
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.white,
-          textColor: Colors.black,
-          fontSize: 16.0);
-    }
-    if (allStatus[Permission.storage].isDenied) {
-      Fluttertoast.showToast(
-          msg: "Please provide permission to access the phone storage.",
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.white,
-          textColor: Colors.black,
-          fontSize: 16.0);
-    }
+    setState(() {
+      croppedImageFile = cropped;
+    });
   }
 
   uploadImage(source) {

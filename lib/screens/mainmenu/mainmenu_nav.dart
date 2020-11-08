@@ -1,6 +1,6 @@
 import 'package:bangunin_id/screens/mainmenu/account/tab_account.dart';
 import 'package:bangunin_id/screens/mainmenu/home/tab_home.dart';
-import 'package:bangunin_id/screens/mainmenu/buy/tab_buy.dart';
+import 'package:bangunin_id/screens/mainmenu/shop/tab_shop.dart';
 import 'package:bangunin_id/screens/mainmenu/settings/tab_settings.dart';
 import 'package:bangunin_id/screens/transitions/loading.dart';
 import 'package:bangunin_id/services/auth.dart';
@@ -161,7 +161,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
         child: TabBarView(
           children: <Widget>[
             HomeTab(/*key: PageStorageKey('Beranda'),*/),
-            BuyTab(/*key: PageStorageKey('Beli'),*/),
+            ShopTab(/*key: PageStorageKey('Beli'),*/),
             AccountTab(/*key: PageStorageKey('Akun')*/),
             SettingsTab(/*key: PageStorageKey('Pengaturan'),*/),
           ],
