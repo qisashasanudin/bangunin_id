@@ -7,8 +7,10 @@ import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
 import 'package:bangunin_id/shared/slide_up_panel.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class AccountTab extends StatefulWidget {
   //Account({Key key}) : super(key: key);
@@ -100,7 +102,6 @@ class _AccountTabState extends State<AccountTab> {
   Future<void> chooseImageSource(context) {
     final picker = ImagePicker();
     File _imagePath;
-    File _croppedImagePath;
 
     return showDialog(
       context: context,
@@ -109,26 +110,29 @@ class _AccountTabState extends State<AccountTab> {
           content: SingleChildScrollView(
             child: ListBody(
               children: [
-                GestureDetector(
-                  child: Text('Camera'),
-                  onTap: () async {
-                    _imagePath = await takeImage(picker, 'Camera');
-                    print('imagePath: $_imagePath');
-                    _croppedImagePath = await cropProfilePicture(_imagePath);
-                    print('croppedImagePath: ${_croppedImagePath.path}');
-                    uploadImage(_croppedImagePath);
-                  },
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: GestureDetector(
+                    child: Text('Camera'),
+                    onTap: () async {
+                      Navigator.of(context).pop();
+                      await checkPermission();
+                      _imagePath = await takeImage(picker, 'Camera');
+                      uploadImage(_imagePath);
+                    },
+                  ),
                 ),
-                SizedBox(height: 20),
-                GestureDetector(
-                  child: Text('Gallery'),
-                  onTap: () async {
-                    _imagePath = await takeImage(picker, 'Gallery');
-                    print('imagePath: $_imagePath');
-                    _croppedImagePath = await cropProfilePicture(_imagePath);
-                    print('croppedImagePath: ${_croppedImagePath.path}');
-                    uploadImage(_croppedImagePath);
-                  },
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: GestureDetector(
+                    child: Text('Gallery'),
+                    onTap: () async {
+                      Navigator.of(context).pop();
+                      await checkPermission();
+                      _imagePath = await takeImage(picker, 'Gallery');
+                      uploadImage(_imagePath);
+                    },
+                  ),
                 ),
               ],
             ),
@@ -139,41 +143,52 @@ class _AccountTabState extends State<AccountTab> {
   }
 
   Future takeImage(picker, source) async {
-    Navigator.of(context).pop();
-    File imagePath;
-    final pickedFile = await picker.getImage(
+    PickedFile image = await picker.getImage(
         source:
             (source == 'Camera') ? ImageSource.camera : ImageSource.gallery);
-    setState(() {
-      if (pickedFile != null) {
-        imagePath = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
-    });
-    return imagePath;
+    File cropped = await ImageCropper.cropImage(
+      sourcePath: image.path,
+      aspectRatioPresets: [CropAspectRatioPreset.square],
+      maxHeight: 512,
+      maxWidth: 512,
+      androidUiSettings: AndroidUiSettings(
+        toolbarColor: AppColors().primary,
+        toolbarWidgetColor: AppColors().accent1,
+        initAspectRatio: CropAspectRatioPreset.square,
+        lockAspectRatio: true,
+      ),
+      iosUiSettings: IOSUiSettings(
+        minimumAspectRatio: 1.0,
+        aspectRatioLockEnabled: true,
+      ),
+    );
+    return cropped;
   }
 
-  Future cropProfilePicture(source) async {
-    File cropped = await ImageCropper.cropImage(
-        sourcePath: source.path,
-        aspectRatioPresets: [CropAspectRatioPreset.square],
-        maxHeight: 512,
-        maxWidth: 512,
-        androidUiSettings: AndroidUiSettings(
-          toolbarColor: AppColors().primary,
-          toolbarWidgetColor: AppColors().accent1,
-          initAspectRatio: CropAspectRatioPreset.square,
-          lockAspectRatio: true,
-        ),
-        iosUiSettings: IOSUiSettings(
-          minimumAspectRatio: 1.0,
-          aspectRatioLockEnabled: true,
-        ));
-    setState(() {
-      source = cropped ?? source;
-    });
-    return source;
+  checkPermission() async {
+    Map<Permission, PermissionStatus> allStatus =
+        await [Permission.camera, Permission.storage].request();
+
+    if (allStatus[Permission.camera].isDenied) {
+      Fluttertoast.showToast(
+          msg: "Please provide permission to access the camera.",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          fontSize: 16.0);
+    }
+    if (allStatus[Permission.storage].isDenied) {
+      Fluttertoast.showToast(
+          msg: "Please provide permission to access the phone storage.",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          fontSize: 16.0);
+    }
   }
 
   uploadImage(source) {
