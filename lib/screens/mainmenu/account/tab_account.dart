@@ -1,14 +1,10 @@
-import 'dart:io';
-
 import 'package:bangunin_id/screens/transitions/loading.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
 import 'package:bangunin_id/shared/slide_up_panel.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:bangunin_id/shared/upload_picture.dart';
 
 class AccountTab extends StatefulWidget {
   //Account({Key key}) : super(key: key);
@@ -20,10 +16,6 @@ class _AccountTabState extends State<AccountTab> {
   final _formKey = GlobalKey<FormState>();
   final userID = AuthService().getCurrentUID();
   String currentValue;
-
-  var picker = ImagePicker();
-  PickedFile imageFile;
-  File croppedImageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +44,10 @@ class _AccountTabState extends State<AccountTab> {
         title: Text('Foto Profil'),
         trailing: Icon(Icons.edit),
         onTap: () async {
-          chooseImageSource(context);
+          UploadPicture(
+            context: context,
+            storagePath: 'accounts/$userID/profilePicture/profilePicture.jpg',
+          );
         },
       ),
       ListTile(
@@ -99,86 +94,6 @@ class _AccountTabState extends State<AccountTab> {
         onTap: () async {},
       ),
     ]);
-  }
-
-  Future<void> chooseImageSource(BuildContext context) {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
-                  child: GestureDetector(
-                    child: Text('Camera'),
-                    onTap: () async {
-                      Navigator.of(context).pop();
-                      await getImageFromExtApp(context, 'Camera');
-                      await cropImage(picker);
-                      await uploadImage(croppedImageFile);
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
-                  child: GestureDetector(
-                    child: Text('Gallery'),
-                    onTap: () async {
-                      Navigator.of(context).pop();
-                      await getImageFromExtApp(context, 'Gallery');
-                      await cropImage(picker);
-                      await uploadImage(croppedImageFile);
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  getImageFromExtApp(BuildContext context, String appType) async {
-    var picture = await picker.getImage(
-        source:
-            (appType == 'Camera') ? ImageSource.camera : ImageSource.gallery);
-    setState(() {
-      imageFile = picture;
-    });
-  }
-
-  Future cropImage(picker) async {
-    File cropped = await ImageCropper.cropImage(
-      sourcePath: imageFile.path,
-      aspectRatioPresets: [CropAspectRatioPreset.square],
-      maxHeight: 512,
-      maxWidth: 512,
-      androidUiSettings: AndroidUiSettings(
-        toolbarColor: AppColors().primary,
-        toolbarWidgetColor: AppColors().accent1,
-        initAspectRatio: CropAspectRatioPreset.square,
-        lockAspectRatio: true,
-      ),
-      iosUiSettings: IOSUiSettings(
-        minimumAspectRatio: 1.0,
-        aspectRatioLockEnabled: true,
-      ),
-    );
-    setState(() {
-      croppedImageFile = cropped;
-    });
-  }
-
-  uploadImage(source) {
-    setState(() {
-      FirebaseStorage.instance
-          .ref()
-          .child('accounts/$userID/profilePicture/profilePicture.jpg')
-          .putFile(source);
-    });
   }
 
   Future popUpTextForm(context, snapshot, String attribute) async {
