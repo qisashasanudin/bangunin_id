@@ -3,8 +3,10 @@ import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/shared/decorations.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class UploadPicture {
   final BuildContext context;
@@ -60,10 +62,32 @@ class UploadPicture {
   }
 
   getImageFromExtApp(BuildContext context, String appType) async {
-    var picture = await picker.getImage(
-        source:
-            (appType == 'Camera') ? ImageSource.camera : ImageSource.gallery);
-    return picture;
+    Map<Permission, PermissionStatus> allStatus =
+        await [Permission.camera, Permission.storage].request();
+    if (allStatus[Permission.camera].isGranted) {
+      if (allStatus[Permission.storage].isGranted) { 
+        var picture = await picker.getImage(
+            source: (appType == 'Camera')
+                ? ImageSource.camera
+                : ImageSource.gallery);
+        return picture;
+      } else {
+        Fluttertoast.showToast(
+          msg:
+              "Please grant permission to access microphone for recording video.",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+        );
+      }
+    } else {
+      Fluttertoast.showToast(
+        msg: "Please grant permission to access camera.",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+      );
+    }
   }
 
   Future cropImage(picker) async {
