@@ -65,7 +65,7 @@ class UploadPicture {
     Map<Permission, PermissionStatus> allStatus =
         await [Permission.camera, Permission.storage].request();
     if (allStatus[Permission.camera].isGranted) {
-      if (allStatus[Permission.storage].isGranted) { 
+      if (allStatus[Permission.storage].isGranted) {
         var picture = await picker.getImage(
             source: (appType == 'Camera')
                 ? ImageSource.camera

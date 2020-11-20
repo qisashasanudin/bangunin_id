@@ -33,6 +33,11 @@ class _SettingsTabState extends State<SettingsTab> {
         title: Text('Keluar'),
         onTap: signOut,
       ),
+      ListTile(
+        leading: Icon(Icons.language),
+        title: Text('Bahasa'),
+        subtitle: Text('Indonesia'),
+      ),
     ]);
   }
 
