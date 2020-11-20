@@ -1,5 +1,6 @@
 import 'package:bangunin_id/services/auth.dart';
-import 'package:bangunin_id/services/database.dart';// sumber AppColors()
+import 'package:bangunin_id/services/database.dart'; // sumber AppColors()
+import 'package:bangunin_id/shared/decorations.dart';
 import 'package:bangunin_id/shared/sliver_panel.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +29,45 @@ class NewProject extends StatelessWidget {
                 ],
               ),
             ),
-            //sliver-sliver lain ditulis di sini
+            SliverList(
+                delegate: SliverChildListDelegate([
+              Padding(
+                padding:
+                    const EdgeInsets.only(top: 25.0, right: 15.0, left: 15.0),
+                child: TextFormField(
+                  decoration:
+                      inputBoxBorder().copyWith(hintText: "Nama Project"),
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(top: 20.0, right: 15.0, left: 15.0),
+                child: TextFormField(
+                  decoration: inputBoxBorder().copyWith(hintText: "Pasir"),
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(top: 20.0, right: 15.0, left: 15.0),
+                child: TextFormField(
+                  decoration: inputBoxBorder().copyWith(hintText: "Keramik"),
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(top: 20.0, right: 15.0, left: 15.0),
+                child: TextFormField(
+                  decoration: inputBoxBorder().copyWith(hintText: "Batu Bata"),
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(top: 20.0, right: 15.0, left: 15.0),
+                child: TextFormField(
+                  decoration: inputBoxBorder().copyWith(hintText: "Semen"),
+                ),
+              ),
+            ])), //sliver-sliver lain ditulis di sini
           ],
         );
       },
