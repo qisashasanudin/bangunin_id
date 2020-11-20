@@ -10,23 +10,22 @@ class SettingsTab extends StatefulWidget {
 }
 
 class _SettingsTabState extends State<SettingsTab> {
-    final AuthService _auth = AuthService();
+  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
-
     return SlideUpPanel(
       children: [
         SliverToBoxAdapter(
           child: pullDownMarker(),
         ),
         SliverList(
-          delegate: signOutButton(),
+          delegate: settingsList(),
         )
       ],
     );
   }
 
-  SliverChildListDelegate signOutButton() {
+  SliverChildListDelegate settingsList() {
     return SliverChildListDelegate([
       ListTile(
         leading: Icon(Icons.logout),
