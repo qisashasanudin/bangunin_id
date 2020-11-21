@@ -2,7 +2,7 @@ import 'package:bangunin_id/screens/transitions/loading.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
-import 'package:bangunin_id/shared/sliver_slide_up_panel.dart';
+import 'package:bangunin_id/shared/slide_up_panel.dart';
 import 'package:bangunin_id/shared/upload_picture.dart';
 import 'package:flutter/material.dart';
 
@@ -22,80 +22,70 @@ class _AccountTabState extends State<AccountTab> {
     return StreamBuilder<Object>(
       stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
       builder: (context, snapshot) {
-        return SliverSlideUpPanel(
+        if (!snapshot.hasData) {
+          return SlideUpPanel(
+            children: [LoadingScreen()],
+          );
+        }
+        return SlideUpPanel(
           children: [
-            SliverToBoxAdapter(
-              child: pullDownMarker(),
-            ),
-            (!snapshot.hasData)
-                ? (SliverToBoxAdapter(child: LoadingText()))
-                : (SliverList(
-                    delegate: accountDetails(context, snapshot),
-                  )),
+            slideUpMarker(),
+            userProfilePic(context),
+            userInfo(snapshot, context, Icons.person, 'Nama', 'name'),
+            userInfo(snapshot, context, Icons.phone, 'Telepon', 'phone'),
+            userInfo(snapshot, context, Icons.home, 'Alamat', 'address'),
+            changeEmail(snapshot),
+            changePassword(),
+            // widget-widget lain dimasukkan di sini
           ],
         );
       },
     );
   }
 
-  SliverChildListDelegate accountDetails(context, snapshot) {
-    return SliverChildListDelegate([
-      ListTile(
-        title: Text('Foto Profil'),
-        trailing: Icon(Icons.edit),
-        onTap: () async {
-          UploadPicture(
-              context: context,
-              table: 'accounts',
-              attribute: 'profilePicture',
-              storagePath:
-                  '/accounts/$userID/profilePicture/profilePicture.jpg');
-        },
-      ),
-      ListTile(
-        leading: Icon(Icons.person),
-        title: Text('Nama'),
-        subtitle: Text(snapshot.data.data()['name'] ?? 'Belum diisi'),
-        trailing: Icon(Icons.edit),
-        onTap: () async {
-          String attribute = 'name';
-          popUpTextForm(context, snapshot, attribute);
-        },
-      ),
-      ListTile(
-        leading: Icon(Icons.phone),
-        title: Text('Nomor Telepon'),
-        subtitle: Text(snapshot.data.data()['phone'] ?? 'Belum diisi'),
-        trailing: Icon(Icons.edit),
-        onTap: () async {
-          String attribute = 'phone';
-          popUpTextForm(context, snapshot, attribute);
-        },
-      ),
-      ListTile(
-        leading: Icon(Icons.home),
-        title: Text('Alamat'),
-        subtitle: Text(snapshot.data.data()['address'] ?? 'Belum diisi'),
-        trailing: Icon(Icons.edit),
-        onTap: () async {
-          String attribute = 'address';
-          popUpTextForm(context, snapshot, attribute);
-        },
-      ),
-      ListTile(
-        leading: Icon(Icons.email),
-        title: Text('Email'),
-        subtitle: Text(snapshot.data.data()['email'] ?? 'Belum diisi'),
-        trailing: Icon(Icons.edit),
-        onTap: () async {},
-      ),
-      ListTile(
-        leading: Icon(Icons.lock),
-        title: Text('Ganti Password'),
-        trailing: Icon(Icons.edit),
-        onTap: () async {},
-      ),
-    ]);
+  ListTile userProfilePic(BuildContext context) {
+    return ListTile(
+      title: Text('Foto Profil'),
+      trailing: Icon(Icons.edit),
+      onTap: () async {
+        UploadPicture(
+            context: context,
+            table: 'accounts',
+            attribute: 'profilePicture',
+            storagePath: '/accounts/$userID/profilePicture/profilePicture.jpg');
+      },
+    );
+  }
+
+  ListTile userInfo(snapshot, context, leadingIcon, title, attribute) {
+    return ListTile(
+      leading: Icon(leadingIcon),
+      title: Text(title),
+      subtitle: Text(snapshot.data.data()[attribute] ?? 'Belum diisi'),
+      trailing: Icon(Icons.edit),
+      onTap: () async {
+        popUpTextForm(context, snapshot, attribute);
+      },
+    );
+  }
+
+  ListTile changeEmail(snapshot) {
+    return ListTile(
+      leading: Icon(Icons.email),
+      title: Text('Email'),
+      subtitle: Text(snapshot.data.data()['email'] ?? 'Belum diisi'),
+      trailing: Icon(Icons.edit),
+      onTap: () async {},
+    );
+  }
+
+  ListTile changePassword() {
+    return ListTile(
+      leading: Icon(Icons.lock),
+      title: Text('Ganti Password'),
+      trailing: Icon(Icons.edit),
+      onTap: () async {},
+    );
   }
 
   Future popUpTextForm(context, snapshot, String attribute) async {

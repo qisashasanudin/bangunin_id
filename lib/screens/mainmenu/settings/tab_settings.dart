@@ -1,6 +1,6 @@
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
-import 'package:bangunin_id/shared/sliver_slide_up_panel.dart';
+import 'package:bangunin_id/shared/slide_up_panel.dart';
 import 'package:flutter/material.dart';
 
 class SettingsTab extends StatefulWidget {
@@ -13,34 +13,33 @@ class _SettingsTabState extends State<SettingsTab> {
   final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
-    return SliverSlideUpPanel(
+    return SlideUpPanel(
       children: [
-        SliverToBoxAdapter(
-          child: pullDownMarker(),
-        ),
-        SliverList(
-          delegate: settingsList(),
-        )
+        slideUpMarker(),
+        signOutButton(),
+        language(),
+        // widget-widget lain dimasukkan di sini
       ],
     );
   }
 
-  SliverChildListDelegate settingsList() {
-    return SliverChildListDelegate([
-      ListTile(
-        leading: Icon(Icons.logout),
-        title: Text('Keluar'),
-        onTap: signOut,
-      ),
-      ListTile(
-        leading: Icon(Icons.language),
-        title: Text('Bahasa'),
-        subtitle: Text('Indonesia'),
-      ),
-    ]);
+  ListTile signOutButton() {
+    return ListTile(
+      leading: Icon(Icons.logout),
+      title: Text('Keluar'),
+      onTap: signOut,
+    );
   }
 
   void signOut() async {
     await _auth.signOut();
+  }
+
+  ListTile language() {
+    return ListTile(
+      leading: Icon(Icons.language),
+      title: Text('Bahasa'),
+      subtitle: Text('Indonesia'),
+    );
   }
 }
