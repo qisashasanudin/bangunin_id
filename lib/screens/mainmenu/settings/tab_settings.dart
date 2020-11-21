@@ -1,6 +1,6 @@
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
-import 'package:bangunin_id/shared/slide_up_panel.dart';
+import 'package:bangunin_id/shared/sliver_slide_up_panel.dart';
 import 'package:flutter/material.dart';
 
 class SettingsTab extends StatefulWidget {
@@ -13,7 +13,7 @@ class _SettingsTabState extends State<SettingsTab> {
   final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
-    return SlideUpPanel(
+    return SliverSlideUpPanel(
       children: [
         SliverToBoxAdapter(
           child: pullDownMarker(),

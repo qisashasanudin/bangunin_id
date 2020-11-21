@@ -1,5 +1,5 @@
 import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
-import 'package:bangunin_id/shared/slide_up_panel.dart';
+import 'package:bangunin_id/shared/sliver_slide_up_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/services/auth.dart';
@@ -16,7 +16,7 @@ class _HomeTabState extends State<HomeTab> {
     final AuthService _auth = AuthService();
     final userID = _auth.getCurrentUID();
 
-    return SlideUpPanel(
+    return SliverSlideUpPanel(
       children: [
         SliverToBoxAdapter(
           child: pullDownMarker(),

@@ -2,7 +2,7 @@ import 'package:bangunin_id/screens/transitions/loading.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
-import 'package:bangunin_id/shared/slide_up_panel.dart';
+import 'package:bangunin_id/shared/sliver_slide_up_panel.dart';
 import 'package:bangunin_id/shared/upload_picture.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +22,7 @@ class _AccountTabState extends State<AccountTab> {
     return StreamBuilder<Object>(
       stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
       builder: (context, snapshot) {
-        return SlideUpPanel(
+        return SliverSlideUpPanel(
           children: [
             SliverToBoxAdapter(
               child: pullDownMarker(),

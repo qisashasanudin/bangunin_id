@@ -2,17 +2,17 @@ import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class SliverPanel extends StatefulWidget {
+class SliverPage extends StatefulWidget {
   final List<Widget> children;
   final Widget floatingButton;
-  SliverPanel({Key key, List<Widget> children, this.floatingButton})
+  SliverPage({Key key, List<Widget> children, this.floatingButton})
       : this.children = children ?? [];
 
   @override
-  _SliverPanelState createState() => _SliverPanelState();
+  _SliverPageState createState() => _SliverPageState();
 }
 
-class _SliverPanelState extends State<SliverPanel> {
+class _SliverPageState extends State<SliverPage> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(

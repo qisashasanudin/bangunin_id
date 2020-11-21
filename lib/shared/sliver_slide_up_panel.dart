@@ -2,17 +2,17 @@ import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class SlideUpPanel extends StatefulWidget {
+class SliverSlideUpPanel extends StatefulWidget {
   final List<Widget> children;
   final Widget floatingButton;
-  SlideUpPanel({Key key, List<Widget> children, this.floatingButton})
+  SliverSlideUpPanel({Key key, List<Widget> children, this.floatingButton})
       : this.children = children ?? [];
 
   @override
-  _SlideUpPanelState createState() => _SlideUpPanelState();
+  _SliverSlideUpPanelState createState() => _SliverSlideUpPanelState();
 }
 
-class _SlideUpPanelState extends State<SlideUpPanel> {
+class _SliverSlideUpPanelState extends State<SliverSlideUpPanel> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(

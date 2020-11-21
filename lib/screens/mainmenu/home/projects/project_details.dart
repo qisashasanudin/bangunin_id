@@ -1,6 +1,6 @@
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
-import 'package:bangunin_id/shared/sliver_panel.dart';
+import 'package:bangunin_id/shared/sliver_page.dart';
 import 'package:flutter/material.dart';
 
 class ProjectDetails extends StatelessWidget {
@@ -13,7 +13,7 @@ class ProjectDetails extends StatelessWidget {
     return StreamBuilder<Object>(
       stream: DatabaseService(uid: userID).entitySnapshot('projects'),
       builder: (context, snapshot) {
-        return SliverPanel(
+        return SliverPage(
           children: [
             SliverAppBar(
               stretch: true,
