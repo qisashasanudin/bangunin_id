@@ -7,5 +7,5 @@ Qisas Tazkia Hasanudin
 
 ## Screenshots:
 
-![](/assets/screenshots/ss1.png) 
-![](/assets/screenshots/ss2.png)
+![](/assets/Screenshots/ss1.png) 
+![](/assets/Screenshots/ss2.png)
