@@ -85,7 +85,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
           return new Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              profilePicture(),
+              profilePicture(snapshot),
               profileTexts(snapshot),
             ],
           );
@@ -94,26 +94,20 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
     );
   }
 
-  FutureBuilder profilePicture() {
-    return FutureBuilder(
-      future: StorageService().getNetworkImageURL(
-          context, '/accounts/$userID/profilePicture/profilePicture.jpg'),
-      builder: (context, snapshot) {
-        return Card(
-          elevation: 10,
-          shape: CircleBorder(),
-          child: Padding(
-            padding: const EdgeInsets.all(2.0),
-            child: CircleAvatar(
-              radius: 50,
-              backgroundColor: AppColors().accent1,
-              backgroundImage: (snapshot.hasData)
-                  ? NetworkImage(snapshot.data)
-                  : AssetImage('assets/img/profile_pic_default.jpg'),
-            ),
-          ),
-        );
-      },
+  Card profilePicture(snapshot) {
+    return Card(
+      elevation: 10,
+      shape: CircleBorder(),
+      child: Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: CircleAvatar(
+          radius: 50,
+          backgroundColor: AppColors().accent1,
+          backgroundImage: (snapshot.data.data()['profilePicture'] != null)
+              ? NetworkImage(snapshot.data.data()['profilePicture'])
+              : AssetImage('assets/img/profile_pic_default.jpg'),
+        ),
+      ),
     );
   }
 

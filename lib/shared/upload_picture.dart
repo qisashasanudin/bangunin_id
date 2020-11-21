@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:bangunin_id/services/auth.dart';
+import 'package:bangunin_id/services/database.dart';
+import 'package:bangunin_id/services/storage.dart';
 import 'package:bangunin_id/shared/decorations.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +12,12 @@ import 'package:permission_handler/permission_handler.dart';
 
 class UploadPicture {
   final BuildContext context;
+  final String table;
+  final String attribute;
   final String storagePath;
 
-  UploadPicture({@required this.context, this.storagePath}) {
+  UploadPicture(
+      {@required this.context, this.table, this.attribute, this.storagePath}) {
     chooseImageSource(context);
   }
 
@@ -112,5 +117,9 @@ class UploadPicture {
 
   uploadImage(source) async {
     await FirebaseStorage.instance.ref().child(storagePath).putFile(source);
+    String imageURL =
+        await StorageService().getNetworkImageURL(context, storagePath);
+    await DatabaseService(uid: AuthService().getCurrentUID())
+        .updateData(table, attribute, imageURL);
   }
 }

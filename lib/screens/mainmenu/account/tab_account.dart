@@ -46,6 +46,8 @@ class _AccountTabState extends State<AccountTab> {
         onTap: () async {
           UploadPicture(
               context: context,
+              table: 'accounts',
+              attribute: 'profilePicture',
               storagePath:
                   '/accounts/$userID/profilePicture/profilePicture.jpg');
         },
@@ -98,7 +100,6 @@ class _AccountTabState extends State<AccountTab> {
 
   Future popUpTextForm(context, snapshot, String attribute) async {
     currentValue = snapshot.data.data()[attribute];
-
     return showModalBottomSheet(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(30.0))),
@@ -114,7 +115,7 @@ class _AccountTabState extends State<AccountTab> {
               height: 200,
               child: ListView(
                 children: <Widget>[
-                  editForm(attribute),
+                  editText(attribute),
                   SizedBox(height: 20.0),
                   submitButton(snapshot, attribute, 'Simpan'),
                 ],
@@ -126,7 +127,7 @@ class _AccountTabState extends State<AccountTab> {
     );
   }
 
-  TextFormField editForm(String attribute) {
+  TextFormField editText(String attribute) {
     return TextFormField(
         initialValue: currentValue,
         decoration: inputBoxBorder().copyWith(hintText: attribute),
@@ -151,9 +152,8 @@ class _AccountTabState extends State<AccountTab> {
 
   void uploadData(snapshot, attribute, data) async {
     if (_formKey.currentState.validate()) {
-      await DatabaseService(uid: AuthService().getCurrentUID())
-          .updateAccountData(
-              attribute, data ?? snapshot.data.data()[attribute]);
+      await DatabaseService(uid: AuthService().getCurrentUID()).updateData(
+          'accounts', attribute, data ?? snapshot.data.data()[attribute]);
       Navigator.pop(context);
     }
   }

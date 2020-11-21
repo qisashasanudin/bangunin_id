@@ -23,31 +23,6 @@ class _ShopTabState extends State<ShopTab> {
         ),
         // sliver-sliver lain dimasukkan di sini
       ],
-      floatingButton: createProjectButton(userID),
     );
   }
-}
-
-StreamBuilder createProjectButton(String userID) {
-  return StreamBuilder(
-    stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
-    builder: (context, snapshot) {
-      if (snapshot.hasData &&
-          ((snapshot.data.data()['role'] == 'Administrator') ||
-              (snapshot.data.data()['role'] == 'Mandor'))) {
-        return FloatingActionButton.extended(
-          onPressed: () async {
-            Navigator.of(context).pushNamed('/newproject');
-          },
-          label: Text(
-            'Buat Proyek Baru',
-            style: TextStyle(color: AppColors().accent1),
-          ),
-          backgroundColor: AppColors().primary,
-        );
-      } else {
-        return Container();
-      }
-    },
-  );
 }
