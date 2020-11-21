@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bangunin_id/shared/decorations.dart';
-import 'package:bangunin_id/screens/mainmenu/home/projects/progress_chart/materials.dart';
+import 'package:bangunin_id/screens/mainmenu/home/projects/UI/item_properties.dart';
 
 class PieChartIndex extends StatelessWidget {
   const PieChartIndex({
@@ -14,8 +13,8 @@ class PieChartIndex extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          for (var category in materials)
-            IndexDesc(text: category.name, index: materials.indexOf(category)),
+          for (var category in items)
+            IndexDesc(text: category.name, index: items.indexOf(category)),
         ],
       ),
     );

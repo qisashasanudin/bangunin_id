@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/sliver_page.dart';
-import 'package:bangunin_id/screens/mainmenu/home/projects/progress_chart/pie_chart.dart';
-import 'package:bangunin_id/screens/mainmenu/home/projects/progress_chart/pie_chart_index.dart';
+import 'package:bangunin_id/screens/mainmenu/home/projects/UI/pie_chart_bg.dart';
+import 'package:bangunin_id/screens/mainmenu/home/projects/UI/pie_chart_index.dart';
 
 class ProjectDetails extends StatelessWidget {
   @override
@@ -33,22 +33,11 @@ class ProjectDetails extends StatelessWidget {
             //sliver-sliver lain ditulis di sini
             SliverList(
               delegate: SliverChildListDelegate([
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    child: Row(
-                      children: <Widget>[
-                        PieChartIndex(),
-                        PieChart(),
-                      ],
-                    ),
-                  ),
-                ),
-                buildCategoryCard(Icons.fastfood, "Semen", 120, 20),
-                buildCategoryCard(Icons.flash_on, "Pasir", 430, 17),
-                buildCategoryCard(Icons.fastfood, "Batu", 120, 20),
-                buildCategoryCard(Icons.fastfood, "Batu", 120, 20),
+                progressChart(context),
+                progressBar(Icons.fastfood, "Pasir", 120, 20),
+                progressBar(Icons.square_foot, "Keramik", 430, 17),
+                progressBar(Icons.crop_square, "Batu Bata", 120, 80),
+                progressBar(Icons.fastfood, "Semen", 120, 40),
               ]),
             ),
           ],
@@ -58,8 +47,22 @@ class ProjectDetails extends StatelessWidget {
   }
 }
 
-Container buildCategoryCard(
-    IconData icon, String title, int amount, int percentage) {
+Padding progressChart(BuildContext context) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 25),
+    child: SizedBox(
+      height: MediaQuery.of(context).size.height * 0.4,
+      child: Row(
+        children: <Widget>[
+          PieChartIndex(),
+          PieChartBG(),
+        ],
+      ),
+    ),
+  );
+}
+
+Container progressBar(IconData icon, String title, int amount, int percentage) {
   return Container(
     padding: EdgeInsets.all(15),
     decoration: BoxDecoration(
@@ -126,7 +129,7 @@ Container buildCategoryCard(
             ),
             Container(
               height: 5,
-              width: 80,
+              width: 200,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(2),
                   color: Color(0XFF00B686)),

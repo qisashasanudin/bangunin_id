@@ -1,13 +1,11 @@
 import 'dart:math';
-
-import 'package:bangunin_id/shared/decorations.dart';
-import 'package:bangunin_id/screens/mainmenu/home/projects/progress_chart/materials.dart';
 import 'package:flutter/material.dart';
+import 'package:bangunin_id/screens/mainmenu/home/projects/UI/item_properties.dart';
 
-class Percentage extends CustomPainter {
-  Percentage({@required this.categories, @required this.width});
+class PieChart extends CustomPainter {
+  PieChart({@required this.categories, @required this.width});
 
-  final List<MaterialModel> categories;
+  final List<ItemModel> categories;
   final double width;
 
   @override

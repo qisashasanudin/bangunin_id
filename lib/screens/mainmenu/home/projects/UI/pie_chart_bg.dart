@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/shared/decorations.dart';
-import 'package:bangunin_id/screens/mainmenu/home/projects/progress_chart/materials.dart';
-import 'package:bangunin_id/screens/mainmenu/home/projects/progress_chart/percentage.dart';
+import 'package:bangunin_id/screens/mainmenu/home/projects/UI/item_properties.dart';
+import 'package:bangunin_id/screens/mainmenu/home/projects/UI/pie_chart.dart';
 
-class PieChart extends StatelessWidget {
-  const PieChart({
+class PieChartBG extends StatelessWidget {
+  const PieChartBG({
     Key key,
   }) : super(key: key);
 
@@ -33,9 +33,9 @@ class PieChart extends StatelessWidget {
                   width: constraints.maxWidth * 0.6,
                   child: CustomPaint(
                     child: Center(),
-                    foregroundPainter: Percentage(
+                    foregroundPainter: PieChart(
                       width: constraints.maxWidth * 0.5,
-                      categories: materials,
+                      categories: items,
                     ),
                   ),
                 ),
