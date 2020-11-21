@@ -4,7 +4,7 @@ import 'package:bangunin_id/shared/decorations.dart';
 import 'package:bangunin_id/shared/sliver_page.dart';
 import 'package:flutter/material.dart';
 
-class NewProject extends StatelessWidget {
+class CreateNewProject extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;

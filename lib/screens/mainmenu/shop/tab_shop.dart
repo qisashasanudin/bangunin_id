@@ -14,6 +14,7 @@ class _ShopTabState extends State<ShopTab> {
     return SlideUpPanel(
       children: [
         slideUpMarker(),
+
         // widget-widget lain dimasukkan di sini
       ],
     );

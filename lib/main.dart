@@ -1,5 +1,5 @@
 import 'package:bangunin_id/screens/main_page_wrapper.dart';
-import 'package:bangunin_id/screens/mainmenu/home/projects/new_project.dart';
+import 'package:bangunin_id/screens/mainmenu/home/projects/create_new_project.dart';
 import 'package:bangunin_id/screens/mainmenu/home/projects/project_details.dart';
 import 'package:bangunin_id/screens/mainmenu/account/tab_account.dart';
 import 'package:bangunin_id/screens/mainmenu/home/tab_home.dart';
@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
           '/buy': (context) => ShopTab(),
           '/account': (context) => AccountTab(),
           '/settings': (context) => SettingsTab(),
-          '/newproject': (context) => NewProject(),
+          '/newproject': (context) => CreateNewProject(),
           '/projectdetails': (context) => ProjectDetails(),
         },
       ),
