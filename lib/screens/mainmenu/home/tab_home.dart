@@ -1,5 +1,5 @@
 import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
-import 'package:bangunin_id/shared/sliver_slide_up_panel.dart';
+import 'package:bangunin_id/shared/slide_up_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/services/auth.dart';
@@ -16,23 +16,18 @@ class _HomeTabState extends State<HomeTab> {
     final AuthService _auth = AuthService();
     final userID = _auth.getCurrentUID();
 
-    return SliverSlideUpPanel(
+    return SlideUpPanel(
       children: [
-        SliverToBoxAdapter(
-          child: pullDownMarker(),
+        slideUpMarker(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(child: projectInProgress()),
+            Expanded(child: projectDone()),
+          ],
         ),
-        SliverToBoxAdapter(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(child: projectInProgress()),
-              Expanded(child: projectDone()),
-            ],
-          ),
-        ),
-        SliverList(
-          delegate: infiniteList(context),
-        )
+        projectList(context),
+        // widget-widget lain dimasukkan di sini
       ],
       floatingButton: createProjectButton(userID),
     );
@@ -55,30 +50,26 @@ ListTile projectDone() {
   );
 }
 
-SliverChildBuilderDelegate infiniteList(BuildContext context) {
-  return SliverChildBuilderDelegate(
-    (BuildContext context, index) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-        child: Container(
-          decoration: BoxDecoration(
-            color: AppColors().accent3,
-            borderRadius: BorderRadius.circular(100),
-          ),
-          child: ListTile(
-            title: Text("Proyek $index"),
-            subtitle: Text("Deadline: -"),
-            trailing: Text(
-              "In - progress",
-              style: TextStyle(color: Colors.red),
-            ),
-            onTap: () async {
-              Navigator.of(context).pushNamed('/projectdetails');
-            },
-          ),
+Padding projectList(BuildContext context) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+    child: Container(
+      decoration: BoxDecoration(
+        color: AppColors().accent3,
+        borderRadius: BorderRadius.circular(100),
+      ),
+      child: ListTile(
+        title: Text("Proyek A"),
+        subtitle: Text("Deadline: -"),
+        trailing: Text(
+          "In - progress",
+          style: TextStyle(color: Colors.red),
         ),
-      );
-    },
+        onTap: () async {
+          Navigator.of(context).pushNamed('/projectdetails');
+        },
+      ),
+    ),
   );
 }
 

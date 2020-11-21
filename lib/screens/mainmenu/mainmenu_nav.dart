@@ -5,10 +5,10 @@ import 'package:bangunin_id/screens/mainmenu/settings/tab_settings.dart';
 import 'package:bangunin_id/screens/transitions/loading.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
-import 'package:bangunin_id/services/storage.dart';
 import 'package:bangunin_id/shared/decorations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class MainMenuTabNav extends StatefulWidget {
   @override
@@ -22,23 +22,27 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4,
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppColors().primary,
-        ),
-        child: Scaffold(
-          body: Stack(
-            alignment: Alignment.center,
-            fit: StackFit.expand,
-            clipBehavior: Clip.none,
-            children: <Widget>[
-              coverPicture(),
-              coverPictureGradient(),
-              userInfo(context, userID),
-              navigation(),
-            ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: transparentAppbarAndNavbar()
+          .copyWith(statusBarIconBrightness: Brightness.light),
+      child: DefaultTabController(
+        length: 4,
+        child: Container(
+          decoration: BoxDecoration(
+            color: AppColors().primary,
+          ),
+          child: Scaffold(
+            body: Stack(
+              alignment: Alignment.center,
+              fit: StackFit.expand,
+              clipBehavior: Clip.none,
+              children: <Widget>[
+                coverPicture(),
+                coverPictureGradient(),
+                userInfo(context, userID),
+                navigation(),
+              ],
+            ),
           ),
         ),
       ),

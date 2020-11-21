@@ -17,7 +17,7 @@ SystemUiOverlayStyle transparentAppbarAndNavbar() {
   );
 }
 
-Center pullDownMarker() {
+Center slideUpMarker() {
   return Center(
     child: Container(
       height: 8,
