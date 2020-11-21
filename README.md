@@ -1,9 +1,9 @@
 # Bangunin.id Mobile App
 
 A Software Engineering Project made by:
-Dimas Wira Nugraha
-Hanvey Xavero
-Qisas Tazkia Hasanudin
+1. Dimas Wira Nugraha
+2. Hanvey Xavero
+3. Qisas Tazkia Hasanudin
 
 ## Screenshots:
 
