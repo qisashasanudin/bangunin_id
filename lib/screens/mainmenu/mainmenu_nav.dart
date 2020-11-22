@@ -25,8 +25,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
     super.initState();
     WidgetsBinding.instance.renderView.automaticSystemUiAdjustment = false;
     SystemChrome.setSystemUIOverlayStyle(
-      transparentAppbarAndNavbar()
-          .copyWith(statusBarIconBrightness: Brightness.light),
+      transparentAppbarAndNavbar(),
     );
   }
 

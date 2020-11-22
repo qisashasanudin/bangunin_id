@@ -12,6 +12,7 @@ class AppColors {
 SystemUiOverlayStyle transparentAppbarAndNavbar() {
   return SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.light,
     systemNavigationBarColor: Colors.transparent,
     systemNavigationBarIconBrightness: Brightness.dark,
   );

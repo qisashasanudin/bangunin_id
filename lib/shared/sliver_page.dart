@@ -19,8 +19,7 @@ class _SliverPageState extends State<SliverPage> {
     super.initState();
     WidgetsBinding.instance.renderView.automaticSystemUiAdjustment = false;
     SystemChrome.setSystemUIOverlayStyle(
-      transparentAppbarAndNavbar()
-          .copyWith(statusBarIconBrightness: Brightness.dark),
+      transparentAppbarAndNavbar(),
     );
   }
 
