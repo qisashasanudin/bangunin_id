@@ -17,8 +17,8 @@ class _HomeTabState extends State<HomeTab> {
     final userID = _auth.getCurrentUID();
 
     return SlideUpPanel(
+      tabTitle: 'Beranda',
       children: [
-        SlideUpMarker(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -26,7 +26,6 @@ class _HomeTabState extends State<HomeTab> {
             Expanded(child: projectDone()),
           ],
         ),
-        SearchBar(textHint: 'Cari'),
         projectList(context),
         projectList(context),
         projectList(context),

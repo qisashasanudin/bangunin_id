@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 class SliverPage extends StatefulWidget {
   final List<Widget> children;
   final Widget floatingButton;
+
   SliverPage({Key key, List<Widget> children, this.floatingButton})
       : this.children = children ?? [];
 

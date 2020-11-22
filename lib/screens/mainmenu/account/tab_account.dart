@@ -28,8 +28,8 @@ class _AccountTabState extends State<AccountTab> {
           );
         }
         return SlideUpPanel(
+          tabTitle: 'Akun',
           children: [
-            SlideUpMarker(),
             userProfilePic(context),
             userInfo(snapshot, context, Icons.person, 'Nama', 'name'),
             userInfo(snapshot, context, Icons.phone, 'Telepon', 'phone'),

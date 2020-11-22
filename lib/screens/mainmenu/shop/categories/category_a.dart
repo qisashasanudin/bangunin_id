@@ -9,8 +9,8 @@ class CategoryA extends StatelessWidget {
     return Container(
       child: ListView.builder(
         itemCount: menu.length,
-        itemBuilder: (context, int key) {
-          return ItemCard(index: key);
+        itemBuilder: (context, int index) {
+          return ItemCard(index: index);
         },
       ),
     );
