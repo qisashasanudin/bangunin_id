@@ -1,4 +1,4 @@
-import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
+import 'package:bangunin_id/shared/UI_templates.dart'; // sumber AppColors()
 import 'package:bangunin_id/shared/slide_up_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/database.dart';
@@ -18,7 +18,7 @@ class _HomeTabState extends State<HomeTab> {
 
     return SlideUpPanel(
       children: [
-        slideUpMarker(),
+        SlideUpMarker(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -26,6 +26,7 @@ class _HomeTabState extends State<HomeTab> {
             Expanded(child: projectDone()),
           ],
         ),
+        SearchBar(textHint: 'Cari'),
         projectList(context),
         projectList(context),
         projectList(context),
@@ -61,6 +62,7 @@ Padding projectList(BuildContext context) {
         borderRadius: BorderRadius.circular(100),
       ),
       child: ListTile(
+        dense: true,
         title: Text("Proyek A"),
         subtitle: Text("Deadline: -"),
         trailing: Text(

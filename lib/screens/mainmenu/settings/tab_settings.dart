@@ -1,5 +1,5 @@
 import 'package:bangunin_id/services/auth.dart';
-import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
+import 'package:bangunin_id/shared/UI_templates.dart'; // sumber AppColors()
 import 'package:bangunin_id/shared/slide_up_panel.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +15,7 @@ class _SettingsTabState extends State<SettingsTab> {
   Widget build(BuildContext context) {
     return SlideUpPanel(
       children: [
-        slideUpMarker(),
+        SlideUpMarker(),
         signOutButton(),
         language(),
         // widget-widget lain dimasukkan di sini
@@ -27,12 +27,10 @@ class _SettingsTabState extends State<SettingsTab> {
     return ListTile(
       leading: Icon(Icons.logout),
       title: Text('Keluar'),
-      onTap: signOut,
+      onTap: () async {
+        await _auth.signOut();
+      },
     );
-  }
-
-  void signOut() async {
-    await _auth.signOut();
   }
 
   ListTile language() {

@@ -17,17 +17,27 @@ SystemUiOverlayStyle transparentAppbarAndNavbar() {
   );
 }
 
-Center slideUpMarker() {
-  return Center(
-    child: Container(
-      height: 8,
-      width: 50,
-      decoration: BoxDecoration(
-        color: AppColors().accent3,
-        borderRadius: BorderRadius.circular(5),
+class SlideUpMarker extends StatelessWidget {
+  const SlideUpMarker({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10.0),
+      child: Center(
+        child: Container(
+          height: 8,
+          width: 50,
+          decoration: BoxDecoration(
+            color: AppColors().accent3,
+            borderRadius: BorderRadius.circular(5),
+          ),
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 ClipRRect loginLogo() {
@@ -74,4 +84,39 @@ InputDecoration inputBoxBorder() {
       borderRadius: BorderRadius.circular(100),
     ),
   );
+}
+
+class SearchBar extends StatefulWidget {
+  const SearchBar({
+    Key key,
+    @required this.textHint,
+  }) : super(key: key);
+
+  final String textHint;
+
+  @override
+  _SearchBarState createState() => _SearchBarState();
+}
+
+class _SearchBarState extends State<SearchBar> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+      child: TextField(
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(vertical: 3),
+          prefixIcon: Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15),
+            child: Icon(Icons.search, size: 30),
+          ),
+          hintText: widget.textHint,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30),
+            borderSide: BorderSide(color: Colors.grey),
+          ),
+        ),
+      ),
+    );
+  }
 }

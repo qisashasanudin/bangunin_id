@@ -1,7 +1,7 @@
 import 'package:bangunin_id/screens/transitions/loading.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
-import 'package:bangunin_id/shared/decorations.dart'; // sumber AppColors()
+import 'package:bangunin_id/shared/UI_templates.dart'; // sumber AppColors()
 import 'package:bangunin_id/shared/slide_up_panel.dart';
 import 'package:bangunin_id/shared/upload_picture.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +29,7 @@ class _AccountTabState extends State<AccountTab> {
         }
         return SlideUpPanel(
           children: [
-            slideUpMarker(),
+            SlideUpMarker(),
             userProfilePic(context),
             userInfo(snapshot, context, Icons.person, 'Nama', 'name'),
             userInfo(snapshot, context, Icons.phone, 'Telepon', 'phone'),

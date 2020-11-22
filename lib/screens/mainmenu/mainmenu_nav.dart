@@ -5,7 +5,7 @@ import 'package:bangunin_id/screens/mainmenu/settings/tab_settings.dart';
 import 'package:bangunin_id/screens/transitions/loading.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
-import 'package:bangunin_id/shared/decorations.dart';
+import 'package:bangunin_id/shared/UI_templates.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,7 +40,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
                 coverPicture(),
                 coverPictureGradient(),
                 userInfo(context, userID),
-                navigation(),
+                navigationTab(),
               ],
             ),
           ),
@@ -141,7 +141,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
     );
   }
 
-  Scaffold navigation() {
+  Scaffold navigationTab() {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: PageStorage(

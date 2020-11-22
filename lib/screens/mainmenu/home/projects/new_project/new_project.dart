@@ -1,6 +1,6 @@
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart'; // sumber AppColors()
-import 'package:bangunin_id/shared/decorations.dart';
+import 'package:bangunin_id/shared/UI_templates.dart';
 import 'package:bangunin_id/shared/sliver_page.dart';
 import 'package:flutter/material.dart';
 

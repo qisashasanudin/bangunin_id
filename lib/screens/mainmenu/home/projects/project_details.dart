@@ -1,4 +1,4 @@
-import 'package:bangunin_id/shared/decorations.dart';
+import 'package:bangunin_id/shared/UI_templates.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';

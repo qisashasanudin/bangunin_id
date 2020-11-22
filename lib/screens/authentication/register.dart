@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:bangunin_id/services/auth.dart';
-import 'package:bangunin_id/shared/decorations.dart';
+import 'package:bangunin_id/shared/UI_templates.dart';
 import 'package:bangunin_id/screens/transitions/loading.dart';
 
 class Register extends StatefulWidget {
