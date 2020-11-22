@@ -28,42 +28,48 @@ class _SignInState extends State<SignIn> {
   TextEditingController emailController = TextEditingController(text: '');
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.renderView.automaticSystemUiAdjustment = false;
+    SystemChrome.setSystemUIOverlayStyle(
+      transparentAppbarAndNavbar()
+          .copyWith(statusBarIconBrightness: Brightness.dark),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (loading) {
       return LoadingScreen();
     } else {
-      return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: transparentAppbarAndNavbar()
-            .copyWith(statusBarIconBrightness: Brightness.dark),
-        child: Scaffold(
-          extendBodyBehindAppBar: true,
-          backgroundColor: AppColors().accent1,
-          body: Container(
-            decoration: loginBground(),
-            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-            child: Center(
-              child: SingleChildScrollView(
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: <Widget>[
-                      loginLogo(),
-                      SizedBox(height: 40.0),
-                      emailForm(),
-                      SizedBox(height: 20.0),
-                      passwordForm(),
-                      SizedBox(height: 10.0),
-                      forgotPassword(),
-                      SizedBox(height: 20.0),
-                      submitButton('Login'),
-                      Text(
-                        error,
-                        style: TextStyle(color: Colors.red, fontSize: 14.0),
-                      ),
-                      SizedBox(height: 20.0),
-                      switchToRegister(),
-                    ],
-                  ),
+      return Scaffold(
+        extendBodyBehindAppBar: true,
+        backgroundColor: AppColors().accent1,
+        body: Container(
+          decoration: loginBground(),
+          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    loginLogo(),
+                    SizedBox(height: 40.0),
+                    emailForm(),
+                    SizedBox(height: 20.0),
+                    passwordForm(),
+                    SizedBox(height: 10.0),
+                    forgotPassword(),
+                    SizedBox(height: 20.0),
+                    submitButton('Login'),
+                    Text(
+                      error,
+                      style: TextStyle(color: Colors.red, fontSize: 14.0),
+                    ),
+                    SizedBox(height: 20.0),
+                    switchToRegister(),
+                  ],
                 ),
               ),
             ),

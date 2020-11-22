@@ -9,8 +9,14 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreen extends State<SplashScreen> {
+  @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.renderView.automaticSystemUiAdjustment = false;
+    SystemChrome.setSystemUIOverlayStyle(
+      transparentAppbarAndNavbar()
+          .copyWith(statusBarIconBrightness: Brightness.dark),
+    );
     splashscreenStart();
   }
 
@@ -23,19 +29,15 @@ class _SplashScreen extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: transparentAppbarAndNavbar()
-          .copyWith(statusBarIconBrightness: Brightness.dark),
-      child: Scaffold(
-        backgroundColor: AppColors().primary,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              splashScreenLogo(),
-            ],
-          ),
+    return Scaffold(
+      backgroundColor: AppColors().primary,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            splashScreenLogo(),
+          ],
         ),
       ),
     );

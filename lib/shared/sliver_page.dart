@@ -15,15 +15,21 @@ class SliverPage extends StatefulWidget {
 
 class _SliverPageState extends State<SliverPage> {
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.renderView.automaticSystemUiAdjustment = false;
+    SystemChrome.setSystemUIOverlayStyle(
+      transparentAppbarAndNavbar()
+          .copyWith(statusBarIconBrightness: Brightness.dark),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: transparentAppbarAndNavbar()
-          .copyWith(statusBarIconBrightness: Brightness.light),
-      child: Scaffold(
-        backgroundColor: AppColors().accent1,
-        body: CustomScrollView(
-          slivers: widget.children,
-        ),
+    return Scaffold(
+      backgroundColor: AppColors().accent1,
+      body: CustomScrollView(
+        slivers: widget.children,
       ),
     );
   }
