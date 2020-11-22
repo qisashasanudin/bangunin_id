@@ -84,32 +84,34 @@ Padding overallProgress(percentage) {
   );
 }
 
-Padding itemProgress(BuildContext context, itemType, percentage) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 5),
-    child: Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: Text(
-            itemType,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+SizedBox itemProgress(BuildContext context, itemType, percentage) {
+  return SizedBox(
+    width: double.infinity,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+      child: Column(
+        children: [
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              itemType,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-        ),
-        LinearPercentIndicator(
-          alignment: MainAxisAlignment.center,
-          progressColor: AppColors().primary,
-          animation: true,
-          width: MediaQuery.of(context).size.width * 0.8,
-          lineHeight: 30,
-          percent: percentage,
-          center: Text('${percentage * 100}%',
-              style: TextStyle(color: AppColors().accent1)),
-        ),
-      ],
+          LinearPercentIndicator(
+            alignment: MainAxisAlignment.center,
+            progressColor: AppColors().primary,
+            animation: true,
+            lineHeight: 30,
+            percent: percentage,
+            center: Text('${percentage * 100}%',
+                style: TextStyle(color: AppColors().accent1)),
+          ),
+        ],
+      ),
     ),
   );
 }

@@ -27,6 +27,8 @@ class _HomeTabState extends State<HomeTab> {
           ],
         ),
         projectList(context),
+        projectList(context),
+        projectList(context),
         // widget-widget lain dimasukkan di sini
       ],
       floatingButton: createProjectButton(userID),
