@@ -51,6 +51,27 @@ class _NewProjectState extends State<NewProject> {
                   _textForm('Alamat', false, 1),
                   //TODO: BUAT OPSI UNTUK MENGISI ALAMAT DGN GOOGLE MAP
                   _textForm('Email Client', false, 2),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 30),
+                    child: RaisedButton(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 30),
+                        color: AppColors().primary,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0)),
+                        child: Text('Pick a Date'),
+                        onPressed: () {
+                          showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime.now(),
+                                  lastDate: DateTime(2999))
+                              .then((date) {
+                            setState(() {});
+                          });
+                        }),
+                  ),
                   //TODO: BUAT FORM DEADLINE (TANGGAL)
                   _submitButton(snapshot, 'Selanjutnya'),
                 ]),
@@ -101,7 +122,7 @@ class _NewProjectState extends State<NewProject> {
         color: AppColors().primary,
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-        child: Text(prompt, style: TextStyle(color: AppColors().accent1)),
+        child: Text(prompt, style: TextStyle(color: AppColors().accent2)),
         onPressed: () async {
           _uploadData(snapshot, item, item);
         },
