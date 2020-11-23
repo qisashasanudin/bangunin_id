@@ -1,8 +1,8 @@
 import 'package:bangunin_id/screens/mainmenu/shop/categories/category_b.dart';
 import 'package:bangunin_id/screens/mainmenu/shop/categories/category_a.dart';
 import 'package:bangunin_id/screens/mainmenu/shop/categories/category_c.dart';
-import 'package:bangunin_id/shared/UI_templates.dart'; // sumber AppColors()
-import 'package:bangunin_id/shared/slide_up_panel.dart';
+import 'package:bangunin_id/shared/UI_components/app_colors.dart';
+import 'package:bangunin_id/shared/page_templates/slide_up_panel.dart';
 import 'package:flutter/material.dart';
 
 class ShopTab extends StatefulWidget {

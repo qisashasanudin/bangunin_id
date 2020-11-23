@@ -1,5 +1,5 @@
 import 'package:bangunin_id/services/auth.dart';
-import 'package:bangunin_id/shared/slide_up_panel.dart';
+import 'package:bangunin_id/shared/page_templates/slide_up_panel.dart';
 import 'package:flutter/material.dart';
 
 class SettingsTab extends StatefulWidget {

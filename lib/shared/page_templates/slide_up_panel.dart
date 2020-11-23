@@ -1,4 +1,5 @@
-import 'package:bangunin_id/shared/UI_templates.dart'; // sumber AppColors()
+import 'package:bangunin_id/shared/UI_components/app_colors.dart';
+import 'package:bangunin_id/shared/UI_components/slide_up_marker.dart';
 import 'package:flutter/material.dart';
 
 class SlideUpPanel extends StatefulWidget {

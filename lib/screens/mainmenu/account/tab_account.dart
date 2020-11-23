@@ -1,9 +1,10 @@
-import 'package:bangunin_id/screens/transitions/loading.dart';
+import 'package:bangunin_id/shared/UI_components/app_colors.dart';
+import 'package:bangunin_id/shared/UI_components/input_box_border.dart';
+import 'package:bangunin_id/shared/UI_components/loading_screen.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
-import 'package:bangunin_id/shared/UI_templates.dart'; // sumber AppColors()
-import 'package:bangunin_id/shared/slide_up_panel.dart';
-import 'package:bangunin_id/shared/upload_picture.dart';
+import 'package:bangunin_id/shared/page_templates/slide_up_panel.dart';
+import 'package:bangunin_id/services/upload_picture.dart';
 import 'package:flutter/material.dart';
 
 class AccountTab extends StatefulWidget {

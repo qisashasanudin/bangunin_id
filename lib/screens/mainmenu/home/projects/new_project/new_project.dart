@@ -1,7 +1,8 @@
 import 'package:bangunin_id/services/auth.dart';
-import 'package:bangunin_id/services/database.dart'; // sumber AppColors()
-import 'package:bangunin_id/shared/UI_templates.dart';
-import 'package:bangunin_id/shared/sliver_page.dart';
+import 'package:bangunin_id/services/database.dart';
+import 'package:bangunin_id/shared/UI_components/app_colors.dart';
+import 'package:bangunin_id/shared/UI_components/input_box_border.dart';
+import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:flutter/material.dart';
 
 class NewProject extends StatefulWidget {

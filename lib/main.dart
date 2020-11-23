@@ -6,12 +6,12 @@ import 'package:bangunin_id/screens/mainmenu/account/tab_account.dart';
 import 'package:bangunin_id/screens/mainmenu/home/tab_home.dart';
 import 'package:bangunin_id/screens/mainmenu/shop/tab_shop.dart';
 import 'package:bangunin_id/screens/mainmenu/settings/tab_settings.dart';
-import 'package:bangunin_id/screens/transitions/loading.dart';
-import 'package:bangunin_id/screens/transitions/splashscreen.dart';
+import 'package:bangunin_id/shared/UI_components/loading_screen.dart';
+import 'package:bangunin_id/screens/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/auth.dart';
-import 'package:bangunin_id/shared/UI_templates.dart';
+import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
