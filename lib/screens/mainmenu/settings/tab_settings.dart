@@ -1,4 +1,5 @@
 import 'package:bangunin_id/services/auth.dart';
+import 'package:bangunin_id/shared/UI_components/custom_appbar.dart';
 import 'package:bangunin_id/shared/page_templates/slide_up_panel.dart';
 import 'package:flutter/material.dart';
 
@@ -13,8 +14,10 @@ class _SettingsTabState extends State<SettingsTab> {
   @override
   Widget build(BuildContext context) {
     return SlideUpPanel(
-      tabTitle: 'Pengaturan',
       children: [
+        CustomAppBar(
+          title: 'Pengaturan',
+        ),
         signOutButton(),
         language(),
         // widget-widget lain dimasukkan di sini

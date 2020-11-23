@@ -1,4 +1,5 @@
 import 'package:bangunin_id/shared/UI_components/app_colors.dart';
+import 'package:bangunin_id/shared/UI_components/custom_appbar.dart';
 import 'package:bangunin_id/shared/page_templates/slide_up_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/database.dart';
@@ -17,8 +18,12 @@ class _HomeTabState extends State<HomeTab> {
     final userID = _auth.getCurrentUID();
 
     return SlideUpPanel(
-      tabTitle: 'Beranda',
       children: [
+        CustomAppBar(
+          title: 'Beranda',
+          searchButton: true,
+          sortButton: true,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
