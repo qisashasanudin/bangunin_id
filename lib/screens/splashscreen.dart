@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:bangunin_id/shared/UI_templates.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../shared/UI_templates.dart';
+import 'package:bangunin_id/shared/UI_components/app_colors.dart';
+import 'package:bangunin_id/shared/UI_components/transparent_appbar_and_navbar.dart';
 
 class SplashScreen extends StatefulWidget {
   _SplashScreen createState() => _SplashScreen();

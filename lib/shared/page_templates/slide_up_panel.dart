@@ -1,15 +1,13 @@
-import 'package:bangunin_id/shared/UI_templates.dart'; // sumber AppColors()
+import 'package:bangunin_id/shared/UI_components/app_colors.dart';
+import 'package:bangunin_id/shared/UI_components/slide_up_marker.dart';
 import 'package:flutter/material.dart';
 
 class SlideUpPanel extends StatefulWidget {
   final List<Widget> children;
-  final String tabTitle;
   final Widget floatingButton;
 
-  SlideUpPanel(
-      {Key key, List<Widget> children, this.floatingButton, String tabTitle})
-      : this.children = children ?? [],
-        this.tabTitle = tabTitle ?? '';
+  SlideUpPanel({Key key, List<Widget> children, this.floatingButton})
+      : this.children = children ?? [];
 
   @override
   _SlideUpPanelState createState() => _SlideUpPanelState();
@@ -49,7 +47,6 @@ class _SlideUpPanelState extends State<SlideUpPanel> {
                   controller: scrollController,
                   children: <Widget>[
                     SlideUpMarker(),
-                    tabTitle(widget.tabTitle),
                     for (var element in widget.children) element,
                   ],
                 ),
@@ -61,31 +58,6 @@ class _SlideUpPanelState extends State<SlideUpPanel> {
           ),
         );
       },
-    );
-  }
-
-  AppBar tabTitle(String tabTitle) {
-    return AppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      title: Text(tabTitle, style: TextStyle(color: AppColors().accent2)),
-      actions: <Widget>[
-        if (tabTitle == 'Beli Material' || tabTitle == 'Beranda')
-          IconButton(
-            icon: Icon(Icons.search, color: Colors.grey),
-            onPressed: () {},
-          ),
-        if (tabTitle == 'Beli Material')
-          IconButton(
-            icon: Icon(Icons.shopping_cart, color: Colors.grey),
-            onPressed: () {},
-          ),
-        if (tabTitle == 'Beranda')
-          IconButton(
-            icon: Icon(Icons.sort, color: Colors.grey),
-            onPressed: () {},
-          ),
-      ],
     );
   }
 }

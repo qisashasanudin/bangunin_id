@@ -1,9 +1,11 @@
-import 'package:bangunin_id/screens/transitions/loading.dart';
+import 'package:bangunin_id/shared/UI_components/app_colors.dart';
+import 'package:bangunin_id/shared/UI_components/custom_appbar.dart';
+import 'package:bangunin_id/shared/UI_components/input_box_border.dart';
+import 'package:bangunin_id/shared/UI_components/loading_screen.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
-import 'package:bangunin_id/shared/UI_templates.dart'; // sumber AppColors()
-import 'package:bangunin_id/shared/slide_up_panel.dart';
-import 'package:bangunin_id/shared/upload_picture.dart';
+import 'package:bangunin_id/shared/page_templates/slide_up_panel.dart';
+import 'package:bangunin_id/services/upload_picture.dart';
 import 'package:flutter/material.dart';
 
 class AccountTab extends StatefulWidget {
@@ -28,9 +30,9 @@ class _AccountTabState extends State<AccountTab> {
           );
         }
         return SlideUpPanel(
-          tabTitle: 'Akun',
           children: [
-            userProfilePic(context),
+            CustomAppBar(title: 'Akun'),
+            changeProfilePic(context),
             userInfo(snapshot, context, Icons.person, 'Nama', 'name'),
             userInfo(snapshot, context, Icons.phone, 'Telepon', 'phone'),
             userInfo(snapshot, context, Icons.home, 'Alamat', 'address'),
@@ -43,9 +45,9 @@ class _AccountTabState extends State<AccountTab> {
     );
   }
 
-  ListTile userProfilePic(BuildContext context) {
+  ListTile changeProfilePic(BuildContext context) {
     return ListTile(
-      title: Text('Foto Profil'),
+      title: Text('Ganti Foto Profil'),
       trailing: Icon(Icons.edit),
       onTap: () async {
         UploadPicture(

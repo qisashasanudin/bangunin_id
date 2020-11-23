@@ -1,8 +1,9 @@
 import 'package:bangunin_id/screens/mainmenu/shop/categories/category_b.dart';
 import 'package:bangunin_id/screens/mainmenu/shop/categories/category_a.dart';
 import 'package:bangunin_id/screens/mainmenu/shop/categories/category_c.dart';
-import 'package:bangunin_id/shared/UI_templates.dart'; // sumber AppColors()
-import 'package:bangunin_id/shared/slide_up_panel.dart';
+import 'package:bangunin_id/shared/UI_components/app_colors.dart';
+import 'package:bangunin_id/shared/UI_components/custom_appbar.dart';
+import 'package:bangunin_id/shared/page_templates/slide_up_panel.dart';
 import 'package:flutter/material.dart';
 
 class ShopTab extends StatefulWidget {
@@ -15,12 +16,16 @@ class _ShopTabState extends State<ShopTab> {
   @override
   Widget build(BuildContext context) {
     return SlideUpPanel(
-      tabTitle: 'Beli Material',
       children: [
         DefaultTabController(
           length: 3,
           child: Column(
             children: <Widget>[
+              CustomAppBar(
+                title: 'Beli Material',
+                searchButton: true,
+                cartButton: true,
+              ),
               categories(),
               SizedBox(height: 5),
               itemList(context),
