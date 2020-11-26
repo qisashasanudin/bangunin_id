@@ -102,7 +102,6 @@ class _NewProjectState extends State<NewProject> {
         child: TextFormField(
           readOnly: true,
           controller: _dateController,
-          style: TextStyle(fontSize: 18),
           onTap: _handleDatePicker,
           decoration: inputBoxBorder(labelText),
           validator: (val) => (val.isEmpty && mustBeFilled == true)
