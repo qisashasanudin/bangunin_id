@@ -19,7 +19,7 @@ class Coffee {
 
 List<Coffee> menu = [
   Coffee(
-      name: "Cappuccino",
+      name: "Pasir",
       type: 'Hot',
       shortDesc: "Esspresso dengan rasa lebih mild",
       desc:
@@ -28,7 +28,7 @@ List<Coffee> menu = [
       rate: 5,
       price: 22000),
   Coffee(
-      name: "Macchiato",
+      name: "Keramik",
       type: "Hot",
       shortDesc: "Espresso dengan milky dan gurih.",
       desc:
@@ -37,7 +37,7 @@ List<Coffee> menu = [
       rate: 5,
       price: 22000),
   Coffee(
-      name: "Espresso",
+      name: "Batu Bata",
       type: "Hot",
       shortDesc: "Ekstrak kopi dengan buih putih",
       desc:
@@ -46,7 +46,25 @@ List<Coffee> menu = [
       rate: 5,
       price: 12000),
   Coffee(
-      name: "Americano",
+      name: "Semen",
+      type: "Hot",
+      shortDesc: "Espresso dengan air panas",
+      desc:
+          "Americano terdiri dari satu shot espresso yang dituangkan dalam cangkir berukuran 178 mililiter yang dicampur dengan air panas hingga memenuhi gelas. Jenis lainnya adalah doppio, yakni segelas Americano dengan dua shot espresso. Minuman ini kerap disajikan dalam panas maupun dingin yang disebut iced Americano.",
+      image: "assets/placeholders/americano.jpg",
+      rate: 5,
+      price: 15000),
+  Coffee(
+      name: "Cat",
+      type: "Hot",
+      shortDesc: "Espresso dengan air panas",
+      desc:
+          "Americano terdiri dari satu shot espresso yang dituangkan dalam cangkir berukuran 178 mililiter yang dicampur dengan air panas hingga memenuhi gelas. Jenis lainnya adalah doppio, yakni segelas Americano dengan dua shot espresso. Minuman ini kerap disajikan dalam panas maupun dingin yang disebut iced Americano.",
+      image: "assets/placeholders/americano.jpg",
+      rate: 5,
+      price: 15000),
+  Coffee(
+      name: "Kayu",
       type: "Hot",
       shortDesc: "Espresso dengan air panas",
       desc:

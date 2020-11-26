@@ -37,7 +37,7 @@ class ProjectDetails extends StatelessWidget {
                 overallProgress(0.75),
                 itemProgress(context, 'Pasir', 0.40),
                 itemProgress(context, 'Keramik', 0.80),
-                itemProgress(context, 'Batu Bara', 1.00),
+                itemProgress(context, 'Batu Bata', 1.00),
                 itemProgress(context, 'Semen', 0.45),
                 itemProgress(context, 'Cat', 0.75),
                 itemProgress(context, 'Kayu', 0.10),
