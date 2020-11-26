@@ -2,6 +2,7 @@ import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:bangunin_id/shared/UI_components/input_box_border.dart';
 import 'package:bangunin_id/shared/UI_components/login_bground.dart';
 import 'package:bangunin_id/shared/UI_components/login_logo.dart';
+import 'package:bangunin_id/shared/UI_components/submit_button.dart';
 import 'package:bangunin_id/shared/UI_components/transparent_appbar_and_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -68,7 +69,7 @@ class _RegisterState extends State<Register> {
                     SizedBox(height: 20.0),
                     passwordConfirForm(),
                     SizedBox(height: 20.0),
-                    submitButton('Daftar'),
+                    submitButton('Daftar', uploadData),
                     Text(
                       error,
                       style: TextStyle(color: Colors.red, fontSize: 14.0),
@@ -154,23 +155,6 @@ class _RegisterState extends State<Register> {
           _hidePassConfir = !_hidePassConfir;
         });
       },
-    );
-  }
-
-  SizedBox submitButton(promptText) {
-    return SizedBox(
-      width: double.infinity,
-      child: RaisedButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        color: AppColors().primary,
-        child: Text(
-          promptText,
-          style: TextStyle(color: AppColors().accent1),
-        ),
-        onPressed: uploadData,
-      ),
     );
   }
 

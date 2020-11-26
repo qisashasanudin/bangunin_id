@@ -1,7 +1,7 @@
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
-import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:bangunin_id/shared/UI_components/input_box_border.dart';
+import 'package:bangunin_id/shared/UI_components/submit_button.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -14,6 +14,7 @@ class NewProject extends StatefulWidget {
 class _NewProjectState extends State<NewProject> {
   final _formKey = GlobalKey<FormState>();
   List<String> item = ['', '', '', ''];
+
   DateTime _date = DateTime.now();
   TextEditingController _dateController = TextEditingController();
   final DateFormat _dateFormatter = DateFormat('dd MMM, yyyy');
@@ -53,8 +54,7 @@ class _NewProjectState extends State<NewProject> {
               SliverList(
                 delegate: SliverChildListDelegate([
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20, horizontal: 30),
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
                     child:
                         Text('Masukkan informasi dasar mengenai proyek ini.'),
                   ),
@@ -63,7 +63,10 @@ class _NewProjectState extends State<NewProject> {
                   //TODO: BUAT OPSI UNTUK MENGISI ALAMAT DGN GOOGLE MAP
                   _textForm('Email Client', false, 2),
                   _dateForm('Deadline', true),
-                  _submitButton(snapshot, 'Selanjutnya'),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                    child: submitButton('Selanjutnya', _uploadData),
+                  ),
                 ]),
               ), //sliver-sliver lain ditulis di sini
             ],
@@ -125,22 +128,7 @@ class _NewProjectState extends State<NewProject> {
     }
   }
 
-  Padding _submitButton(snapshot, String prompt) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-      child: RaisedButton(
-        color: AppColors().primary,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-        child: Text(prompt, style: TextStyle(color: AppColors().accent2)),
-        onPressed: () async {
-          _uploadData(snapshot, item, item);
-        },
-      ),
-    );
-  }
-
-  void _uploadData(snapshot, attribute, data) async {
+  void _uploadData() async {
     if (_formKey.currentState.validate()) {
       // await DatabaseService(uid: AuthService().getCurrentUID()).updateData(
       //     'accounts', attribute, data ?? snapshot.data.data()[attribute]);

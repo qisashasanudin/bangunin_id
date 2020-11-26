@@ -32,12 +32,12 @@ class _AccountTabState extends State<AccountTab> {
         return SlideUpPanel(
           children: [
             CustomAppBar(title: 'Akun'),
-            changeProfilePic(context),
-            userInfo(snapshot, context, Icons.person, 'Nama', 'name'),
-            userInfo(snapshot, context, Icons.phone, 'Telepon', 'phone'),
-            userInfo(snapshot, context, Icons.home, 'Alamat', 'address'),
-            changeEmail(snapshot),
-            changePassword(),
+            _changeProfilePic(context),
+            _userInfo(snapshot, context, Icons.person, 'Nama', 'name'),
+            _userInfo(snapshot, context, Icons.phone, 'Telepon', 'phone'),
+            _userInfo(snapshot, context, Icons.home, 'Alamat', 'address'),
+            _changeEmail(snapshot),
+            _changePassword(),
             // widget-widget lain dimasukkan di sini
           ],
         );
@@ -45,7 +45,7 @@ class _AccountTabState extends State<AccountTab> {
     );
   }
 
-  ListTile changeProfilePic(BuildContext context) {
+  ListTile _changeProfilePic(BuildContext context) {
     return ListTile(
       title: Text('Ganti Foto Profil'),
       trailing: Icon(Icons.edit),
@@ -59,19 +59,19 @@ class _AccountTabState extends State<AccountTab> {
     );
   }
 
-  ListTile userInfo(snapshot, context, leadingIcon, title, attribute) {
+  ListTile _userInfo(snapshot, context, leadingIcon, title, attribute) {
     return ListTile(
       leading: Icon(leadingIcon),
       title: Text(title),
       subtitle: Text(snapshot.data.data()[attribute] ?? 'Belum diisi'),
       trailing: Icon(Icons.edit),
       onTap: () async {
-        popUpTextForm(context, snapshot, attribute);
+        _popUpTextForm(context, snapshot, attribute);
       },
     );
   }
 
-  ListTile changeEmail(snapshot) {
+  ListTile _changeEmail(snapshot) {
     return ListTile(
       leading: Icon(Icons.email),
       title: Text('Email'),
@@ -81,7 +81,7 @@ class _AccountTabState extends State<AccountTab> {
     );
   }
 
-  ListTile changePassword() {
+  ListTile _changePassword() {
     return ListTile(
       leading: Icon(Icons.lock),
       title: Text('Ganti Password'),
@@ -90,7 +90,7 @@ class _AccountTabState extends State<AccountTab> {
     );
   }
 
-  Future popUpTextForm(context, snapshot, String attribute) async {
+  Future _popUpTextForm(context, snapshot, String attribute) async {
     currentValue = snapshot.data.data()[attribute];
     return showModalBottomSheet(
       shape: RoundedRectangleBorder(
@@ -107,9 +107,9 @@ class _AccountTabState extends State<AccountTab> {
               height: 200,
               child: ListView(
                 children: <Widget>[
-                  editText(attribute),
+                  _editText(attribute),
                   SizedBox(height: 20.0),
-                  submitButton(snapshot, attribute, 'Simpan'),
+                  _updateButton(snapshot, attribute, 'Simpan'),
                 ],
               ),
             ),
@@ -119,7 +119,7 @@ class _AccountTabState extends State<AccountTab> {
     );
   }
 
-  TextFormField editText(String attribute) {
+  TextFormField _editText(String attribute) {
     return TextFormField(
         initialValue: currentValue,
         decoration: inputBoxBorder(attribute),
@@ -127,7 +127,7 @@ class _AccountTabState extends State<AccountTab> {
         onChanged: (val) => setState(() => currentValue = val));
   }
 
-  SizedBox submitButton(snapshot, String attribute, String prompt) {
+  SizedBox _updateButton(snapshot, String attribute, String prompt) {
     return SizedBox(
       width: double.infinity,
       child: RaisedButton(
@@ -136,13 +136,13 @@ class _AccountTabState extends State<AccountTab> {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: Text(prompt, style: TextStyle(color: AppColors().accent1)),
         onPressed: () async {
-          uploadData(snapshot, attribute, currentValue);
+          _uploadData(snapshot, attribute, currentValue);
         },
       ),
     );
   }
 
-  void uploadData(snapshot, attribute, data) async {
+  void _uploadData(snapshot, attribute, data) async {
     if (_formKey.currentState.validate()) {
       await DatabaseService(uid: AuthService().getCurrentUID()).updateData(
           'accounts', attribute, data ?? snapshot.data.data()[attribute]);

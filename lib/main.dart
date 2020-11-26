@@ -11,7 +11,6 @@ import 'package:bangunin_id/screens/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/auth.dart';
-import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -38,8 +37,7 @@ class MyApp extends StatelessWidget {
         title: 'Bangunin.id',
         theme: ThemeData(
           primaryColorBrightness: Brightness.dark,
-          primaryColor: AppColors().primary,
-          accentColor: AppColors().accent1,
+          primarySwatch: Colors.amber,
           //fontFamily: 'Georgia',
         ),
         initialRoute: '/splashscreen',
