@@ -87,7 +87,7 @@ class _RegisterState extends State<Register> {
 
   TextFormField emailForm() {
     return TextFormField(
-      decoration: inputBoxBorder().copyWith(hintText: 'Email'),
+      decoration: inputBoxBorder('Email'),
       validator: (val) => (val.isEmpty | !val.contains('@'))
           ? 'Masukkan email yang valid'
           : null,
@@ -99,7 +99,7 @@ class _RegisterState extends State<Register> {
 
   TextFormField nameForm() {
     return TextFormField(
-      decoration: inputBoxBorder().copyWith(hintText: 'Nama Lengkap'),
+      decoration: inputBoxBorder('Nama Lengkap'),
       validator: (val) => (val.isEmpty) ? 'Masukkan nama lengkap anda' : null,
       onChanged: (val) {
         setState(() => name = val);
@@ -109,8 +109,8 @@ class _RegisterState extends State<Register> {
 
   TextFormField passwordForm() {
     return TextFormField(
-      decoration: inputBoxBorder()
-          .copyWith(hintText: 'Password', suffixIcon: togglePassVisibility()),
+      decoration: inputBoxBorder('Password')
+          .copyWith(suffixIcon: togglePassVisibility()),
       obscureText: _hidePass,
       validator: (val) =>
           val.length < 6 ? 'Masukkan password (6 huruf atau lebih)' : null,
@@ -136,9 +136,8 @@ class _RegisterState extends State<Register> {
 
   TextFormField passwordConfirForm() {
     return TextFormField(
-      decoration: inputBoxBorder().copyWith(
-          hintText: 'Konfirmasi password',
-          suffixIcon: togglePassConfirVisibility()),
+      decoration: inputBoxBorder('Konfirmasi password')
+          .copyWith(suffixIcon: togglePassConfirVisibility()),
       obscureText: _hidePassConfir,
       validator: (val) => val != password ? 'Kedua password harus sama' : null,
     );

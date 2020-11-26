@@ -85,7 +85,7 @@ class _SignInState extends State<SignIn> {
 
   TextFormField emailForm() {
     return TextFormField(
-      decoration: inputBoxBorder().copyWith(hintText: 'Email'),
+      decoration: inputBoxBorder('Email'),
       initialValue: email,
       validator: (val) => (val.isEmpty | !val.contains('@'))
           ? 'Masukkan email yang valid'
@@ -98,8 +98,8 @@ class _SignInState extends State<SignIn> {
 
   TextFormField passwordForm() {
     return TextFormField(
-      decoration: inputBoxBorder()
-          .copyWith(hintText: 'Password', suffixIcon: togglePassVisibility()),
+      decoration: inputBoxBorder('Password')
+          .copyWith(suffixIcon: togglePassVisibility()),
       obscureText: _hidePass,
       validator: (val) =>
           val.length < 6 ? 'Masukkan password (6 huruf atau lebih)' : null,

@@ -4,6 +4,7 @@ import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:bangunin_id/shared/UI_components/input_box_border.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewProject extends StatefulWidget {
   @override
@@ -13,6 +14,15 @@ class NewProject extends StatefulWidget {
 class _NewProjectState extends State<NewProject> {
   final _formKey = GlobalKey<FormState>();
   List<String> item = ['', '', '', ''];
+  DateTime _date = DateTime.now();
+  TextEditingController _dateController = TextEditingController();
+  final DateFormat _dateFormatter = DateFormat('dd MMM, yyyy');
+
+  @override
+  void dispose() {
+    super.dispose();
+    _dateController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,28 +62,7 @@ class _NewProjectState extends State<NewProject> {
                   _textForm('Alamat', false, 1),
                   //TODO: BUAT OPSI UNTUK MENGISI ALAMAT DGN GOOGLE MAP
                   _textForm('Email Client', false, 2),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 30),
-                    child: RaisedButton(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 30),
-                        color: AppColors().primary,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0)),
-                        child: Text('Pick a Date'),
-                        onPressed: () {
-                          showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime.now(),
-                                  lastDate: DateTime(2999))
-                              .then((date) {
-                            setState(() {});
-                          });
-                        }),
-                  ),
-                  //TODO: BUAT FORM DEADLINE (TANGGAL)
+                  _dateForm('Deadline', true),
                   _submitButton(snapshot, 'Selanjutnya'),
                 ]),
               ), //sliver-sliver lain ditulis di sini
@@ -84,36 +73,56 @@ class _NewProjectState extends State<NewProject> {
     );
   }
 
-  SizedBox _textForm(hintText, mustBeFilled, index) {
+  SizedBox _textForm(labelText, mustBeFilled, index) {
     return SizedBox(
       width: double.infinity,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-        child: Column(
-          children: [
-            Container(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                hintText,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            TextFormField(
-              decoration: inputBoxBorder().copyWith(hintText: hintText),
-              validator: (val) => (val.isEmpty && mustBeFilled == true)
-                  ? 'Data tidak boleh kosong.'
-                  : null,
-              onChanged: (val) {
-                setState(() => item[index] = val);
-              },
-            ),
-          ],
+        child: TextFormField(
+          decoration: inputBoxBorder(labelText),
+          validator: (val) => (val.isEmpty && mustBeFilled == true)
+              ? 'Data tidak boleh kosong.'
+              : null,
+          onChanged: (val) {
+            setState(() => item[index] = val);
+          },
         ),
       ),
     );
+  }
+
+  SizedBox _dateForm(labelText, mustBeFilled) {
+    return SizedBox(
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        child: TextFormField(
+          readOnly: true,
+          controller: _dateController,
+          style: TextStyle(fontSize: 18),
+          onTap: _handleDatePicker,
+          decoration: inputBoxBorder(labelText),
+          validator: (val) => (val.isEmpty && mustBeFilled == true)
+              ? 'Data tidak boleh kosong.'
+              : null,
+        ),
+      ),
+    );
+  }
+
+  _handleDatePicker() async {
+    final DateTime date = await showDatePicker(
+      context: context,
+      initialDate: _date,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2100),
+    );
+    if (date != null && date != _date) {
+      setState(() {
+        _date = date;
+      });
+      _dateController.text = _dateFormatter.format(_date);
+    }
   }
 
   Padding _submitButton(snapshot, String prompt) {

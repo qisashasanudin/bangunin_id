@@ -122,7 +122,7 @@ class _AccountTabState extends State<AccountTab> {
   TextFormField editText(String attribute) {
     return TextFormField(
         initialValue: currentValue,
-        decoration: inputBoxBorder().copyWith(hintText: attribute),
+        decoration: inputBoxBorder(attribute),
         validator: (val) => (val.isEmpty) ? 'Data tidak boleh kosong' : null,
         onChanged: (val) => setState(() => currentValue = val));
   }
