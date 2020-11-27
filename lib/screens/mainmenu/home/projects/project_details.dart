@@ -1,5 +1,4 @@
 import 'package:bangunin_id/shared/UI_components/app_colors.dart';
-import 'package:bangunin_id/shared/UI_components/custom_sliver_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
@@ -17,14 +16,12 @@ class ProjectDetails extends StatelessWidget {
       stream: DatabaseService(uid: userID).entitySnapshot('projects'),
       builder: (context, snapshot) {
         return SliverPage(
+          // backgroundImage: Image.asset(
+          //   'assets/img/sliver_page_bg.jpg',
+          //   fit: BoxFit.cover,
+          // ),
+          title: Text('Rincian Proyek'),
           children: [
-            CustomSliverAppBar(
-              // backgroundImage: Image.asset(
-              //   'assets/img/sliver_page_bg.jpg',
-              //   fit: BoxFit.cover,
-              // ),
-              title: Text('Rincian Proyek'),
-            ),
             SliverList(
               delegate: SliverChildListDelegate([
                 // informasi-informasi proyek ditulis di sini

@@ -5,10 +5,17 @@ import 'package:flutter/services.dart';
 
 class SliverPage extends StatefulWidget {
   final List<Widget> children;
+  Text title;
+  Image backgroundImage;
   final Widget floatingButton;
 
-  SliverPage({Key key, List<Widget> children, this.floatingButton})
-      : this.children = children ?? [];
+  SliverPage({
+    Key key,
+    List<Widget> children,
+    this.title,
+    this.backgroundImage,
+    this.floatingButton,
+  }) : this.children = children ?? [];
 
   @override
   _SliverPageState createState() => _SliverPageState();
@@ -26,12 +33,51 @@ class _SliverPageState extends State<SliverPage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: AppColors().accent1,
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: <Widget>[
+          customSliverAppBar(screenHeight),
           for (var element in widget.children) element,
+        ],
+      ),
+    );
+  }
+
+  SliverAppBar customSliverAppBar(double screenHeight) {
+    return SliverAppBar(
+      elevation: 0,
+      stretch: true,
+      pinned: true,
+      automaticallyImplyLeading: false,
+      expandedHeight: screenHeight / 3,
+      flexibleSpace: Stack(
+        children: [
+          FlexibleSpaceBar(
+            titlePadding: EdgeInsets.only(left: 30, bottom: 40),
+            background: widget.backgroundImage,
+            title: widget.title,
+            stretchModes: [
+              StretchMode.zoomBackground,
+              StretchMode.fadeTitle,
+            ],
+          ),
+          Positioned(
+            child: Container(
+              height: 30,
+              decoration: BoxDecoration(
+                color: AppColors().accent1,
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(50),
+                ),
+              ),
+            ),
+            bottom: -1,
+            left: 0,
+            right: 0,
+          ),
         ],
       ),
     );

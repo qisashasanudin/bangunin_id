@@ -1,6 +1,5 @@
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
-import 'package:bangunin_id/shared/UI_components/custom_sliver_app_bar.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:flutter/material.dart';
 
@@ -23,14 +22,12 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
         return Form(
           key: _formKey,
           child: SliverPage(
+            // backgroundImage: Image.asset(
+            //   'assets/img/sliver_page_bg.jpg',
+            //   fit: BoxFit.cover,
+            // ),
+            title: Text('Material Proyek Baru'),
             children: [
-              CustomSliverAppBar(
-                // backgroundImage: Image.asset(
-                //   'assets/img/sliver_page_bg.jpg',
-                //   fit: BoxFit.cover,
-                // ),
-                title: Text('Material Proyek Baru'),
-              ),
               //sliver-sliver lain ditulis di sini
             ],
           ),

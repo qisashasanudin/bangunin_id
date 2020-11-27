@@ -1,6 +1,5 @@
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
-import 'package:bangunin_id/shared/UI_components/custom_sliver_app_bar.dart';
 import 'package:bangunin_id/shared/UI_components/input_box_border.dart';
 import 'package:bangunin_id/shared/UI_components/submit_button.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
@@ -37,20 +36,18 @@ class _NewProjectState extends State<NewProject> {
         return Form(
           key: _formKey,
           child: SliverPage(
+            // backgroundImage: Image.asset(
+            //   'assets/img/new_project_bg.jpg',
+            //   fit: BoxFit.cover,
+            // ),
+            title: Text('Proyek Baru'),
             children: [
-              CustomSliverAppBar(
-                // backgroundImage: Image.asset(
-                //   'assets/img/sliver_page_bg.jpg',
-                //   fit: BoxFit.cover,
-                // ),
-                title: Text('Proyek Baru'),
-              ),
               SliverList(
                 delegate: SliverChildListDelegate([
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-                    child:
-                        Text('Masukkan informasi dasar mengenai proyek ini.'),
+                    child: Text(
+                        'Masukkan informasi dasar mengenai proyek yang akan dibuat.'),
                   ),
                   _textForm('Nama Proyek', true, 0),
                   _textForm('Alamat', false, 1),
