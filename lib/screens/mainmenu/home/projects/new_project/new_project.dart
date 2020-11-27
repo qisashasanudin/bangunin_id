@@ -13,11 +13,27 @@ class NewProject extends StatefulWidget {
 
 class _NewProjectState extends State<NewProject> {
   final _formKey = GlobalKey<FormState>();
-  List<String> item = ['', '', '', ''];
 
-  DateTime _date = DateTime.now();
+  String projectName;
+  String address;
+  String clientName;
+  String clientEmail;
+  String clientPhone;
+  String supervisorName;
+  String supervisorEmail;
+  String supervisorPhone;
+  DateTime dateCreated = DateTime.now();
+  DateTime dateDeadline;
+  bool isCompleted = false;
+
   TextEditingController _dateController = TextEditingController();
   final DateFormat _dateFormatter = DateFormat('dd MMM, yyyy');
+
+  @override
+  void initState() {
+    // TODO: isi semua variabel supervisor
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -49,10 +65,13 @@ class _NewProjectState extends State<NewProject> {
                     child: Text(
                         'Masukkan informasi dasar mengenai proyek yang akan dibuat.'),
                   ),
-                  _textForm('Nama Proyek', true, 0),
-                  _textForm('Alamat', false, 1),
+                  _textForm('Nama Proyek', true),
+
+                  _textForm('Alamat', false),
                   //TODO: BUAT OPSI UNTUK MENGISI ALAMAT DGN GOOGLE MAP
-                  _textForm('Email Client', false, 2),
+                  _textForm('Nama Klien', false),
+                  _textForm('Email Klien', false),
+                  _textForm('Nomor Telepon Klien', false),
                   _dateForm('Deadline', true),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
@@ -67,7 +86,7 @@ class _NewProjectState extends State<NewProject> {
     );
   }
 
-  SizedBox _textForm(labelText, mustBeFilled, index) {
+  SizedBox _textForm(labelText, mustBeFilled) {
     return SizedBox(
       width: double.infinity,
       child: Padding(
@@ -78,7 +97,25 @@ class _NewProjectState extends State<NewProject> {
               ? 'Data tidak boleh kosong.'
               : null,
           onChanged: (val) {
-            setState(() => item[index] = val);
+            setState(() {
+              switch (labelText) {
+                case 'Nama Proyek':
+                  projectName = val;
+                  break;
+                case 'Alamat':
+                  address = val;
+                  break;
+                case 'Nama Klien':
+                  clientName = val;
+                  break;
+                case 'Email Klien':
+                  clientEmail = val;
+                  break;
+                case 'Nomor Telepon Klien':
+                  clientPhone = val;
+                  break;
+              }
+            });
           },
         ),
       ),
@@ -106,15 +143,15 @@ class _NewProjectState extends State<NewProject> {
   _handleDatePicker() async {
     final DateTime date = await showDatePicker(
       context: context,
-      initialDate: _date,
+      initialDate: DateTime.now(),
       firstDate: DateTime.now(),
       lastDate: DateTime(2100),
     );
-    if (date != null && date != _date) {
+    if (date != null && date != dateDeadline) {
       setState(() {
-        _date = date;
+        dateDeadline = date;
       });
-      _dateController.text = _dateFormatter.format(_date);
+      _dateController.text = _dateFormatter.format(dateDeadline);
     }
   }
 
@@ -125,4 +162,15 @@ class _NewProjectState extends State<NewProject> {
       Navigator.of(context).pushNamed('/newproject_materials');
     }
   }
+
+  // void uploadData() async {
+  //   if (_formKey.currentState.validate()) {
+  //     String result = await _auth.signUpWithEmail(email, name, password);
+  //     setState(() {
+  //       error = result;
+  //     });
+  //     Navigator.of(context).pushNamed('/newproject_materials');
+  //   }
+  // }
+
 }

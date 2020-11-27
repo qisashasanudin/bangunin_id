@@ -17,29 +17,31 @@ class DatabaseService {
   }
 
   Future writeProjectData(
-      String projectName,
-      String customerName,
-      String customerEmail,
-      String customerPhone,
-      String supervisorName,
-      String supervisorEmail,
-      String supervisorPhone,
-      DateTime dateCreated,
-      String address,
-      bool isCompleted) async {
+    String projectName,
+    String address,
+    String clientName,
+    String clientEmail,
+    String clientPhone,
+    String supervisorName,
+    String supervisorEmail,
+    String supervisorPhone,
+    DateTime dateCreated,
+    DateTime dateDeadline,
+    bool isCompleted,
+  ) async {
     CollectionReference tabel =
         FirebaseFirestore.instance.collection('projects');
     return await tabel.doc(uid).set(
       {
         'projectName': projectName,
-        'customerName': customerName,
-        'customerEmail': customerEmail,
-        'customerPhone': customerPhone,
+        'address': address,
+        'customerName': clientName,
+        'customerEmail': clientEmail,
+        'customerPhone': clientPhone,
         'supervisorName': supervisorName,
         'supervisorEmail': supervisorEmail,
         'supervisorPhone': supervisorPhone,
         'dateCreated': dateCreated,
-        'address': address,
         'isCompleted': isCompleted,
       },
     );
