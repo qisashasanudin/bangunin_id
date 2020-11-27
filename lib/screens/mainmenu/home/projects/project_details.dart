@@ -1,4 +1,5 @@
 import 'package:bangunin_id/shared/UI_components/app_colors.dart';
+import 'package:bangunin_id/shared/UI_components/custom_sliver_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
@@ -9,7 +10,6 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 class ProjectDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
     final AuthService _auth = AuthService();
     final userID = _auth.getCurrentUID();
 
@@ -18,18 +18,12 @@ class ProjectDetails extends StatelessWidget {
       builder: (context, snapshot) {
         return SliverPage(
           children: [
-            SliverAppBar(
-              stretch: true,
-              pinned: true,
-              expandedHeight: screenHeight / 4,
-              flexibleSpace: FlexibleSpaceBar(
-                centerTitle: true,
-                title: Text('Rincian Proyek'),
-                stretchModes: [
-                  StretchMode.zoomBackground,
-                  StretchMode.fadeTitle,
-                ],
-              ),
+            CustomSliverAppBar(
+              // backgroundImage: Image.asset(
+              //   'assets/img/sliver_page_bg.jpg',
+              //   fit: BoxFit.cover,
+              // ),
+              title: Text('Rincian Proyek'),
             ),
             SliverList(
               delegate: SliverChildListDelegate([

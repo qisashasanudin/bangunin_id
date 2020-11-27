@@ -1,5 +1,6 @@
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
+import 'package:bangunin_id/shared/UI_components/custom_sliver_app_bar.dart';
 import 'package:bangunin_id/shared/UI_components/input_box_border.dart';
 import 'package:bangunin_id/shared/UI_components/submit_button.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
@@ -27,7 +28,6 @@ class _NewProjectState extends State<NewProject> {
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
     final AuthService _auth = AuthService();
     final userID = _auth.getCurrentUID();
 
@@ -38,18 +38,12 @@ class _NewProjectState extends State<NewProject> {
           key: _formKey,
           child: SliverPage(
             children: [
-              SliverAppBar(
-                stretch: true,
-                pinned: true,
-                expandedHeight: screenHeight / 4,
-                flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
-                  title: Text('Buat Proyek Baru'),
-                  stretchModes: [
-                    StretchMode.zoomBackground,
-                    StretchMode.fadeTitle,
-                  ],
-                ),
+              CustomSliverAppBar(
+                // backgroundImage: Image.asset(
+                //   'assets/img/sliver_page_bg.jpg',
+                //   fit: BoxFit.cover,
+                // ),
+                title: Text('Proyek Baru'),
               ),
               SliverList(
                 delegate: SliverChildListDelegate([

@@ -35,7 +35,7 @@ class UploadPicture {
             child: ListBody(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  padding: const EdgeInsets.symmetric(vertical: 25.0),
                   child: GestureDetector(
                     child: Text('Camera'),
                     onTap: () async {
@@ -47,7 +47,7 @@ class UploadPicture {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  padding: const EdgeInsets.symmetric(vertical: 25.0),
                   child: GestureDetector(
                     child: Text('Gallery'),
                     onTap: () async {

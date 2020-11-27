@@ -8,6 +8,7 @@ class CategoryA extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: ListView.builder(
+        physics: BouncingScrollPhysics(),
         itemCount: menu.length,
         itemBuilder: (context, int index) {
           return ItemCard(index: index);

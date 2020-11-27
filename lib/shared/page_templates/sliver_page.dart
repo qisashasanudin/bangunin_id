@@ -29,7 +29,10 @@ class _SliverPageState extends State<SliverPage> {
     return Scaffold(
       backgroundColor: AppColors().accent1,
       body: CustomScrollView(
-        slivers: widget.children,
+        physics: BouncingScrollPhysics(),
+        slivers: <Widget>[
+          for (var element in widget.children) element,
+        ],
       ),
     );
   }
