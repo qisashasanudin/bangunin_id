@@ -4,11 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class SliverPage extends StatefulWidget {
-  final List<Widget> children;
-  Text title;
-  Image backgroundImage;
-  final Widget floatingButton;
-
   SliverPage({
     Key key,
     List<Widget> children,
@@ -16,6 +11,11 @@ class SliverPage extends StatefulWidget {
     this.backgroundImage,
     this.floatingButton,
   }) : this.children = children ?? [];
+
+  final List<Widget> children;
+  final Text title;
+  final Image backgroundImage;
+  final Widget floatingButton;
 
   @override
   _SliverPageState createState() => _SliverPageState();
@@ -61,7 +61,6 @@ class _SliverPageState extends State<SliverPage> {
             title: widget.title,
             stretchModes: [
               StretchMode.zoomBackground,
-              StretchMode.fadeTitle,
             ],
           ),
           Positioned(

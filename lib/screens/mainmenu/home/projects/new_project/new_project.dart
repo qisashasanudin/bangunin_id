@@ -12,19 +12,21 @@ class NewProject extends StatefulWidget {
 }
 
 class _NewProjectState extends State<NewProject> {
+  final userID = AuthService().getCurrentUID();
   final _formKey = GlobalKey<FormState>();
 
-  String projectName;
-  String address;
-  String clientName;
-  String clientEmail;
-  String clientPhone;
-  String supervisorName;
-  String supervisorEmail;
-  String supervisorPhone;
-  DateTime dateCreated = DateTime.now();
-  DateTime dateDeadline;
-  bool isCompleted = false;
+  String _projectName;
+  String _address;
+  String _addressGMap;
+  String _clientName;
+  String _clientEmail;
+  String _clientPhone;
+  String _supervisorName;
+  String _supervisorEmail;
+  String _supervisorPhone;
+  DateTime _dateCreated;
+  DateTime _dateDeadline;
+  bool _isCompleted = false;
 
   TextEditingController _dateController = TextEditingController();
   final DateFormat _dateFormatter = DateFormat('dd MMM, yyyy');
@@ -43,9 +45,6 @@ class _NewProjectState extends State<NewProject> {
 
   @override
   Widget build(BuildContext context) {
-    final AuthService _auth = AuthService();
-    final userID = _auth.getCurrentUID();
-
     return StreamBuilder<Object>(
       stream: DatabaseService(uid: userID).entitySnapshot('projects'),
       builder: (context, snapshot) {
@@ -66,7 +65,6 @@ class _NewProjectState extends State<NewProject> {
                         'Masukkan informasi dasar mengenai proyek yang akan dibuat.'),
                   ),
                   _textForm('Nama Proyek', true),
-
                   _textForm('Alamat', false),
                   //TODO: BUAT OPSI UNTUK MENGISI ALAMAT DGN GOOGLE MAP
                   _textForm('Nama Klien', false),
@@ -100,19 +98,19 @@ class _NewProjectState extends State<NewProject> {
             setState(() {
               switch (labelText) {
                 case 'Nama Proyek':
-                  projectName = val;
+                  _projectName = val;
                   break;
                 case 'Alamat':
-                  address = val;
+                  _address = val;
                   break;
                 case 'Nama Klien':
-                  clientName = val;
+                  _clientName = val;
                   break;
                 case 'Email Klien':
-                  clientEmail = val;
+                  _clientEmail = val;
                   break;
                 case 'Nomor Telepon Klien':
-                  clientPhone = val;
+                  _clientPhone = val;
                   break;
               }
             });
@@ -143,23 +141,26 @@ class _NewProjectState extends State<NewProject> {
   _handleDatePicker() async {
     final DateTime date = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: _dateDeadline ?? DateTime.now(),
       firstDate: DateTime.now(),
       lastDate: DateTime(2100),
     );
-    if (date != null && date != dateDeadline) {
-      setState(() {
-        dateDeadline = date;
-      });
-      _dateController.text = _dateFormatter.format(dateDeadline);
-    }
+    setState(() {
+      _dateDeadline = date;
+    });
+    _dateController.text = _dateFormatter.format(_dateDeadline);
   }
 
   void _uploadData() async {
     if (_formKey.currentState.validate()) {
+      setState(() {
+        _dateCreated = DateTime.now();
+      });
+      print(
+          '$_projectName, $_address, $_addressGMap, $_clientName, $_clientEmail, $_clientPhone, $_supervisorName, $_supervisorEmail, $_supervisorPhone, $_dateCreated, $_dateDeadline, $_isCompleted');
       // await DatabaseService(uid: AuthService().getCurrentUID()).updateData(
       //     'accounts', attribute, data ?? snapshot.data.data()[attribute]);
-      Navigator.of(context).pushNamed('/newproject_materials');
+      //Navigator.of(context).pushNamed('/newproject_materials');
     }
   }
 
