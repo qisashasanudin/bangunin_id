@@ -60,7 +60,7 @@ List<Coffee> menu = [
       shortDesc: "Espresso dengan air panas",
       desc:
           "Americano terdiri dari satu shot espresso yang dituangkan dalam cangkir berukuran 178 mililiter yang dicampur dengan air panas hingga memenuhi gelas. Jenis lainnya adalah doppio, yakni segelas Americano dengan dua shot espresso. Minuman ini kerap disajikan dalam panas maupun dingin yang disebut iced Americano.",
-      image: "assets/placeholders/americano.jpg",
+      image: "assets/placeholders/espreso.jpeg",
       rate: 5,
       price: 15000),
   Coffee(
@@ -69,7 +69,7 @@ List<Coffee> menu = [
       shortDesc: "Espresso dengan air panas",
       desc:
           "Americano terdiri dari satu shot espresso yang dituangkan dalam cangkir berukuran 178 mililiter yang dicampur dengan air panas hingga memenuhi gelas. Jenis lainnya adalah doppio, yakni segelas Americano dengan dua shot espresso. Minuman ini kerap disajikan dalam panas maupun dingin yang disebut iced Americano.",
-      image: "assets/placeholders/americano.jpg",
+      image: "assets/placeholders/header.jpg",
       rate: 5,
       price: 15000),
 ];
