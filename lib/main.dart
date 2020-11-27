@@ -1,11 +1,13 @@
 import 'package:bangunin_id/screens/main_page_wrapper.dart';
 import 'package:bangunin_id/screens/mainmenu/home/projects/new_project/new_project.dart';
-import 'package:bangunin_id/screens/mainmenu/home/projects/new_project/new_project_materials.dart';
 import 'package:bangunin_id/screens/mainmenu/home/projects/project_details.dart';
 import 'package:bangunin_id/screens/mainmenu/account/tab_account.dart';
 import 'package:bangunin_id/screens/mainmenu/home/tab_home.dart';
 import 'package:bangunin_id/screens/mainmenu/shop/tab_shop.dart';
 import 'package:bangunin_id/screens/mainmenu/settings/tab_settings.dart';
+import 'package:bangunin_id/services/database.dart';
+import 'package:bangunin_id/models/project_details_model.dart';
+import 'package:bangunin_id/models/account_model.dart';
 import 'package:bangunin_id/shared/UI_components/loading_screen.dart';
 import 'package:bangunin_id/screens/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,6 +33,12 @@ class MyApp extends StatelessWidget {
         StreamProvider(
           create: (context) => context.read<AuthService>().authStateChanges,
         ),
+        StreamProvider<List<AccountModel>>.value(
+          value: DatabaseService().accounts,
+        ),
+        StreamProvider<List<ProjectDetailsModel>>.value(
+          value: DatabaseService().projects,
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -50,7 +58,6 @@ class MyApp extends StatelessWidget {
           '/account': (context) => AccountTab(),
           '/settings': (context) => SettingsTab(),
           '/newproject': (context) => NewProject(),
-          '/newproject_materials': (context) => NewProjectMaterials(),
           '/projectdetails': (context) => ProjectDetails(),
         },
       ),

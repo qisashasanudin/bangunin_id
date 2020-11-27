@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-InputDecoration inputBoxBorder(labelText) {
+InputDecoration formFieldDecoration(labelText) {
   return InputDecoration(
     labelText: labelText,
     border: OutlineInputBorder(

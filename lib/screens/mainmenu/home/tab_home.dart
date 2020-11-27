@@ -1,9 +1,10 @@
-import 'package:bangunin_id/shared/UI_components/app_colors.dart';
-import 'package:bangunin_id/shared/UI_components/custom_appbar.dart';
-import 'package:bangunin_id/shared/page_templates/slide_up_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/services/auth.dart';
+import 'package:bangunin_id/shared/UI_components/app_colors.dart';
+import 'package:bangunin_id/shared/UI_components/custom_appbar.dart';
+import 'package:bangunin_id/shared/page_templates/slide_up_panel.dart';
+import 'package:bangunin_id/screens/mainmenu/home/project_list.dart';
 
 class HomeTab extends StatefulWidget {
   //Home({Key key}) : super(key: key);
@@ -31,9 +32,7 @@ class _HomeTabState extends State<HomeTab> {
             Expanded(child: projectDone()),
           ],
         ),
-        projectList(context),
-        projectList(context),
-        projectList(context),
+        ProjectList(),
         // widget-widget lain dimasukkan di sini
       ],
       floatingButton: createProjectButton(userID),
@@ -54,30 +53,6 @@ ListTile projectDone() {
     title:
         Center(child: Text('2', style: TextStyle(fontWeight: FontWeight.bold))),
     subtitle: Center(child: Text('Selesai')),
-  );
-}
-
-Padding projectList(BuildContext context) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-    child: Container(
-      decoration: BoxDecoration(
-        color: AppColors().accent3,
-        borderRadius: BorderRadius.circular(100),
-      ),
-      child: ListTile(
-        dense: true,
-        title: Text("Proyek A"),
-        subtitle: Text("Deadline: -"),
-        trailing: Text(
-          "In - progress",
-          style: TextStyle(color: Colors.red),
-        ),
-        onTap: () async {
-          Navigator.of(context).pushNamed('/projectdetails');
-        },
-      ),
-    ),
   );
 }
 

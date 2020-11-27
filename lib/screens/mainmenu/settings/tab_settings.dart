@@ -31,8 +31,8 @@ class _SettingsTabState extends State<SettingsTab> {
       leading: Icon(Icons.logout),
       title: Text('Keluar'),
       onTap: () async {
-        final action = await PopUpDialog.yesNoDialog(
-            context, 'Keluar dari Bangunin.id', 'Apakah anda ingin keluar?');
+        final action = await PopUpDialog.yesNoDialog(context,
+            'Keluar dari Bangunin.id', 'Apakah anda yakin ingin keluar?');
         if (action == DialogAction.yes) {
           await _auth.signOut();
         }

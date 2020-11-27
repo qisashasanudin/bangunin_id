@@ -1,7 +1,7 @@
 import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:flutter/material.dart';
 
-SizedBox submitButton(promptText, onPressed) {
+SizedBox customButton(promptText, onPressed) {
   return SizedBox(
     width: double.infinity,
     child: RaisedButton(

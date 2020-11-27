@@ -1,8 +1,8 @@
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/UI_components/popup_dialog.dart';
-import 'package:bangunin_id/shared/UI_components/input_box_border.dart';
-import 'package:bangunin_id/shared/UI_components/submit_button.dart';
+import 'package:bangunin_id/shared/UI_components/form_field_decoration.dart';
+import 'package:bangunin_id/shared/UI_components/custom_button.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -28,12 +28,6 @@ class _NewProjectState extends State<NewProject> {
 
   TextEditingController _dateController = TextEditingController();
   final DateFormat _dateFormatter = DateFormat('dd MMM, yyyy');
-
-  @override
-  void initState() {
-    // TODO: isi semua variabel supervisor
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -70,7 +64,7 @@ class _NewProjectState extends State<NewProject> {
                 _dateForm('Deadline', true),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-                  child: submitButton('Selanjutnya', _uploadData),
+                  child: customButton('Simpan', _uploadData),
                 ),
               ]),
             ), //sliver-sliver lain ditulis di sini
@@ -85,7 +79,7 @@ class _NewProjectState extends State<NewProject> {
     final action = await PopUpDialog.yesNoDialog(
         context,
         'Batal Membuat Proyek',
-        'Apakah anda yakin ingin membatalkan pembuatan proyek baru?');
+        'Apakah anda yakin ingin membatalkan pembuatan proyek? Semua pengaturan pada halaman ini tidak akan tersimpan.');
     if (action == DialogAction.yes) {
       tappedYes = true;
     }
@@ -103,7 +97,7 @@ class _NewProjectState extends State<NewProject> {
               : (labelText == 'Email Klien')
                   ? TextInputType.emailAddress
                   : TextInputType.text,
-          decoration: inputBoxBorder(labelText),
+          decoration: formFieldDecoration(labelText),
           validator: (val) => (val.isEmpty && mustBeFilled == true)
               ? 'Data tidak boleh kosong.'
               : null,
@@ -142,7 +136,7 @@ class _NewProjectState extends State<NewProject> {
           readOnly: true,
           controller: _dateController,
           onTap: _handleDatePicker,
-          decoration: inputBoxBorder(labelText),
+          decoration: formFieldDecoration(labelText),
           validator: (val) => (val.isEmpty && mustBeFilled == true)
               ? 'Data tidak boleh kosong.'
               : null,
@@ -169,8 +163,6 @@ class _NewProjectState extends State<NewProject> {
       setState(() {
         _dateCreated = DateTime.now();
       });
-      print(
-          '$userID, $_projectName, $_address, $_addressGMap, $_clientName, $_clientEmail, $_clientPhone, $_dateCreated, $_dateDeadline, $_isCompleted');
       await DatabaseService().writeProjectData(
         userID,
         _projectName,
@@ -185,7 +177,7 @@ class _NewProjectState extends State<NewProject> {
       );
       // await DatabaseService(uid: AuthService().getCurrentUID()).updateData(
       //     'accounts', attribute, data ?? snapshot.data.data()[attribute]);
-      Navigator.of(context).pushNamed('/newproject_materials');
+      Navigator.of(context).pop();
     }
   }
 }

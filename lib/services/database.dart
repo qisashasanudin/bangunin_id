@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:bangunin_id/models/project_details_model.dart';
+import 'package:bangunin_id/models/account_model.dart';
 
 class DatabaseService {
   final String uid;
@@ -36,9 +38,9 @@ class DatabaseService {
         'projectName': projectName,
         'address': address,
         'addressGMap': addressGMap,
-        'customerName': clientName,
-        'customerEmail': clientEmail,
-        'customerPhone': clientPhone,
+        'clientName': clientName,
+        'clientEmail': clientEmail,
+        'clientPhone': clientPhone,
         'dateCreated': dateCreated,
         'dateDeadline': dateDeadline,
         'isCompleted': isCompleted,
@@ -60,5 +62,50 @@ class DatabaseService {
         .collection(tablename)
         .doc(uid)
         .snapshots();
+  }
+
+  List<ProjectDetailsModel> _projectDetailsListFromSnapshot(
+      QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return ProjectDetailsModel(
+        supervisorID: doc.data()['supervisorID'] ?? '',
+        projectName: doc.data()['projectName'] ?? '',
+        address: doc.data()['address'] ?? '',
+        addressGMap: doc.data()['addressGMap'] ?? '',
+        clientName: doc.data()['clientName'] ?? '',
+        clientEmail: doc.data()['clientEmail'] ?? '',
+        clientPhone: doc.data()['clientPhone'] ?? '',
+        dateCreated: doc.data()['dateCreated'].toDate() ?? '',
+        dateDeadline: doc.data()['dateDeadline'].toDate() ?? '',
+        isCompleted: doc.data()['isCompleted'] ?? false,
+      );
+    }).toList();
+  }
+
+  Stream<List<ProjectDetailsModel>> get projects {
+    return FirebaseFirestore.instance
+        .collection('projects')
+        .snapshots()
+        .map(_projectDetailsListFromSnapshot);
+  }
+
+  List<AccountModel> _accountListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return AccountModel(
+        address: doc.data()['address'] ?? '',
+        email: doc.data()['email'] ?? '',
+        name: doc.data()['name'] ?? '',
+        phone: doc.data()['phone'] ?? '',
+        profilePicture: doc.data()['profilePicture'] ?? '',
+        role: doc.data()['role'] ?? '',
+      );
+    }).toList();
+  }
+
+  Stream<List<AccountModel>> get accounts {
+    return FirebaseFirestore.instance
+        .collection('accounts')
+        .snapshots()
+        .map(_accountListFromSnapshot);
   }
 }

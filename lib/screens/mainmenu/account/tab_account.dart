@@ -1,6 +1,6 @@
 import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:bangunin_id/shared/UI_components/custom_appbar.dart';
-import 'package:bangunin_id/shared/UI_components/input_box_border.dart';
+import 'package:bangunin_id/shared/UI_components/form_field_decoration.dart';
 import 'package:bangunin_id/shared/UI_components/loading_screen.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
@@ -126,7 +126,7 @@ class _AccountTabState extends State<AccountTab> {
       keyboardType:
           (attribute == 'phone') ? TextInputType.number : TextInputType.text,
       initialValue: currentValue,
-      decoration: inputBoxBorder(attribute),
+      decoration: formFieldDecoration(attribute),
       validator: (val) => (val.isEmpty) ? 'Data tidak boleh kosong' : null,
       onChanged: (val) => setState(() => currentValue = val),
     );

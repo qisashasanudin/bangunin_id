@@ -1,4 +1,4 @@
-class Coffee {
+class ShopMaterialModel {
   final String name;
   final String type;
   final String shortDesc;
@@ -7,7 +7,7 @@ class Coffee {
   final int rate;
   final int price;
 
-  Coffee(
+  ShopMaterialModel(
       {this.name,
       this.type,
       this.shortDesc,
@@ -17,8 +17,8 @@ class Coffee {
       this.price});
 }
 
-List<Coffee> menu = [
-  Coffee(
+List<ShopMaterialModel> menu = [
+  ShopMaterialModel(
       name: "Pasir",
       type: 'Hot',
       shortDesc: "Esspresso dengan rasa lebih mild",
@@ -27,7 +27,7 @@ List<Coffee> menu = [
       image: "assets/placeholders/cappuccino.jpg",
       rate: 5,
       price: 22000),
-  Coffee(
+  ShopMaterialModel(
       name: "Keramik",
       type: "Hot",
       shortDesc: "Espresso dengan milky dan gurih.",
@@ -36,7 +36,7 @@ List<Coffee> menu = [
       image: "assets/placeholders/Macchiato.jpg",
       rate: 5,
       price: 22000),
-  Coffee(
+  ShopMaterialModel(
       name: "Batu Bata",
       type: "Hot",
       shortDesc: "Ekstrak kopi dengan buih putih",
@@ -45,7 +45,7 @@ List<Coffee> menu = [
       image: "assets/placeholders/espreso.jpg",
       rate: 5,
       price: 12000),
-  Coffee(
+  ShopMaterialModel(
       name: "Semen",
       type: "Hot",
       shortDesc: "Espresso dengan air panas",
@@ -54,7 +54,7 @@ List<Coffee> menu = [
       image: "assets/placeholders/americano.jpg",
       rate: 5,
       price: 15000),
-  Coffee(
+  ShopMaterialModel(
       name: "Cat",
       type: "Hot",
       shortDesc: "Espresso dengan air panas",
@@ -63,7 +63,7 @@ List<Coffee> menu = [
       image: "assets/placeholders/espreso.jpeg",
       rate: 5,
       price: 15000),
-  Coffee(
+  ShopMaterialModel(
       name: "Kayu",
       type: "Hot",
       shortDesc: "Espresso dengan air panas",

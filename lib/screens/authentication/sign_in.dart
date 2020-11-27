@@ -1,8 +1,8 @@
 import 'package:bangunin_id/shared/UI_components/app_colors.dart';
-import 'package:bangunin_id/shared/UI_components/input_box_border.dart';
+import 'package:bangunin_id/shared/UI_components/form_field_decoration.dart';
 import 'package:bangunin_id/shared/UI_components/login_bground.dart';
 import 'package:bangunin_id/shared/UI_components/login_logo.dart';
-import 'package:bangunin_id/shared/UI_components/submit_button.dart';
+import 'package:bangunin_id/shared/UI_components/custom_button.dart';
 import 'package:bangunin_id/shared/UI_components/transparent_appbar_and_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -67,7 +67,7 @@ class _SignInState extends State<SignIn> {
                     SizedBox(height: 10.0),
                     forgotPassword(),
                     SizedBox(height: 20.0),
-                    submitButton('Login', _uploadData),
+                    customButton('Login', _uploadData),
                     Text(
                       error,
                       style: TextStyle(color: Colors.red, fontSize: 14.0),
@@ -86,7 +86,7 @@ class _SignInState extends State<SignIn> {
 
   TextFormField emailForm() {
     return TextFormField(
-      decoration: inputBoxBorder('Email'),
+      decoration: formFieldDecoration('Email'),
       initialValue: email,
       validator: (val) => (val.isEmpty | !val.contains('@'))
           ? 'Masukkan email yang valid'
@@ -99,7 +99,7 @@ class _SignInState extends State<SignIn> {
 
   TextFormField passwordForm() {
     return TextFormField(
-      decoration: inputBoxBorder('Password')
+      decoration: formFieldDecoration('Password')
           .copyWith(suffixIcon: togglePassVisibility()),
       obscureText: _hidePass,
       validator: (val) =>

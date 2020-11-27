@@ -1,4 +1,4 @@
-import 'package:bangunin_id/models/items_model.dart';
+import 'package:bangunin_id/models/shop_material_model.dart';
 import 'package:flutter/material.dart';
 
 import 'Item_card.dart';
