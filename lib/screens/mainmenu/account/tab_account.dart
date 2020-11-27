@@ -71,6 +71,7 @@ class _AccountTabState extends State<AccountTab> {
     );
   }
 
+  //TODO: request to Firebase Auth to change email
   ListTile _changeEmail(snapshot) {
     return ListTile(
       leading: Icon(Icons.email),
@@ -81,6 +82,7 @@ class _AccountTabState extends State<AccountTab> {
     );
   }
 
+  //TODO: request to Firebase Auth to change password
   ListTile _changePassword() {
     return ListTile(
       leading: Icon(Icons.lock),
@@ -121,10 +123,13 @@ class _AccountTabState extends State<AccountTab> {
 
   TextFormField _editText(String attribute) {
     return TextFormField(
-        initialValue: currentValue,
-        decoration: inputBoxBorder(attribute),
-        validator: (val) => (val.isEmpty) ? 'Data tidak boleh kosong' : null,
-        onChanged: (val) => setState(() => currentValue = val));
+      keyboardType:
+          (attribute == 'phone') ? TextInputType.number : TextInputType.text,
+      initialValue: currentValue,
+      decoration: inputBoxBorder(attribute),
+      validator: (val) => (val.isEmpty) ? 'Data tidak boleh kosong' : null,
+      onChanged: (val) => setState(() => currentValue = val),
+    );
   }
 
   SizedBox _updateButton(snapshot, String attribute, String prompt) {

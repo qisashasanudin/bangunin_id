@@ -1,7 +1,7 @@
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
+import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:bangunin_id/shared/UI_components/input_box_border.dart';
-import 'package:bangunin_id/shared/UI_components/submit_button.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -46,7 +46,7 @@ class _NewProjectState extends State<NewProject> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Object>(
-      stream: DatabaseService(uid: userID).entitySnapshot('projects'),
+      stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
       builder: (context, snapshot) {
         return Form(
           key: _formKey,
@@ -73,7 +73,7 @@ class _NewProjectState extends State<NewProject> {
                   _dateForm('Deadline', true),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-                    child: submitButton('Selanjutnya', _uploadData),
+                    child: _submitButton(snapshot, 'Selanjutnya'),
                   ),
                 ]),
               ), //sliver-sliver lain ditulis di sini
@@ -90,6 +90,11 @@ class _NewProjectState extends State<NewProject> {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
         child: TextFormField(
+          keyboardType: (labelText == 'Nomor Telepon Klien')
+              ? TextInputType.number
+              : (labelText == 'Email Klien')
+                  ? TextInputType.emailAddress
+                  : TextInputType.text,
           decoration: inputBoxBorder(labelText),
           validator: (val) => (val.isEmpty && mustBeFilled == true)
               ? 'Data tidak boleh kosong.'
@@ -151,9 +156,27 @@ class _NewProjectState extends State<NewProject> {
     _dateController.text = _dateFormatter.format(_dateDeadline);
   }
 
-  void _uploadData() async {
+  SizedBox _submitButton(snapshot, String prompt) {
+    return SizedBox(
+      width: double.infinity,
+      child: RaisedButton(
+        color: AppColors().primary,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        child: Text(prompt, style: TextStyle(color: AppColors().accent1)),
+        onPressed: () async {
+          _uploadData(snapshot);
+        },
+      ),
+    );
+  }
+
+  void _uploadData(snapshot) async {
     if (_formKey.currentState.validate()) {
       setState(() {
+        _supervisorName = snapshot.data.data()['name'];
+        _supervisorEmail = snapshot.data.data()['email'];
+        _supervisorPhone = snapshot.data.data()['phone'];
         _dateCreated = DateTime.now();
       });
       print(

@@ -69,7 +69,7 @@ class _RegisterState extends State<Register> {
                     SizedBox(height: 20.0),
                     passwordConfirForm(),
                     SizedBox(height: 20.0),
-                    submitButton('Daftar', uploadData),
+                    submitButton('Daftar', _uploadData),
                     Text(
                       error,
                       style: TextStyle(color: Colors.red, fontSize: 14.0),
@@ -158,7 +158,7 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  void uploadData() async {
+  void _uploadData() async {
     if (_formKey.currentState.validate()) {
       setState(() {
         loading = true;
