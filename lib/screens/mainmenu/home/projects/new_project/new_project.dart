@@ -1,5 +1,6 @@
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
+import 'package:bangunin_id/shared/UI_components/popup_dialog.dart';
 import 'package:bangunin_id/shared/UI_components/input_box_border.dart';
 import 'package:bangunin_id/shared/UI_components/submit_button.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
@@ -42,38 +43,53 @@ class _NewProjectState extends State<NewProject> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: SliverPage(
-        // backgroundImage: Image.asset(
-        //   'assets/img/new_project_bg.jpg',
-        //   fit: BoxFit.cover,
-        // ),
-        title: Text('Proyek Baru'),
-        children: [
-          SliverList(
-            delegate: SliverChildListDelegate([
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-                child: Text(
-                    'Masukkan informasi dasar mengenai proyek yang akan dibuat.'),
-              ),
-              _textForm('Nama Proyek', true),
-              _textForm('Alamat', false),
-              //TODO: BUAT OPSI UNTUK MENGISI ALAMAT DGN GOOGLE MAP
-              _textForm('Nama Klien', false),
-              _textForm('Email Klien', false),
-              _textForm('Nomor Telepon Klien', false),
-              _dateForm('Deadline', true),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-                child: submitButton('Selanjutnya', _uploadData),
-              ),
-            ]),
-          ), //sliver-sliver lain ditulis di sini
-        ],
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: Form(
+        key: _formKey,
+        child: SliverPage(
+          // backgroundImage: Image.asset(
+          //   'assets/img/new_project_bg.jpg',
+          //   fit: BoxFit.cover,
+          // ),
+          title: Text('Proyek Baru'),
+          children: [
+            SliverList(
+              delegate: SliverChildListDelegate([
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                  child: Text(
+                      'Masukkan informasi dasar mengenai proyek yang akan dibuat.'),
+                ),
+                _textForm('Nama Proyek', true),
+                _textForm('Alamat', false),
+                //TODO: BUAT OPSI UNTUK MENGISI ALAMAT DGN GOOGLE MAP
+                _textForm('Nama Klien', false),
+                _textForm('Email Klien', false),
+                _textForm('Nomor Telepon Klien', false),
+                _dateForm('Deadline', true),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                  child: submitButton('Selanjutnya', _uploadData),
+                ),
+              ]),
+            ), //sliver-sliver lain ditulis di sini
+          ],
+        ),
       ),
     );
+  }
+
+  Future<bool> _onBackPressed() async {
+    bool tappedYes = false;
+    final action = await PopUpDialog.yesNoDialog(
+        context,
+        'Batal Membuat Proyek',
+        'Apakah anda yakin ingin membatalkan pembuatan proyek baru?');
+    if (action == DialogAction.yes) {
+      tappedYes = true;
+    }
+    return tappedYes;
   }
 
   SizedBox _textForm(labelText, mustBeFilled) {
