@@ -136,7 +136,7 @@ class _AccountTabState extends State<AccountTab> {
     return SizedBox(
       width: double.infinity,
       child: RaisedButton(
-        color: AppColors().primary,
+        color: Theme.of(context).primaryColor,
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: Text(prompt, style: TextStyle(color: AppColors().accent1)),

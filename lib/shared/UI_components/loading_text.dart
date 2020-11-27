@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 
 class LoadingText extends StatelessWidget {
   @override
@@ -10,7 +9,7 @@ class LoadingText extends StatelessWidget {
       color: Colors.transparent,
       child: Center(
         child: SpinKitThreeBounce(
-          color: AppColors().primary,
+          color: Theme.of(context).primaryColor,
         ),
       ),
     );

@@ -36,7 +36,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
       length: 4,
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors().primary,
+          color: Theme.of(context).primaryColor,
         ),
         child: Scaffold(
           body: Stack(
@@ -70,7 +70,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
           begin: FractionalOffset.topCenter,
           end: FractionalOffset.bottomCenter,
           colors: [
-            AppColors().primary,
+            Theme.of(context).primaryColor,
             AppColors().accent1.withOpacity(0.0),
           ],
           stops: [0.0, 0.7],
@@ -170,9 +170,10 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
             Tab(icon: Icon(Icons.person)),
             Tab(icon: Icon(Icons.settings)),
           ],
-          labelColor: AppColors().primary,
+          labelColor: Theme.of(context).primaryColor,
           indicator: UnderlineTabIndicator(
-            borderSide: BorderSide(color: AppColors().primary, width: 4.0),
+            borderSide:
+                BorderSide(color: Theme.of(context).primaryColor, width: 4.0),
             insets: EdgeInsets.only(bottom: 44),
           ),
           unselectedLabelColor: AppColors().accent3,

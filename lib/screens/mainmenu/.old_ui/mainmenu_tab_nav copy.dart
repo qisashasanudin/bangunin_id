@@ -17,7 +17,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        backgroundColor: AppColors().primary,
+        backgroundColor: Theme.of(context).primaryColor,
         body: PageStorage(
           bucket: bucket,
           child: TabBarView(
@@ -42,7 +42,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
               Tab(icon: Icon(Icons.person)),
               Tab(icon: Icon(Icons.settings)),
             ],
-            labelColor: AppColors().primary,
+            labelColor: Theme.of(context).primaryColor,
             indicator: UnderlineTabIndicator(
               borderSide: BorderSide(color: AppColors().primary, width: 4.0),
               insets: EdgeInsets.only(bottom: 44),

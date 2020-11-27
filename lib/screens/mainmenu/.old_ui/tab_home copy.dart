@@ -19,7 +19,6 @@ class Home extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppColors().accent1,
         body: CustomScrollView(
-          
           slivers: [
             SliverPersistentHeader(
               delegate: HomeAppBar(expandedHeight: screenHeight / 3),
@@ -77,7 +76,7 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
       width: double.infinity,
       height: shrinkOffset,
       decoration: BoxDecoration(
-        color: AppColors().primary,
+        color: Theme.of(context).primaryColor,
       ),
     );
   }
@@ -102,7 +101,7 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
             begin: FractionalOffset.topCenter,
             end: FractionalOffset.bottomCenter,
             colors: [
-              AppColors().primary,
+              Theme.of(context).primaryColor,
               AppColors().accent1.withOpacity(0.0),
             ],
             stops: [0.0, 0.5],
@@ -141,7 +140,7 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
             padding: const EdgeInsets.all(5.0),
             child: CircleAvatar(
               radius: 70,
-              backgroundColor: AppColors().primary,
+              backgroundColor: Theme.of(context).primaryColor,
               backgroundImage: AssetImage('assets/img/profile_pic_default.jpg'),
             ),
           ),
@@ -220,7 +219,7 @@ StreamBuilder createProjectButton(String userID) {
             'Buat Proyek Baru',
             style: TextStyle(color: AppColors().accent1),
           ),
-          backgroundColor: AppColors().primary,
+          backgroundColor: Theme.of(context).primaryColor,
         );
       } else {
         return Container();

@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/auth.dart';
+import 'package:bangunin_id/shared/UI_components/popup_dialog.dart';
 import 'package:bangunin_id/shared/UI_components/custom_appbar.dart';
 import 'package:bangunin_id/shared/page_templates/slide_up_panel.dart';
-import 'package:flutter/material.dart';
 
 class SettingsTab extends StatefulWidget {
   //Settings({Key key}) : super(key: key);
@@ -30,7 +31,11 @@ class _SettingsTabState extends State<SettingsTab> {
       leading: Icon(Icons.logout),
       title: Text('Keluar'),
       onTap: () async {
-        await _auth.signOut();
+        final action = await PopUpDialog.yesNoDialog(
+            context, 'Keluar dari Bangunin.id', 'Apakah anda ingin keluar?');
+        if (action == DialogAction.yes) {
+          await _auth.signOut();
+        }
       },
     );
   }

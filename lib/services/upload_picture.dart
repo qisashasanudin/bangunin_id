@@ -102,7 +102,7 @@ class UploadPicture {
       maxHeight: 512,
       maxWidth: 512,
       androidUiSettings: AndroidUiSettings(
-        toolbarColor: AppColors().primary,
+        toolbarColor: Theme.of(context).primaryColor,
         toolbarWidgetColor: AppColors().accent1,
         initAspectRatio: CropAspectRatioPreset.square,
         lockAspectRatio: true,

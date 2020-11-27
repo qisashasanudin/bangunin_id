@@ -84,7 +84,7 @@ class _AccountState extends State<Account> {
           begin: FractionalOffset.topCenter,
           end: FractionalOffset.bottomCenter,
           colors: [
-            AppColors().primary,
+            Theme.of(context).primaryColor,
             AppColors().accent1.withOpacity(0.0),
           ],
           stops: [0.0, 0.5],

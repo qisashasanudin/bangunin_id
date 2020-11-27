@@ -1,6 +1,5 @@
 import 'package:bangunin_id/models/items_model.dart';
 import 'package:bangunin_id/screens/mainmenu/shop/categories/item_details.dart';
-import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ItemCard extends StatelessWidget {
@@ -77,7 +76,7 @@ class ItemCard extends StatelessWidget {
                 onPressed: () {},
                 icon: Icon(
                   Icons.add_circle,
-                  color: AppColors().primary,
+                  color: Theme.of(context).primaryColor,
                   size: 36,
                 ),
               )

@@ -96,7 +96,7 @@ StreamBuilder createProjectButton(String userID) {
             'Buat Proyek Baru',
             style: TextStyle(color: AppColors().accent1),
           ),
-          backgroundColor: AppColors().primary,
+          backgroundColor: Theme.of(context).primaryColor,
         );
       } else {
         return Container();

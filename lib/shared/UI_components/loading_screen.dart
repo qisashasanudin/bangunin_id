@@ -10,7 +10,7 @@ class LoadingScreen extends StatelessWidget {
       color: AppColors().accent1,
       child: Center(
         child: SpinKitWanderingCubes(
-          color: AppColors().primary,
+          color: Theme.of(context).primaryColor,
         ),
       ),
     );

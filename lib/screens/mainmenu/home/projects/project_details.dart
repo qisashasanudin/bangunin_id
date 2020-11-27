@@ -94,7 +94,7 @@ SizedBox itemProgress(BuildContext context, itemType, percentage) {
           ),
           LinearPercentIndicator(
             alignment: MainAxisAlignment.center,
-            progressColor: AppColors().primary,
+            progressColor: Theme.of(context).primaryColor,
             animation: true,
             lineHeight: 30,
             percent: percentage,

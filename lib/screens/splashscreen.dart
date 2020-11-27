@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:bangunin_id/shared/UI_components/transparent_appbar_and_navbar.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -30,7 +29,7 @@ class _SplashScreen extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors().primary,
+      backgroundColor: Theme.of(context).primaryColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
