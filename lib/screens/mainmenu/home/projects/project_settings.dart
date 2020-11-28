@@ -47,22 +47,50 @@ class _ProjectSettingsState extends State<ProjectSettings> {
           children: [
             SliverList(
               delegate: SliverChildListDelegate([
-                sectionHeader('Informasi Utama (Wajib Diisi)'),
-                _textForm('Nama Proyek', true),
-                _dateForm('Deadline', true),
-                separatorLine(),
-                sectionHeader('Informasi Tambahan (Opsional)'),
-                _textForm('Alamat', false),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    child: Text('Informasi Utama (Wajib Diisi)')),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    child: _textForm('Nama Proyek', true)),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    child: _dateForm('Deadline', true)),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                    child: Divider(color: Colors.black)),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    child: Text('Informasi Tambahan (Opsional)')),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    child: _textForm('Alamat', false)),
                 //TODO: BUAT OPSI UNTUK MENGISI ALAMAT DGN GOOGLE MAP
-                _textForm('Nama Klien', false),
-                _textForm('Email Klien', false),
-                _textForm('Nomor Telepon Klien', false),
-                separatorLine(),
-                sectionHeader('Material Yang Dibutuhkan'),
-                ProjectMaterialsList(),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    child: _textForm('Nama Klien', false)),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    child: _textForm('Email Klien', false)),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    child: _textForm('Nomor Telepon Klien', false)),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                    child: Divider(color: Colors.black)),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    child: Text('Material Yang Dibutuhkan')),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    child: ProjectMaterialsList()),
                 //TODO: Dropdown List yang jumlahnya bisa ditambahkan dan diberi angka
-                separatorLine(),
-                saveButton(),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                    child: Divider(color: Colors.black)),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    child: customButton('Simpan', _uploadData)),
               ]),
             ), //sliver-sliver lain ditulis di sini
           ],
@@ -82,74 +110,50 @@ class _ProjectSettingsState extends State<ProjectSettings> {
     return tappedYes;
   }
 
-  Padding separatorLine() {
-    return Padding(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-        child: Divider(color: Colors.black));
-  }
-
-  Padding sectionHeader(text) {
-    return Padding(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-        child: Text(text));
-  }
-
-  SizedBox _textForm(labelText, mustBeFilled) {
-    return SizedBox(
-      width: double.infinity,
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-        child: TextFormField(
-          keyboardType: (labelText == 'Nomor Telepon Klien')
-              ? TextInputType.number
-              : (labelText == 'Email Klien')
-                  ? TextInputType.emailAddress
-                  : TextInputType.text,
-          decoration: formFieldDecoration(labelText),
-          validator: (val) => (val.isEmpty && mustBeFilled == true)
-              ? 'Data tidak boleh kosong.'
-              : null,
-          onChanged: (val) {
-            setState(() {
-              switch (labelText) {
-                case 'Nama Proyek':
-                  _projectDetails.projectName = val;
-                  break;
-                case 'Alamat':
-                  _projectDetails.address = val;
-                  break;
-                case 'Nama Klien':
-                  _projectDetails.clientName = val;
-                  break;
-                case 'Email Klien':
-                  _projectDetails.clientEmail = val;
-                  break;
-                case 'Nomor Telepon Klien':
-                  _projectDetails.clientPhone = val;
-                  break;
-              }
-            });
-          },
-        ),
-      ),
+  TextFormField _textForm(labelText, mustBeFilled) {
+    return TextFormField(
+      keyboardType: (labelText == 'Nomor Telepon Klien')
+          ? TextInputType.number
+          : (labelText == 'Email Klien')
+              ? TextInputType.emailAddress
+              : TextInputType.text,
+      decoration: formFieldDecoration(labelText),
+      validator: (val) => (val.isEmpty && mustBeFilled == true)
+          ? 'Data tidak boleh kosong.'
+          : null,
+      onChanged: (val) {
+        setState(() {
+          switch (labelText) {
+            case 'Nama Proyek':
+              _projectDetails.projectName = val;
+              break;
+            case 'Alamat':
+              _projectDetails.address = val;
+              break;
+            case 'Nama Klien':
+              _projectDetails.clientName = val;
+              break;
+            case 'Email Klien':
+              _projectDetails.clientEmail = val;
+              break;
+            case 'Nomor Telepon Klien':
+              _projectDetails.clientPhone = val;
+              break;
+          }
+        });
+      },
     );
   }
 
-  SizedBox _dateForm(labelText, mustBeFilled) {
-    return SizedBox(
-      width: double.infinity,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-        child: TextFormField(
-          readOnly: true,
-          controller: _dateController,
-          onTap: _handleDatePicker,
-          decoration: formFieldDecoration(labelText),
-          validator: (val) => (val.isEmpty && mustBeFilled == true)
-              ? 'Data tidak boleh kosong.'
-              : null,
-        ),
-      ),
+  TextFormField _dateForm(labelText, mustBeFilled) {
+    return TextFormField(
+      readOnly: true,
+      controller: _dateController,
+      onTap: _handleDatePicker,
+      decoration: formFieldDecoration(labelText),
+      validator: (val) => (val.isEmpty && mustBeFilled == true)
+          ? 'Data tidak boleh kosong.'
+          : null,
     );
   }
 
@@ -164,12 +168,6 @@ class _ProjectSettingsState extends State<ProjectSettings> {
       _projectDetails.dateDeadline = date;
     });
     _dateController.text = _dateFormatter.format(_projectDetails.dateDeadline);
-  }
-
-  Padding saveButton() {
-    return Padding(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-        child: customButton('Simpan', _uploadData));
   }
 
   void _uploadData() async {

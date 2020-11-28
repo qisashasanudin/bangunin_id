@@ -1,3 +1,4 @@
+import 'package:bangunin_id/shared/UI_components/form_field_decoration.dart';
 import 'package:flutter/material.dart';
 
 class ProjectMaterialsList extends StatefulWidget {
@@ -8,33 +9,60 @@ class ProjectMaterialsList extends StatefulWidget {
 class _ProjectMaterialsListState extends State<ProjectMaterialsList> {
   List<DynamicWidget> _dynamicList = [];
 
-  _addList() {
-    _dynamicList.add(DynamicWidget());
-    setState(() {});
-  }
-
+  //========================= main function =========================
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       child: Column(
         children: <Widget>[
           ListView.builder(
+            padding: EdgeInsets.only(top: 0),
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             itemCount: _dynamicList.length,
             itemBuilder: (_, index) => _dynamicList[index],
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-            child: RaisedButton(
-              child: Icon(Icons.add),
-              onPressed: _addList,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _addMaterialButton(),
+              _removeMaterialButton(),
+            ],
           ),
         ],
       ),
     );
+  }
+  //========================= main function =========================
+
+  Padding _addMaterialButton() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+      child: RaisedButton(
+        child: Text('+', style: TextStyle(fontSize: 25)),
+        onPressed: _addList,
+      ),
+    );
+  }
+
+  _addList() {
+    _dynamicList.add(DynamicWidget());
+    setState(() {});
+  }
+
+  Padding _removeMaterialButton() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+      child: RaisedButton(
+        child: Text('-', style: TextStyle(fontSize: 25)),
+        onPressed: _removeList,
+      ),
+    );
+  }
+
+  _removeList() {
+    _dynamicList.removeLast();
+    setState(() {});
   }
 }
 
@@ -42,9 +70,31 @@ class DynamicWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: TextField(
-        decoration: InputDecoration(hintText: 'Masukkan data'),
+      child: Row(
+        children: [
+          Flexible(
+              child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: _numberForm('Jenis material', false),
+          )),
+          Flexible(
+              child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: _numberForm('Jumlah material', false),
+          )),
+        ],
       ),
     );
   }
+}
+
+TextFormField _numberForm(labelText, mustBeFilled) {
+  return TextFormField(
+    keyboardType: TextInputType.number,
+    decoration: formFieldDecoration(labelText),
+    validator: (val) => (val.isEmpty && mustBeFilled == true)
+        ? 'Data tidak boleh kosong.'
+        : null,
+    onChanged: (val) {},
+  );
 }
