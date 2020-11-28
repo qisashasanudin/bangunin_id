@@ -1,5 +1,5 @@
 import 'package:bangunin_id/models/project_details_model.dart';
-import 'package:bangunin_id/screens/mainmenu/home/projects/project_materials_list.dart';
+import 'package:bangunin_id/screens/mainmenu/home/projects/project_materials/project_materials_list.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/UI_components/popup_dialog.dart';

@@ -1,4 +1,5 @@
-import 'package:bangunin_id/shared/UI_components/form_field_decoration.dart';
+import 'package:bangunin_id/screens/mainmenu/home/projects/project_materials/dynamic_widget.dart';
+import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ProjectMaterialsList extends StatefulWidget {
@@ -7,7 +8,7 @@ class ProjectMaterialsList extends StatefulWidget {
 }
 
 class _ProjectMaterialsListState extends State<ProjectMaterialsList> {
-  List<DynamicWidget> _dynamicList = [];
+  List<DynamicWidget> _dynamicList = [DynamicWidget()];
 
   //========================= main function =========================
   @override
@@ -16,7 +17,7 @@ class _ProjectMaterialsListState extends State<ProjectMaterialsList> {
       child: Column(
         children: <Widget>[
           ListView.builder(
-            padding: EdgeInsets.only(top: 0),
+            padding: EdgeInsets.symmetric(vertical: 0),
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             itemCount: _dynamicList.length,
@@ -28,9 +29,17 @@ class _ProjectMaterialsListState extends State<ProjectMaterialsList> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _editMaterialListButton(
-                  Text('+', style: TextStyle(fontSize: 25)), _addList),
+                  Text(
+                    '+',
+                    style: TextStyle(fontSize: 25, color: AppColors().accent1),
+                  ),
+                  _addList),
               _editMaterialListButton(
-                  Text('-', style: TextStyle(fontSize: 25)), _removeList),
+                  Text(
+                    '-',
+                    style: TextStyle(fontSize: 25, color: AppColors().accent1),
+                  ),
+                  _removeList),
             ],
           ),
         ],
@@ -43,6 +52,7 @@ class _ProjectMaterialsListState extends State<ProjectMaterialsList> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
       child: RaisedButton(
+        color: Theme.of(context).primaryColor,
         child: prompt,
         onPressed: onPressed,
       ),
@@ -55,40 +65,10 @@ class _ProjectMaterialsListState extends State<ProjectMaterialsList> {
   }
 
   _removeList() {
+    if (_dynamicList.length < 2) {
+      return;
+    }
     _dynamicList.removeLast();
     setState(() {});
   }
-}
-
-class DynamicWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          Flexible(
-              child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: _numberForm('Jenis material', false),
-          )),
-          Flexible(
-              child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: _numberForm('Jumlah material', false),
-          )),
-        ],
-      ),
-    );
-  }
-}
-
-TextFormField _numberForm(labelText, mustBeFilled) {
-  return TextFormField(
-    keyboardType: TextInputType.number,
-    decoration: formFieldDecoration(labelText),
-    validator: (val) => (val.isEmpty && mustBeFilled == true)
-        ? 'Data tidak boleh kosong.'
-        : null,
-    onChanged: (val) {},
-  );
 }
