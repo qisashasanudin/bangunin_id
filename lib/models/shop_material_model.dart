@@ -39,7 +39,7 @@ List<ShopMaterialModel> menu = [
   ShopMaterialModel(
       name: "Batu Bata",
       type: "Hot",
-      shortDesc: "Ekstrak kopi dengan buih putih",
+      shortDesc: "Batu bata dengan warna merah",
       desc:
           "Minuman kopi paling dasar ini biasanya disajikan dalam demitasse alias cangkir khusus espresso berukuran 30 mililiter (satu shot) sampai 118 mililiter. Espresso bertekstur pekat dan pahit, dengan buih putih alias crema di atasnya yang terbentuk dari tekanan minyak dalam bijih kopi.",
       image: "assets/placeholders/espreso.jpg",
