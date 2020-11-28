@@ -7,6 +7,7 @@ class ItemCard extends StatelessWidget {
 
   ItemCard({this.index});
 
+  //========================= main function =========================
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -86,4 +87,5 @@ class ItemCard extends StatelessWidget {
       ),
     );
   }
+  //========================= main function =========================
 }

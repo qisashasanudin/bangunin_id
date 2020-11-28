@@ -42,6 +42,7 @@ class _RegisterState extends State<Register> {
     );
   }
 
+  //========================= main function =========================
   @override
   Widget build(BuildContext context) {
     if (loading) {
@@ -85,6 +86,7 @@ class _RegisterState extends State<Register> {
       );
     }
   }
+  //========================= main function =========================
 
   TextFormField emailForm() {
     return TextFormField(

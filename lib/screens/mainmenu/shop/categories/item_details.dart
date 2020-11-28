@@ -13,6 +13,7 @@ class ItemDetails extends StatefulWidget {
 class _ItemDetailsState extends State<ItemDetails> {
   bool _like = false;
 
+  //========================= main function =========================
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -192,4 +193,5 @@ class _ItemDetailsState extends State<ItemDetails> {
       ),
     );
   }
+  //========================= main function =========================
 }

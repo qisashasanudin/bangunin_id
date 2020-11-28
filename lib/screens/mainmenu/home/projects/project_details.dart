@@ -7,6 +7,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class ProjectDetails extends StatelessWidget {
+  //========================= main function =========================
   @override
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
@@ -40,6 +41,7 @@ class ProjectDetails extends StatelessWidget {
       },
     );
   }
+  //========================= main function =========================
 }
 
 Padding overallProgress(percentage) {

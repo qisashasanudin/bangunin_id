@@ -42,6 +42,7 @@ class _SignInState extends State<SignIn> {
     );
   }
 
+  //========================= main function =========================
   @override
   Widget build(BuildContext context) {
     if (loading) {
@@ -83,6 +84,7 @@ class _SignInState extends State<SignIn> {
       );
     }
   }
+  //========================= main function =========================
 
   TextFormField emailForm() {
     return TextFormField(

@@ -12,11 +12,12 @@ class MainPageWrapper extends StatefulWidget {
 
 class _MainPageWrapperState extends State<MainPageWrapper> {
   bool signInScreen = true;
-  
+
   void toggleView() {
     setState(() => signInScreen = !signInScreen);
   }
 
+  //========================= main function =========================
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
@@ -32,4 +33,5 @@ class _MainPageWrapperState extends State<MainPageWrapper> {
       return MainMenuTabNav();
     }
   }
+  //========================= main function =========================
 }

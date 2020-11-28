@@ -19,6 +19,7 @@ class _AccountTabState extends State<AccountTab> {
   final userID = AuthService().getCurrentUID();
   String currentValue;
 
+  //========================= main function =========================
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Object>(
@@ -44,6 +45,7 @@ class _AccountTabState extends State<AccountTab> {
       },
     );
   }
+  //========================= main function =========================
 
   ListTile _changeProfilePic(BuildContext context) {
     return ListTile(

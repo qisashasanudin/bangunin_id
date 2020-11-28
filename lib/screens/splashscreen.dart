@@ -26,6 +26,7 @@ class _SplashScreen extends State<SplashScreen> {
     });
   }
 
+  //========================= main function =========================
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +42,7 @@ class _SplashScreen extends State<SplashScreen> {
       ),
     );
   }
+  //========================= main function =========================
 
   ClipRRect splashScreenLogo() {
     return ClipRRect(

@@ -15,6 +15,7 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
+  //========================= main function =========================
   @override
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
@@ -49,6 +50,7 @@ class _HomeTabState extends State<HomeTab> {
       floatingButton: createProjectButton(userID),
     );
   }
+  //========================= main function =========================
 }
 
 ListTile projectCounter(projects, subtitle) {
@@ -69,7 +71,7 @@ StreamBuilder createProjectButton(String userID) {
               (snapshot.data.data()['role'] == 'Mandor'))) {
         return FloatingActionButton.extended(
           onPressed: () async {
-            Navigator.of(context).pushNamed('/newproject');
+            Navigator.of(context).pushNamed('/projectsettings');
           },
           label: Text(
             'Buat Proyek Baru',

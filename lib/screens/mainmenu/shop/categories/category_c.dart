@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'Item_card.dart';
 
 class CategoryC extends StatelessWidget {
+  //========================= main function =========================
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,4 +17,5 @@ class CategoryC extends StatelessWidget {
       ),
     );
   }
+  //========================= main function =========================
 }

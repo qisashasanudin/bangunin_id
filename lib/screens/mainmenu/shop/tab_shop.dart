@@ -13,6 +13,7 @@ class ShopTab extends StatefulWidget {
 }
 
 class _ShopTabState extends State<ShopTab> {
+  //========================= main function =========================
   @override
   Widget build(BuildContext context) {
     return SlideUpPanel(
@@ -36,6 +37,7 @@ class _ShopTabState extends State<ShopTab> {
       ],
     );
   }
+  //========================= main function =========================
 }
 
 TabBar categories() {

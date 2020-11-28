@@ -12,6 +12,8 @@ class SettingsTab extends StatefulWidget {
 
 class _SettingsTabState extends State<SettingsTab> {
   final AuthService _auth = AuthService();
+
+  //========================= main function =========================
   @override
   Widget build(BuildContext context) {
     return SlideUpPanel(
@@ -25,6 +27,7 @@ class _SettingsTabState extends State<SettingsTab> {
       ],
     );
   }
+  //========================= main function =========================
 
   ListTile signOutButton() {
     return ListTile(

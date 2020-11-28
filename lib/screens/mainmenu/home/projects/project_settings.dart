@@ -7,12 +7,12 @@ import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class NewProject extends StatefulWidget {
+class ProjectSettings extends StatefulWidget {
   @override
-  _NewProjectState createState() => _NewProjectState();
+  _ProjectSettingsState createState() => _ProjectSettingsState();
 }
 
-class _NewProjectState extends State<NewProject> {
+class _ProjectSettingsState extends State<ProjectSettings> {
   final _formKey = GlobalKey<FormState>();
 
   final userID = AuthService().getCurrentUID();
@@ -35,6 +35,7 @@ class _NewProjectState extends State<NewProject> {
     _dateController.dispose();
   }
 
+  //========================= main function =========================
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -46,26 +47,25 @@ class _NewProjectState extends State<NewProject> {
           //   'assets/img/new_project_bg.jpg',
           //   fit: BoxFit.cover,
           // ),
-          title: Text('Proyek Baru'),
+          title: Text('Proyek ${_projectName ?? 'Baru'}'),
           children: [
             SliverList(
               delegate: SliverChildListDelegate([
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-                  child: Text(
-                      'Masukkan informasi dasar mengenai proyek yang akan dibuat.'),
-                ),
+                sectionHeader('Informasi Utama (Wajib Diisi)'),
                 _textForm('Nama Proyek', true),
+                _dateForm('Deadline', true),
+                separatorLine(),
+                sectionHeader('Informasi Tambahan (Opsional)'),
                 _textForm('Alamat', false),
                 //TODO: BUAT OPSI UNTUK MENGISI ALAMAT DGN GOOGLE MAP
                 _textForm('Nama Klien', false),
                 _textForm('Email Klien', false),
                 _textForm('Nomor Telepon Klien', false),
-                _dateForm('Deadline', true),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-                  child: customButton('Simpan', _uploadData),
-                ),
+                separatorLine(),
+                sectionHeader('Material Yang Dibutuhkan'),
+                //TODO: Dropdown List yang jumlahnya bisa ditambahkan dan diberi angka
+                separatorLine(),
+                saveButton(),
               ]),
             ), //sliver-sliver lain ditulis di sini
           ],
@@ -73,17 +73,28 @@ class _NewProjectState extends State<NewProject> {
       ),
     );
   }
+  //========================= main function =========================
 
   Future<bool> _onBackPressed() async {
     bool tappedYes = false;
-    final action = await PopUpDialog.yesNoDialog(
-        context,
-        'Batal Membuat Proyek',
-        'Apakah anda yakin ingin membatalkan pembuatan proyek? Semua pengaturan pada halaman ini tidak akan tersimpan.');
+    final action = await PopUpDialog.yesNoDialog(context, 'Keluar?',
+        'Apakah anda yakin ingin keluar? Semua pengaturan pada halaman ini tidak akan tersimpan.');
     if (action == DialogAction.yes) {
       tappedYes = true;
     }
     return tappedYes;
+  }
+
+  Padding separatorLine() {
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+        child: Divider(color: Colors.black));
+  }
+
+  Padding sectionHeader(text) {
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        child: Text(text));
   }
 
   SizedBox _textForm(labelText, mustBeFilled) {
@@ -156,6 +167,12 @@ class _NewProjectState extends State<NewProject> {
       _dateDeadline = date;
     });
     _dateController.text = _dateFormatter.format(_dateDeadline);
+  }
+
+  Padding saveButton() {
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        child: customButton('Simpan', _uploadData));
   }
 
   void _uploadData() async {

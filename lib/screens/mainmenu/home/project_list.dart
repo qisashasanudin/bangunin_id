@@ -11,6 +11,7 @@ class ProjectList extends StatelessWidget {
 
   final List<ProjectDetailsModel> children;
 
+  //========================= main function =========================
   @override
   Widget build(BuildContext context) {
     final DateFormat _dateFormatter = DateFormat('dd MMM, yyyy');
@@ -45,4 +46,5 @@ class ProjectList extends StatelessWidget {
       },
     );
   }
+  //========================= main function =========================
 }
