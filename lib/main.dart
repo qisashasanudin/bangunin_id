@@ -37,12 +37,7 @@ class MyApp extends StatelessWidget {
           value: DatabaseService(uid: AuthService().getCurrentUID()).accounts,
         ),
         StreamProvider<List<ProjectDetailsModel>>.value(
-          value: DatabaseService(uid: AuthService().getCurrentUID())
-              .myCompletedProjects,
-        ),
-        StreamProvider<List<ProjectDetailsModel>>.value(
-          value: DatabaseService(uid: AuthService().getCurrentUID())
-              .myOngoingProjects,
+          value: DatabaseService(uid: AuthService().getCurrentUID()).myProjects,
         ),
       ],
       child: MaterialApp(

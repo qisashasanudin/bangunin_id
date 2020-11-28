@@ -22,7 +22,7 @@ class _AccountTabState extends State<AccountTab> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Object>(
-      stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
+      stream: DatabaseService(uid: userID).entityDocumentSnapshot('accounts'),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return SlideUpPanel(

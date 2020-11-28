@@ -19,7 +19,7 @@ class DatabaseService {
     return await tabel.add(data);
   }
 
-  Stream entitySnapshot(String tablename) {
+  Stream entityDocumentSnapshot(String tablename) {
     return FirebaseFirestore.instance
         .collection(tablename)
         .doc(uid)
@@ -63,22 +63,11 @@ class DatabaseService {
     }).toList();
   }
 
-  Stream<List<ProjectDetailsModel>> get myOngoingProjects {
+  Stream<List<ProjectDetailsModel>> get myProjects {
     return FirebaseFirestore.instance
         .collection('accounts')
         .doc(uid)
         .collection('projects')
-        .where('isCompleted', isEqualTo: false)
-        .snapshots()
-        .map(_projectDetailsListFromSnapshot);
-  }
-
-  Stream<List<ProjectDetailsModel>> get myCompletedProjects {
-    return FirebaseFirestore.instance
-        .collection('accounts')
-        .doc(uid)
-        .collection('projects')
-        .where('isCompleted', isEqualTo: true)
         .snapshots()
         .map(_projectDetailsListFromSnapshot);
   }

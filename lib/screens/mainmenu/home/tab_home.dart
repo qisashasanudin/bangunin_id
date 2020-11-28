@@ -1,4 +1,3 @@
-import 'package:bangunin_id/shared/UI_components/loading_text.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/models/project_details_model.dart';
 import 'package:bangunin_id/services/database.dart';
@@ -20,10 +19,12 @@ class _HomeTabState extends State<HomeTab> {
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
     final userID = _auth.getCurrentUID();
-    var myProjects = Provider.of<List<ProjectDetailsModel>>(context);
-    if (myProjects == null) {
-      return LoadingText();
-    }
+    var myProjects = Provider.of<List<ProjectDetailsModel>>(context) ?? [];
+    var myOngoingProjects =
+        myProjects.where((project) => project.isCompleted == false) ?? [];
+    var myCompletedProjects =
+        myProjects.where((project) => project.isCompleted == true) ?? [];
+
     return SlideUpPanel(
       children: [
         CustomAppBar(
@@ -34,8 +35,12 @@ class _HomeTabState extends State<HomeTab> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(child: projectInProgress(myProjects)),
-            Expanded(child: projectDone(myProjects)),
+            Expanded(
+              child: projectCounter(myOngoingProjects, 'Sedang Berjalan'),
+            ),
+            Expanded(
+              child: projectCounter(myCompletedProjects, 'Selesai'),
+            ),
           ],
         ),
         ProjectList(children: myProjects),
@@ -46,26 +51,18 @@ class _HomeTabState extends State<HomeTab> {
   }
 }
 
-ListTile projectInProgress(projects) {
+ListTile projectCounter(projects, subtitle) {
   return ListTile(
     title: Center(
         child: Text(projects.length.toString(),
             style: TextStyle(fontWeight: FontWeight.bold))),
-    subtitle: Center(child: Text('Sedang berjalan')),
-  );
-}
-
-ListTile projectDone(projects) {
-  return ListTile(
-    title:
-        Center(child: Text('2', style: TextStyle(fontWeight: FontWeight.bold))),
-    subtitle: Center(child: Text('Selesai')),
+    subtitle: Center(child: Text(subtitle)),
   );
 }
 
 StreamBuilder createProjectButton(String userID) {
   return StreamBuilder(
-    stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
+    stream: DatabaseService(uid: userID).entityDocumentSnapshot('accounts'),
     builder: (context, snapshot) {
       if (snapshot.hasData &&
           ((snapshot.data.data()['role'] == 'Administrator') ||

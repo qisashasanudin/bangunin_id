@@ -83,7 +83,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
     return Positioned(
       top: MediaQuery.of(context).size.height / 14,
       child: StreamBuilder(
-        stream: DatabaseService(uid: userID).entitySnapshot('accounts'),
+        stream: DatabaseService(uid: userID).entityDocumentSnapshot('accounts'),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Text('Ada kesalahan, silahkan coba lagi.');

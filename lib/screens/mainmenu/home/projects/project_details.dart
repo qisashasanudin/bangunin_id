@@ -13,7 +13,7 @@ class ProjectDetails extends StatelessWidget {
     final userID = _auth.getCurrentUID();
 
     return StreamBuilder<Object>(
-      stream: DatabaseService(uid: userID).entitySnapshot('projects'),
+      stream: DatabaseService(uid: userID).entityDocumentSnapshot('projects'),
       builder: (context, snapshot) {
         return SliverPage(
           // backgroundImage: Image.asset(
