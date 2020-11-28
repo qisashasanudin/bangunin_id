@@ -20,13 +20,17 @@ class _ProjectMaterialsListState extends State<ProjectMaterialsList> {
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             itemCount: _dynamicList.length,
-            itemBuilder: (_, index) => _dynamicList[index],
+            itemBuilder: (context, index) {
+              return _dynamicList[index];
+            },
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _addMaterialButton(),
-              _removeMaterialButton(),
+              _editMaterialListButton(
+                  Text('+', style: TextStyle(fontSize: 25)), _addList),
+              _editMaterialListButton(
+                  Text('-', style: TextStyle(fontSize: 25)), _removeList),
             ],
           ),
         ],
@@ -35,12 +39,12 @@ class _ProjectMaterialsListState extends State<ProjectMaterialsList> {
   }
   //========================= main function =========================
 
-  Padding _addMaterialButton() {
+  Padding _editMaterialListButton(prompt, onPressed) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
       child: RaisedButton(
-        child: Text('+', style: TextStyle(fontSize: 25)),
-        onPressed: _addList,
+        child: prompt,
+        onPressed: onPressed,
       ),
     );
   }
@@ -48,16 +52,6 @@ class _ProjectMaterialsListState extends State<ProjectMaterialsList> {
   _addList() {
     _dynamicList.add(DynamicWidget());
     setState(() {});
-  }
-
-  Padding _removeMaterialButton() {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-      child: RaisedButton(
-        child: Text('-', style: TextStyle(fontSize: 25)),
-        onPressed: _removeList,
-      ),
-    );
   }
 
   _removeList() {

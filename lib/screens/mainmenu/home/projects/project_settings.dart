@@ -84,7 +84,6 @@ class _ProjectSettingsState extends State<ProjectSettings> {
                 Padding(
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
                     child: ProjectMaterialsList()),
-                //TODO: Dropdown List yang jumlahnya bisa ditambahkan dan diberi angka
                 Padding(
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
                     child: Divider(color: Colors.black)),
