@@ -8,7 +8,7 @@ class LoadingText extends StatelessWidget {
       alignment: Alignment.center,
       color: Colors.transparent,
       child: Center(
-        child: SpinKitThreeBounce(
+        child: SpinKitWave(
           color: Theme.of(context).primaryColor,
         ),
       ),

@@ -1,5 +1,4 @@
 class ProjectDetailsModel {
-  final String supervisorID;
   final String projectName;
   final String address;
   final String addressGMap;
@@ -11,7 +10,6 @@ class ProjectDetailsModel {
   final bool isCompleted;
 
   ProjectDetailsModel({
-    this.supervisorID,
     this.projectName,
     this.address,
     this.addressGMap,

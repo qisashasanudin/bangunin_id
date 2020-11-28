@@ -26,8 +26,8 @@ class UploadPicture {
   PickedFile imageFile;
   File croppedImageFile;
 
-  Future<void> chooseImageSource(BuildContext context) {
-    return showDialog(
+  Future<void> chooseImageSource(BuildContext context) async {
+    final action = await showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -38,24 +38,14 @@ class UploadPicture {
                   padding: const EdgeInsets.symmetric(vertical: 25.0),
                   child: GestureDetector(
                     child: Text('Camera'),
-                    onTap: () async {
-                      Navigator.of(context).pop();
-                      imageFile = await getImageFromExtApp(context, 'Camera');
-                      croppedImageFile = await cropImage(picker);
-                      await uploadImage(croppedImageFile);
-                    },
+                    onTap: openCamera,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 25.0),
                   child: GestureDetector(
                     child: Text('Gallery'),
-                    onTap: () async {
-                      Navigator.of(context).pop();
-                      imageFile = await getImageFromExtApp(context, 'Gallery');
-                      croppedImageFile = await cropImage(picker);
-                      await uploadImage(croppedImageFile);
-                    },
+                    onTap: openGallery,
                   ),
                 ),
               ],
@@ -64,6 +54,21 @@ class UploadPicture {
         );
       },
     );
+    return action;
+  }
+
+  openCamera() async {
+    Navigator.of(context).pop();
+    imageFile = await getImageFromExtApp(context, 'Camera');
+    croppedImageFile = await cropImage(picker);
+    await uploadImage(croppedImageFile);
+  }
+
+  openGallery() async {
+    Navigator.of(context).pop();
+    imageFile = await getImageFromExtApp(context, 'Gallery');
+    croppedImageFile = await cropImage(picker);
+    await uploadImage(croppedImageFile);
   }
 
   getImageFromExtApp(BuildContext context, String appType) async {
@@ -120,6 +125,6 @@ class UploadPicture {
     String imageURL =
         await StorageService().getNetworkImageURL(context, storagePath);
     await DatabaseService(uid: AuthService().getCurrentUID())
-        .updateData(table, attribute, imageURL);
+        .writeData(table, attribute, imageURL);
   }
 }

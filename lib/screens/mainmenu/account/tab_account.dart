@@ -149,7 +149,7 @@ class _AccountTabState extends State<AccountTab> {
 
   void _uploadData(snapshot, attribute, data) async {
     if (_formKey.currentState.validate()) {
-      await DatabaseService(uid: AuthService().getCurrentUID()).updateData(
+      await DatabaseService(uid: AuthService().getCurrentUID()).writeData(
           'accounts', attribute, data ?? snapshot.data.data()[attribute]);
       Navigator.pop(context);
     }

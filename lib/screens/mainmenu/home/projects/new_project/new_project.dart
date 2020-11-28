@@ -163,18 +163,19 @@ class _NewProjectState extends State<NewProject> {
       setState(() {
         _dateCreated = DateTime.now();
       });
-      await DatabaseService().writeProjectData(
-        userID,
-        _projectName,
-        _address,
-        _addressGMap,
-        _clientName,
-        _clientEmail,
-        _clientPhone,
-        _dateCreated,
-        _dateDeadline,
-        _isCompleted,
-      );
+      await DatabaseService(uid: AuthService().getCurrentUID())
+          .createDataOnSubcollection('accounts', 'projects', {
+        'projectName': _projectName,
+        'address': _address,
+        'addressGMap': _addressGMap,
+        'clientName': _clientName,
+        'clientEmail': _clientEmail,
+        'clientPhone': _clientPhone,
+        'dateCreated': _dateCreated,
+        'dateDeadline': _dateDeadline,
+        'isCompleted': _isCompleted,
+      });
+
       // await DatabaseService(uid: AuthService().getCurrentUID()).updateData(
       //     'accounts', attribute, data ?? snapshot.data.data()[attribute]);
       Navigator.of(context).pop();

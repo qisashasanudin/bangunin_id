@@ -1,10 +1,13 @@
+import 'package:bangunin_id/shared/UI_components/loading_text.dart';
 import 'package:flutter/material.dart';
+import 'package:bangunin_id/models/project_details_model.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:bangunin_id/shared/UI_components/custom_appbar.dart';
 import 'package:bangunin_id/shared/page_templates/slide_up_panel.dart';
 import 'package:bangunin_id/screens/mainmenu/home/project_list.dart';
+import 'package:provider/provider.dart';
 
 class HomeTab extends StatefulWidget {
   //Home({Key key}) : super(key: key);
@@ -17,7 +20,10 @@ class _HomeTabState extends State<HomeTab> {
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
     final userID = _auth.getCurrentUID();
-
+    var myProjects = Provider.of<List<ProjectDetailsModel>>(context);
+    if (myProjects == null) {
+      return LoadingText();
+    }
     return SlideUpPanel(
       children: [
         CustomAppBar(
@@ -28,11 +34,11 @@ class _HomeTabState extends State<HomeTab> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(child: projectInProgress()),
-            Expanded(child: projectDone()),
+            Expanded(child: projectInProgress(myProjects)),
+            Expanded(child: projectDone(myProjects)),
           ],
         ),
-        ProjectList(),
+        ProjectList(children: myProjects),
         // widget-widget lain dimasukkan di sini
       ],
       floatingButton: createProjectButton(userID),
@@ -40,15 +46,16 @@ class _HomeTabState extends State<HomeTab> {
   }
 }
 
-ListTile projectInProgress() {
+ListTile projectInProgress(projects) {
   return ListTile(
-    title:
-        Center(child: Text('3', style: TextStyle(fontWeight: FontWeight.bold))),
+    title: Center(
+        child: Text(projects.length.toString(),
+            style: TextStyle(fontWeight: FontWeight.bold))),
     subtitle: Center(child: Text('Sedang berjalan')),
   );
 }
 
-ListTile projectDone() {
+ListTile projectDone(projects) {
   return ListTile(
     title:
         Center(child: Text('2', style: TextStyle(fontWeight: FontWeight.bold))),

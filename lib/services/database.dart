@@ -6,55 +6,17 @@ class DatabaseService {
   final String uid;
   DatabaseService({this.uid});
 
-  Future writeAccountData(String email, String name, String role) async {
-    CollectionReference tabel =
-        FirebaseFirestore.instance.collection('accounts');
-    return await tabel.doc(uid).set(
-      {
-        'email': email,
-        'name': name,
-        'role': role,
-      },
-    );
-  }
-
-  Future writeProjectData(
-    String supervisorID,
-    String projectName,
-    String address,
-    String addressGMap,
-    String clientName,
-    String clientEmail,
-    String clientPhone,
-    DateTime dateCreated,
-    DateTime dateDeadline,
-    bool isCompleted,
-  ) async {
-    CollectionReference tabel =
-        FirebaseFirestore.instance.collection('projects');
-    return await tabel.doc().set(
-      {
-        'supervisorID': supervisorID,
-        'projectName': projectName,
-        'address': address,
-        'addressGMap': addressGMap,
-        'clientName': clientName,
-        'clientEmail': clientEmail,
-        'clientPhone': clientPhone,
-        'dateCreated': dateCreated,
-        'dateDeadline': dateDeadline,
-        'isCompleted': isCompleted,
-      },
-    );
-  }
-
-  Future updateData(String table, String attribute, String data) async {
+  Future writeData(String table, String attribute, String data) async {
     CollectionReference tabel = FirebaseFirestore.instance.collection(table);
-    return await tabel.doc(uid).update(
-      {
-        attribute: data,
-      },
-    );
+    return await tabel.doc(uid).set({attribute: data}, SetOptions(merge: true));
+  }
+
+  Future createDataOnSubcollection(String table, String subtable, data) async {
+    CollectionReference tabel = FirebaseFirestore.instance
+        .collection(table)
+        .doc(uid)
+        .collection(subtable);
+    return await tabel.add(data);
   }
 
   Stream entitySnapshot(String tablename) {
@@ -62,31 +24,6 @@ class DatabaseService {
         .collection(tablename)
         .doc(uid)
         .snapshots();
-  }
-
-  List<ProjectDetailsModel> _projectDetailsListFromSnapshot(
-      QuerySnapshot snapshot) {
-    return snapshot.docs.map((doc) {
-      return ProjectDetailsModel(
-        supervisorID: doc.data()['supervisorID'] ?? '',
-        projectName: doc.data()['projectName'] ?? '',
-        address: doc.data()['address'] ?? '',
-        addressGMap: doc.data()['addressGMap'] ?? '',
-        clientName: doc.data()['clientName'] ?? '',
-        clientEmail: doc.data()['clientEmail'] ?? '',
-        clientPhone: doc.data()['clientPhone'] ?? '',
-        dateCreated: doc.data()['dateCreated'].toDate() ?? '',
-        dateDeadline: doc.data()['dateDeadline'].toDate() ?? '',
-        isCompleted: doc.data()['isCompleted'] ?? false,
-      );
-    }).toList();
-  }
-
-  Stream<List<ProjectDetailsModel>> get projects {
-    return FirebaseFirestore.instance
-        .collection('projects')
-        .snapshots()
-        .map(_projectDetailsListFromSnapshot);
   }
 
   List<AccountModel> _accountListFromSnapshot(QuerySnapshot snapshot) {
@@ -107,5 +44,42 @@ class DatabaseService {
         .collection('accounts')
         .snapshots()
         .map(_accountListFromSnapshot);
+  }
+
+  List<ProjectDetailsModel> _projectDetailsListFromSnapshot(
+      QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return ProjectDetailsModel(
+        projectName: doc.data()['projectName'] ?? '',
+        address: doc.data()['address'] ?? '',
+        addressGMap: doc.data()['addressGMap'] ?? '',
+        clientName: doc.data()['clientName'] ?? '',
+        clientEmail: doc.data()['clientEmail'] ?? '',
+        clientPhone: doc.data()['clientPhone'] ?? '',
+        dateCreated: doc.data()['dateCreated'].toDate() ?? '',
+        dateDeadline: doc.data()['dateDeadline'].toDate() ?? '',
+        isCompleted: doc.data()['isCompleted'] ?? false,
+      );
+    }).toList();
+  }
+
+  Stream<List<ProjectDetailsModel>> get myOngoingProjects {
+    return FirebaseFirestore.instance
+        .collection('accounts')
+        .doc(uid)
+        .collection('projects')
+        .where('isCompleted', isEqualTo: false)
+        .snapshots()
+        .map(_projectDetailsListFromSnapshot);
+  }
+
+  Stream<List<ProjectDetailsModel>> get myCompletedProjects {
+    return FirebaseFirestore.instance
+        .collection('accounts')
+        .doc(uid)
+        .collection('projects')
+        .where('isCompleted', isEqualTo: true)
+        .snapshots()
+        .map(_projectDetailsListFromSnapshot);
   }
 }

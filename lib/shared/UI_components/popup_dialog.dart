@@ -20,7 +20,7 @@ class PopUpDialog {
               onPressed: () => Navigator.of(context).pop(DialogAction.yes),
               child: Text('Ya'),
             ),
-            RaisedButton(
+            FlatButton(
               color: Theme.of(context).primaryColor,
               onPressed: () => Navigator.of(context).pop(DialogAction.no),
               child: Text(
