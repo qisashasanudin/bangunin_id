@@ -1,4 +1,5 @@
 import 'package:bangunin_id/models/project_details_model.dart';
+import 'package:bangunin_id/screens/mainmenu/home/projects/project_materials_list.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/UI_components/popup_dialog.dart';
@@ -58,6 +59,7 @@ class _ProjectSettingsState extends State<ProjectSettings> {
                 _textForm('Nomor Telepon Klien', false),
                 separatorLine(),
                 sectionHeader('Material Yang Dibutuhkan'),
+                ProjectMaterialsList(),
                 //TODO: Dropdown List yang jumlahnya bisa ditambahkan dan diberi angka
                 separatorLine(),
                 saveButton(),
@@ -96,7 +98,7 @@ class _ProjectSettingsState extends State<ProjectSettings> {
     return SizedBox(
       width: double.infinity,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
         child: TextFormField(
           keyboardType: (labelText == 'Nomor Telepon Klien')
               ? TextInputType.number
