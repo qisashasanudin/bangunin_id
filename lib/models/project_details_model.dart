@@ -1,13 +1,13 @@
 class ProjectDetailsModel {
-  final String projectName;
-  final String address;
-  final String addressGMap;
-  final String clientName;
-  final String clientEmail;
-  final String clientPhone;
-  final DateTime dateCreated;
-  final DateTime dateDeadline;
-  final bool isCompleted;
+  String projectName;
+  String address;
+  String addressGMap;
+  String clientName;
+  String clientEmail;
+  String clientPhone;
+  DateTime dateCreated;
+  DateTime dateDeadline;
+  bool isCompleted;
 
   ProjectDetailsModel({
     this.projectName,

@@ -1,11 +1,11 @@
 class ShopMaterialModel {
-  final String name;
-  final String type;
-  final String shortDesc;
-  final String desc;
-  final String image;
-  final int rate;
-  final int price;
+  String name;
+  String type;
+  String shortDesc;
+  String desc;
+  String image;
+  int rate;
+  int price;
 
   ShopMaterialModel(
       {this.name,

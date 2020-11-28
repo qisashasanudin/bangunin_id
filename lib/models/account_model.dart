@@ -1,10 +1,10 @@
 class AccountModel {
-  final String address;
-  final String email;
-  final String name;
-  final String phone;
-  final String profilePicture;
-  final String role;
+  String address;
+  String email;
+  String name;
+  String phone;
+  String profilePicture;
+  String role;
 
   AccountModel({
     this.address,

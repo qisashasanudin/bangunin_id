@@ -1,3 +1,4 @@
+import 'package:bangunin_id/models/project_details_model.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/UI_components/popup_dialog.dart';
@@ -14,20 +15,14 @@ class ProjectSettings extends StatefulWidget {
 
 class _ProjectSettingsState extends State<ProjectSettings> {
   final _formKey = GlobalKey<FormState>();
-
   final userID = AuthService().getCurrentUID();
-  String _projectName;
-  String _address;
-  String _addressGMap;
-  String _clientName;
-  String _clientEmail;
-  String _clientPhone;
-  DateTime _dateCreated;
-  DateTime _dateDeadline;
-  bool _isCompleted = false;
 
   TextEditingController _dateController = TextEditingController();
   final DateFormat _dateFormatter = DateFormat('dd MMM, yyyy');
+
+  ProjectDetailsModel _projectDetails = ProjectDetailsModel(
+    isCompleted: false,
+  );
 
   @override
   void dispose() {
@@ -47,7 +42,7 @@ class _ProjectSettingsState extends State<ProjectSettings> {
           //   'assets/img/new_project_bg.jpg',
           //   fit: BoxFit.cover,
           // ),
-          title: Text('Proyek ${_projectName ?? 'Baru'}'),
+          title: Text('Proyek ${_projectDetails.projectName ?? 'Baru'}'),
           children: [
             SliverList(
               delegate: SliverChildListDelegate([
@@ -116,19 +111,19 @@ class _ProjectSettingsState extends State<ProjectSettings> {
             setState(() {
               switch (labelText) {
                 case 'Nama Proyek':
-                  _projectName = val;
+                  _projectDetails.projectName = val;
                   break;
                 case 'Alamat':
-                  _address = val;
+                  _projectDetails.address = val;
                   break;
                 case 'Nama Klien':
-                  _clientName = val;
+                  _projectDetails.clientName = val;
                   break;
                 case 'Email Klien':
-                  _clientEmail = val;
+                  _projectDetails.clientEmail = val;
                   break;
                 case 'Nomor Telepon Klien':
-                  _clientPhone = val;
+                  _projectDetails.clientPhone = val;
                   break;
               }
             });
@@ -159,14 +154,14 @@ class _ProjectSettingsState extends State<ProjectSettings> {
   _handleDatePicker() async {
     final DateTime date = await showDatePicker(
       context: context,
-      initialDate: _dateDeadline ?? DateTime.now(),
+      initialDate: _projectDetails.dateDeadline ?? DateTime.now(),
       firstDate: DateTime.now(),
       lastDate: DateTime(2100),
     );
     setState(() {
-      _dateDeadline = date;
+      _projectDetails.dateDeadline = date;
     });
-    _dateController.text = _dateFormatter.format(_dateDeadline);
+    _dateController.text = _dateFormatter.format(_projectDetails.dateDeadline);
   }
 
   Padding saveButton() {
@@ -178,19 +173,19 @@ class _ProjectSettingsState extends State<ProjectSettings> {
   void _uploadData() async {
     if (_formKey.currentState.validate()) {
       setState(() {
-        _dateCreated = DateTime.now();
+        _projectDetails.dateCreated = DateTime.now();
       });
       await DatabaseService(uid: AuthService().getCurrentUID())
           .createDataOnSubcollection('accounts', 'projects', {
-        'projectName': _projectName,
-        'address': _address,
-        'addressGMap': _addressGMap,
-        'clientName': _clientName,
-        'clientEmail': _clientEmail,
-        'clientPhone': _clientPhone,
-        'dateCreated': _dateCreated,
-        'dateDeadline': _dateDeadline,
-        'isCompleted': _isCompleted,
+        'projectName': _projectDetails.projectName,
+        'address': _projectDetails.address,
+        'addressGMap': _projectDetails.addressGMap,
+        'clientName': _projectDetails.clientName,
+        'clientEmail': _projectDetails.clientEmail,
+        'clientPhone': _projectDetails.clientPhone,
+        'dateCreated': _projectDetails.dateCreated,
+        'dateDeadline': _projectDetails.dateDeadline,
+        'isCompleted': _projectDetails.isCompleted,
       });
 
       // await DatabaseService(uid: AuthService().getCurrentUID()).updateData(

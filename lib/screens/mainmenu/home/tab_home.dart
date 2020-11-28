@@ -37,11 +37,8 @@ class _HomeTabState extends State<HomeTab> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
-              child: projectCounter(myOngoingProjects, 'Sedang Berjalan'),
-            ),
-            Expanded(
-              child: projectCounter(myCompletedProjects, 'Selesai'),
-            ),
+                child: projectCounter(myOngoingProjects, 'Sedang Berjalan')),
+            Expanded(child: projectCounter(myCompletedProjects, 'Selesai')),
           ],
         ),
         ProjectList(children: myProjects),
