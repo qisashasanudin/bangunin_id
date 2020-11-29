@@ -45,4 +45,86 @@ List<MaterialModel> materials = [
     type: 'ulir',
     unit: 'batang',
   ),
+  MaterialModel(
+    name: 'wiremesh',
+    unit: 'lembar',
+  ),
+  MaterialModel(
+    name: 'genteng',
+    unit: 'batang',
+  ),
+  MaterialModel(
+    name: 'bata',
+    type: 'merah',
+    unit: 'buah',
+  ),
+  MaterialModel(
+    name: 'bata',
+    type: 'hebel',
+    unit: 'buah',
+  ),
+  MaterialModel(
+    name: 'keramik',
+    type: 'lantai',
+    unit: 'dus',
+  ),
+  MaterialModel(
+    name: 'keramik',
+    type: 'dinding',
+    unit: 'dus',
+  ),
+  MaterialModel(
+    name: 'pintu',
+    unit: 'buah',
+  ),
+  MaterialModel(
+    name: 'jendela',
+    unit: 'm2',
+  ),
+  MaterialModel(
+    name: 'pintu ',
+    type: 'toilet',
+    unit: 'buah',
+  ),
+  MaterialModel(
+    name: 'cat',
+    size: '25Kg',
+    unit: 'pail',
+  ),
+  MaterialModel(
+    name: 'waterproofing',
+    unit: 'pail',
+  ),
+  MaterialModel(
+    name: 'sika',
+    unit: 'pail',
+  ),
+  MaterialModel(
+    name: 'lampu',
+    unit: 'buah',
+  ),
+  MaterialModel(
+    name: 'kabel',
+    unit: 'm',
+  ),
+  MaterialModel(
+    name: 'pipa',
+    unit: 'batang',
+  ),
+  MaterialModel(
+    name: 'keran',
+    unit: 'buah',
+  ),
+  MaterialModel(
+    name: 'wastafel',
+    unit: 'buah',
+  ),
+  MaterialModel(
+    name: 'shower',
+    unit: 'buah',
+  ),
+  MaterialModel(
+    name: 'railing tangga',
+    unit: 'm',
+  ),
 ];
