@@ -9,9 +9,10 @@ class DynamicWidget extends StatefulWidget {
 class _DynamicWidgetState extends State<DynamicWidget> {
   // List<DropdownMenuItem<String>> dropDownItems = List();
 
-  final List<String> materials = ['Pasir', 'Keramik', 'Batu Bata'];
+  final List<String> materials = ['Kasir', 'Keramik', 'BatuBata'];
 
   String _choosenMaterialType;
+  String _choosenMaterialAmount;
 
   @override
   Widget build(BuildContext context) {
@@ -36,23 +37,24 @@ class _DynamicWidgetState extends State<DynamicWidget> {
 
   DropdownButtonFormField _materialType() {
     return DropdownButtonFormField(
-      value: _choosenMaterialType,
+      value: _choosenMaterialType ?? materials[0],
       items: materials.map((material) {
         return DropdownMenuItem(
           value: material,
           child: Text(material),
         );
       }).toList(),
-      onChanged: (value) => setState(() => _choosenMaterialType = value),
+      onChanged: (val) => setState(() => _choosenMaterialType = val),
     );
   }
 
   TextFormField _materialAmount() {
     return TextFormField(
+      initialValue: _choosenMaterialAmount,
       keyboardType: TextInputType.number,
       decoration: formFieldDecoration('Jumlah material'),
-      validator: (val) => (val.isEmpty) ? 'Data tidak boleh kosong.' : null,
-      onChanged: (val) {},
+      validator: (val) => (val.isEmpty) ? 'Tidak boleh kosong.' : null,
+      onChanged: (val) => setState(() => _choosenMaterialAmount = val),
     );
   }
 }
