@@ -68,7 +68,7 @@ StreamBuilder createProjectButton(String userID) {
               (snapshot.data.data()['role'] == 'Mandor'))) {
         return FloatingActionButton.extended(
           onPressed: () async {
-            Navigator.of(context).pushNamed('/projectsettings');
+            Navigator.of(context).pushNamed('/newprojectinformation');
           },
           label: Text(
             'Buat Proyek Baru',

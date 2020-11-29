@@ -1,7 +1,5 @@
 import 'package:bangunin_id/models/project_details_model.dart';
-import 'package:bangunin_id/screens/mainmenu/home/projects/project_materials/project_materials_list.dart';
 import 'package:bangunin_id/services/auth.dart';
-import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/UI_components/popup_dialog.dart';
 import 'package:bangunin_id/shared/UI_components/form_field_decoration.dart';
 import 'package:bangunin_id/shared/UI_components/custom_button.dart';
@@ -9,21 +7,18 @@ import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class ProjectSettings extends StatefulWidget {
+class NewProjectInformation extends StatefulWidget {
   @override
-  _ProjectSettingsState createState() => _ProjectSettingsState();
+  _NewProjectInformationState createState() => _NewProjectInformationState();
 }
 
-class _ProjectSettingsState extends State<ProjectSettings> {
+class _NewProjectInformationState extends State<NewProjectInformation> {
   final _formKey = GlobalKey<FormState>();
   final userID = AuthService().getCurrentUID();
 
   TextEditingController _dateController = TextEditingController();
   final DateFormat _dateFormatter = DateFormat('dd MMM, yyyy');
-
-  ProjectDetailsModel _projectDetails = ProjectDetailsModel(
-    isCompleted: false,
-  );
+  ProjectDetailsModel _projectDetails = ProjectDetailsModel();
 
   @override
   void dispose() {
@@ -76,27 +71,18 @@ class _ProjectSettingsState extends State<ProjectSettings> {
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
                     child: _textForm('Nomor Telepon Klien', false)),
                 Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-                    child: Divider(color: Colors.black)),
-                Padding(
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-                    child: Text('Material Yang Dibutuhkan')),
-                Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-                    child: ProjectMaterialsList()),
-                Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-                    child: Divider(color: Colors.black)),
-                Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-                    child: customButton('Simpan', _uploadData)),
+                    child: customButton(
+                        'Selanjutnya', _moveToNewProjectMaterials)),
               ]),
-            ), //sliver-sliver lain ditulis di sini
+            ),
+            //sliver-sliver lain ditulis di sini
           ],
         ),
       ),
     );
   }
+
   //========================= main function =========================
 
   Future<bool> _onBackPressed() async {
@@ -169,27 +155,19 @@ class _ProjectSettingsState extends State<ProjectSettings> {
     _dateController.text = _dateFormatter.format(_projectDetails.dateDeadline);
   }
 
-  void _uploadData() async {
+  void _moveToNewProjectMaterials() async {
     if (_formKey.currentState.validate()) {
       setState(() {
         _projectDetails.dateCreated = DateTime.now();
+        _projectDetails.isCompleted = false;
       });
-      await DatabaseService(uid: AuthService().getCurrentUID())
-          .createDataOnSubcollection('accounts', 'projects', {
-        'projectName': _projectDetails.projectName,
-        'address': _projectDetails.address,
-        'addressGMap': _projectDetails.addressGMap,
-        'clientName': _projectDetails.clientName,
-        'clientEmail': _projectDetails.clientEmail,
-        'clientPhone': _projectDetails.clientPhone,
-        'dateCreated': _projectDetails.dateCreated,
-        'dateDeadline': _projectDetails.dateDeadline,
-        'isCompleted': _projectDetails.isCompleted,
-      });
-
+      //TODO: upload materials information
       // await DatabaseService(uid: AuthService().getCurrentUID()).updateData(
       //     'accounts', attribute, data ?? snapshot.data.data()[attribute]);
-      Navigator.of(context).pop();
+      Navigator.of(context).pushNamed(
+        '/newprojectmaterials',
+        arguments: _projectDetails,
+      );
     }
   }
 }
