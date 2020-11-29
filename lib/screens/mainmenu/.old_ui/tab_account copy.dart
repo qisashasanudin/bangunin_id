@@ -71,7 +71,7 @@ class _AccountState extends State<Account> {
 
   Image coverPicture() {
     return Image.asset(
-      'assets/img/home_bg_default2.jpg',
+      'assets/img/UI/home_bg_default2.jpg',
       fit: BoxFit.cover,
     );
   }
@@ -103,7 +103,8 @@ class _AccountState extends State<Account> {
           child: CircleAvatar(
             radius: 60,
             backgroundColor: AppColors().primary,
-            backgroundImage: AssetImage('assets/img/profile_pic_default.jpg'),
+            backgroundImage:
+                AssetImage('assets/img/UI/profile_pic_default.jpg'),
             child: Padding(
               padding: EdgeInsets.only(top: 80, left: 80),
               child: CircleAvatar(

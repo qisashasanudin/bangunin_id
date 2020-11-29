@@ -57,7 +57,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
 
   Image coverPicture() {
     return Image.asset(
-      'assets/img/home_bg_default3.jpg',
+      'assets/img/UI/home_bg_default3.jpg',
       fit: BoxFit.cover,
     );
   }
@@ -115,7 +115,7 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
           backgroundColor: AppColors().accent1,
           backgroundImage: (snapshot.data.data()['profilePicture'] != null)
               ? NetworkImage(snapshot.data.data()['profilePicture'])
-              : AssetImage('assets/img/profile_pic_default.jpg'),
+              : AssetImage('assets/img/UI/profile_pic_default.jpg'),
         ),
       ),
     );

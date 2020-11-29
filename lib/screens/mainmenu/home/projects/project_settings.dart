@@ -40,7 +40,7 @@ class _ProjectSettingsState extends State<ProjectSettings> {
         key: _formKey,
         child: SliverPage(
           // backgroundImage: Image.asset(
-          //   'assets/img/new_project_bg.jpg',
+          //   'assets/img/UI/new_project_bg.jpg',
           //   fit: BoxFit.cover,
           // ),
           title: Text('Proyek ${_projectDetails.projectName ?? 'Baru'}'),

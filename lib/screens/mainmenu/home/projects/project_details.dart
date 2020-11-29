@@ -18,7 +18,7 @@ class ProjectDetails extends StatelessWidget {
       builder: (context, snapshot) {
         return SliverPage(
           // backgroundImage: Image.asset(
-          //   'assets/img/sliver_page_bg.jpg',
+          //   'assets/img/UI/sliver_page_bg.jpg',
           //   fit: BoxFit.cover,
           // ),
           title: Text('Rincian Proyek'),

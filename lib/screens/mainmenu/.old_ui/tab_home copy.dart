@@ -85,7 +85,7 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
     return Opacity(
       opacity: (1 - shrinkOffset / expandedHeight),
       child: Image.asset(
-        'assets/img/home_bg_default1.jpg',
+        'assets/img/UI/home_bg_default1.jpg',
         fit: BoxFit.cover,
       ),
     );
@@ -141,7 +141,8 @@ class HomeAppBar extends SliverPersistentHeaderDelegate {
             child: CircleAvatar(
               radius: 70,
               backgroundColor: Theme.of(context).primaryColor,
-              backgroundImage: AssetImage('assets/img/profile_pic_default.jpg'),
+              backgroundImage:
+                  AssetImage('assets/img/UI/profile_pic_default.jpg'),
             ),
           ),
         ),

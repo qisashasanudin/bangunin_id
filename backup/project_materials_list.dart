@@ -17,6 +17,8 @@ class _ProjectMaterialsListState extends State<ProjectMaterialsList> {
     'Kayu',
   ];
   List<ProjectMaterialForm> _dynamicMaterialList = [];
+  String _chosenMaterialType;
+  String _chosenMaterialAmount;
 
   //========================= main function =========================
   @override
@@ -56,10 +58,13 @@ class _ProjectMaterialsListState extends State<ProjectMaterialsList> {
     if (_dynamicMaterialList.length >= materials.length) {
       return;
     }
+    List<String> temp = List.from(materials);
     //TODO: hapus elemen yang telah dipilih di dropdown sebelumnya
-    // List<String> temp = List.from(materials);
-
-    _dynamicMaterialList.add(ProjectMaterialForm(children: materials));
+    _dynamicMaterialList.add(ProjectMaterialForm(
+      children: temp,
+      onChangedType: (val) => _chosenMaterialType = val,
+      onChangedAmount: (val) => _chosenMaterialAmount = val,
+    ));
     setState(() {});
   }
 

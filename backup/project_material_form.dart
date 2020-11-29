@@ -25,38 +25,32 @@ class _ProjectMaterialFormState extends State<ProjectMaterialForm> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Flexible(
-              flex: 2,
               child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: _materialType(),
-              )),
+            padding: const EdgeInsets.all(10.0),
+            child: _materialType(),
+          )),
           Flexible(
-              flex: 3,
               child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: _materialAmount(),
-              )),
+            padding: const EdgeInsets.all(10.0),
+            child: _materialAmount(),
+          )),
         ],
       ),
     );
   }
 
-  // DropdownButtonFormField _materialType() {
-  //   return DropdownButtonFormField(
-  //     items: widget.children.map((material) {
-  //       return DropdownMenuItem(
-  //         value: material,
-  //         child: Text(material),
-  //       );
-  //     }).toList(),
-  //     onChanged: (val) => setState(() {
-  //       widget.onChangedType(val);
-  //     }),
-  //   );
-  // }
-
-  _materialType() {
-    return Text(widget.children[0]);
+  DropdownButtonFormField _materialType() {
+    return DropdownButtonFormField(
+      items: widget.children.map((material) {
+        return DropdownMenuItem(
+          value: material,
+          child: Text(material),
+        );
+      }).toList(),
+      onChanged: (val) => setState(() {
+        widget.onChangedType(val);
+      }),
+    );
   }
 
   TextFormField _materialAmount() {
