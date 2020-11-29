@@ -98,7 +98,7 @@ class _AccountTabState extends State<AccountTab> {
     currentValue = snapshot.data.data()[attribute];
     return showModalBottomSheet(
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(30.0))),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20.0))),
       isScrollControlled: true,
       context: context,
       builder: (context) {
@@ -107,7 +107,7 @@ class _AccountTabState extends State<AccountTab> {
           child: Padding(
             padding: MediaQuery.of(context).viewInsets,
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
               height: 200,
               child: ListView(
                 children: <Widget>[

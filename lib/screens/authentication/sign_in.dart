@@ -94,7 +94,9 @@ class _SignInState extends State<SignIn> {
 
   TextFormField emailForm() {
     return TextFormField(
-      decoration: formFieldDecoration('Email'),
+      decoration: formFieldDecoration('Email').copyWith(
+        prefixIcon: Icon(Icons.mail),
+      ),
       initialValue: email,
       validator: (val) => (val.isEmpty | !val.contains('@'))
           ? 'Masukkan email yang valid'
@@ -107,8 +109,10 @@ class _SignInState extends State<SignIn> {
 
   TextFormField passwordForm() {
     return TextFormField(
-      decoration: formFieldDecoration('Password')
-          .copyWith(suffixIcon: togglePassVisibility()),
+      decoration: formFieldDecoration('Password').copyWith(
+        prefixIcon: Icon(Icons.lock),
+        suffixIcon: togglePassVisibility(),
+      ),
       obscureText: _hidePass,
       validator: (val) =>
           val.length < 6 ? 'Masukkan password (6 huruf atau lebih)' : null,

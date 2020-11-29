@@ -14,7 +14,7 @@ class ProjectList extends StatelessWidget {
   //========================= main function =========================
   @override
   Widget build(BuildContext context) {
-    final DateFormat _dateFormatter = DateFormat('dd MMM, yyyy');
+    final DateFormat _dateFormatter = DateFormat('dd MMM yyyy');
 
     return ListView.builder(
       shrinkWrap: true,
@@ -22,7 +22,7 @@ class ProjectList extends StatelessWidget {
       itemCount: children.length,
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           child: Container(
             decoration: BoxDecoration(
               color: AppColors().accent3,

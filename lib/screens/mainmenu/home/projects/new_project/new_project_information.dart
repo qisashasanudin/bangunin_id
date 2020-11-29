@@ -17,7 +17,7 @@ class _NewProjectInformationState extends State<NewProjectInformation> {
   final userID = AuthService().getCurrentUID();
 
   TextEditingController _dateController = TextEditingController();
-  final DateFormat _dateFormatter = DateFormat('dd MMM, yyyy');
+  final DateFormat _dateFormatter = DateFormat('dd MMM yyyy');
   ProjectDetailsModel _projectDetails = ProjectDetailsModel();
 
   @override
@@ -43,35 +43,35 @@ class _NewProjectInformationState extends State<NewProjectInformation> {
             SliverList(
               delegate: SliverChildListDelegate([
                 Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     child: Text('Informasi Utama (Wajib Diisi)')),
                 Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     child: _textForm('Nama Proyek', true)),
                 Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     child: _dateForm('Deadline', true)),
                 Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                     child: Divider(color: Colors.black)),
                 Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     child: Text('Informasi Tambahan (Opsional)')),
                 Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     child: _textForm('Alamat', false)),
                 //TODO: BUAT OPSI UNTUK MENGISI ALAMAT DGN GOOGLE MAP
                 Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     child: _textForm('Nama Klien', false)),
                 Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     child: _textForm('Email Klien', false)),
                 Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     child: _textForm('Nomor Telepon Klien', false)),
                 Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     child: CustomButton(
                       prompt: 'Selanjutnya',
                       onPressed: _moveToNewProjectMaterials,
@@ -84,7 +84,6 @@ class _NewProjectInformationState extends State<NewProjectInformation> {
       ),
     );
   }
-
   //========================= main function =========================
 
   Future<bool> _onBackPressed() async {
@@ -109,27 +108,31 @@ class _NewProjectInformationState extends State<NewProjectInformation> {
           ? 'Data tidak boleh kosong.'
           : null,
       onChanged: (val) {
-        setState(() {
-          switch (labelText) {
-            case 'Nama Proyek':
-              _projectDetails.projectName = val;
-              break;
-            case 'Alamat':
-              _projectDetails.address = val;
-              break;
-            case 'Nama Klien':
-              _projectDetails.clientName = val;
-              break;
-            case 'Email Klien':
-              _projectDetails.clientEmail = val;
-              break;
-            case 'Nomor Telepon Klien':
-              _projectDetails.clientPhone = val;
-              break;
-          }
-        });
+        _chooseProjectDetailsElement(labelText, val);
       },
     );
+  }
+
+  void _chooseProjectDetailsElement(labelText, String val) {
+    return setState(() {
+      switch (labelText) {
+        case 'Nama Proyek':
+          _projectDetails.projectName = val;
+          break;
+        case 'Alamat':
+          _projectDetails.address = val;
+          break;
+        case 'Nama Klien':
+          _projectDetails.clientName = val;
+          break;
+        case 'Email Klien':
+          _projectDetails.clientEmail = val;
+          break;
+        case 'Nomor Telepon Klien':
+          _projectDetails.clientPhone = val;
+          break;
+      }
+    });
   }
 
   TextFormField _dateForm(labelText, mustBeFilled) {
@@ -163,13 +166,6 @@ class _NewProjectInformationState extends State<NewProjectInformation> {
         _projectDetails.dateCreated = DateTime.now();
         _projectDetails.isCompleted = false;
       });
-      //TODO: upload materials information
-      // await DatabaseService(uid: AuthService().getCurrentUID()).updateData(
-      //     'accounts', attribute, data ?? snapshot.data.data()[attribute]);
-      // Navigator.of(context).pushNamed(
-      //   '/newprojectmaterials',
-      //   arguments: _projectDetails,
-      // );
       Navigator.of(context).pushNamed(
         '/newprojectmaterials',
         arguments: _projectDetails,

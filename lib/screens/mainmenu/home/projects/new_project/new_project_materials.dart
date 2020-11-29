@@ -3,8 +3,10 @@ import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/UI_components/custom_button.dart';
 import 'package:bangunin_id/shared/UI_components/popup_dialog.dart';
+import 'package:bangunin_id/shared/UI_components/project_details_card.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewProjectMaterials extends StatefulWidget {
   @override
@@ -18,8 +20,7 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
   //========================= main function =========================
   @override
   Widget build(BuildContext context) {
-    ProjectDetailsModel _projectDetails =
-        ModalRoute.of(context).settings.arguments;
+    ProjectDetailsModel details = ModalRoute.of(context).settings.arguments;
 
     return WillPopScope(
       onWillPop: _onBackPressed,
@@ -30,20 +31,22 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
           //   'assets/img/UI/new_project_bg.jpg',
           //   fit: BoxFit.cover,
           // ),
-          title:
-              Text('Material Proyek ${_projectDetails.projectName ?? 'Baru'}'),
+          title: Text('Material Proyek'),
           children: [
             SliverList(
               delegate: SliverChildListDelegate([
                 //widget-widget lain dipasang di sini
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: ProjectDetailsCard(child: details),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   child: CustomButton(
                       prompt: 'Simpan',
                       onPressed: () {
-                        _uploadData(_projectDetails);
+                        _uploadData(details);
                       }),
-                  // customButton('Simpan', _uploadData)
                 ),
               ]),
             ), //sliver-sliver lain ditulis di sini
