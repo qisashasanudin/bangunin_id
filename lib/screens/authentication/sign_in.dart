@@ -74,7 +74,7 @@ class _SignInState extends State<SignIn> {
                     SizedBox(height: 10.0),
                     forgotPassword(),
                     SizedBox(height: 20.0),
-                    customButton('Login', _uploadData),
+                    CustomButton(prompt: 'Login', onPressed: _uploadData),
                     Text(
                       error,
                       style: TextStyle(color: Colors.red, fontSize: 14.0),

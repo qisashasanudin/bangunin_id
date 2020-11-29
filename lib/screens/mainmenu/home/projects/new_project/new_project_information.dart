@@ -72,8 +72,9 @@ class _NewProjectInformationState extends State<NewProjectInformation> {
                     child: _textForm('Nomor Telepon Klien', false)),
                 Padding(
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-                    child: customButton(
-                        'Selanjutnya', _moveToNewProjectMaterials)),
+                    child: CustomButton(
+                        prompt: 'Selanjutnya',
+                        onPressed: _moveToNewProjectMaterials)),
               ]),
             ),
             //sliver-sliver lain ditulis di sini

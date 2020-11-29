@@ -15,18 +15,12 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
   final _formKey = GlobalKey<FormState>();
   final userID = AuthService().getCurrentUID();
 
-  TextEditingController _dateController = TextEditingController();
-  ProjectDetailsModel _projectDetails = ProjectDetailsModel();
-
-  @override
-  void dispose() {
-    super.dispose();
-    _dateController.dispose();
-  }
-
   //========================= main function =========================
   @override
   Widget build(BuildContext context) {
+    final ProjectDetailsModel _projectDetails =
+        ModalRoute.of(context).settings.arguments;
+
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Form(
@@ -43,8 +37,12 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
               delegate: SliverChildListDelegate([
                 //widget-widget lain dipasang di sini
                 Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-                    child: customButton('Simpan', _uploadData)),
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                  child: CustomButton(
+                      prompt: 'Simpan',
+                      onPressed: _uploadData(_projectDetails)),
+                  // customButton('Simpan', _uploadData)
+                ),
               ]),
             ), //sliver-sliver lain ditulis di sini
           ],
@@ -65,23 +63,23 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
     return tappedYes;
   }
 
-  void _uploadData() async {
+  void _uploadData(ProjectDetailsModel projectDetails) async {
     if (_formKey.currentState.validate()) {
       setState(() {
-        _projectDetails.dateCreated = DateTime.now();
-        _projectDetails.isCompleted = false;
+        projectDetails.dateCreated = DateTime.now();
+        projectDetails.isCompleted = false;
       });
       await DatabaseService(uid: AuthService().getCurrentUID())
           .createDataOnSubcollection('accounts', 'projects', {
-        'projectName': _projectDetails.projectName,
-        'address': _projectDetails.address,
-        'addressGMap': _projectDetails.addressGMap,
-        'clientName': _projectDetails.clientName,
-        'clientEmail': _projectDetails.clientEmail,
-        'clientPhone': _projectDetails.clientPhone,
-        'dateCreated': _projectDetails.dateCreated,
-        'dateDeadline': _projectDetails.dateDeadline,
-        'isCompleted': _projectDetails.isCompleted,
+        'projectName': projectDetails.projectName,
+        'address': projectDetails.address,
+        'addressGMap': projectDetails.addressGMap,
+        'clientName': projectDetails.clientName,
+        'clientEmail': projectDetails.clientEmail,
+        'clientPhone': projectDetails.clientPhone,
+        'dateCreated': projectDetails.dateCreated,
+        'dateDeadline': projectDetails.dateDeadline,
+        'isCompleted': projectDetails.isCompleted,
       });
       //TODO: upload materials information
       // await DatabaseService(uid: AuthService().getCurrentUID()).updateData(

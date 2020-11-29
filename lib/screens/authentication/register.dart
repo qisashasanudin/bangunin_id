@@ -70,7 +70,7 @@ class _RegisterState extends State<Register> {
                     SizedBox(height: 20.0),
                     passwordConfirForm(),
                     SizedBox(height: 20.0),
-                    customButton('Daftar', _uploadData),
+                    CustomButton(prompt: 'Daftar', onPressed: _uploadData),
                     Text(
                       error,
                       style: TextStyle(color: Colors.red, fontSize: 14.0),
