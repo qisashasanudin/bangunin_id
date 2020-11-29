@@ -34,8 +34,16 @@ class ProjectList extends StatelessWidget {
               subtitle: Text(
                   "Deadline: ${_dateFormatter.format(children[index].dateDeadline)}"),
               trailing: (children[index].isCompleted == false)
-                  ? Text("In-Progress", style: TextStyle(color: Colors.red))
-                  : Text("Complete", style: TextStyle(color: Colors.green)),
+                  ? Text("In - Progress",
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold,
+                      ))
+                  : Text("Completed",
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontWeight: FontWeight.bold,
+                      )),
               onTap: () async {
                 Navigator.of(context).pushNamed('/projectdetails');
               },
