@@ -35,10 +35,10 @@ class MyApp extends StatelessWidget {
           create: (context) => context.read<AuthService>().authStateChanges,
         ),
         StreamProvider<List<AccountModel>>.value(
-          value: DatabaseService(uid: AuthService().getCurrentUID()).accounts,
+          value: DatabaseService().accounts,
         ),
         StreamProvider<List<ProjectDetailsModel>>.value(
-          value: DatabaseService(uid: AuthService().getCurrentUID()).myProjects,
+          value: DatabaseService().myProjects,
         ),
       ],
       child: MaterialApp(

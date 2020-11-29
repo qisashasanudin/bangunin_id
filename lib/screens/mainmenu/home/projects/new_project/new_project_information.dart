@@ -156,7 +156,7 @@ class _NewProjectInformationState extends State<NewProjectInformation> {
     _dateController.text = _dateFormatter.format(_projectDetails.dateDeadline);
   }
 
-  void _moveToNewProjectMaterials() async {
+  _moveToNewProjectMaterials() {
     if (_formKey.currentState.validate()) {
       setState(() {
         _projectDetails.dateCreated = DateTime.now();
@@ -165,10 +165,11 @@ class _NewProjectInformationState extends State<NewProjectInformation> {
       //TODO: upload materials information
       // await DatabaseService(uid: AuthService().getCurrentUID()).updateData(
       //     'accounts', attribute, data ?? snapshot.data.data()[attribute]);
-      Navigator.of(context).pushNamed(
-        '/newprojectmaterials',
-        arguments: _projectDetails,
-      );
+      // Navigator.of(context).pushNamed(
+      //   '/newprojectmaterials',
+      //   arguments: _projectDetails,
+      // );
+      Navigator.of(context).pop();
     }
   }
 }

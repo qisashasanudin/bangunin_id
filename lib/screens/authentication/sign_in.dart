@@ -150,7 +150,7 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  void _uploadData() async {
+  _uploadData() async {
     if (_formKey.currentState.validate()) {
       setState(() {
         loading = true;

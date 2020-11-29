@@ -160,7 +160,7 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  void _uploadData() async {
+  _uploadData() async {
     if (_formKey.currentState.validate()) {
       setState(() {
         loading = true;

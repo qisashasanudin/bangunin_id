@@ -18,7 +18,7 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
   //========================= main function =========================
   @override
   Widget build(BuildContext context) {
-    final ProjectDetailsModel _projectDetails =
+    ProjectDetailsModel _projectDetails =
         ModalRoute.of(context).settings.arguments;
 
     return WillPopScope(
@@ -63,7 +63,7 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
     return tappedYes;
   }
 
-  void _uploadData(ProjectDetailsModel projectDetails) async {
+  _uploadData(ProjectDetailsModel projectDetails) async {
     if (_formKey.currentState.validate()) {
       setState(() {
         projectDetails.dateCreated = DateTime.now();
