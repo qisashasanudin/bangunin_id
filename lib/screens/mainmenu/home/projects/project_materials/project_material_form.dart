@@ -1,19 +1,23 @@
 import 'package:bangunin_id/shared/UI_components/form_field_decoration.dart';
 import 'package:flutter/material.dart';
 
-class DynamicWidget extends StatefulWidget {
+class ProjectMaterialForm extends StatefulWidget {
+  const ProjectMaterialForm({
+    Key key,
+    @required this.children,
+    this.onChangedType,
+    this.onChangedAmount,
+  }) : super(key: key);
+
+  final List<String> children;
+  final Function(String) onChangedType;
+  final Function(String) onChangedAmount;
+
   @override
-  _DynamicWidgetState createState() => _DynamicWidgetState();
+  _ProjectMaterialFormState createState() => _ProjectMaterialFormState();
 }
 
-class _DynamicWidgetState extends State<DynamicWidget> {
-  // List<DropdownMenuItem<String>> dropDownItems = List();
-
-  final List<String> materials = ['Kasir', 'Keramik', 'BatuBata'];
-
-  String _choosenMaterialType;
-  String _choosenMaterialAmount;
-
+class _ProjectMaterialFormState extends State<ProjectMaterialForm> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,24 +41,26 @@ class _DynamicWidgetState extends State<DynamicWidget> {
 
   DropdownButtonFormField _materialType() {
     return DropdownButtonFormField(
-      value: _choosenMaterialType ?? materials[0],
-      items: materials.map((material) {
+      items: widget.children.map((material) {
         return DropdownMenuItem(
           value: material,
           child: Text(material),
         );
       }).toList(),
-      onChanged: (val) => setState(() => _choosenMaterialType = val),
+      onChanged: (val) => setState(() {
+        widget.onChangedType(val);
+      }),
     );
   }
 
   TextFormField _materialAmount() {
     return TextFormField(
-      initialValue: _choosenMaterialAmount,
       keyboardType: TextInputType.number,
       decoration: formFieldDecoration('Jumlah material'),
       validator: (val) => (val.isEmpty) ? 'Tidak boleh kosong.' : null,
-      onChanged: (val) => setState(() => _choosenMaterialAmount = val),
+      onChanged: (val) => setState(() {
+        widget.onChangedAmount(val);
+      }),
     );
   }
 }

@@ -1,5 +1,5 @@
-import 'package:bangunin_id/screens/mainmenu/home/projects/project_materials/dynamic_widget.dart';
-import 'package:bangunin_id/shared/UI_components/app_colors.dart';
+import 'package:bangunin_id/screens/mainmenu/home/projects/project_materials/project_material_form.dart';
+import 'package:bangunin_id/shared/UI_components/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class ProjectMaterialsList extends StatefulWidget {
@@ -8,7 +8,17 @@ class ProjectMaterialsList extends StatefulWidget {
 }
 
 class _ProjectMaterialsListState extends State<ProjectMaterialsList> {
-  List<DynamicWidget> _dynamicList = [DynamicWidget()];
+  List<String> materials = [
+    'Pasir',
+    'Keramik',
+    'BatuBata',
+    'Semen',
+    'Cat',
+    'Kayu',
+  ];
+  List<ProjectMaterialForm> _dynamicMaterialList = [];
+  String _chosenMaterialType;
+  String _chosenMaterialAmount;
 
   //========================= main function =========================
   @override
@@ -20,26 +30,22 @@ class _ProjectMaterialsListState extends State<ProjectMaterialsList> {
             padding: EdgeInsets.symmetric(vertical: 0),
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
-            itemCount: _dynamicList.length,
+            itemCount: _dynamicMaterialList.length,
             itemBuilder: (context, index) {
-              return _dynamicList[index];
+              return _dynamicMaterialList[index];
             },
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _editMaterialListButton(
-                  Text(
-                    '+',
-                    style: TextStyle(fontSize: 25, color: AppColors().accent1),
-                  ),
-                  _addList),
-              _editMaterialListButton(
-                  Text(
-                    '-',
-                    style: TextStyle(fontSize: 25, color: AppColors().accent1),
-                  ),
-                  _removeList),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: customButton('+', _addList),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: customButton('-', _removeList),
+              ),
             ],
           ),
         ],
@@ -48,27 +54,22 @@ class _ProjectMaterialsListState extends State<ProjectMaterialsList> {
   }
   //========================= main function =========================
 
-  Padding _editMaterialListButton(prompt, onPressed) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-      child: RaisedButton(
-        color: Theme.of(context).primaryColor,
-        child: prompt,
-        onPressed: onPressed,
-      ),
-    );
-  }
-
   _addList() {
-    _dynamicList.add(DynamicWidget());
+    if (_dynamicMaterialList.length >= materials.length) {
+      return;
+    }
+    List<String> temp = List.from(materials);
+    //TODO: hapus elemen yang telah dipilih di dropdown sebelumnya
+    _dynamicMaterialList.add(ProjectMaterialForm(
+      children: temp,
+      onChangedType: (val) => _chosenMaterialType = val,
+      onChangedAmount: (val) => _chosenMaterialAmount = val,
+    ));
     setState(() {});
   }
 
   _removeList() {
-    if (_dynamicList.length < 2) {
-      return;
-    }
-    _dynamicList.removeLast();
+    _dynamicMaterialList.removeLast();
     setState(() {});
   }
 }

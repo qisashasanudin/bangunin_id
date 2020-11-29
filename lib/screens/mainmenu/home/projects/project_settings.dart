@@ -101,8 +101,8 @@ class _ProjectSettingsState extends State<ProjectSettings> {
 
   Future<bool> _onBackPressed() async {
     bool tappedYes = false;
-    final action = await PopUpDialog.yesNoDialog(context, 'Keluar?',
-        'Apakah anda yakin ingin keluar? Semua pengaturan pada halaman ini tidak akan tersimpan.');
+    final action = await PopUpDialog.yesNoDialog(context, 'Kembali?',
+        'Apakah anda yakin ingin kembali? Semua pengaturan pada halaman ini tidak akan tersimpan.');
     if (action == DialogAction.yes) {
       tappedYes = true;
     }
