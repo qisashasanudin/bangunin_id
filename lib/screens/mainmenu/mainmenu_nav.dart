@@ -6,17 +6,20 @@ import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:bangunin_id/shared/UI_components/loading_text.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
+import 'package:bangunin_id/models/project_details_model.dart';
+import 'package:bangunin_id/models/account_model.dart';
 import 'package:bangunin_id/shared/UI_components/transparent_appbar_and_navbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
-class MainMenuTabNav extends StatefulWidget {
+class MainMenuNav extends StatefulWidget {
   @override
-  _MainMenuTabNavState createState() => _MainMenuTabNavState();
+  _MainMenuNavState createState() => _MainMenuNavState();
 }
 
-class _MainMenuTabNavState extends State<MainMenuTabNav> {
+class _MainMenuNavState extends State<MainMenuNav> {
   final PageStorageBucket bucket = PageStorageBucket();
   final userID = AuthService().getCurrentUID();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -32,23 +35,33 @@ class _MainMenuTabNavState extends State<MainMenuTabNav> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor,
+    return MultiProvider(
+      providers: [
+        StreamProvider<List<AccountModel>>.value(
+          value: DatabaseService(uid: AuthService().getCurrentUID()).accounts,
         ),
-        child: Scaffold(
-          body: Stack(
-            alignment: Alignment.center,
-            fit: StackFit.expand,
-            clipBehavior: Clip.none,
-            children: <Widget>[
-              coverPicture(),
-              coverPictureGradient(),
-              userInfo(context, userID),
-              navigationTab(),
-            ],
+        StreamProvider<List<ProjectDetailsModel>>.value(
+          value: DatabaseService(uid: AuthService().getCurrentUID()).myProjects,
+        ),
+      ],
+      child: DefaultTabController(
+        length: 4,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).primaryColor,
+          ),
+          child: Scaffold(
+            body: Stack(
+              alignment: Alignment.center,
+              fit: StackFit.expand,
+              clipBehavior: Clip.none,
+              children: <Widget>[
+                coverPicture(),
+                coverPictureGradient(),
+                userInfo(context, userID),
+                navigationTab(),
+              ],
+            ),
           ),
         ),
       ),

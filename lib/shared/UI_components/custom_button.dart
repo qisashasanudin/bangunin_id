@@ -14,13 +14,17 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-      color: AppColors().primary,
-      child: Text(prompt, style: TextStyle(color: AppColors().accent1)),
-      onPressed: () {
-        onPressed();
-      },
+    return Container(
+      width: double.infinity,
+      child: RaisedButton(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        color: AppColors().primary,
+        child: Text(prompt, style: TextStyle(color: AppColors().accent1)),
+        onPressed: () {
+          onPressed();
+        },
+      ),
     );
   }
 }

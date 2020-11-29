@@ -30,7 +30,7 @@ class _MainPageWrapperState extends State<MainPageWrapper> {
         return Register(toggleView: toggleView);
       }
     } else {
-      return MainMenuTabNav();
+      return MainMenuNav();
     }
   }
   //========================= main function =========================

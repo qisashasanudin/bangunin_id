@@ -40,7 +40,9 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
                   child: CustomButton(
                       prompt: 'Simpan',
-                      onPressed: _uploadData(_projectDetails)),
+                      onPressed: () {
+                        _uploadData(_projectDetails);
+                      }),
                   // customButton('Simpan', _uploadData)
                 ),
               ]),

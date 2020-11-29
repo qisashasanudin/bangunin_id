@@ -73,8 +73,9 @@ class _NewProjectInformationState extends State<NewProjectInformation> {
                 Padding(
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
                     child: CustomButton(
-                        prompt: 'Selanjutnya',
-                        onPressed: _moveToNewProjectMaterials)),
+                      prompt: 'Selanjutnya',
+                      onPressed: _moveToNewProjectMaterials,
+                    )),
               ]),
             ),
             //sliver-sliver lain ditulis di sini
@@ -169,7 +170,10 @@ class _NewProjectInformationState extends State<NewProjectInformation> {
       //   '/newprojectmaterials',
       //   arguments: _projectDetails,
       // );
-      Navigator.of(context).pop();
+      Navigator.of(context).pushNamed(
+        '/newprojectmaterials',
+        arguments: _projectDetails,
+      );
     }
   }
 }
