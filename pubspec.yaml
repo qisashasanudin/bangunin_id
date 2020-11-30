@@ -69,7 +69,7 @@ flutter:
   assets:
     - assets/img/
     - assets/img/UI/
-    - assets/img/UI/materials/
+    - assets/img/materials/
     - assets/placeholders/
 
   # An image asset can refer to one or more resolution-specific "variants", see
