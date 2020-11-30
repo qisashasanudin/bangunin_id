@@ -7,6 +7,7 @@ import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/page_templates/slide_up_panel.dart';
 import 'package:bangunin_id/services/upload_picture.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AccountTab extends StatefulWidget {
   //Account({Key key}) : super(key: key);
@@ -127,6 +128,9 @@ class _AccountTabState extends State<AccountTab> {
     return TextFormField(
       keyboardType:
           (attribute == 'phone') ? TextInputType.number : TextInputType.text,
+      inputFormatters: [
+        if (attribute == 'phone') FilteringTextInputFormatter.digitsOnly,
+      ],
       initialValue: currentValue,
       decoration: formFieldDecoration(attribute),
       validator: (val) => (val.isEmpty) ? 'Data tidak boleh kosong' : null,

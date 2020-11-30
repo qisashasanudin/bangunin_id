@@ -6,6 +6,7 @@ class MaterialModel {
   String type;
   String unit;
   Float price;
+  int amount;
   String image;
 
   MaterialModel({
@@ -14,6 +15,7 @@ class MaterialModel {
     this.type,
     this.unit,
     this.price,
+    this.amount,
     this.image,
   });
 }

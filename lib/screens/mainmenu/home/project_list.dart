@@ -1,5 +1,4 @@
 import 'package:bangunin_id/models/project_details_model.dart';
-import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -22,12 +21,12 @@ class ProjectList extends StatelessWidget {
       itemCount: children.length,
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-          child: Container(
-            decoration: BoxDecoration(
-              color: AppColors().accent3,
-              borderRadius: BorderRadius.circular(100),
-            ),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          child: Card(
+            elevation: 10,
+            shadowColor: Color(0x802196F3),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             child: ListTile(
               dense: true,
               title: Text('Proyek ${children[index].projectName}'),

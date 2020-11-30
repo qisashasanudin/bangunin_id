@@ -67,6 +67,7 @@ StreamBuilder createProjectButton(String userID) {
           ((snapshot.data.data()['role'] == 'Administrator') ||
               (snapshot.data.data()['role'] == 'Mandor'))) {
         return FloatingActionButton.extended(
+          elevation: 10,
           onPressed: () async {
             Navigator.of(context).pushNamed('/newprojectinformation');
           },

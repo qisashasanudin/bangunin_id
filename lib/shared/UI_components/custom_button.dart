@@ -8,9 +8,8 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     Key key,
     @required this.onPressed,
-    String prompt,
-  })  : this.prompt = prompt,
-        super(key: key);
+    @required this.prompt,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

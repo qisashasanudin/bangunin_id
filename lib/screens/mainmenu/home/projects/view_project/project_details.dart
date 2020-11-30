@@ -81,7 +81,7 @@ SizedBox itemProgress(BuildContext context, itemType, percentage) {
   return SizedBox(
     width: double.infinity,
     child: Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
       child: Column(
         children: [
           Container(

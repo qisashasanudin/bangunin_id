@@ -5,6 +5,7 @@ import 'package:bangunin_id/shared/UI_components/form_field_decoration.dart';
 import 'package:bangunin_id/shared/UI_components/custom_button.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class NewProjectInformation extends StatefulWidget {
@@ -103,6 +104,10 @@ class _NewProjectInformationState extends State<NewProjectInformation> {
           : (labelText == 'Email Klien')
               ? TextInputType.emailAddress
               : TextInputType.text,
+      inputFormatters: [
+        if (labelText == 'Nomor Telepon Klien')
+          FilteringTextInputFormatter.digitsOnly,
+      ],
       decoration: formFieldDecoration(labelText),
       validator: (val) => (val.isEmpty && mustBeFilled == true)
           ? 'Data tidak boleh kosong.'

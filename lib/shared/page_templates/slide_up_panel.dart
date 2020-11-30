@@ -37,7 +37,7 @@ class _SlideUpPanelState extends State<SlideUpPanel> {
                   topRight: Radius.circular(30.0),
                 ),
                 boxShadow: [
-                  BoxShadow(color: Colors.grey[700], blurRadius: 10.0)
+                  BoxShadow(color: Colors.grey[700], blurRadius: 5.0)
                 ],
               ),
               child: MediaQuery.removePadding(
