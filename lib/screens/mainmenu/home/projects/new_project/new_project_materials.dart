@@ -3,7 +3,7 @@ import 'package:bangunin_id/models/project_details_model.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/UI_components/custom_button.dart';
-import 'package:bangunin_id/shared/UI_components/dynamic_multi_form.dart';
+import 'package:bangunin_id/shared/UI_components/dynamic_list.dart';
 import 'package:bangunin_id/shared/UI_components/popup_dialog.dart';
 import 'package:bangunin_id/shared/UI_components/project_details_card.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
@@ -48,7 +48,7 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
                 //TODO: Materials checklist
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: DynamicMultiForm(
+                  child: DynamicList(
                     returnValue: getMaterialListData,
                   ),
                 ),

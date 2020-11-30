@@ -7,10 +7,10 @@ typedef OnDelete();
 
 class ProjectMaterialForm extends StatefulWidget {
   final state = _ProjectMaterialFormState();
-  final MaterialModel modelValue;
-  final Function(MaterialModel newModelValue) returnValue;
+  final MaterialModel children;
+  final Function(MaterialModel newObject) returnValue;
 
-  ProjectMaterialForm({Key key, this.modelValue, this.returnValue})
+  ProjectMaterialForm({Key key, this.children, this.returnValue})
       : super(key: key);
 
   @override
@@ -52,7 +52,7 @@ class _ProjectMaterialFormState extends State<ProjectMaterialForm> {
     return Padding(
       padding: EdgeInsets.all(10),
       child: Text(
-          '${widget.modelValue.name} ${widget.modelValue.size ?? ''} ${widget.modelValue.type ?? ''}'),
+          '${widget.children.name} ${widget.children.size ?? ''} ${widget.children.type ?? ''}'),
     );
   }
 
@@ -64,8 +64,8 @@ class _ProjectMaterialFormState extends State<ProjectMaterialForm> {
         decoration: formFieldDecoration('Jumlah'),
         validator: (val) => (val.isEmpty) ? 'Data tidak boleh kosong.' : null,
         onChanged: (newValue) {
-          widget.modelValue.amount = int.parse(newValue);
-          widget.returnValue(widget.modelValue);
+          widget.children.amount = int.parse(newValue);
+          widget.returnValue(widget.children);
         },
       ),
     );
@@ -74,7 +74,7 @@ class _ProjectMaterialFormState extends State<ProjectMaterialForm> {
   Padding materialUnit() {
     return Padding(
       padding: EdgeInsets.all(10.0),
-      child: Text('${widget.modelValue.unit}'),
+      child: Text('${widget.children.unit}'),
     );
   }
 
