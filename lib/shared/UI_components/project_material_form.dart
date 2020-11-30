@@ -6,11 +6,12 @@ import 'package:flutter/services.dart';
 typedef OnDelete();
 
 class ProjectMaterialForm extends StatefulWidget {
-  final model;
   final state = _ProjectMaterialFormState();
   final MaterialModel modelValue;
+  final Function(MaterialModel newModelValue) callBack;
 
-  ProjectMaterialForm({Key key, this.model, this.modelValue}) : super(key: key);
+  ProjectMaterialForm({Key key, this.modelValue, this.callBack})
+      : super(key: key);
 
   @override
   _ProjectMaterialFormState createState() => state;
@@ -63,7 +64,8 @@ class _ProjectMaterialFormState extends State<ProjectMaterialForm> {
         decoration: formFieldDecoration('Jumlah'),
         validator: (val) => (val.isEmpty) ? 'Data tidak boleh kosong.' : null,
         onChanged: (newValue) {
-          widget.model.amount = int.parse(newValue);
+          widget.modelValue.amount = int.parse(newValue);
+          widget.callBack(widget.modelValue);
         },
       ),
     );

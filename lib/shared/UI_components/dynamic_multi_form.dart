@@ -9,9 +9,9 @@ class DynamicMultiForm extends StatefulWidget {
 }
 
 class _DynamicMultiFormState extends State<DynamicMultiForm> {
-  List<MaterialModel> materialsList = List.from(materials);
-  List<MaterialModel> choosenMaterialsList = [];
-  List<ProjectMaterialForm> choosenMaterialsForm = [];
+  List<MaterialModel> unselectedMaterialsList = List.from(materials);
+  List<MaterialModel> selectedMaterialsList = [];
+  List<ProjectMaterialForm> materialsForm = [];
 
   //========================= main function =========================
   @override
@@ -31,10 +31,10 @@ class _DynamicMultiFormState extends State<DynamicMultiForm> {
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       addAutomaticKeepAlives: true,
-      itemCount: choosenMaterialsForm.length,
+      itemCount: materialsForm.length,
       itemBuilder: (_, index) => Padding(
         padding: const EdgeInsets.only(bottom: 10),
-        child: choosenMaterialsForm[index],
+        child: materialsForm[index],
       ),
     );
   }
@@ -48,7 +48,7 @@ class _DynamicMultiFormState extends State<DynamicMultiForm> {
             child: new DropdownButton(
               hint: Text('Tambah material'),
               items: [
-                for (var materialType in materialsList)
+                for (var materialType in unselectedMaterialsList)
                   new DropdownMenuItem(
                     value: materialType,
                     child: Text(
@@ -59,10 +59,6 @@ class _DynamicMultiFormState extends State<DynamicMultiForm> {
                 addNewMaterial(value);
               },
             ),
-            // CustomButton(
-            //   prompt: '+',
-            //   onPressed: addNewMaterial,
-            // ),
           ),
         ),
         Flexible(
@@ -79,52 +75,39 @@ class _DynamicMultiFormState extends State<DynamicMultiForm> {
   }
 
   void addNewMaterial(materialType) {
-    if (choosenMaterialsForm.length >= materials.length) {
+    if (materialsForm.length >= materials.length) {
       return;
     }
     setState(() {
-      choosenMaterialsList.add(materialType);
-      materialsList.removeWhere((element) => element == materialType);
-      choosenMaterialsForm.add(ProjectMaterialForm(
-        model: MaterialModel(),
+      selectedMaterialsList.add(materialType);
+      unselectedMaterialsList.removeWhere((element) => element == materialType);
+      materialsForm.add(ProjectMaterialForm(
+        callBack: getNewMaterialData,
         modelValue: materialType,
       ));
     });
   }
 
   void deleteMaterial() {
-    if (choosenMaterialsForm.length < 1) {
+    if (materialsForm.length < 1) {
       return;
     }
     setState(() {
-      materialsList.add(choosenMaterialsList.last);
-      choosenMaterialsList.removeLast();
-      choosenMaterialsForm.removeLast();
+      unselectedMaterialsList.add(selectedMaterialsList.last);
+      selectedMaterialsList.removeLast();
+      materialsForm.removeLast();
     });
   }
+
+  getNewMaterialData(MaterialModel newMaterialModel) {
+    setState(() {
+      selectedMaterialsList[selectedMaterialsList.indexWhere((element) =>
+          element.name == newMaterialModel.name &&
+          element.type == newMaterialModel.type &&
+          element.size == newMaterialModel.size)] = newMaterialModel;
+    });
+    for (var element in selectedMaterialsList)
+      print(
+          '${element.name} ${element.size ?? ''} ${element.type ?? ''} ${element.amount ?? ''}');
+  }
 }
-
-// void addNewMaterial(materialType) {
-//   if (choosenMaterialsForm.length >= materials.length) {
-//     return;
-//   }
-//   setState(() {
-//     choosenMaterialsForm.add(ProjectMaterialForm(
-//       model: MaterialModel(),
-//       modelValue: materialType,
-//     ));
-//     materialsList.removeWhere((element) =>
-//         element.name == materialType.name &&
-//         element.type == materialType.type &&
-//         element.size == materialType.size);
-//   });
-// }
-
-// void deleteMaterial() {
-//   if (choosenMaterialsForm.length < 1) {
-//     return;
-//   }
-//   setState(() {
-//     choosenMaterialsForm.removeLast();
-//   });
-// }
