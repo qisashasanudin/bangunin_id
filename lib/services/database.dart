@@ -11,12 +11,28 @@ class DatabaseService {
     return await tabel.doc(uid).set({attribute: data}, SetOptions(merge: true));
   }
 
-  Future createDataOnSubcollection(String table, String subtable, data) async {
+  Future createProjectData(
+      String table, String subtable, Map<String, dynamic> data) async {
+    String docId;
     CollectionReference tabel = FirebaseFirestore.instance
         .collection(table)
         .doc(uid)
         .collection(subtable);
-    return await tabel.add(data);
+    await tabel.add(data).then((value) => docId = value.id);
+    return docId;
+  }
+
+  Future createProjectMaterialsData(String table, String subtable1,
+      String parentId, String subtable2, Map<String, dynamic> data) async {
+    String docId;
+    CollectionReference tabel = FirebaseFirestore.instance
+        .collection(table)
+        .doc(uid)
+        .collection(subtable1)
+        .doc(parentId)
+        .collection(subtable2);
+    await tabel.add(data).then((value) => docId = value.id);
+    return docId;
   }
 
   Stream entityDocumentSnapshot(String tablename) {

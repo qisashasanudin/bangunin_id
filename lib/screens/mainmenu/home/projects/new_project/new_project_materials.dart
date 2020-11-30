@@ -1,3 +1,4 @@
+import 'package:bangunin_id/models/material_model.dart';
 import 'package:bangunin_id/models/project_details_model.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
@@ -16,6 +17,7 @@ class NewProjectMaterials extends StatefulWidget {
 class _NewProjectMaterialsState extends State<NewProjectMaterials> {
   final _formKey = GlobalKey<FormState>();
   final userID = AuthService().getCurrentUID();
+  List<MaterialModel> materialsList = [];
 
   //========================= main function =========================
   @override
@@ -46,7 +48,9 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
                 //TODO: Materials checklist
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: DynamicMultiForm(),
+                  child: DynamicMultiForm(
+                    callBack: getMaterialListData,
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -76,14 +80,20 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
     return tappedYes;
   }
 
+  getMaterialListData(List<MaterialModel> _materialList) {
+    setState(() {
+      materialsList = List.from(_materialList);
+    });
+  }
+
   _uploadData(ProjectDetailsModel projectDetails) async {
     if (_formKey.currentState.validate()) {
       setState(() {
         projectDetails.dateCreated = DateTime.now();
         projectDetails.isCompleted = false;
       });
-      await DatabaseService(uid: AuthService().getCurrentUID())
-          .createDataOnSubcollection('accounts', 'projects', {
+      String docId = await DatabaseService(uid: AuthService().getCurrentUID())
+          .createProjectData('accounts', 'projects', {
         'projectName': projectDetails.projectName,
         'address': projectDetails.address,
         'addressGMap': projectDetails.addressGMap,
@@ -94,9 +104,20 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
         'dateDeadline': projectDetails.dateDeadline,
         'isCompleted': projectDetails.isCompleted,
       });
-      //TODO: upload materials information
-      // await DatabaseService(uid: AuthService().getCurrentUID()).updateData(
-      //     'accounts', attribute, data ?? snapshot.data.data()[attribute]);
+      print(docId);
+
+      for (var element in materialsList)
+        await DatabaseService(uid: AuthService().getCurrentUID())
+            .createProjectMaterialsData(
+                'accounts', 'projects', docId, 'materials_target', {
+          'name': element.name,
+          'size': element.size,
+          'type': element.type,
+          'unit': element.unit,
+          'price': element.price,
+          'amount': element.amount,
+          'image': element.image,
+        });
       Navigator.of(context).pop();
       Navigator.of(context).pop();
     }

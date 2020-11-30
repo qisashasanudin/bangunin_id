@@ -4,6 +4,10 @@ import 'package:bangunin_id/shared/UI_components/project_material_form.dart';
 import 'package:flutter/material.dart';
 
 class DynamicMultiForm extends StatefulWidget {
+  final Function(List<MaterialModel> newModelValue) callBack;
+
+  DynamicMultiForm({Key key, this.callBack}) : super(key: key);
+
   @override
   _DynamicMultiFormState createState() => _DynamicMultiFormState();
 }
@@ -109,5 +113,6 @@ class _DynamicMultiFormState extends State<DynamicMultiForm> {
     for (var element in selectedMaterialsList)
       print(
           '${element.name} ${element.size ?? ''} ${element.type ?? ''} ${element.amount ?? ''}');
+    widget.callBack(selectedMaterialsList);
   }
 }
