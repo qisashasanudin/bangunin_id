@@ -8,9 +8,9 @@ typedef OnDelete();
 class ProjectMaterialForm extends StatefulWidget {
   final state = _ProjectMaterialFormState();
   final MaterialModel modelValue;
-  final Function(MaterialModel newModelValue) callBack;
+  final Function(MaterialModel newModelValue) returnValue;
 
-  ProjectMaterialForm({Key key, this.modelValue, this.callBack})
+  ProjectMaterialForm({Key key, this.modelValue, this.returnValue})
       : super(key: key);
 
   @override
@@ -65,7 +65,7 @@ class _ProjectMaterialFormState extends State<ProjectMaterialForm> {
         validator: (val) => (val.isEmpty) ? 'Data tidak boleh kosong.' : null,
         onChanged: (newValue) {
           widget.modelValue.amount = int.parse(newValue);
-          widget.callBack(widget.modelValue);
+          widget.returnValue(widget.modelValue);
         },
       ),
     );

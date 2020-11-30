@@ -49,7 +49,7 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   child: DynamicMultiForm(
-                    callBack: getMaterialListData,
+                    returnValue: getMaterialListData,
                   ),
                 ),
                 Padding(
@@ -104,7 +104,6 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
         'dateDeadline': projectDetails.dateDeadline,
         'isCompleted': projectDetails.isCompleted,
       });
-      print(docId);
 
       for (var element in materialsList)
         await DatabaseService(uid: AuthService().getCurrentUID())

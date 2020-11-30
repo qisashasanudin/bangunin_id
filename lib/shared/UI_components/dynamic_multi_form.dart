@@ -4,9 +4,9 @@ import 'package:bangunin_id/shared/UI_components/project_material_form.dart';
 import 'package:flutter/material.dart';
 
 class DynamicMultiForm extends StatefulWidget {
-  final Function(List<MaterialModel> newModelValue) callBack;
+  final Function(List<MaterialModel> newModelValue) returnValue;
 
-  DynamicMultiForm({Key key, this.callBack}) : super(key: key);
+  DynamicMultiForm({Key key, this.returnValue}) : super(key: key);
 
   @override
   _DynamicMultiFormState createState() => _DynamicMultiFormState();
@@ -22,14 +22,19 @@ class _DynamicMultiFormState extends State<DynamicMultiForm> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        projectMaterialList(),
-        addAndDeleteButton(),
+        _projectMaterialList(),
+        Row(
+          children: <Widget>[
+            _addButton(),
+            _deleteButton(),
+          ],
+        ),
       ],
     );
   }
   //========================= main function =========================
 
-  ListView projectMaterialList() {
+  ListView _projectMaterialList() {
     return ListView.builder(
       padding: EdgeInsets.zero,
       physics: NeverScrollableScrollPhysics(),
@@ -43,57 +48,56 @@ class _DynamicMultiFormState extends State<DynamicMultiForm> {
     );
   }
 
-  Row addAndDeleteButton() {
-    return Row(
-      children: [
-        Flexible(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: new DropdownButton(
-              hint: Text('Tambah material'),
-              items: [
-                for (var materialType in unselectedMaterialsList)
-                  new DropdownMenuItem(
-                    value: materialType,
-                    child: Text(
-                        '${materialType.name ?? ''} ${materialType.size ?? ''} ${materialType.type ?? ''}'),
-                  )
-              ],
-              onChanged: (value) {
-                addNewMaterial(value);
-              },
-            ),
-          ),
+  Flexible _addButton() {
+    return Flexible(
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: new DropdownButton(
+          hint: Text('Tambah material'),
+          items: [
+            for (var materialType in unselectedMaterialsList)
+              new DropdownMenuItem(
+                value: materialType,
+                child: Text(
+                    '${materialType.name ?? ''} ${materialType.size ?? ''} ${materialType.type ?? ''}'),
+              )
+          ],
+          onChanged: (value) {
+            _addNewMaterial(value);
+          },
         ),
-        Flexible(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: CustomButton(
-              prompt: 'Hapus',
-              onPressed: deleteMaterial,
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 
-  void addNewMaterial(materialType) {
-    if (materialsForm.length >= materials.length) {
+  void _addNewMaterial(materialType) {
+    if (unselectedMaterialsList.isEmpty) {
       return;
     }
     setState(() {
       selectedMaterialsList.add(materialType);
       unselectedMaterialsList.removeWhere((element) => element == materialType);
       materialsForm.add(ProjectMaterialForm(
-        callBack: getNewMaterialData,
+        returnValue: _getNewMaterialData,
         modelValue: materialType,
       ));
     });
   }
 
-  void deleteMaterial() {
-    if (materialsForm.length < 1) {
+  Flexible _deleteButton() {
+    return Flexible(
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: CustomButton(
+          prompt: 'Hapus',
+          onPressed: _deleteMaterial,
+        ),
+      ),
+    );
+  }
+
+  void _deleteMaterial() {
+    if (selectedMaterialsList.isEmpty) {
       return;
     }
     setState(() {
@@ -103,16 +107,13 @@ class _DynamicMultiFormState extends State<DynamicMultiForm> {
     });
   }
 
-  getNewMaterialData(MaterialModel newMaterialModel) {
+  _getNewMaterialData(MaterialModel newMaterialModel) {
     setState(() {
       selectedMaterialsList[selectedMaterialsList.indexWhere((element) =>
           element.name == newMaterialModel.name &&
           element.type == newMaterialModel.type &&
           element.size == newMaterialModel.size)] = newMaterialModel;
     });
-    for (var element in selectedMaterialsList)
-      print(
-          '${element.name} ${element.size ?? ''} ${element.type ?? ''} ${element.amount ?? ''}');
-    widget.callBack(selectedMaterialsList);
+    widget.returnValue(selectedMaterialsList);
   }
 }
