@@ -8,7 +8,7 @@ typedef OnDelete();
 class ProjectMaterialForm extends StatefulWidget {
   final model;
   final state = _ProjectMaterialFormState();
-  MaterialModel modelValue;
+  final MaterialModel modelValue;
 
   ProjectMaterialForm({Key key, this.model, this.modelValue}) : super(key: key);
 
@@ -21,6 +21,7 @@ class ProjectMaterialForm extends StatefulWidget {
 class _ProjectMaterialFormState extends State<ProjectMaterialForm> {
   final _formKey = GlobalKey<FormState>();
 
+  //========================= main function =========================
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -35,31 +36,43 @@ class _ProjectMaterialFormState extends State<ProjectMaterialForm> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                    '${widget.modelValue.name} ${widget.modelValue.size ?? ''} ${widget.modelValue.type ?? ''}'),
-              ),
-              Flexible(
-                child: TextFormField(
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  decoration: formFieldDecoration('Jumlah'),
-                  validator: (val) =>
-                      (val.isEmpty) ? 'Data tidak boleh kosong.' : null,
-                  onChanged: (newValue) {
-                    widget.model.amount = int.parse(newValue);
-                  },
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Text('${widget.modelValue.unit}'),
-              ),
+              materialType(),
+              materialAmount(),
+              materialUnit(),
             ],
           ),
         ),
       ),
+    );
+  }
+  //========================= main function =========================
+
+  Padding materialType() {
+    return Padding(
+      padding: EdgeInsets.all(10),
+      child: Text(
+          '${widget.modelValue.name} ${widget.modelValue.size ?? ''} ${widget.modelValue.type ?? ''}'),
+    );
+  }
+
+  Flexible materialAmount() {
+    return Flexible(
+      child: TextFormField(
+        keyboardType: TextInputType.number,
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+        decoration: formFieldDecoration('Jumlah'),
+        validator: (val) => (val.isEmpty) ? 'Data tidak boleh kosong.' : null,
+        onChanged: (newValue) {
+          widget.model.amount = int.parse(newValue);
+        },
+      ),
+    );
+  }
+
+  Padding materialUnit() {
+    return Padding(
+      padding: EdgeInsets.all(10.0),
+      child: Text('${widget.modelValue.unit}'),
     );
   }
 

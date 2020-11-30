@@ -24,12 +24,12 @@ List<MaterialModel> materials = [
   MaterialModel(
     name: 'semen',
     size: '50Kg',
-    unit: 'Sak',
+    unit: 'sak',
   ),
   MaterialModel(
     name: 'MU200',
     size: '40Kg',
-    unit: 'Sak',
+    unit: 'sak',
   ),
   MaterialModel(
     name: 'besi',
