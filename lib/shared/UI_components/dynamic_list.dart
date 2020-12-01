@@ -25,7 +25,6 @@ class _DynamicListState extends State<DynamicList> {
         _list(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             _addObjectButton(),
             _deleteObjectButton(),
@@ -43,10 +42,12 @@ class _DynamicListState extends State<DynamicList> {
       shrinkWrap: true,
       addAutomaticKeepAlives: true,
       itemCount: generatedList.length,
-      itemBuilder: (_, index) => Padding(
-        padding: const EdgeInsets.only(bottom: 10),
-        child: generatedList[index],
-      ),
+      itemBuilder: (_, index) {
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: generatedList[index],
+        );
+      },
     );
   }
 
@@ -84,6 +85,16 @@ class _DynamicListState extends State<DynamicList> {
         returnValue: _getNewObject,
       ));
     });
+    widget.returnValue(selectedObjects);
+  }
+
+  _getNewObject(MaterialModel newObject) {
+    setState(() {
+      selectedObjects[selectedObjects.indexWhere((oldObject) =>
+          oldObject.name == newObject.name &&
+          oldObject.type == newObject.type &&
+          oldObject.size == newObject.size)] = newObject;
+    });
   }
 
   Flexible _deleteObjectButton() {
@@ -107,15 +118,12 @@ class _DynamicListState extends State<DynamicList> {
       selectedObjects.removeLast();
       generatedList.removeLast();
     });
+    widget.returnValue(selectedObjects);
   }
 
-  _getNewObject(MaterialModel newObject) {
-    setState(() {
-      selectedObjects[selectedObjects.indexWhere((oldObject) =>
-          oldObject.name == newObject.name &&
-          oldObject.type == newObject.type &&
-          oldObject.size == newObject.size)] = newObject;
-    });
-    widget.returnValue(selectedObjects);
+  bool get validateEachForm {
+    var allValid = true;
+    generatedList.forEach((form) => allValid = allValid && form.isValid());
+    return allValid;
   }
 }

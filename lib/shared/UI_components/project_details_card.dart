@@ -13,6 +13,13 @@ class ProjectDetailsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final DateFormat _dateFormatter = DateFormat('dd MMM yyyy');
+    final String dateCreated = _dateFormatter.format(child.dateCreated);
+    final String dateDeadline = _dateFormatter.format(child.dateDeadline);
+    final String difference =
+        child.dateDeadline.difference(child.dateCreated).inDays.toString();
+    final String daysRemaining =
+        child.dateDeadline.difference(DateTime.now()).inDays.toString();
+
     return Card(
       elevation: 10,
       shadowColor: Color(0x802196F3),
@@ -23,24 +30,31 @@ class ProjectDetailsCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: Text(
-                'Rincian Proyek',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-            Text('Proyek ${child.projectName}'),
-            if (child.address != null)
-              Text(
-                '${child.address ?? '(Alamat kosong)'}',
-                overflow: TextOverflow.ellipsis,
-              ),
-            if (child.clientName != null &&
-                (child.clientPhone != null || child.clientEmail != null))
-              Text(
-                  '${child.clientName ?? '(Nama klien kosong)'} - ${child.clientPhone ?? child.clientEmail ?? '(Kontak klien kosong)'}'),
-            Text("Tanggal mulai: ${_dateFormatter.format(child.dateCreated)}"),
-            Text("Tenggat waktu: ${_dateFormatter.format(child.dateDeadline)}"),
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Text('Rincian Proyek',
+                    style: TextStyle(fontWeight: FontWeight.bold))),
+            Padding(
+                padding: const EdgeInsets.symmetric(vertical: 3),
+                child: Text('Proyek ${child.projectName}')),
+            if (child.address.isNotEmpty || child.address != '')
+              Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 3),
+                  child: Text('${child.address ?? '(Alamat kosong)'}')),
+            if (child.clientName.isNotEmpty || child.clientName != '')
+              Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 3),
+                  child:
+                      Text('${child.clientName} - ${child.clientPhone ?? ''}')),
+            if (child.clientEmail.isNotEmpty || child.clientEmail != null)
+              Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 3),
+                  child: Text('${child.clientEmail ?? ''}')),
+            Padding(
+                padding: const EdgeInsets.symmetric(vertical: 3),
+                child: Text('$dateCreated - $dateDeadline ($difference hari)')),
+            Padding(
+                padding: const EdgeInsets.symmetric(vertical: 3),
+                child: Text('Tersisa $daysRemaining hari lagi')),
           ],
         ),
       ),

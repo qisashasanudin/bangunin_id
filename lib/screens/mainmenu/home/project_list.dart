@@ -14,7 +14,6 @@ class ProjectList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final DateFormat _dateFormatter = DateFormat('dd MMM yyyy');
-
     return ListView.builder(
       shrinkWrap: true,
       physics: ScrollPhysics(),
@@ -31,7 +30,7 @@ class ProjectList extends StatelessWidget {
               dense: true,
               title: Text('Proyek ${children[index].projectName}'),
               subtitle: Text(
-                  "Deadline: ${_dateFormatter.format(children[index].dateDeadline)}"),
+                  "Deadline: ${_dateFormatter.format(children[index].dateDeadline)} (${children[index].dateDeadline.difference(DateTime.now()).inDays.toString()} hari lagi)"),
               trailing: (children[index].isCompleted == false)
                   ? Text("In - Progress",
                       style: TextStyle(

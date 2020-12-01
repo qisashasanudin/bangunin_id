@@ -22,6 +22,11 @@ class ProjectMaterialForm extends StatefulWidget {
 class _ProjectMaterialFormState extends State<ProjectMaterialForm> {
   final _formKey = GlobalKey<FormState>();
 
+  bool validate() {
+    var valid = _formKey.currentState.validate();
+    return valid;
+  }
+
   //========================= main function =========================
   @override
   Widget build(BuildContext context) {
@@ -64,7 +69,7 @@ class _ProjectMaterialFormState extends State<ProjectMaterialForm> {
         decoration: formFieldDecoration('Jumlah'),
         validator: (val) => (val.isEmpty) ? 'Data tidak boleh kosong.' : null,
         onChanged: (newValue) {
-          widget.children.amount = int.parse(newValue);
+          widget.children.amount = int.parse(newValue ?? 0);
           widget.returnValue(widget.children);
         },
       ),
@@ -76,11 +81,5 @@ class _ProjectMaterialFormState extends State<ProjectMaterialForm> {
       padding: EdgeInsets.all(10.0),
       child: Text('${widget.children.unit}'),
     );
-  }
-
-  bool validate() {
-    var valid = _formKey.currentState.validate();
-    if (valid) _formKey.currentState.save();
-    return valid;
   }
 }
