@@ -31,12 +31,14 @@ class ProjectDetails extends StatelessWidget {
                 projectDetails(details),
                 separatorLine(),
                 overallProgress(0.75),
-                itemProgress(context, 'Pasir', 0.40),
-                itemProgress(context, 'Keramik', 0.80),
-                itemProgress(context, 'Batu Bata', 1.00),
-                itemProgress(context, 'Semen', 0.45),
-                itemProgress(context, 'Cat', 0.75),
-                itemProgress(context, 'Kayu', 0.10),
+                ListView.builder(
+                  shrinkWrap: true,
+                  padding: EdgeInsets.zero,
+                  itemCount: 5,
+                  itemBuilder: (_, builder) {
+                    return itemProgress(context, 'Material', 0.50);
+                  },
+                ),
               ]),
             ),
             //sliver-sliver lain ditulis di sini

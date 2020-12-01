@@ -45,7 +45,6 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
                 Padding(
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                     child: Divider(color: Colors.black)),
-                //TODO: Materials checklist
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   child: DynamicList(
