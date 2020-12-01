@@ -52,9 +52,10 @@ class ProjectDetailsCard extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: Text('$dateCreated - $dateDeadline ($difference hari)')),
-            Padding(
-                padding: const EdgeInsets.symmetric(vertical: 3),
-                child: Text('Tersisa $daysRemaining hari lagi')),
+            if (!child.isCompleted)
+              Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 3),
+                  child: Text('Tersisa $daysRemaining hari lagi')),
           ],
         ),
       ),

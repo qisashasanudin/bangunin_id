@@ -30,7 +30,7 @@ class ProjectList extends StatelessWidget {
               dense: true,
               title: Text('Proyek ${children[index].projectName}'),
               subtitle: Text(
-                  "Deadline: ${_dateFormatter.format(children[index].dateDeadline)} (${children[index].dateDeadline.difference(DateTime.now()).inDays.toString()} hari lagi)"),
+                  "Deadline: ${_dateFormatter.format(children[index].dateDeadline)} ${(!children[index].isCompleted) ? '(' + children[index].dateDeadline.difference(DateTime.now()).inDays.toString() + ' hari lagi)' : ''}"),
               trailing: (children[index].isCompleted == false)
                   ? Text("In - Progress",
                       style: TextStyle(
