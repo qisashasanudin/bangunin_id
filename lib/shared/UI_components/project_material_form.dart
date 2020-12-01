@@ -69,7 +69,7 @@ class _ProjectMaterialFormState extends State<ProjectMaterialForm> {
         decoration: formFieldDecoration('Jumlah'),
         validator: (val) => (val.isEmpty) ? 'Data tidak boleh kosong.' : null,
         onChanged: (newValue) {
-          widget.children.amount = int.parse(newValue ?? 0);
+          widget.children.amount = int.parse(newValue);
           widget.returnValue(widget.children);
         },
       ),

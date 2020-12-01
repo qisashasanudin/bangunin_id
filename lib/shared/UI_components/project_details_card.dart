@@ -36,16 +36,16 @@ class ProjectDetailsCard extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: Text('Proyek ${child.projectName}')),
-            if (child.address.isNotEmpty || child.address != '')
+            if (child.address != null && child.address != '')
               Padding(
                   padding: const EdgeInsets.symmetric(vertical: 3),
                   child: Text('${child.address ?? '(Alamat kosong)'}')),
-            if (child.clientName.isNotEmpty || child.clientName != '')
+            if (child.clientName != null && child.clientName != '')
               Padding(
                   padding: const EdgeInsets.symmetric(vertical: 3),
                   child:
                       Text('${child.clientName} - ${child.clientPhone ?? ''}')),
-            if (child.clientEmail.isNotEmpty || child.clientEmail != null)
+            if (child.clientEmail != null && child.clientEmail != '')
               Padding(
                   padding: const EdgeInsets.symmetric(vertical: 3),
                   child: Text('${child.clientEmail ?? ''}')),
