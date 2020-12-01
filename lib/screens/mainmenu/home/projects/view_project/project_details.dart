@@ -1,4 +1,6 @@
+import 'package:bangunin_id/models/project_details_model.dart';
 import 'package:bangunin_id/shared/UI_components/app_colors.dart';
+import 'package:bangunin_id/shared/UI_components/project_details_card.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
@@ -12,6 +14,7 @@ class ProjectDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
     final userID = _auth.getCurrentUID();
+    ProjectDetailsModel details = ModalRoute.of(context).settings.arguments;
 
     return StreamBuilder<Object>(
       stream: DatabaseService(uid: userID).entityDocumentSnapshot('projects'),
@@ -21,11 +24,12 @@ class ProjectDetails extends StatelessWidget {
           //   'assets/img/UI/sliver_page_bg.jpg',
           //   fit: BoxFit.cover,
           // ),
-          title: Text('Rincian Proyek'),
+          title: Text('Proyek ${details.projectName}'),
           children: [
             SliverList(
               delegate: SliverChildListDelegate([
-                // informasi-informasi proyek ditulis di sini
+                projectDetails(details),
+                separatorLine(),
                 overallProgress(0.75),
                 itemProgress(context, 'Pasir', 0.40),
                 itemProgress(context, 'Keramik', 0.80),
@@ -41,7 +45,21 @@ class ProjectDetails extends StatelessWidget {
       },
     );
   }
+
   //========================= main function =========================
+}
+
+Padding projectDetails(ProjectDetailsModel details) {
+  return Padding(
+    padding: EdgeInsets.symmetric(horizontal: 15),
+    child: ProjectDetailsCard(child: details),
+  );
+}
+
+Padding separatorLine() {
+  return Padding(
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      child: Divider(color: Colors.black));
 }
 
 Padding overallProgress(percentage) {

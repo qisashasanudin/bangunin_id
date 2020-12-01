@@ -14,7 +14,7 @@ class ProjectDetailsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final DateFormat _dateFormatter = DateFormat('dd MMM yyyy');
     return Card(
-      elevation: 15,
+      elevation: 10,
       shadowColor: Color(0x802196F3),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
@@ -39,7 +39,8 @@ class ProjectDetailsCard extends StatelessWidget {
                 (child.clientPhone != null || child.clientEmail != null))
               Text(
                   '${child.clientName ?? '(Nama klien kosong)'} - ${child.clientPhone ?? child.clientEmail ?? '(Kontak klien kosong)'}'),
-            Text("Deadline: ${_dateFormatter.format(child.dateDeadline)}"),
+            Text("Tanggal mulai: ${_dateFormatter.format(child.dateCreated)}"),
+            Text("Tenggat waktu: ${_dateFormatter.format(child.dateDeadline)}"),
           ],
         ),
       ),

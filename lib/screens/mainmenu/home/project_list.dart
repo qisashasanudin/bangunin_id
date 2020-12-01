@@ -44,7 +44,8 @@ class ProjectList extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       )),
               onTap: () async {
-                Navigator.of(context).pushNamed('/projectdetails');
+                Navigator.of(context)
+                    .pushNamed('/projectdetails', arguments: children[index]);
               },
               onLongPress: () {},
             ),
