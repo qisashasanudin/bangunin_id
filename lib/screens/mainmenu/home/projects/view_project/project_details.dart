@@ -34,6 +34,7 @@ class ProjectDetails extends StatelessWidget {
                 ListView.builder(
                   shrinkWrap: true,
                   padding: EdgeInsets.zero,
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: 5,
                   itemBuilder: (_, builder) {
                     return itemProgress(context, 'Material', 0.50);
