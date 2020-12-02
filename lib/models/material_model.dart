@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class MaterialModel {
   String materialId;
   String name;
