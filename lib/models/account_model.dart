@@ -1,4 +1,5 @@
 class AccountModel {
+  String accountId;
   String address;
   String email;
   String name;
@@ -7,6 +8,7 @@ class AccountModel {
   String role;
 
   AccountModel({
+    this.accountId,
     this.address,
     this.email,
     this.name,

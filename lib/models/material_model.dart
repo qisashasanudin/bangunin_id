@@ -1,15 +1,17 @@
 import 'dart:ffi';
 
 class MaterialModel {
+  String materialId;
   String name;
   String size;
   String type;
   String unit;
-  Float price;
+  double price;
   int amount;
   String image;
 
   MaterialModel({
+    this.materialId,
     this.name,
     this.size,
     this.type,

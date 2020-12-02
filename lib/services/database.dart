@@ -1,10 +1,12 @@
+import 'package:bangunin_id/models/material_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bangunin_id/models/project_details_model.dart';
 import 'package:bangunin_id/models/account_model.dart';
 
 class DatabaseService {
   final String uid;
-  DatabaseService({this.uid});
+  final String projectId;
+  DatabaseService({this.uid, this.projectId});
 
   Future writeData(String table, String attribute, String data) async {
     CollectionReference tabel = FirebaseFirestore.instance.collection(table);
@@ -45,6 +47,7 @@ class DatabaseService {
   List<AccountModel> _accountListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return AccountModel(
+        accountId: doc.id,
         address: doc.data()['address'] ?? '',
         email: doc.data()['email'] ?? '',
         name: doc.data()['name'] ?? '',
@@ -66,6 +69,7 @@ class DatabaseService {
       QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return ProjectDetailsModel(
+        projectId: doc.id,
         projectName: doc.data()['projectName'] ?? '',
         address: doc.data()['address'] ?? '',
         addressGMap: doc.data()['addressGMap'] ?? '',
@@ -86,5 +90,42 @@ class DatabaseService {
         .collection('projects')
         .snapshots()
         .map(_projectDetailsListFromSnapshot);
+  }
+
+  List<MaterialModel> _projectMateialsListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return MaterialModel(
+        materialId: doc.id,
+        name: doc.data()['name'] ?? '',
+        size: doc.data()['size'] ?? '',
+        type: doc.data()['type'] ?? '',
+        unit: doc.data()['unit'] ?? '',
+        price: doc.data()['price'] ?? 0,
+        amount: doc.data()['amount'] ?? 0,
+        image: doc.data()['image'] ?? '',
+      );
+    }).toList();
+  }
+
+  Stream<List<MaterialModel>> get projectMaterialsTarget {
+    return FirebaseFirestore.instance
+        .collection('accounts')
+        .doc(uid)
+        .collection('projects')
+        .doc(projectId)
+        .collection('materials_target')
+        .snapshots()
+        .map(_projectMateialsListFromSnapshot);
+  }
+
+  Stream<List<MaterialModel>> get projectMaterialsProgress {
+    return FirebaseFirestore.instance
+        .collection('accounts')
+        .doc(uid)
+        .collection('projects')
+        .doc(projectId)
+        .collection('materials_progress')
+        .snapshots()
+        .map(_projectMateialsListFromSnapshot);
   }
 }

@@ -1,4 +1,5 @@
 class ProjectDetailsModel {
+  String projectId;
   String projectName;
   String address;
   String addressGMap;
@@ -10,6 +11,7 @@ class ProjectDetailsModel {
   bool isCompleted;
 
   ProjectDetailsModel({
+    this.projectId,
     this.projectName,
     this.address,
     this.addressGMap,

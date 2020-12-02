@@ -1,12 +1,15 @@
+import 'package:bangunin_id/models/material_model.dart';
 import 'package:bangunin_id/models/project_details_model.dart';
 import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:bangunin_id/shared/UI_components/project_details_card.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
 class ProjectDetails extends StatelessWidget {
   //========================= main function =========================
@@ -16,48 +19,60 @@ class ProjectDetails extends StatelessWidget {
     final userID = _auth.getCurrentUID();
     ProjectDetailsModel details = ModalRoute.of(context).settings.arguments;
 
-    return StreamBuilder<Object>(
-      stream: DatabaseService(uid: userID).entityDocumentSnapshot('projects'),
-      builder: (context, snapshot) {
-        return SliverPage(
-          // backgroundImage: Image.asset(
-          //   'assets/img/UI/sliver_page_bg.jpg',
-          //   fit: BoxFit.cover,
+    return MultiProvider(
+        providers: [
+          StreamProvider<List<MaterialModel>>.value(
+            value: DatabaseService(uid: userID, projectId: details.projectId)
+                .projectMaterialsTarget,
+          ),
+          // StreamProvider<List<MaterialModel>>.value(
+          //   value: DatabaseService(uid: userID, projectId: details.projectId)
+          //       .projectMaterialsProgress,
           // ),
-          title: Text('Proyek ${details.projectName}'),
-          children: [
-            SliverList(
-              delegate: SliverChildListDelegate([
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Flexible(flex: 1, child: overallProgress(0.75)),
-                      SizedBox(width: 15),
-                      Flexible(
-                          flex: 3, child: ProjectDetailsCard(child: details)),
-                    ],
+        ],
+        builder: (context, snapshot) {
+          var materialsTarget = Provider.of<List<MaterialModel>>(context) ?? [];
+          print(materialsTarget);
+          // var materialsProgress = Provider.of<List<MaterialModel>>(context) ?? [];
+          return SliverPage(
+            // backgroundImage: Image.asset(
+            //   'assets/img/UI/sliver_page_bg.jpg',
+            //   fit: BoxFit.cover,
+            // ),
+            title: Text('Proyek ${details.projectName}'),
+            children: [
+              SliverList(
+                delegate: SliverChildListDelegate([
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Flexible(flex: 1, child: overallProgress(0.75)),
+                        SizedBox(width: 15),
+                        Flexible(
+                            flex: 3, child: ProjectDetailsCard(child: details)),
+                      ],
+                    ),
                   ),
-                ),
-                separatorLine(),
-                ListView.builder(
-                  shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: 5,
-                  itemBuilder: (_, builder) {
-                    return itemProgress(context, 'Material', 0.50);
-                  },
-                ),
-              ]),
-            ),
-            //sliver-sliver lain ditulis di sini
-          ],
-        );
-      },
-    );
+                  separatorLine(),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: materialsTarget.length,
+                    itemBuilder: (_, index) {
+                      return itemProgress(
+                          context, materialsTarget[index], 0.50);
+                    },
+                  ),
+                ]),
+              ),
+              //sliver-sliver lain ditulis di sini
+            ],
+          );
+        });
   }
 
   //========================= main function =========================
@@ -69,7 +84,7 @@ Padding separatorLine() {
       child: Divider(color: Colors.black));
 }
 
-CircularPercentIndicator overallProgress(percentage) {
+CircularPercentIndicator overallProgress(double percentage) {
   return CircularPercentIndicator(
     circularStrokeCap: CircularStrokeCap.round,
     progressColor: Colors.greenAccent,
@@ -97,7 +112,8 @@ CircularPercentIndicator overallProgress(percentage) {
   );
 }
 
-SizedBox itemProgress(BuildContext context, itemType, percentage) {
+SizedBox itemProgress(
+    BuildContext context, MaterialModel item, double percentage) {
   return SizedBox(
     width: double.infinity,
     child: Padding(
@@ -107,7 +123,7 @@ SizedBox itemProgress(BuildContext context, itemType, percentage) {
           Container(
             alignment: Alignment.centerLeft,
             child: Text(
-              itemType,
+              '${item.name} ${item.size} ${item.type} (${item.amount} ${item.unit})',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
