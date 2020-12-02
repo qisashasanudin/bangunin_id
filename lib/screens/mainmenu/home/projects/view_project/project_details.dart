@@ -55,6 +55,10 @@ class ProjectDetails extends StatelessWidget {
                     ],
                   ),
                 ),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20)
+                    //masukkan tulisan
+                    ),
                 Container(
                   height: 250,
                   child: ListView(
@@ -96,7 +100,7 @@ class ProjectDetails extends StatelessWidget {
     return Container(
       width: 250.0,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15.0),
+        padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15),
         child: Card(
           clipBehavior: Clip.antiAlias,
           elevation: 10,
