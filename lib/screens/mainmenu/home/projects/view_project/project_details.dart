@@ -56,7 +56,19 @@ class ProjectDetails extends StatelessWidget {
                     ],
                   ),
                 ),
-                //TODO: masukkan project gallery di sini
+                ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                    myArticles("assets/placeholders/Macchiato.jpg", "heading1",
+                        "subHeading1"),
+                    myArticles("assets/placeholders/Macchiato.jpg", "heading1",
+                        "subHeading1"),
+                    myArticles("assets/placeholders/Macchiato.jpg", "heading1",
+                        "subHeading1"),
+                    myArticles("assets/placeholders/Macchiato.jpg", "heading1",
+                        "subHeading1"),
+                  ],
+                ),
                 separatorLine(),
                 ListView.builder(
                   shrinkWrap: true,
@@ -73,6 +85,23 @@ class ProjectDetails extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+
+  Container myArticles(String imageVal, String heading, String subHeading) {
+    return Container(
+      width: 160.0,
+      child: Card(
+        child: Wrap(
+          children: [
+            Image.network(imageVal),
+            ListTile(
+              title: Text(heading),
+              subtitle: Text(subHeading),
+            )
+          ],
+        ),
+      ),
     );
   }
   //========================= main function =========================
