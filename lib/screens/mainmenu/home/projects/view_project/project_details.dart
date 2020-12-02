@@ -20,61 +20,61 @@ class ProjectDetails extends StatelessWidget {
     ProjectDetailsModel details = ModalRoute.of(context).settings.arguments;
 
     return MultiProvider(
-        providers: [
-          StreamProvider<List<MaterialModel>>.value(
-            value: DatabaseService(uid: userID, projectId: details.projectId)
-                .projectMaterialsTarget,
-          ),
-          // StreamProvider<List<MaterialModel>>.value(
-          //   value: DatabaseService(uid: userID, projectId: details.projectId)
-          //       .projectMaterialsProgress,
+      providers: [
+        StreamProvider<List<MaterialModel>>.value(
+          value: DatabaseService(uid: userID, projectId: details.projectId)
+              .projectMaterialsTarget,
+        ),
+        // StreamProvider<List<MaterialModel>>.value(
+        //   value: DatabaseService(uid: userID, projectId: details.projectId)
+        //       .projectMaterialsProgress,
+        // ),
+      ],
+      builder: (context, snapshot) {
+        var materialsTarget = Provider.of<List<MaterialModel>>(context) ?? [];
+        print(materialsTarget);
+        // var materialsProgress = Provider.of<List<MaterialModel>>(context) ?? [];
+        return SliverPage(
+          // backgroundImage: Image.asset(
+          //   'assets/img/UI/sliver_page_bg.jpg',
+          //   fit: BoxFit.cover,
           // ),
-        ],
-        builder: (context, snapshot) {
-          var materialsTarget = Provider.of<List<MaterialModel>>(context) ?? [];
-          print(materialsTarget);
-          // var materialsProgress = Provider.of<List<MaterialModel>>(context) ?? [];
-          return SliverPage(
-            // backgroundImage: Image.asset(
-            //   'assets/img/UI/sliver_page_bg.jpg',
-            //   fit: BoxFit.cover,
-            // ),
-            title: Text('Proyek ${details.projectName}'),
-            children: [
-              SliverList(
-                delegate: SliverChildListDelegate([
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Flexible(flex: 1, child: overallProgress(0.75)),
-                        SizedBox(width: 15),
-                        Flexible(
-                            flex: 3, child: ProjectDetailsCard(child: details)),
-                      ],
-                    ),
+          title: Text('Proyek ${details.projectName}'),
+          children: [
+            SliverList(
+              delegate: SliverChildListDelegate([
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Flexible(flex: 1, child: overallProgress(0.50)),
+                      SizedBox(width: 15),
+                      Flexible(
+                          flex: 3, child: ProjectDetailsCard(child: details)),
+                    ],
                   ),
-                  separatorLine(),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    padding: EdgeInsets.zero,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: materialsTarget.length,
-                    itemBuilder: (_, index) {
-                      return itemProgress(
-                          context, materialsTarget[index], 0.50);
-                    },
-                  ),
-                ]),
-              ),
-              //sliver-sliver lain ditulis di sini
-            ],
-          );
-        });
+                ),
+                //TODO: masukkan project gallery di sini
+                separatorLine(),
+                ListView.builder(
+                  shrinkWrap: true,
+                  padding: EdgeInsets.zero,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: materialsTarget.length,
+                  itemBuilder: (_, index) {
+                    return itemProgress(context, materialsTarget[index], 0.50);
+                  },
+                ),
+              ]),
+            ),
+            //sliver-sliver lain ditulis di sini
+          ],
+        );
+      },
+    );
   }
-
   //========================= main function =========================
 }
 
