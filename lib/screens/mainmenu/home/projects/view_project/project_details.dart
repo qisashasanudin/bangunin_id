@@ -100,7 +100,7 @@ class ProjectDetails extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Wrap(
           children: [
-            Image.network(imageVal),
+            Image.asset(imageVal),
             ListTile(
               title: Text(heading),
               subtitle: Text(subHeading),
