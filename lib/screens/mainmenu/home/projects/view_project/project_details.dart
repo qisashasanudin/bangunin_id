@@ -56,18 +56,21 @@ class ProjectDetails extends StatelessWidget {
                     ],
                   ),
                 ),
-                ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    myArticles("assets/placeholders/Macchiato.jpg", "heading1",
-                        "subHeading1"),
-                    myArticles("assets/placeholders/Macchiato.jpg", "heading1",
-                        "subHeading1"),
-                    myArticles("assets/placeholders/Macchiato.jpg", "heading1",
-                        "subHeading1"),
-                    myArticles("assets/placeholders/Macchiato.jpg", "heading1",
-                        "subHeading1"),
-                  ],
+                Container(
+                  height: 100,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: <Widget>[
+                      myArticles("assets/placeholders/Macchiato.jpg",
+                          "heading1", "subHeading1"),
+                      myArticles("assets/placeholders/Macchiato.jpg",
+                          "heading1", "subHeading1"),
+                      myArticles("assets/placeholders/Macchiato.jpg",
+                          "heading1", "subHeading1"),
+                      myArticles("assets/placeholders/Macchiato.jpg",
+                          "heading1", "subHeading1"),
+                    ],
+                  ),
                 ),
                 separatorLine(),
                 ListView.builder(
