@@ -34,6 +34,10 @@ class _AccountTabState extends State<AccountTab> {
         return SlideUpPanel(
           children: [
             CustomAppBar(title: 'Akun'),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child:
+                    Text('ID: $userID', style: TextStyle(color: Colors.grey))),
             _changeProfilePic(context),
             _userInfo(snapshot, context, Icons.person, 'Nama', 'name'),
             _userInfo(snapshot, context, Icons.phone, 'Telepon', 'phone'),
