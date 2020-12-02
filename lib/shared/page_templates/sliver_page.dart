@@ -67,6 +67,12 @@ class _SliverPageState extends State<SliverPage> {
             child: Container(
               height: 30,
               decoration: BoxDecoration(
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      blurRadius: 10.0,
+                      offset: Offset(0.0, 0.75))
+                ],
                 color: AppColors().accent1,
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(50),

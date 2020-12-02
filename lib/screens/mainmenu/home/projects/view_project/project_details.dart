@@ -57,17 +57,21 @@ class ProjectDetails extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  height: 100,
+                  height: 250,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: <Widget>[
-                      myArticles("assets/placeholders/Macchiato.jpg",
+                      myArticles("assets/img/UI/home_bg_default4.jpg",
                           "heading1", "subHeading1"),
-                      myArticles("assets/placeholders/Macchiato.jpg",
+                      myArticles("assets/img/UI/home_bg_default4.jpg",
                           "heading1", "subHeading1"),
-                      myArticles("assets/placeholders/Macchiato.jpg",
+                      myArticles("assets/img/UI/home_bg_default4.jpg",
                           "heading1", "subHeading1"),
-                      myArticles("assets/placeholders/Macchiato.jpg",
+                      myArticles("assets/img/UI/home_bg_default4.jpg",
+                          "heading1", "subHeading1"),
+                      myArticles("assets/img/UI/home_bg_default4.jpg",
+                          "heading1", "subHeading1"),
+                      myArticles("assets/img/UI/home_bg_default4.jpg",
                           "heading1", "subHeading1"),
                     ],
                   ),
@@ -93,19 +97,24 @@ class ProjectDetails extends StatelessWidget {
 
   Container myArticles(String imageVal, String heading, String subHeading) {
     return Container(
-      width: 160.0,
-      child: Card(
-        elevation: 10,
-        shadowColor: Color(0x802196F3),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: Wrap(
-          children: [
-            Image.asset(imageVal),
-            ListTile(
-              title: Text(heading),
-              subtitle: Text(subHeading),
-            )
-          ],
+      width: 250.0,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 15.0),
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          elevation: 10,
+          shadowColor: Color(0x802196F3),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          child: Column(
+            children: [
+              Image.asset(imageVal),
+              ListTile(
+                title: Text(heading),
+                subtitle: Text(subHeading),
+              )
+            ],
+          ),
         ),
       ),
     );
