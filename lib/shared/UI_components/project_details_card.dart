@@ -26,13 +26,11 @@ class ProjectDetailsCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ExpansionTile(
+          title: Text('Rincian Proyek',
+              style: TextStyle(fontWeight: FontWeight.bold)),
+          expandedCrossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Text('Rincian Proyek',
-                    style: TextStyle(fontWeight: FontWeight.bold))),
             Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: Text('Proyek ${child.projectName}')),

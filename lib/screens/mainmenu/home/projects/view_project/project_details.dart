@@ -28,9 +28,20 @@ class ProjectDetails extends StatelessWidget {
           children: [
             SliverList(
               delegate: SliverChildListDelegate([
-                projectDetails(details),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Flexible(flex: 1, child: overallProgress(0.75)),
+                      SizedBox(width: 15),
+                      Flexible(
+                          flex: 3, child: ProjectDetailsCard(child: details)),
+                    ],
+                  ),
+                ),
                 separatorLine(),
-                overallProgress(0.75),
                 ListView.builder(
                   shrinkWrap: true,
                   padding: EdgeInsets.zero,
@@ -52,48 +63,36 @@ class ProjectDetails extends StatelessWidget {
   //========================= main function =========================
 }
 
-Padding projectDetails(ProjectDetailsModel details) {
-  return Padding(
-    padding: EdgeInsets.symmetric(horizontal: 15),
-    child: ProjectDetailsCard(child: details),
-  );
-}
-
 Padding separatorLine() {
   return Padding(
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: Divider(color: Colors.black));
 }
 
-Padding overallProgress(percentage) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 15),
-    child: CircularPercentIndicator(
-      circularStrokeCap: CircularStrokeCap.round,
-      progressColor: Colors.greenAccent,
-      animation: true,
-      radius: 200,
-      lineWidth: 20,
-      percent: percentage,
-      center: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Overall',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+CircularPercentIndicator overallProgress(percentage) {
+  return CircularPercentIndicator(
+    circularStrokeCap: CircularStrokeCap.round,
+    progressColor: Colors.greenAccent,
+    animation: true,
+    radius: 100,
+    lineWidth: 10,
+    percent: percentage,
+    center: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'Overall',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
           ),
-          Text(
-            '${percentage * 100}%',
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
+        ),
+        Text(
+          '${percentage * 100}%',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
           ),
-        ],
-      ),
+        ),
+      ],
     ),
   );
 }
