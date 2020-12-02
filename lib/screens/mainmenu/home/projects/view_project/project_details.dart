@@ -95,6 +95,9 @@ class ProjectDetails extends StatelessWidget {
     return Container(
       width: 160.0,
       child: Card(
+        elevation: 10,
+        shadowColor: Color(0x802196F3),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Wrap(
           children: [
             Image.network(imageVal),
