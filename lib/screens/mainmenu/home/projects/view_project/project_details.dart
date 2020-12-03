@@ -78,11 +78,9 @@ class ProjectDetails extends StatelessWidget {
                   ),
                 ),
                 separatorLine(),
-                Scaffold(
-                  floatingActionButton: FloatingActionButton(
-                    child: Icon(Icons.add_a_photo),
-                    onPressed: () {},
-                  ),
+                FloatingActionButton(
+                  child: Icon(Icons.add_a_photo),
+                  onPressed: () {},
                 ),
                 ListView.builder(
                   shrinkWrap: true,
