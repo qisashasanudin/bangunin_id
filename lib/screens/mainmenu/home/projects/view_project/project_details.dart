@@ -115,7 +115,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                           Navigator.of(context).pop();
                           await DatabaseService(
                                   uid: userID, projectId: details.projectId)
-                              .deleteProjectData('accounts', 'projects');
+                              .deleteProjectData();
                         }
                       },
                     ),
