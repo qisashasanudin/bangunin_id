@@ -38,12 +38,28 @@ class DatabaseService {
   }
 
   Future deleteProjectData(String table, String subtable) async {
-    DocumentReference tabel = FirebaseFirestore.instance
+    await FirebaseFirestore.instance
         .collection(table)
         .doc(uid)
         .collection(subtable)
-        .doc(projectId);
-    var result = await tabel.delete();
+        .doc(projectId)
+        .collection('materials_target')
+        .doc()
+        .delete();
+    await FirebaseFirestore.instance
+        .collection(table)
+        .doc(uid)
+        .collection(subtable)
+        .doc(projectId)
+        .collection('materials_progress')
+        .doc()
+        .delete();
+    var result = await FirebaseFirestore.instance
+        .collection(table)
+        .doc(uid)
+        .collection(subtable)
+        .doc(projectId)
+        .delete();
     return result;
   }
 
