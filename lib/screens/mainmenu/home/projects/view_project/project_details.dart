@@ -91,12 +91,21 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     RaisedButton(
-                      child: Icon(Icons.add_a_photo),
+                      elevation: 10,
+                      color: Theme.of(context).primaryColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      child:
+                          Icon(Icons.add_a_photo, color: AppColors().accent1),
                       onPressed: () {},
                     ),
                     SizedBox(width: 15),
                     RaisedButton(
-                      child: Icon(Icons.delete),
+                      elevation: 10,
+                      color: Theme.of(context).primaryColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Icon(Icons.delete, color: AppColors().accent1),
                       onPressed: () async {
                         final action = await PopUpDialog.yesNoDialog(
                             context,
