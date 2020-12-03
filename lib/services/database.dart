@@ -25,16 +25,26 @@ class DatabaseService {
   }
 
   Future createProjectMaterialsData(String table, String subtable1,
-      String parentId, String subtable2, Map<String, dynamic> data) async {
+      String subtable2, Map<String, dynamic> data) async {
     String docId;
     CollectionReference tabel = FirebaseFirestore.instance
         .collection(table)
         .doc(uid)
         .collection(subtable1)
-        .doc(parentId)
+        .doc(projectId)
         .collection(subtable2);
     await tabel.add(data).then((value) => docId = value.id);
     return docId;
+  }
+
+  Future deleteProjectData(String table, String subtable) async {
+    DocumentReference tabel = FirebaseFirestore.instance
+        .collection(table)
+        .doc(uid)
+        .collection(subtable)
+        .doc(projectId);
+    var result = await tabel.delete();
+    return result;
   }
 
   Stream entityDocumentSnapshot(String tablename) {

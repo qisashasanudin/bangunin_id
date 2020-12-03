@@ -1,6 +1,7 @@
 import 'package:bangunin_id/models/material_model.dart';
 import 'package:bangunin_id/models/project_details_model.dart';
 import 'package:bangunin_id/shared/UI_components/app_colors.dart';
+import 'package:bangunin_id/shared/UI_components/popup_dialog.dart';
 import 'package:bangunin_id/shared/UI_components/project_details_card.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/auth.dart';
@@ -10,7 +11,13 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
-class ProjectDetails extends StatelessWidget {
+class ProjectDetails extends StatefulWidget {
+  //========================= main function =========================
+  @override
+  _ProjectDetailsState createState() => _ProjectDetailsState();
+}
+
+class _ProjectDetailsState extends State<ProjectDetails> {
   //========================= main function =========================
   @override
   Widget build(BuildContext context) {
@@ -51,7 +58,9 @@ class ProjectDetails extends StatelessWidget {
                       Flexible(flex: 1, child: overallProgress(0.50)),
                       SizedBox(width: 15),
                       Flexible(
-                          flex: 3, child: ProjectDetailsCard(child: details)),
+                        flex: 3,
+                        child: ProjectDetailsCard(child: details),
+                      ),
                     ],
                   ),
                 ),
@@ -78,10 +87,32 @@ class ProjectDetails extends StatelessWidget {
                   ),
                 ),
                 separatorLine(),
-                FloatingActionButton(
-                  child: Icon(Icons.add_a_photo),
-                  onPressed: () {},
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    RaisedButton(
+                      child: Icon(Icons.add_a_photo),
+                      onPressed: () {},
+                    ),
+                    SizedBox(width: 15),
+                    RaisedButton(
+                      child: Icon(Icons.delete),
+                      onPressed: () async {
+                        final action = await PopUpDialog.yesNoDialog(
+                            context,
+                            'Hapus Proyek',
+                            'Apakah anda yakin ingin menghapus proyek ini?');
+                        if (action == DialogAction.yes) {
+                          Navigator.of(context).pop();
+                          await DatabaseService(
+                                  uid: userID, projectId: details.projectId)
+                              .deleteProjectData('accounts', 'projects');
+                        }
+                      },
+                    ),
+                  ],
                 ),
+                separatorLine(),
                 ListView.builder(
                   shrinkWrap: true,
                   padding: EdgeInsets.zero,
@@ -97,6 +128,41 @@ class ProjectDetails extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+  //========================= main function =========================
+
+  Padding separatorLine() {
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: Divider(color: Colors.black));
+  }
+
+  CircularPercentIndicator overallProgress(double percentage) {
+    return CircularPercentIndicator(
+      circularStrokeCap: CircularStrokeCap.round,
+      progressColor: Colors.greenAccent,
+      animation: true,
+      radius: 100,
+      lineWidth: 10,
+      percent: percentage,
+      center: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Overall',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            '${percentage * 100}%',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -124,72 +190,37 @@ class ProjectDetails extends StatelessWidget {
       ),
     );
   }
-  //========================= main function =========================
-}
 
-Padding separatorLine() {
-  return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      child: Divider(color: Colors.black));
-}
-
-CircularPercentIndicator overallProgress(double percentage) {
-  return CircularPercentIndicator(
-    circularStrokeCap: CircularStrokeCap.round,
-    progressColor: Colors.greenAccent,
-    animation: true,
-    radius: 100,
-    lineWidth: 10,
-    percent: percentage,
-    center: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          'Overall',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Text(
-          '${percentage * 100}%',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-SizedBox itemProgress(
-    BuildContext context, MaterialModel item, double percentage) {
-  return SizedBox(
-    width: double.infinity,
-    child: Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
-      child: Column(
-        children: [
-          Container(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              '${item.name} ${item.size} ${item.type} (${item.amount} ${item.unit})',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+  SizedBox itemProgress(
+      BuildContext context, MaterialModel item, double percentage) {
+    return SizedBox(
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+        child: Column(
+          children: [
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                '${item.name} ${item.size} ${item.type} (${item.amount} ${item.unit})',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-          LinearPercentIndicator(
-            alignment: MainAxisAlignment.center,
-            progressColor: Theme.of(context).primaryColor,
-            animation: true,
-            lineHeight: 30,
-            percent: percentage,
-            center: Text('${percentage * 100}%',
-                style: TextStyle(color: AppColors().accent1)),
-          ),
-        ],
+            LinearPercentIndicator(
+              alignment: MainAxisAlignment.center,
+              progressColor: Theme.of(context).primaryColor,
+              animation: true,
+              lineHeight: 30,
+              percent: percentage,
+              center: Text('${percentage * 100}%',
+                  style: TextStyle(color: AppColors().accent1)),
+            ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

@@ -207,9 +207,10 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
       });
 
       for (var element in selectedMaterials) {
-        await DatabaseService(uid: AuthService().getCurrentUID())
+        await DatabaseService(
+                uid: AuthService().getCurrentUID(), projectId: docId)
             .createProjectMaterialsData(
-                'accounts', 'projects', docId, 'materials_target', {
+                'accounts', 'projects', 'materials_target', {
           'name': element.name,
           'size': element.size,
           'type': element.type,
