@@ -34,9 +34,10 @@ class ProjectDetailsCard extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: Text('Proyek ${child.projectName}')),
-            Padding(
-                padding: const EdgeInsets.symmetric(vertical: 3),
-                child: Text('ID:  ${child.projectId}')),
+            if (child.projectId != null && child.projectId != '')
+              Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 3),
+                  child: Text('ID:  ${child.projectId}')),
             if (child.address != null && child.address != '')
               Padding(
                   padding: const EdgeInsets.symmetric(vertical: 3),
