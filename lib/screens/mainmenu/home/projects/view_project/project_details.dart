@@ -90,35 +90,9 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    RaisedButton(
-                      elevation: 10,
-                      color: Theme.of(context).primaryColor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      child:
-                          Icon(Icons.add_a_photo, color: AppColors().accent1),
-                      onPressed: () {},
-                    ),
-                    SizedBox(width: 15),
-                    RaisedButton(
-                      elevation: 10,
-                      color: Theme.of(context).primaryColor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Icon(Icons.delete, color: AppColors().accent1),
-                      onPressed: () async {
-                        final action = await PopUpDialog.yesNoDialog(
-                            context,
-                            'Hapus Proyek',
-                            'Apakah anda yakin ingin menghapus proyek ini?');
-                        if (action == DialogAction.yes) {
-                          Navigator.of(context).pop();
-                          await DatabaseService(
-                                  uid: userID, projectId: details.projectId)
-                              .deleteProjectData();
-                        }
-                      },
-                    ),
+                    addPictureButton(context),
+                    editProjectButton(context),
+                    deleteProjectButton(context, userID, details),
                   ],
                 ),
                 separatorLine(),
@@ -139,6 +113,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
       },
     );
   }
+
   //========================= main function =========================
 
   Padding separatorLine() {
@@ -200,6 +175,32 @@ class _ProjectDetailsState extends State<ProjectDetails> {
     );
   }
 
+  Padding addPictureButton(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+      child: RaisedButton(
+        elevation: 10,
+        color: Theme.of(context).primaryColor,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Icon(Icons.add_a_photo, color: AppColors().accent1),
+        onPressed: () {},
+      ),
+    );
+  }
+
+  Padding editProjectButton(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+      child: RaisedButton(
+        elevation: 10,
+        color: Theme.of(context).primaryColor,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Icon(Icons.settings, color: AppColors().accent1),
+        onPressed: () {},
+      ),
+    );
+  }
+
   SizedBox itemProgress(
       BuildContext context, MaterialModel item, double percentage) {
     return SizedBox(
@@ -229,6 +230,28 @@ class _ProjectDetailsState extends State<ProjectDetails> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Padding deleteProjectButton(
+      BuildContext context, String userID, ProjectDetailsModel details) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+      child: RaisedButton(
+        elevation: 10,
+        color: Colors.red,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Icon(Icons.delete, color: AppColors().accent1),
+        onPressed: () async {
+          final action = await PopUpDialog.yesNoDialog(context, 'Hapus Proyek',
+              'Apakah anda yakin ingin menghapus proyek ini?');
+          if (action == DialogAction.yes) {
+            Navigator.of(context).pop();
+            await DatabaseService(uid: userID, projectId: details.projectId)
+                .deleteProjectData();
+          }
+        },
       ),
     );
   }
