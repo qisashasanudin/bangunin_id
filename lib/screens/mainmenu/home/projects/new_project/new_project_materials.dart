@@ -3,7 +3,7 @@ import 'package:bangunin_id/models/project_details_model.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/UI_components/custom_button.dart';
-import 'package:bangunin_id/shared/UI_components/popup_dialog.dart';
+import 'package:bangunin_id/shared/UI_components/on_back_pressed.dart';
 import 'package:bangunin_id/shared/UI_components/project_details_card.dart';
 import 'package:bangunin_id/shared/UI_components/project_material_form.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
@@ -28,7 +28,7 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
     ProjectDetailsModel details = ModalRoute.of(context).settings.arguments;
 
     return WillPopScope(
-      onWillPop: _onBackPressed,
+      onWillPop: () async => await onBackPressed(context),
       child: Form(
         key: _formKey,
         child: SliverPage(
@@ -87,16 +87,6 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
 
   //========================= main function =========================
 
-  Future<bool> _onBackPressed() async {
-    bool tappedYes = false;
-    final action = await PopUpDialog.yesNoDialog(context, 'Kembali?',
-        'Apakah anda yakin ingin kembali? Semua pengaturan pada halaman ini tidak akan tersimpan.');
-    if (action == DialogAction.yes) {
-      tappedYes = true;
-    }
-    return tappedYes;
-  }
-
   ListView _list() {
     return ListView.builder(
       padding: EdgeInsets.zero,
@@ -128,25 +118,21 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
               )
           ],
           onChanged: (value) {
-            _addObject(value);
+            if (unselectedMaterials.isEmpty) {
+              return;
+            }
+            setState(() {
+              selectedMaterials.add(value);
+              unselectedMaterials.removeWhere((element) => element == value);
+              generatedList.add(ProjectMaterialForm(
+                children: value,
+                returnValue: _getNewObject,
+              ));
+            });
           },
         ),
       ),
     );
-  }
-
-  void _addObject(object) {
-    if (unselectedMaterials.isEmpty) {
-      return;
-    }
-    setState(() {
-      selectedMaterials.add(object);
-      unselectedMaterials.removeWhere((element) => element == object);
-      generatedList.add(ProjectMaterialForm(
-        children: object,
-        returnValue: _getNewObject,
-      ));
-    });
   }
 
   _getNewObject(MaterialModel newObject) {
@@ -164,21 +150,19 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
         padding: const EdgeInsets.all(10.0),
         child: CustomButton(
           prompt: 'Hapus',
-          onPressed: _deleteObject,
+          onPressed: () {
+            if (selectedMaterials.isEmpty) {
+              return;
+            }
+            setState(() {
+              unselectedMaterials.add(selectedMaterials.last);
+              selectedMaterials.removeLast();
+              generatedList.removeLast();
+            });
+          },
         ),
       ),
     );
-  }
-
-  void _deleteObject() {
-    if (selectedMaterials.isEmpty) {
-      return;
-    }
-    setState(() {
-      unselectedMaterials.add(selectedMaterials.last);
-      selectedMaterials.removeLast();
-      generatedList.removeLast();
-    });
   }
 
   _uploadData(ProjectDetailsModel projectDetails) async {
