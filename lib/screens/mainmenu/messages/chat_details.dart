@@ -20,7 +20,7 @@ class _ChatDetailsState extends State<ChatDetails> {
               height: 40,
               margin: EdgeInsets.fromLTRB(0, 5, 10, 0),
               child: CircleAvatar(
-                backgroundImage: NetworkImage('https://i.pravatar.cc/110'),
+                backgroundImage: AssetImage('assets/img/UI/character.png'),
                 backgroundColor: Colors.grey[200],
                 minRadius: 30,
               ),
