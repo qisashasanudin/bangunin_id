@@ -19,29 +19,13 @@ class _SettingsTabState extends State<SettingsTab> {
     return SlideUpPanel(
       children: [
         CustomAppBar(
-          title: 'Pengaturan',
+          title: 'Pesan dan Notifikasi',
         ),
-        signOutButton(),
-        language(),
         // widget-widget lain dimasukkan di sini
       ],
     );
   }
   //========================= main function =========================
-
-  ListTile signOutButton() {
-    return ListTile(
-      leading: Icon(Icons.logout),
-      title: Text('Keluar'),
-      onTap: () async {
-        final action = await PopUpDialog.yesNoDialog(context,
-            'Keluar dari Bangunin.id', 'Apakah anda yakin ingin keluar?');
-        if (action == DialogAction.yes) {
-          await _auth.signOut();
-        }
-      },
-    );
-  }
 
   ListTile language() {
     return ListTile(
