@@ -54,6 +54,7 @@ class _AccountTabState extends State<AccountTab> {
                     Text('Pengaturan', style: TextStyle(color: Colors.black))),
             signOutButton(),
             language(),
+            notif(),
             // widget-widget lain dimasukkan di sini
           ],
         );
@@ -81,6 +82,15 @@ class _AccountTabState extends State<AccountTab> {
       leading: Icon(Icons.language),
       title: Text('Bahasa'),
       subtitle: Text('Indonesia'),
+      onTap: () {}, // command yang dilakukan jika tombol ditekan
+    );
+  }
+
+  ListTile notif() {
+    return ListTile(
+      leading: Icon(Icons.notifications),
+      title: Text('Notifications'),
+      subtitle: Text('ON'),
       onTap: () {}, // command yang dilakukan jika tombol ditekan
     );
   }
