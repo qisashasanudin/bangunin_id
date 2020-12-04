@@ -3,13 +3,13 @@ import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/shared/UI_components/custom_appbar.dart';
 import 'package:bangunin_id/shared/page_templates/slide_up_panel.dart';
 
-class SettingsTab extends StatefulWidget {
+class CheckoutTab extends StatefulWidget {
   //Settings({Key key}) : super(key: key);
   @override
-  _SettingsTabState createState() => _SettingsTabState();
+  _CheckoutTabState createState() => _CheckoutTabState();
 }
 
-class _SettingsTabState extends State<SettingsTab> {
+class _CheckoutTabState extends State<CheckoutTab> {
   final AuthService _auth = AuthService();
 
   //========================= main function =========================
