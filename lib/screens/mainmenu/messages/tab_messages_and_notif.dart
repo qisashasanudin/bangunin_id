@@ -1,8 +1,5 @@
 import 'package:bangunin_id/screens/mainmenu/messages/messages.dart';
 import 'package:bangunin_id/screens/mainmenu/messages/notif.dart';
-import 'package:bangunin_id/screens/mainmenu/shop/categories/category_b.dart';
-import 'package:bangunin_id/screens/mainmenu/shop/categories/category_a.dart';
-import 'package:bangunin_id/screens/mainmenu/shop/categories/category_c.dart';
 import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:bangunin_id/shared/UI_components/custom_appbar.dart';
 import 'package:bangunin_id/shared/page_templates/slide_up_panel.dart';
