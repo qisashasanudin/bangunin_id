@@ -52,6 +52,8 @@ class _AccountTabState extends State<AccountTab> {
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child:
                     Text('Pengaturan', style: TextStyle(color: Colors.black))),
+            signOutButton(),
+            language(),
             // widget-widget lain dimasukkan di sini
           ],
         );
