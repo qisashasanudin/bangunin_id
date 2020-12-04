@@ -44,6 +44,8 @@ class _AccountTabState extends State<AccountTab> {
             _userInfo(snapshot, context, Icons.person, 'Nama', 'name'),
             _userInfo(snapshot, context, Icons.phone, 'Telepon', 'phone'),
             _userInfo(snapshot, context, Icons.home, 'Alamat', 'address'),
+            _userInfo(snapshot, context, Icons.admin_panel_settings,
+                'Jenis Akun', 'role'),
             _changeEmail(snapshot),
             _changePassword(),
             Padding(

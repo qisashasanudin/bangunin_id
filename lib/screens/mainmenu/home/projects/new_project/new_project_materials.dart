@@ -189,38 +189,38 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
     if (_formKey.currentState.validate() &&
         status &&
         selectedMaterials.isNotEmpty) {
-      setState(() {
-        projectDetails.dateCreated = DateTime.now();
-        projectDetails.isCompleted = false;
-      });
-      String docId = await DatabaseService(uid: AuthService().getCurrentUID())
-          .createProjectData('accounts', 'projects', {
-        'projectName': projectDetails.projectName,
-        'address': projectDetails.address,
-        'addressGMap': projectDetails.addressGMap,
-        'clientName': projectDetails.clientName,
-        'clientEmail': projectDetails.clientEmail,
-        'clientPhone': projectDetails.clientPhone,
-        'dateCreated': projectDetails.dateCreated,
-        'dateDeadline': projectDetails.dateDeadline,
-        'isCompleted': projectDetails.isCompleted,
-      });
-
+      String docId = await DatabaseService(
+        uid: AuthService().getCurrentUID(),
+      ).createProjectData(
+        {
+          'projectName': projectDetails.projectName,
+          'address': projectDetails.address,
+          'addressGMap': projectDetails.addressGMap,
+          'clientName': projectDetails.clientName,
+          'clientEmail': projectDetails.clientEmail,
+          'clientPhone': projectDetails.clientPhone,
+          'dateCreated': projectDetails.dateCreated ?? DateTime.now(),
+          'dateDeadline': projectDetails.dateDeadline,
+          'isCompleted': projectDetails.isCompleted ?? false,
+        },
+      );
       for (var element in selectedMaterials) {
         await DatabaseService(
-                uid: AuthService().getCurrentUID(), projectId: docId)
-            .createProjectMaterialsData(
-                'accounts', 'projects', 'materials_target', {
-          'name': element.name,
-          'size': element.size,
-          'type': element.type,
-          'unit': element.unit,
-          'price': element.price,
-          'amount': element.amount,
-          'image': element.image,
-        });
+          uid: AuthService().getCurrentUID(),
+          projectId: docId,
+        ).createProjectMaterialsData(
+          'materials_target',
+          {
+            'name': element.name,
+            'size': element.size,
+            'type': element.type,
+            'unit': element.unit,
+            'price': element.price,
+            'amount': element.amount,
+            'image': element.image,
+          },
+        );
       }
-
       Navigator.of(context).pop();
       Navigator.of(context).pop();
     } else {

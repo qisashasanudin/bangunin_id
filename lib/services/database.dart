@@ -8,43 +8,55 @@ class DatabaseService {
   final String projectId;
   DatabaseService({this.uid, this.projectId});
 
-  Future writeData(String table, String attribute, String data) async {
-    CollectionReference tabel = FirebaseFirestore.instance.collection(table);
-    return await tabel.doc(uid).set({attribute: data}, SetOptions(merge: true));
+  Future writeData(String tableName, String attribute, String data) async {
+    CollectionReference table =
+        FirebaseFirestore.instance.collection(tableName);
+    return await table.doc(uid).set({attribute: data}, SetOptions(merge: true));
   }
 
-  Future createProjectData(
-      String table, String subtable, Map<String, dynamic> data) async {
+  Future createProjectData(Map<String, dynamic> data) async {
     String docId;
-    CollectionReference tabel = FirebaseFirestore.instance
-        .collection(table)
+    await FirebaseFirestore.instance
+        .collection('accounts')
         .doc(uid)
-        .collection(subtable);
-    await tabel.add(data).then((value) => docId = value.id);
+        .collection('projects')
+        .add(data)
+        .then((value) => docId = value.id);
     return docId;
   }
 
-  Future createProjectMaterialsData(String table, String subtable1,
-      String subtable2, Map<String, dynamic> data) async {
+  Future createProjectMaterialsData(
+      String tableName, Map<String, dynamic> data) async {
     String docId;
-    CollectionReference tabel = FirebaseFirestore.instance
-        .collection(table)
+    await FirebaseFirestore.instance
+        .collection('accounts')
         .doc(uid)
-        .collection(subtable1)
+        .collection('projects')
         .doc(projectId)
-        .collection(subtable2);
-    await tabel.add(data).then((value) => docId = value.id);
+        .collection(tableName)
+        .add(data)
+        .then((value) => docId = value.id);
     return docId;
   }
 
-  Future deleteProjectData(String table, String subtable) async {
-    DocumentReference tabel = FirebaseFirestore.instance
-        .collection(table)
+  Future deleteProjectData() async {
+    DocumentReference table = FirebaseFirestore.instance
+        .collection('accounts')
         .doc(uid)
-        .collection(subtable)
+        .collection('projects')
         .doc(projectId);
-    var result = await tabel.delete();
-    return result;
+
+    table.collection('materials_target').get().then((snapshot) {
+      for (DocumentSnapshot ds in snapshot.docs) {
+        ds.reference.delete();
+      }
+    });
+    table.collection('materials_progress').get().then((snapshot) {
+      for (DocumentSnapshot ds in snapshot.docs) {
+        ds.reference.delete();
+      }
+    });
+    return await table.delete();
   }
 
   Stream entityDocumentSnapshot(String tablename) {
