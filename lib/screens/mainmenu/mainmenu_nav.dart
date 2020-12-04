@@ -181,7 +181,7 @@ class _MainMenuNavState extends State<MainMenuNav> {
             Tab(icon: Icon(Icons.home)),
             Tab(icon: Icon(Icons.shopping_cart)),
             Tab(icon: Icon(Icons.person)),
-            Tab(icon: Icon(Icons.settings)),
+            Tab(icon: Icon(Icons.chat_outlined)),
           ],
           labelColor: Theme.of(context).primaryColor,
           indicator: UnderlineTabIndicator(
