@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -87,15 +88,6 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                   ),
                 ),
                 separatorLine(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    addPictureButton(context),
-                    editProjectButton(context),
-                    deleteProjectButton(context, userID, details),
-                  ],
-                ),
-                separatorLine(),
                 ListView.builder(
                   shrinkWrap: true,
                   padding: EdgeInsets.zero,
@@ -109,6 +101,16 @@ class _ProjectDetailsState extends State<ProjectDetails> {
             ),
             //sliver-sliver lain ditulis di sini
           ],
+          floatingButton: SpeedDial(
+            animatedIcon: AnimatedIcons.menu_close,
+            foregroundColor: AppColors().accent1,
+            elevation: 10,
+            children: [
+              addPictureButton(context),
+              editProjectButton(context),
+              deleteProjectButton(context, userID, details),
+            ],
+          ),
         );
       },
     );
@@ -175,32 +177,6 @@ class _ProjectDetailsState extends State<ProjectDetails> {
     );
   }
 
-  Padding addPictureButton(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-      child: RaisedButton(
-        elevation: 10,
-        color: Theme.of(context).primaryColor,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: Icon(Icons.add_a_photo, color: AppColors().accent1),
-        onPressed: () {},
-      ),
-    );
-  }
-
-  Padding editProjectButton(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-      child: RaisedButton(
-        elevation: 10,
-        color: Theme.of(context).primaryColor,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: Icon(Icons.settings, color: AppColors().accent1),
-        onPressed: () {},
-      ),
-    );
-  }
-
   SizedBox itemProgress(
       BuildContext context, MaterialModel item, double percentage) {
     return SizedBox(
@@ -234,25 +210,41 @@ class _ProjectDetailsState extends State<ProjectDetails> {
     );
   }
 
-  Padding deleteProjectButton(
+  SpeedDialChild addPictureButton(BuildContext context) {
+    return SpeedDialChild(
+      backgroundColor: Theme.of(context).primaryColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: Icon(Icons.add_a_photo, color: AppColors().accent1),
+      onTap: () {},
+    );
+  }
+
+  SpeedDialChild editProjectButton(BuildContext context) {
+    return SpeedDialChild(
+      elevation: 10,
+      backgroundColor: Theme.of(context).primaryColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: Icon(Icons.settings, color: AppColors().accent1),
+      onTap: () {},
+    );
+  }
+
+  SpeedDialChild deleteProjectButton(
       BuildContext context, String userID, ProjectDetailsModel details) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-      child: RaisedButton(
-        elevation: 10,
-        color: Colors.red,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: Icon(Icons.delete, color: AppColors().accent1),
-        onPressed: () async {
-          final action = await PopUpDialog.yesNoDialog(context, 'Hapus Proyek',
-              'Apakah anda yakin ingin menghapus proyek ini?');
-          if (action == DialogAction.yes) {
-            Navigator.of(context).pop();
-            await DatabaseService(uid: userID, projectId: details.projectId)
-                .deleteProjectData();
-          }
-        },
-      ),
+    return SpeedDialChild(
+      elevation: 10,
+      backgroundColor: Colors.red,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: Icon(Icons.delete, color: AppColors().accent1),
+      onTap: () async {
+        final action = await PopUpDialog.yesNoDialog(context, 'Hapus Proyek',
+            'Apakah anda yakin ingin menghapus proyek ini?');
+        if (action == DialogAction.yes) {
+          Navigator.of(context).pop();
+          await DatabaseService(uid: userID, projectId: details.projectId)
+              .deleteProjectData();
+        }
+      },
     );
   }
 }
