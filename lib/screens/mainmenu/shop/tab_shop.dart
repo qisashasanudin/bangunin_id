@@ -19,7 +19,7 @@ class _ShopTabState extends State<ShopTab> {
     return SlideUpPanel(
       children: [
         DefaultTabController(
-          length: 3,
+          length: 6,
           child: Column(
             children: <Widget>[
               CustomAppBar(
@@ -42,6 +42,7 @@ class _ShopTabState extends State<ShopTab> {
 
 TabBar categories() {
   return TabBar(
+    isScrollable: true,
     labelColor: AppColors().primary,
     labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
     unselectedLabelColor: Colors.grey,
@@ -50,6 +51,9 @@ TabBar categories() {
       Tab(child: Text("Kategori A")),
       Tab(child: Text("Kategori B")),
       Tab(child: Text("Kategori C")),
+      Tab(child: Text("Kategori D")),
+      Tab(child: Text("Kategori E")),
+      Tab(child: Text("Kategori F")),
     ],
   );
 }
@@ -59,6 +63,9 @@ Container itemList(BuildContext context) {
     height: MediaQuery.of(context).size.height * 0.6,
     child: TabBarView(
       children: <Widget>[
+        CategoryA(),
+        CategoryB(),
+        CategoryC(),
         CategoryA(),
         CategoryB(),
         CategoryC(),

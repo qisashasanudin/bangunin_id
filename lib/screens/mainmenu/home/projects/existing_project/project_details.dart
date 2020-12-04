@@ -64,8 +64,18 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                     ],
                   ),
                 ),
-                //TODO: tambah opsi untuk mengganti pekan
-                WeeklyProgress(items: materialsTarget),
+                DefaultTabController(
+                  length: 5,
+                  child: ListView(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
+                    physics: NeverScrollableScrollPhysics(),
+                    children: <Widget>[
+                      _weeksTab(),
+                      WeeklyProgress(items: materialsTarget),
+                    ],
+                  ),
+                ),
               ]),
             ),
             //sliver-sliver lain ditulis di sini
@@ -112,6 +122,24 @@ class _ProjectDetailsState extends State<ProjectDetails> {
           ),
         ],
       ),
+    );
+  }
+
+  TabBar _weeksTab() {
+    return TabBar(
+      isScrollable: true,
+      labelColor: AppColors().primary,
+      labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+      unselectedLabelColor: Colors.grey,
+      unselectedLabelStyle: TextStyle(fontSize: 16),
+      tabs: <Widget>[
+        Tab(child: Text("Pekan 1")),
+        Tab(child: Text("Pekan 2")),
+        Tab(child: Text("Pekan 3")),
+        Tab(child: Text("Pekan 4")),
+        Tab(child: Text("Pekan 5")),
+      ],
+      onTap: (value) {},
     );
   }
 
