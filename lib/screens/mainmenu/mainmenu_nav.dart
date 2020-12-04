@@ -1,5 +1,5 @@
-import 'package:bangunin_id/screens/mainmenu/account/tab_account.dart';
 import 'package:bangunin_id/screens/mainmenu/home/tab_home.dart';
+import 'package:bangunin_id/screens/mainmenu/messages/tab_messages.dart';
 import 'package:bangunin_id/screens/mainmenu/shop/tab_shop.dart';
 import 'package:bangunin_id/screens/mainmenu/settings/tab_settings.dart';
 import 'package:bangunin_id/shared/UI_components/app_colors.dart';
@@ -169,7 +169,7 @@ class _MainMenuNavState extends State<MainMenuNav> {
           children: <Widget>[
             HomeTab(/*key: PageStorageKey('Beranda'),*/),
             ShopTab(/*key: PageStorageKey('Beli'),*/),
-            AccountTab(/*key: PageStorageKey('Akun')*/),
+            MessagesTab(/*key: PageStorageKey('Akun')*/),
             SettingsTab(/*key: PageStorageKey('Pengaturan'),*/),
           ],
         ),
@@ -180,8 +180,8 @@ class _MainMenuNavState extends State<MainMenuNav> {
           tabs: <Widget>[
             Tab(icon: Icon(Icons.home)),
             Tab(icon: Icon(Icons.shopping_cart)),
-            Tab(icon: Icon(Icons.person)),
-            Tab(icon: Icon(Icons.chat_outlined)),
+            Tab(icon: Icon(Icons.message)),
+            Tab(icon: Icon(Icons.settings)),
           ],
           labelColor: Theme.of(context).primaryColor,
           indicator: UnderlineTabIndicator(
