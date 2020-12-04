@@ -38,8 +38,8 @@ class CustomHeading extends StatelessWidget {
                   end: Alignment.bottomLeft,
                   stops: [0.1, 1],
                   colors: [
-                    Color(0xFF8C68EC),
-                    Color(0xFF3E8DF3),
+                    Color(0xFFFF9900),
+                    Color(0xFFFFF000),
                   ],
                 ),
               ),

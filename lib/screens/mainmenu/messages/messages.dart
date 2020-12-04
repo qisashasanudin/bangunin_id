@@ -82,7 +82,7 @@ class _MessagesState extends State<Messages> {
                                 Text(
                                   'Hi How are you ?',
                                   style: TextStyle(
-                                    color: Color(0xff8C68EC),
+                                    color: Color(0xFFFF9900),
                                     fontSize: 14,
                                   ),
                                 ),
