@@ -1,5 +1,6 @@
 import 'package:bangunin_id/models/material_model.dart';
 import 'package:bangunin_id/models/project_details_model.dart';
+import 'package:bangunin_id/screens/mainmenu/home/projects/existing_project/weekly_progress.dart';
 import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:bangunin_id/shared/UI_components/popup_dialog.dart';
 import 'package:bangunin_id/shared/UI_components/project_details_card.dart';
@@ -9,7 +10,6 @@ import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class ProjectDetails extends StatefulWidget {
@@ -39,7 +39,6 @@ class _ProjectDetailsState extends State<ProjectDetails> {
       ],
       builder: (context, snapshot) {
         var materialsTarget = Provider.of<List<MaterialModel>>(context) ?? [];
-        print(materialsTarget);
         // var materialsProgress = Provider.of<List<MaterialModel>>(context) ?? [];
         return SliverPage(
           // backgroundImage: Image.asset(
@@ -65,38 +64,8 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                     ],
                   ),
                 ),
-                Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20)
-                    //masukkan tulisan
-                    ),
-                Container(
-                  height: 250,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: <Widget>[
-                      myArticles("assets/img/UI/home_bg_default4.jpg",
-                          "Perbaikan Atap Rumah", "perbaikan atap rumah"),
-                      myArticles("assets/img/UI/home_bg_default4.jpg",
-                          "Perbaikan depan rumah", "perbaikan depan rumah"),
-                      myArticles("assets/img/UI/home_bg_default4.jpg",
-                          "Perbaikan depan rumah", "perbaikan depan rumah"),
-                      myArticles("assets/img/UI/home_bg_default4.jpg",
-                          "Perbaikan depan rumah", "perbaikan depan rumah"),
-                      myArticles("assets/img/UI/home_bg_default4.jpg",
-                          "Perbaikan depan rumah", "perbaikan depan rumah"),
-                    ],
-                  ),
-                ),
-                separatorLine(),
-                ListView.builder(
-                  shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: materialsTarget.length,
-                  itemBuilder: (_, index) {
-                    return itemProgress(context, materialsTarget[index], 0.50);
-                  },
-                ),
+                //TODO: tambah opsi untuk mengganti pekan
+                WeeklyProgress(items: materialsTarget),
               ]),
             ),
             //sliver-sliver lain ditulis di sini
@@ -117,12 +86,6 @@ class _ProjectDetailsState extends State<ProjectDetails> {
   }
 
   //========================= main function =========================
-
-  Padding separatorLine() {
-    return Padding(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        child: Divider(color: Colors.black));
-  }
 
   CircularPercentIndicator overallProgress(double percentage) {
     return CircularPercentIndicator(
@@ -148,64 +111,6 @@ class _ProjectDetailsState extends State<ProjectDetails> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Container myArticles(String imageVal, String heading, String subHeading) {
-    return Container(
-      width: 250.0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15),
-        child: Card(
-          clipBehavior: Clip.antiAlias,
-          elevation: 10,
-          shadowColor: Color(0x802196F3),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          child: Column(
-            children: [
-              Image.asset(imageVal),
-              ListTile(
-                title: Text(heading),
-                subtitle: Text(subHeading),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  SizedBox itemProgress(
-      BuildContext context, MaterialModel item, double percentage) {
-    return SizedBox(
-      width: double.infinity,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
-        child: Column(
-          children: [
-            Container(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                '${item.name} ${item.size} ${item.type} (${item.amount} ${item.unit})',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            LinearPercentIndicator(
-              alignment: MainAxisAlignment.center,
-              progressColor: Theme.of(context).primaryColor,
-              animation: true,
-              lineHeight: 30,
-              percent: percentage,
-              center: Text('${percentage * 100}%',
-                  style: TextStyle(color: AppColors().accent1)),
-            ),
-          ],
-        ),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:bangunin_id/models/project_details_model.dart';
 import 'package:bangunin_id/services/auth.dart';
-import 'package:bangunin_id/shared/UI_components/popup_dialog.dart';
+import 'package:bangunin_id/shared/UI_components/on_back_pressed.dart';
 import 'package:bangunin_id/shared/UI_components/form_field_decoration.dart';
 import 'package:bangunin_id/shared/UI_components/custom_button.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
@@ -31,7 +31,7 @@ class _NewProjectInformationState extends State<NewProjectInformation> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: _onBackPressed,
+      onWillPop: () async => await onBackPressed(context),
       child: Form(
         key: _formKey,
         child: SliverPage(
@@ -86,16 +86,6 @@ class _NewProjectInformationState extends State<NewProjectInformation> {
     );
   }
   //========================= main function =========================
-
-  Future<bool> _onBackPressed() async {
-    bool tappedYes = false;
-    final action = await PopUpDialog.yesNoDialog(context, 'Kembali?',
-        'Apakah anda yakin ingin kembali? Semua pengaturan pada halaman ini tidak akan tersimpan.');
-    if (action == DialogAction.yes) {
-      tappedYes = true;
-    }
-    return tappedYes;
-  }
 
   TextFormField _textForm(labelText, mustBeFilled) {
     return TextFormField(
