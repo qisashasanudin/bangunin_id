@@ -17,11 +17,27 @@ class _NotifState extends State<Notif> {
             CustomHeading(
               title: 'Tracking Orders',
             ),
+            _trackingOrder('Cat Merah'),
+            _trackingOrder('Cat Merah'),
+            _trackingOrder('Cat Merah'),
+            _trackingOrder('Cat Merah'),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container _trackingOrder(String judul) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 5),
+        child: Column(
+          children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 new Text(
-                  'Cat Rumah',
+                  judul,
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.normal,
@@ -31,9 +47,9 @@ class _NotifState extends State<Notif> {
                 Text(
                   'Delivering',
                   style: TextStyle(
-                    color: Colors.black38,
+                    color: Colors.greenAccent,
                     fontWeight: FontWeight.normal,
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
               ],
