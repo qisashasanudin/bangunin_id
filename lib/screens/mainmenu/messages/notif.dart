@@ -11,10 +11,32 @@ class _NotifState extends State<Notif> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: 25),
         child: Column(
           children: <Widget>[
             CustomHeading(
               title: 'Tracking Orders',
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                new Text(
+                  'Cat Rumah',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 18,
+                  ),
+                ),
+                Text(
+                  'Delivering',
+                  style: TextStyle(
+                    color: Colors.black38,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 18,
+                  ),
+                ),
+              ],
             ),
             Divider(),
           ],
