@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:bangunin_id/shared/UI_components/custom_heading.dart';
+import 'chat_details.dart';
 
 class Messages extends StatefulWidget {
   @override
@@ -9,69 +11,9 @@ class _MessagesState extends State<Messages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0.4,
-        backgroundColor: Colors.white,
-        title: Text(
-          'Chats',
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-        actions: <Widget>[
-          FlatButton(
-            onPressed: () {},
-            child: Text('Create Group'),
-          )
-        ],
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            CustomHeading(
-              title: 'Groups',
-            ),
-            Container(
-              height: 150,
-              child: ListView.builder(
-                itemCount: 4,
-                shrinkWrap: true,
-                physics: ClampingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.all(15),
-                itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    children: <Widget>[
-                      Container(
-                        width: 90,
-                        height: 90,
-                        margin: EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topRight,
-                            end: Alignment.bottomRight,
-                            stops: [0.1, 1],
-                            colors: [
-                              Color(0xFF8C68EC),
-                              Color(0xFF3E8DF3),
-                            ],
-                          ),
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        child: Icon(
-                          Icons.chat,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 10),
-                        child: Text('Group Name'),
-                      )
-                    ],
-                  );
-                },
-              ),
-            ),
             CustomHeading(
               title: 'Direct Messages',
             ),
