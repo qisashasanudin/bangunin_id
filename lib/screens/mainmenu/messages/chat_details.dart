@@ -12,7 +12,6 @@ class _ChatDetailsState extends State<ChatDetails> {
       appBar: AppBar(
         elevation: 0.4,
         iconTheme: IconThemeData(color: Colors.black),
-        backgroundColor: Colors.white,
         title: Row(
           children: <Widget>[
             Container(
@@ -36,7 +35,7 @@ class _ChatDetailsState extends State<ChatDetails> {
                 Text(
                   'Online Now',
                   style: TextStyle(
-                    color: Colors.grey[400],
+                    color: Colors.white,
                     fontSize: 12,
                   ),
                 )
@@ -115,14 +114,14 @@ class _ChatDetailsState extends State<ChatDetails> {
                     onPressed: () {},
                     icon: Icon(
                       Icons.camera,
-                      color: Color(0xff3E8DF3),
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                   IconButton(
                     onPressed: () {},
                     icon: Icon(
                       Icons.image,
-                      color: Color(0xff3E8DF3),
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                   Padding(
@@ -141,7 +140,7 @@ class _ChatDetailsState extends State<ChatDetails> {
                     onPressed: () {},
                     icon: Icon(
                       Icons.send,
-                      color: Color(0xff3E8DF3),
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 ],
