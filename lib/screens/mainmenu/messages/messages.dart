@@ -54,8 +54,10 @@ class _MessagesState extends State<Messages> {
                             children: <Widget>[
                               Container(
                                 child: CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                      'https://i.pravatar.cc/11$index'),
+                                  backgroundImage:
+                                      AssetImage('assets/img/UI/character.png'),
+                                  //NetworkImage(
+                                  //'https://i.pravatar.cc/11$index'),
                                   minRadius: 35,
                                   backgroundColor: Colors.grey[200],
                                 ),
@@ -70,7 +72,7 @@ class _MessagesState extends State<Messages> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  'Klien Bangunin',
+                                  'Klien Bangunin$index',
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -91,7 +93,7 @@ class _MessagesState extends State<Messages> {
                                   padding: EdgeInsets.only(top: 5),
                                 ),
                                 Text(
-                                  '11:00 AM',
+                                  '1$index:00 AM',
                                   style: TextStyle(
                                     color: Colors.grey,
                                     fontSize: 12,
