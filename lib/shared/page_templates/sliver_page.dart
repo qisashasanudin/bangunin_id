@@ -43,6 +43,7 @@ class _SliverPageState extends State<SliverPage> {
           for (var element in widget.children) element,
         ],
       ),
+      floatingActionButton: widget.floatingButton,
     );
   }
 
