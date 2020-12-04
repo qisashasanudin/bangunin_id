@@ -4,11 +4,9 @@ import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/shared/UI_components/custom_appbar.dart';
 import 'package:bangunin_id/shared/UI_components/form_field_decoration.dart';
 import 'package:bangunin_id/shared/UI_components/loading_screen.dart';
-import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/page_templates/slide_up_panel.dart';
 import 'package:bangunin_id/services/upload_picture.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:bangunin_id/shared/UI_components/popup_dialog.dart';
 
@@ -42,7 +40,8 @@ class _SettingsTabState extends State<SettingsTab> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
                 child: Text('Akun',
-                    style: TextStyle(fontSize: 16, color: Colors.black))),
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child:
@@ -59,7 +58,8 @@ class _SettingsTabState extends State<SettingsTab> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
                 child: Text('Sistem',
-                    style: TextStyle(fontSize: 16, color: Colors.black))),
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
             language(),
             notif(),
             signOutButton(),
