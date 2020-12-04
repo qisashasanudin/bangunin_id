@@ -215,6 +215,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
       backgroundColor: Theme.of(context).primaryColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Icon(Icons.add_a_photo, color: AppColors().accent1),
+      label: 'Tambah Foto Baru',
       onTap: () {},
     );
   }
@@ -225,6 +226,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
       backgroundColor: Theme.of(context).primaryColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Icon(Icons.settings, color: AppColors().accent1),
+      label: 'Edit Proyek',
       onTap: () {},
     );
   }
@@ -236,6 +238,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
       backgroundColor: Colors.red,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Icon(Icons.delete, color: AppColors().accent1),
+      label: 'Hapus Proyek',
       onTap: () async {
         final action = await PopUpDialog.yesNoDialog(context, 'Hapus Proyek',
             'Apakah anda yakin ingin menghapus proyek ini?');

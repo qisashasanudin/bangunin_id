@@ -1,5 +1,5 @@
 import 'package:bangunin_id/screens/mainmenu/home/tab_home.dart';
-import 'package:bangunin_id/screens/mainmenu/messages/tab_messages.dart';
+import 'package:bangunin_id/screens/mainmenu/messages/tab_messages_and_notif.dart';
 import 'package:bangunin_id/screens/mainmenu/shop/tab_shop.dart';
 import 'package:bangunin_id/screens/mainmenu/settings/tab_settings.dart';
 import 'package:bangunin_id/shared/UI_components/app_colors.dart';
@@ -169,7 +169,7 @@ class _MainMenuNavState extends State<MainMenuNav> {
           children: <Widget>[
             HomeTab(/*key: PageStorageKey('Beranda'),*/),
             ShopTab(/*key: PageStorageKey('Beli'),*/),
-            MessagesTab(/*key: PageStorageKey('Akun')*/),
+            MessagesAndNotifTab(/*key: PageStorageKey('Akun')*/),
             SettingsTab(/*key: PageStorageKey('Pengaturan'),*/),
           ],
         ),
