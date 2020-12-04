@@ -180,7 +180,7 @@ class _MainMenuNavState extends State<MainMenuNav> {
           tabs: <Widget>[
             Tab(icon: Icon(Icons.home)),
             Tab(icon: Icon(Icons.shopping_cart)),
-            Tab(icon: Icon(Icons.message)),
+            Tab(icon: Icon(Icons.message_outlined)),
             Tab(icon: Icon(Icons.settings)),
           ],
           labelColor: Theme.of(context).primaryColor,
