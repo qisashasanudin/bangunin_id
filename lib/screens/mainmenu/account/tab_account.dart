@@ -8,6 +8,7 @@ import 'package:bangunin_id/shared/page_templates/slide_up_panel.dart';
 import 'package:bangunin_id/services/upload_picture.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:bangunin_id/shared/UI_components/popup_dialog.dart';
 
 class AccountTab extends StatefulWidget {
   //Account({Key key}) : super(key: key);
@@ -16,6 +17,7 @@ class AccountTab extends StatefulWidget {
 }
 
 class _AccountTabState extends State<AccountTab> {
+  final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   final userID = AuthService().getCurrentUID();
   String currentValue;
@@ -44,13 +46,40 @@ class _AccountTabState extends State<AccountTab> {
             _userInfo(snapshot, context, Icons.home, 'Alamat', 'address'),
             _changeEmail(snapshot),
             _changePassword(),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child:
+                    Text('Pengaturan', style: TextStyle(color: Colors.black))),
             // widget-widget lain dimasukkan di sini
           ],
         );
       },
     );
   }
+
   //========================= main function =========================
+  ListTile signOutButton() {
+    return ListTile(
+      leading: Icon(Icons.logout),
+      title: Text('Keluar'),
+      onTap: () async {
+        final action = await PopUpDialog.yesNoDialog(context,
+            'Keluar dari Bangunin.id', 'Apakah anda yakin ingin keluar?');
+        if (action == DialogAction.yes) {
+          await _auth.signOut();
+        }
+      },
+    );
+  }
+
+  ListTile language() {
+    return ListTile(
+      leading: Icon(Icons.language),
+      title: Text('Bahasa'),
+      subtitle: Text('Indonesia'),
+      onTap: () {}, // command yang dilakukan jika tombol ditekan
+    );
+  }
 
   ListTile _changeProfilePic(BuildContext context) {
     return ListTile(
