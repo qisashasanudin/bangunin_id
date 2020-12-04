@@ -18,7 +18,7 @@ class _CheckoutTabState extends State<CheckoutTab> {
     return SlideUpPanel(
       children: [
         CustomAppBar(
-          title: 'Pesan dan Notifikasi',
+          title: 'Checkout',
         ),
         // widget-widget lain dimasukkan di sini
       ],
