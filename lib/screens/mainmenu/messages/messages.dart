@@ -72,7 +72,7 @@ class _MessagesState extends State<Messages> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  'Klien Bangunin$index',
+                                  'Klien Bangunin $index',
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
