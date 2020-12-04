@@ -38,6 +38,32 @@ class _NotifState extends State<Notif> {
                 ),
               ],
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  new Text(
+                    '5 Desember 2020 \n5 pail',
+                    style: TextStyle(
+                      color: Colors.black38,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                  Text(
+                    'Rp. 150.000,00',
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Divider(),
           ],
         ),
