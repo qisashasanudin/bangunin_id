@@ -49,9 +49,10 @@ class _AccountTabState extends State<AccountTab> {
             _changeEmail(snapshot),
             _changePassword(),
             Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child:
-                    Text('Pengaturan', style: TextStyle(color: Colors.black))),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                child: Text('Pengaturan',
+                    style: TextStyle(fontSize: 16, color: Colors.black))),
             signOutButton(),
             language(),
             notif(),
