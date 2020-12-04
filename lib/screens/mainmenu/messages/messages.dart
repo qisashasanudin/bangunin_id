@@ -39,7 +39,8 @@ class _MessagesState extends State<Messages> {
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withAlpha(50),
+                            color: Colors.blueGrey.withAlpha(50),
+                            //color: Colors.grey.withAlpha(50),
                             offset: Offset(0, 0),
                             blurRadius: 5,
                           ),
@@ -69,7 +70,7 @@ class _MessagesState extends State<Messages> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  'Jocelyn',
+                                  'Klien Bangunin',
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -80,7 +81,7 @@ class _MessagesState extends State<Messages> {
                                   padding: EdgeInsets.only(top: 5),
                                 ),
                                 Text(
-                                  'Hi How are you ?',
+                                  'Bagaimana keadaannya ?',
                                   style: TextStyle(
                                     color: Color(0xFFFF9900),
                                     fontSize: 14,

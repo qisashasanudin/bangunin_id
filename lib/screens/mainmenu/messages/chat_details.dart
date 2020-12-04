@@ -30,7 +30,7 @@ class _ChatDetailsState extends State<ChatDetails> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'Selina Kyle',
+                  'Admin Bangunin.id',
                   style: TextStyle(color: Colors.black),
                 ),
                 Text(
@@ -66,11 +66,12 @@ class _ChatDetailsState extends State<ChatDetails> {
                                   TextStyle(color: Colors.grey, fontSize: 12),
                             ),
                             Bubble(
-                              message: 'Hi How are you ?',
+                              message:
+                                  'Bagaimana respon / pendapat klien terhadap\n perkembangan di lapangan Pak Agus?',
                               isMe: true,
                             ),
                             Bubble(
-                              message: 'have you seen the docs yet?',
+                              message: 'Sudahkah sesuai dengan permintaan?',
                               isMe: true,
                             ),
                             Text(
@@ -79,11 +80,11 @@ class _ChatDetailsState extends State<ChatDetails> {
                                   TextStyle(color: Colors.grey, fontSize: 12),
                             ),
                             Bubble(
-                              message: 'i am fine !',
+                              message: 'Ya sudah sesuai !',
                               isMe: false,
                             ),
                             Bubble(
-                              message: 'yes i\'ve seen the docs',
+                              message: 'T\'rima kasih',
                               isMe: false,
                             ),
                           ],
