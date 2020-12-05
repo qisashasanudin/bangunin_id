@@ -80,6 +80,38 @@ class _NotifState extends State<Notif> {
                 ],
               ),
             ),
+            ExpansionTile(
+              leading: Icon(
+                Icons.local_shipping,
+                color: Colors.black38,
+              ),
+              title: Text('Tracking Details',
+                  style: TextStyle(color: Colors.black38, fontSize: 15)),
+              children: <Widget>[
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.location_on,
+                          color: Colors.orangeAccent,
+                        ),
+                        Text(
+                          '[Jakarta] on process',
+                        ),
+                      ],
+                    ),
+                    Padding(padding: EdgeInsets.all(2.0)),
+                    Text(
+                      '29-03-2010',
+                      style: TextStyle(fontSize: 12, color: Colors.black38),
+                    )
+                  ],
+                ),
+              ],
+            ),
             Divider(),
           ],
         ),
