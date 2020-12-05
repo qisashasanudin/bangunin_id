@@ -83,6 +83,7 @@ class _NotifState extends State<Notif> {
             ExpansionTile(
               leading: Icon(
                 Icons.local_shipping,
+                size: 20,
                 color: Colors.black38,
               ),
               title: Text('Tracking Details',
@@ -125,14 +126,14 @@ class _NotifState extends State<Notif> {
                         ),
                         Padding(padding: EdgeInsets.all(10.0)),
                         Text(
-                          '[Jakarta] on process',
+                          '[Jakarta Utara] received on process',
                         ),
                       ],
                     ),
                     Padding(
                       padding: EdgeInsets.fromLTRB(45.0, 5.0, 10.0, 5.0),
                       child: Text(
-                        '29-03-2010   19:54',
+                        '26-03-2010   17:00',
                         style: TextStyle(fontSize: 12, color: Colors.black38),
                         textAlign: TextAlign.start,
                       ),
@@ -148,14 +149,14 @@ class _NotifState extends State<Notif> {
                         ),
                         Padding(padding: EdgeInsets.all(10.0)),
                         Text(
-                          '[Jakarta] on process',
+                          '[Cikarang.Bekasi] manifested',
                         ),
                       ],
                     ),
                     Padding(
                       padding: EdgeInsets.fromLTRB(45.0, 5.0, 10.0, 5.0),
                       child: Text(
-                        '29-03-2010   19:54',
+                        '25-03-2010   15:33',
                         style: TextStyle(fontSize: 12, color: Colors.black38),
                         textAlign: TextAlign.start,
                       ),
