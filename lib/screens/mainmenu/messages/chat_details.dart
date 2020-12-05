@@ -184,8 +184,8 @@ class Bubble extends StatelessWidget {
                               1
                             ],
                           colors: [
-                              Color(0xFFF6D365),
-                              Color(0xFFFDA085),
+                              Color(0xFFFFCC00),
+                              Color(0xFFFF9900),
                             ])
                       : LinearGradient(
                           begin: Alignment.topRight,
