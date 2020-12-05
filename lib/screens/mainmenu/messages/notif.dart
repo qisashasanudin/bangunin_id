@@ -89,25 +89,31 @@ class _NotifState extends State<Notif> {
                   style: TextStyle(color: Colors.black38, fontSize: 15)),
               children: <Widget>[
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Icon(
                           Icons.location_on,
                           color: Colors.orangeAccent,
                         ),
+                        Padding(padding: EdgeInsets.all(10.0)),
                         Text(
                           '[Jakarta] on process',
                         ),
                       ],
                     ),
-                    Padding(padding: EdgeInsets.all(2.0)),
-                    Text(
-                      '29-03-2010',
-                      style: TextStyle(fontSize: 12, color: Colors.black38),
-                    )
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(45.0, 10.0, 10.0, 10.0),
+                      child: Text(
+                        '29-03-2010',
+                        style: TextStyle(fontSize: 12, color: Colors.black38),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
                   ],
                 ),
               ],
