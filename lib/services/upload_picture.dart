@@ -12,12 +12,17 @@ import 'package:permission_handler/permission_handler.dart';
 
 class UploadPicture {
   final BuildContext context;
+  final String docId;
   final String table;
   final String attribute;
   final String storagePath;
 
   UploadPicture(
-      {@required this.context, this.table, this.attribute, this.storagePath}) {
+      {@required this.context,
+      this.docId,
+      this.table,
+      this.attribute,
+      this.storagePath}) {
     chooseImageSource(context);
   }
 
@@ -101,22 +106,34 @@ class UploadPicture {
   }
 
   Future cropImage(picker) async {
-    File cropped = await ImageCropper.cropImage(
-      sourcePath: imageFile.path,
-      aspectRatioPresets: [CropAspectRatioPreset.square],
-      maxHeight: 512,
-      maxWidth: 512,
-      androidUiSettings: AndroidUiSettings(
-        toolbarColor: Theme.of(context).primaryColor,
-        toolbarWidgetColor: AppColors().accent1,
-        initAspectRatio: CropAspectRatioPreset.square,
-        lockAspectRatio: true,
-      ),
-      iosUiSettings: IOSUiSettings(
-        minimumAspectRatio: 1.0,
-        aspectRatioLockEnabled: true,
-      ),
-    );
+    File cropped = (imageFile.path ==
+            '/accounts/$userID/profilePicture/profilePicture.jpg')
+        ? await ImageCropper.cropImage(
+            sourcePath: imageFile.path,
+            aspectRatioPresets: [CropAspectRatioPreset.square],
+            maxHeight: 512,
+            maxWidth: 512,
+            androidUiSettings: AndroidUiSettings(
+              toolbarColor: Theme.of(context).primaryColor,
+              toolbarWidgetColor: AppColors().accent1,
+              initAspectRatio: CropAspectRatioPreset.square,
+              lockAspectRatio: true,
+            ),
+            iosUiSettings: IOSUiSettings(
+              minimumAspectRatio: 1.0,
+              aspectRatioLockEnabled: true,
+            ),
+          )
+        : await ImageCropper.cropImage(
+            sourcePath: imageFile.path,
+            aspectRatioPresets: [CropAspectRatioPreset.ratio16x9],
+            androidUiSettings: AndroidUiSettings(
+              toolbarColor: Theme.of(context).primaryColor,
+              toolbarWidgetColor: AppColors().accent1,
+              initAspectRatio: CropAspectRatioPreset.ratio16x9,
+            ),
+            iosUiSettings: IOSUiSettings(),
+          );
     return cropped;
   }
 
@@ -124,7 +141,6 @@ class UploadPicture {
     await FirebaseStorage.instance.ref().child(storagePath).putFile(source);
     String imageURL =
         await StorageService().getNetworkImageURL(context, storagePath);
-    await DatabaseService(uid: AuthService().getCurrentUID())
-        .writeData(table, attribute, imageURL);
+    await DatabaseService().writeData(docId, table, attribute, imageURL);
   }
 }

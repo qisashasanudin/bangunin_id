@@ -8,10 +8,13 @@ class DatabaseService {
   final String projectId;
   DatabaseService({this.uid, this.projectId});
 
-  Future writeData(String tableName, String attribute, String data) async {
+  Future writeData(
+      String docId, String tableName, String attribute, String data) async {
     CollectionReference table =
         FirebaseFirestore.instance.collection(tableName);
-    return await table.doc(uid).set({attribute: data}, SetOptions(merge: true));
+    return await table
+        .doc(docId)
+        .set({attribute: data}, SetOptions(merge: true));
   }
 
   Future createProjectData(Map<String, dynamic> data) async {

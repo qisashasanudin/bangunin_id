@@ -1,11 +1,12 @@
-import 'package:bangunin_id/models/shop_material_model.dart';
+import 'package:bangunin_id/models/material_model.dart';
 import 'package:bangunin_id/screens/mainmenu/shop/categories/item_details.dart';
 import 'package:flutter/material.dart';
 
 class ItemCard extends StatelessWidget {
+  final MaterialModel item;
   final int index;
 
-  ItemCard({this.index});
+  ItemCard({this.index, this.item});
 
   //========================= main function =========================
   @override
@@ -20,11 +21,11 @@ class ItemCard extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ItemDetails(
-                                index: index,
-                              )));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ItemDetails(item: item),
+                    ),
+                  );
                 },
                 child: Row(
                   children: <Widget>[
@@ -33,7 +34,7 @@ class ItemCard extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.asset(
-                          menu[index].image,
+                          item.image,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -48,12 +49,12 @@ class ItemCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            menu[index].name,
+                            item.name,
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            menu[index].shortDesc,
+                            '${item.type ?? ''} ${item.size ?? ''}',
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey[500],
@@ -63,7 +64,7 @@ class ItemCard extends StatelessWidget {
                             height: 20,
                           ),
                           Text(
-                            "Rp. " + menu[index].price.toString(),
+                            "Rp. ${item.price ?? '0'}",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 18),
                           )

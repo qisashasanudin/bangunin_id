@@ -1,10 +1,10 @@
-import 'package:bangunin_id/models/shop_material_model.dart';
+import 'package:bangunin_id/models/material_model.dart';
 import 'package:flutter/material.dart';
 
 class ItemDetails extends StatefulWidget {
-  final int index;
+  final MaterialModel item;
 
-  ItemDetails({Key key, this.index}) : super(key: key);
+  ItemDetails({Key key, this.item}) : super(key: key);
 
   @override
   _ItemDetailsState createState() => _ItemDetailsState();
@@ -29,7 +29,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                 height: height * 0.55,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage(menu[widget.index].image),
+                        image: AssetImage(widget.item.image),
                         fit: BoxFit.cover)),
                 child: Container(
                   decoration: BoxDecoration(
@@ -57,7 +57,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      menu[widget.index].name,
+                      widget.item.name,
                       style: TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
@@ -70,7 +70,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                       height: 50,
                       width: width,
                       child: ListView.builder(
-                        itemCount: menu[widget.index].rate,
+                        itemCount: 5,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, int key) {
                           return Icon(
@@ -95,7 +95,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                       height: 8,
                     ),
                     Text(
-                      menu[widget.index].desc,
+                      '${widget.item.type ?? ''} ${widget.item.size ?? ''}',
                       style: TextStyle(
                           fontSize: 16,
                           color: Colors.black,
@@ -120,7 +120,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                                   fontWeight: FontWeight.w600),
                             ),
                             Text(
-                              menu[widget.index].price.toString(),
+                              'Rp. ${widget.item.price ?? '0'}',
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 28,
@@ -132,7 +132,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                           onPressed: () {},
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
-                          color: Colors.orange[800],
+                          color: Theme.of(context).primaryColor,
                           padding: EdgeInsets.fromLTRB(35, 15, 35, 15),
                           child: Text(
                             "Add to cart",

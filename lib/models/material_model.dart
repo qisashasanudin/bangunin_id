@@ -80,7 +80,7 @@ List<MaterialModel> materials = [
     name: 'keramik',
     type: 'lantai',
     unit: 'dus',
-    image: 'assets/img/materials/semen.jpg',
+    image: 'assets/img/materials/Semen_50kg.jpg',
   ),
   MaterialModel(
     name: 'keramik',

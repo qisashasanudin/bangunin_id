@@ -17,11 +17,11 @@ class AuthService {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
       await DatabaseService(uid: getCurrentUID())
-          .writeData('accounts', 'email', email);
+          .writeData(getCurrentUID(), 'accounts', 'email', email);
       await DatabaseService(uid: getCurrentUID())
-          .writeData('accounts', 'name', name);
+          .writeData(getCurrentUID(), 'accounts', 'name', name);
       await DatabaseService(uid: getCurrentUID())
-          .writeData('accounts', 'role', 'Konsumen');
+          .writeData(getCurrentUID(), 'accounts', 'role', 'Konsumen');
       return "Signed Up";
     } on FirebaseAuthException catch (e) {
       print(e.toString());

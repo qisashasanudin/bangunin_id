@@ -71,37 +71,6 @@ class _SettingsTabState extends State<SettingsTab> {
   }
 
   //========================= main function =========================
-  ListTile signOutButton() {
-    return ListTile(
-      leading: Icon(Icons.logout),
-      title: Text('Keluar'),
-      onTap: () async {
-        final action = await PopUpDialog.yesNoDialog(context,
-            'Keluar dari Bangunin.id', 'Apakah anda yakin ingin keluar?');
-        if (action == DialogAction.yes) {
-          await _auth.signOut();
-        }
-      },
-    );
-  }
-
-  ListTile language() {
-    return ListTile(
-      leading: Icon(Icons.language),
-      title: Text('Bahasa'),
-      subtitle: Text('Indonesia'),
-      onTap: () {}, // command yang dilakukan jika tombol ditekan
-    );
-  }
-
-  ListTile notif() {
-    return ListTile(
-      leading: Icon(Icons.notifications),
-      title: Text('Notifikasi'),
-      subtitle: Text('Aktif'),
-      onTap: () {}, // command yang dilakukan jika tombol ditekan
-    );
-  }
 
   ListTile _changeProfilePic(BuildContext context) {
     return ListTile(
@@ -210,9 +179,41 @@ class _SettingsTabState extends State<SettingsTab> {
 
   _uploadData(snapshot, attribute, data) async {
     if (_formKey.currentState.validate()) {
-      await DatabaseService(uid: AuthService().getCurrentUID()).writeData(
+      await DatabaseService().writeData(AuthService().getCurrentUID(),
           'accounts', attribute, data ?? snapshot.data.data()[attribute]);
       Navigator.pop(context);
     }
+  }
+
+  ListTile signOutButton() {
+    return ListTile(
+      leading: Icon(Icons.logout),
+      title: Text('Keluar'),
+      onTap: () async {
+        final action = await PopUpDialog.yesNoDialog(context,
+            'Keluar dari Bangunin.id', 'Apakah anda yakin ingin keluar?');
+        if (action == DialogAction.yes) {
+          await _auth.signOut();
+        }
+      },
+    );
+  }
+
+  ListTile language() {
+    return ListTile(
+      leading: Icon(Icons.language),
+      title: Text('Bahasa'),
+      subtitle: Text('Indonesia'),
+      onTap: () {}, // command yang dilakukan jika tombol ditekan
+    );
+  }
+
+  ListTile notif() {
+    return ListTile(
+      leading: Icon(Icons.notifications),
+      title: Text('Notifikasi'),
+      subtitle: Text('Aktif'),
+      onTap: () {}, // command yang dilakukan jika tombol ditekan
+    );
   }
 }
