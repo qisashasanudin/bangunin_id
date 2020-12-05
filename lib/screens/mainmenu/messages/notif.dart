@@ -114,6 +114,52 @@ class _NotifState extends State<Notif> {
                         textAlign: TextAlign.start,
                       ),
                     ),
+                    Divider(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.location_on_rounded,
+                          color: Colors.grey[300],
+                        ),
+                        Padding(padding: EdgeInsets.all(10.0)),
+                        Text(
+                          '[Jakarta] on process',
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(45.0, 5.0, 10.0, 5.0),
+                      child: Text(
+                        '29-03-2010   19:54',
+                        style: TextStyle(fontSize: 12, color: Colors.black38),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                    Divider(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.location_on_rounded,
+                          color: Colors.grey[300],
+                        ),
+                        Padding(padding: EdgeInsets.all(10.0)),
+                        Text(
+                          '[Jakarta] on process',
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(45.0, 5.0, 10.0, 5.0),
+                      child: Text(
+                        '29-03-2010   19:54',
+                        style: TextStyle(fontSize: 12, color: Colors.black38),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
                   ],
                 ),
               ],
