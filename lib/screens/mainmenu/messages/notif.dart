@@ -97,7 +97,7 @@ class _NotifState extends State<Notif> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Icon(
-                          Icons.location_on,
+                          Icons.location_on_rounded,
                           color: Colors.orangeAccent,
                         ),
                         Padding(padding: EdgeInsets.all(10.0)),
@@ -107,9 +107,9 @@ class _NotifState extends State<Notif> {
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(45.0, 10.0, 10.0, 10.0),
+                      padding: EdgeInsets.fromLTRB(45.0, 5.0, 10.0, 5.0),
                       child: Text(
-                        '29-03-2010',
+                        '29-03-2010   19:54',
                         style: TextStyle(fontSize: 12, color: Colors.black38),
                         textAlign: TextAlign.start,
                       ),
