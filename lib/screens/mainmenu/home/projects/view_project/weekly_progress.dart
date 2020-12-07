@@ -49,7 +49,7 @@ class _WeeklyProgressState extends State<WeeklyProgress> {
           physics: NeverScrollableScrollPhysics(),
           itemCount: widget.items.length,
           itemBuilder: (_, index) {
-            return itemProgress(context, widget.items[index], 0.50);
+            return itemProgress(context, index, widget.items[index], 0.50);
           },
         ),
       ],
@@ -89,7 +89,7 @@ Padding separatorLine() {
 }
 
 SizedBox itemProgress(
-    BuildContext context, MaterialModel item, double percentage) {
+    BuildContext context, int index, MaterialModel item, double percentage) {
   return SizedBox(
     width: double.infinity,
     child: Padding(
@@ -99,7 +99,7 @@ SizedBox itemProgress(
           Container(
             alignment: Alignment.centerLeft,
             child: Text(
-              '${item.name} ${item.size} ${item.type} (${item.amount} ${item.unit})',
+              '${index + 1}. ${item.name} ${item.size} ${item.type} (${item.amount} ${item.unit})',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
