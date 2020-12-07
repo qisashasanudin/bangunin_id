@@ -22,11 +22,11 @@ class DatabaseService {
 
     CollectionReference table =
         FirebaseFirestore.instance.collection(tableName);
-    //TODO: add condition to update material information
-
-    (docId == null)
-        ? await table.add(data).then((value) => newDocId = value.id)
-        : await table.doc(docId).update(data);
+    if (docId == null) {
+      await table.add(data).then((value) => newDocId = value.id);
+    } else {
+      await table.doc(docId).set(data, SetOptions(merge: true));
+    }
     return newDocId;
   }
 
@@ -47,7 +47,7 @@ class DatabaseService {
         .doc(uid)
         .collection('projects')
         .doc(docId);
-    table.collection('materials_target').get().then((snapshot) {
+    await table.collection('materials_target').get().then((snapshot) {
       for (DocumentSnapshot ds in snapshot.docs) {
         ds.reference.delete();
       }
