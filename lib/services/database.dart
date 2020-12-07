@@ -17,14 +17,17 @@ class DatabaseService {
         .set({attribute: data}, SetOptions(merge: true));
   }
 
-  Future createProjectData(Map<String, dynamic> data) async {
+  Future writeProjectData(Map<String, dynamic> data) async {
     String docId;
-    await FirebaseFirestore.instance
+
+    CollectionReference table = FirebaseFirestore.instance
         .collection('accounts')
         .doc(uid)
-        .collection('projects')
-        .add(data)
-        .then((value) => docId = value.id);
+        .collection('projects');
+
+    (projectId == null)
+        ? await table.add(data).then((value) => docId = value.id)
+        : await table.doc(projectId).update(data);
     return docId;
   }
 

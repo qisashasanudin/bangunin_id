@@ -9,12 +9,12 @@ import 'package:bangunin_id/shared/UI_components/project_material_form.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:flutter/material.dart';
 
-class NewProjectMaterials extends StatefulWidget {
+class ProjectMaterials extends StatefulWidget {
   @override
-  _NewProjectMaterialsState createState() => _NewProjectMaterialsState();
+  _ProjectMaterialsState createState() => _ProjectMaterialsState();
 }
 
-class _NewProjectMaterialsState extends State<NewProjectMaterials> {
+class _ProjectMaterialsState extends State<ProjectMaterials> {
   final _formKey = GlobalKey<FormState>();
   final userID = AuthService().getCurrentUID();
   List<MaterialModel> unselectedMaterials = List.from(materials);
@@ -175,7 +175,7 @@ class _NewProjectMaterialsState extends State<NewProjectMaterials> {
         selectedMaterials.isNotEmpty) {
       String docId = await DatabaseService(
         uid: AuthService().getCurrentUID(),
-      ).createProjectData(
+      ).writeProjectData(
         {
           'projectName': projectDetails.projectName,
           'address': projectDetails.address,

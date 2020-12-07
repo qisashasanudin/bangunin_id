@@ -214,7 +214,7 @@ StreamBuilder createProjectButton(String userID) {
       if (snapshot.hasData && snapshot.data.data['isSupervisor']) {
         return FloatingActionButton.extended(
           onPressed: () async {
-            Navigator.of(context).pushNamed('/newproject');
+            Navigator.of(context).pushNamed('/projectinformation');
           },
           label: Text(
             'Buat Proyek Baru',

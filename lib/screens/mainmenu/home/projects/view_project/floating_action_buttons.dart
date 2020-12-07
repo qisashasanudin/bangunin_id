@@ -24,7 +24,8 @@ SpeedDialChild addPictureButton(
   );
 }
 
-SpeedDialChild editProjectButton(BuildContext context) {
+SpeedDialChild editProjectButton(
+    BuildContext context, ProjectDetailsModel data) {
   return SpeedDialChild(
     elevation: 10,
     backgroundColor: Theme.of(context).primaryColor,
@@ -32,7 +33,7 @@ SpeedDialChild editProjectButton(BuildContext context) {
     child: Icon(Icons.settings, color: AppColors().accent1),
     label: 'Edit Proyek',
     onTap: () {
-      chooseEditProject(context);
+      chooseEditProject(context, data);
     },
   );
 }
@@ -57,7 +58,8 @@ SpeedDialChild deleteProjectButton(
   );
 }
 
-Future<void> chooseEditProject(BuildContext context) async {
+Future<void> chooseEditProject(
+    BuildContext context, ProjectDetailsModel data) async {
   final action = await showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -69,7 +71,12 @@ Future<void> chooseEditProject(BuildContext context) async {
                 padding: const EdgeInsets.symmetric(vertical: 25.0),
                 child: GestureDetector(
                   child: Text('Rincian Proyek'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                    Navigator.of(context)
+                        .pushNamed('/projectinformation', arguments: data);
+                  },
                 ),
               ),
               Padding(

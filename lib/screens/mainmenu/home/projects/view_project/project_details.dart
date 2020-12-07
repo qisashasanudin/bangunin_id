@@ -1,8 +1,8 @@
 import 'package:bangunin_id/models/material_model.dart';
 import 'package:bangunin_id/models/project_details_model.dart';
-import 'package:bangunin_id/screens/mainmenu/home/projects/existing_project/floating_action_buttons.dart';
-import 'package:bangunin_id/screens/mainmenu/home/projects/existing_project/overall_progress_percentage.dart';
-import 'package:bangunin_id/screens/mainmenu/home/projects/existing_project/weekly_progress.dart';
+import 'package:bangunin_id/screens/mainmenu/home/projects/view_project/floating_action_buttons.dart';
+import 'package:bangunin_id/screens/mainmenu/home/projects/view_project/overall_progress_percentage.dart';
+import 'package:bangunin_id/screens/mainmenu/home/projects/view_project/weekly_progress.dart';
 import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:bangunin_id/shared/UI_components/project_details_card.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,8 @@ class _ProjectDetailsState extends State<ProjectDetails> {
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
     final userID = _auth.getCurrentUID();
-    ProjectDetailsModel details = ModalRoute.of(context).settings.arguments;
+    ProjectDetailsModel details =
+        ModalRoute.of(context).settings.arguments ?? ProjectDetailsModel();
 
     return MultiProvider(
       providers: [
@@ -86,7 +87,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
             elevation: 10,
             children: [
               addPictureButton(context, userID, details.projectId),
-              editProjectButton(context),
+              editProjectButton(context, details),
               deleteProjectButton(context, userID, details),
             ],
           ),

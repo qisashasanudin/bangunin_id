@@ -69,7 +69,7 @@ StreamBuilder createProjectButton(String userID) {
         return FloatingActionButton.extended(
           elevation: 10,
           onPressed: () async {
-            Navigator.of(context).pushNamed('/newprojectinformation');
+            Navigator.of(context).pushNamed('/projectinformation');
           },
           label: Text(
             'Buat Proyek Baru',
