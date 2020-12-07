@@ -1,11 +1,11 @@
 import 'package:bangunin_id/models/project_details_model.dart';
 import 'package:bangunin_id/services/auth.dart';
+import 'package:bangunin_id/shared/UI_components/custom_text_form.dart';
 import 'package:bangunin_id/shared/UI_components/on_back_pressed.dart';
 import 'package:bangunin_id/shared/UI_components/form_field_decoration.dart';
 import 'package:bangunin_id/shared/UI_components/custom_button.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class NewProjectInformation extends StatefulWidget {
@@ -46,37 +46,20 @@ class _NewProjectInformationState extends State<NewProjectInformation> {
                 Padding(
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     child: Text('Informasi Utama (Wajib Diisi)')),
-                Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    child: _textForm('Nama Proyek', true)),
-                Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    child: _dateForm('Deadline', true)),
+                _projectNameForm(),
+                _deadlineForm(),
                 Padding(
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                     child: Divider(color: Colors.black)),
                 Padding(
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     child: Text('Informasi Tambahan (Opsional)')),
-                Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    child: _textForm('Alamat', false)),
+                _addressForm(),
                 //TODO: BUAT OPSI UNTUK MENGISI ALAMAT DGN GOOGLE MAP
-                Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    child: _textForm('Nama Klien', false)),
-                Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    child: _textForm('Email Klien', false)),
-                Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    child: _textForm('Nomor Telepon Klien', false)),
-                Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    child: CustomButton(
-                      prompt: 'Selanjutnya',
-                      onPressed: _moveToNewProjectMaterials,
-                    )),
+                _clientNameForm(),
+                _clientEmailForm(),
+                _clientPhoneForm(),
+                _nextButton(),
               ]),
             ),
             //sliver-sliver lain ditulis di sini
@@ -87,28 +70,82 @@ class _NewProjectInformationState extends State<NewProjectInformation> {
   }
   //========================= main function =========================
 
-  TextFormField _textForm(labelText, mustBeFilled) {
-    return TextFormField(
-      keyboardType: (labelText == 'Nomor Telepon Klien')
-          ? TextInputType.number
-          : (labelText == 'Email Klien')
-              ? TextInputType.emailAddress
-              : TextInputType.text,
-      inputFormatters: [
-        if (labelText == 'Nomor Telepon Klien')
-          FilteringTextInputFormatter.digitsOnly,
-      ],
-      decoration: formFieldDecoration(labelText),
-      validator: (val) => (val.isEmpty && mustBeFilled == true)
-          ? 'Data tidak boleh kosong.'
-          : null,
-      onChanged: (val) {
-        _chooseProjectDetailsElement(labelText, val);
-      },
-    );
+  Padding _projectNameForm() {
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: CustomTextForm(
+          label: 'Nama Proyek',
+          mustBeFilled: true,
+          onChanged: (val) {
+            _chooseProjectDetailsElement('Nama Proyek', val);
+          },
+        ));
   }
 
-  void _chooseProjectDetailsElement(labelText, String val) {
+  Padding _deadlineForm() {
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: _dateForm('Deadline', true));
+  }
+
+  Padding _addressForm() {
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: CustomTextForm(
+          label: 'Alamat',
+          mustBeFilled: false,
+          onChanged: (val) {
+            _chooseProjectDetailsElement('Alamat', val);
+          },
+        ));
+  }
+
+  Padding _clientNameForm() {
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: CustomTextForm(
+          label: 'Nama Klien',
+          mustBeFilled: false,
+          onChanged: (val) {
+            _chooseProjectDetailsElement('Nama Klien', val);
+          },
+        ));
+  }
+
+  Padding _clientEmailForm() {
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: CustomTextForm(
+          label: 'Email Klien',
+          mustBeFilled: false,
+          onChanged: (val) {
+            _chooseProjectDetailsElement('Email Klien', val);
+          },
+        ));
+  }
+
+  Padding _clientPhoneForm() {
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: CustomTextForm(
+          label: 'Nomor Telepon Klien',
+          mustBeFilled: false,
+          onChanged: (val) {
+            _chooseProjectDetailsElement('Nomor Telepon Klien', val);
+          },
+        ));
+  }
+
+  Padding _nextButton() {
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: CustomButton(
+          prompt: 'Selanjutnya',
+          onPressed: _moveToNewProjectMaterials,
+        ));
+  }
+
+  void _chooseProjectDetailsElement(String labelText, String val) {
     return setState(() {
       switch (labelText) {
         case 'Nama Proyek':

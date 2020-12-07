@@ -1,4 +1,5 @@
 import 'package:bangunin_id/shared/UI_components/app_colors.dart';
+import 'package:bangunin_id/shared/UI_components/custom_text_form.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/shared/UI_components/custom_appbar.dart';
@@ -136,7 +137,12 @@ class _SettingsTabState extends State<SettingsTab> {
               height: 200,
               child: ListView(
                 children: <Widget>[
-                  _editText(attribute),
+                  CustomTextForm(
+                    initialValue: currentValue,
+                    label: attribute,
+                    mustBeFilled: true,
+                    onChanged: (val) => setState(() => currentValue = val),
+                  ),
                   SizedBox(height: 20.0),
                   _updateButton(snapshot, attribute, 'Simpan'),
                 ],
@@ -145,20 +151,6 @@ class _SettingsTabState extends State<SettingsTab> {
           ),
         );
       },
-    );
-  }
-
-  TextFormField _editText(String attribute) {
-    return TextFormField(
-      keyboardType:
-          (attribute == 'phone') ? TextInputType.number : TextInputType.text,
-      inputFormatters: [
-        if (attribute == 'phone') FilteringTextInputFormatter.digitsOnly,
-      ],
-      initialValue: currentValue,
-      decoration: formFieldDecoration(attribute),
-      validator: (val) => (val.isEmpty) ? 'Data tidak boleh kosong' : null,
-      onChanged: (val) => setState(() => currentValue = val),
     );
   }
 
