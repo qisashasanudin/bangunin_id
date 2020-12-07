@@ -67,6 +67,9 @@ class _ProjectMaterialFormState extends State<ProjectMaterialForm> {
         keyboardType: TextInputType.number,
         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         decoration: formFieldDecoration('Jumlah'),
+        initialValue: (widget.children.amount != null)
+            ? widget.children.amount.toString()
+            : null,
         validator: (val) => (val.isEmpty) ? 'Data tidak boleh kosong.' : null,
         onChanged: (newValue) {
           widget.children.amount = int.parse(newValue);

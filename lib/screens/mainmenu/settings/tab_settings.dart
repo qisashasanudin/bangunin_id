@@ -3,12 +3,10 @@ import 'package:bangunin_id/shared/UI_components/custom_text_form.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/shared/UI_components/custom_appbar.dart';
-import 'package:bangunin_id/shared/UI_components/form_field_decoration.dart';
 import 'package:bangunin_id/shared/UI_components/loading_screen.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/page_templates/slide_up_panel.dart';
 import 'package:bangunin_id/services/upload_picture.dart';
-import 'package:flutter/services.dart';
 import 'package:bangunin_id/shared/UI_components/popup_dialog.dart';
 
 class SettingsTab extends StatefulWidget {

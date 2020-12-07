@@ -24,7 +24,6 @@ class AuthService {
           .writeData(getCurrentUID(), 'accounts', 'role', 'Konsumen');
       return "Signed Up";
     } on FirebaseAuthException catch (e) {
-      print(e.toString());
       return e.message;
     }
   }
@@ -34,10 +33,8 @@ class AuthService {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-      print(getCurrentUID());
       return "Signed in";
     } on FirebaseAuthException catch (e) {
-      print(e.toString());
       return e.message;
     }
   }
@@ -47,7 +44,6 @@ class AuthService {
     try {
       return await _firebaseAuth.signOut();
     } catch (e) {
-      print(e.toString());
       return null;
     }
   }

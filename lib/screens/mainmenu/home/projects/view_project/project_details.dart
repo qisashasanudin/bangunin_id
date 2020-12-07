@@ -30,7 +30,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
     return MultiProvider(
       providers: [
         StreamProvider<List<MaterialModel>>.value(
-          value: DatabaseService(uid: userID, projectId: details.projectId)
+          value: DatabaseService(uid: userID, docId: details.projectId)
               .projectMaterialsTarget,
         ),
         // StreamProvider<List<MaterialModel>>.value(
@@ -87,7 +87,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
             elevation: 10,
             children: [
               addPictureButton(context, userID, details.projectId),
-              editProjectButton(context, details),
+              editProjectButton(context, details, materialsTarget),
               deleteProjectButton(context, userID, details),
             ],
           ),

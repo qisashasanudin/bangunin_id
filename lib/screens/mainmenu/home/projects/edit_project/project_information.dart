@@ -33,6 +33,11 @@ class _ProjectInformationState extends State<ProjectInformation> {
   Widget build(BuildContext context) {
     ProjectDetailsModel currentValue =
         ModalRoute.of(context).settings.arguments ?? ProjectDetailsModel();
+
+    if (_projectDetails == ProjectDetailsModel()) {
+      _projectDetails = currentValue;
+    }
+
     return WillPopScope(
       onWillPop: () async => await onBackPressed(context),
       child: Form(
@@ -49,20 +54,20 @@ class _ProjectInformationState extends State<ProjectInformation> {
                 Padding(
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     child: Text('Informasi Utama (Wajib Diisi)')),
-                _projectNameForm(currentValue.projectName),
-                _deadlineForm(currentValue.dateDeadline),
+                _projectNameForm(),
+                _deadlineForm(),
                 Padding(
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                     child: Divider(color: Colors.black)),
                 Padding(
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     child: Text('Informasi Tambahan (Opsional)')),
-                _addressForm(currentValue.address),
+                _addressForm(),
                 //TODO: BUAT OPSI UNTUK MENGISI ALAMAT DGN GOOGLE MAP
-                _clientNameForm(currentValue.clientName),
-                _clientEmailForm(currentValue.clientEmail),
-                _clientPhoneForm(currentValue.clientPhone),
-                _nextButton(currentValue),
+                _clientNameForm(),
+                _clientEmailForm(),
+                _clientPhoneForm(),
+                _nextButton(),
               ]),
             ),
             //sliver-sliver lain ditulis di sini
@@ -73,37 +78,35 @@ class _ProjectInformationState extends State<ProjectInformation> {
   }
   //========================= main function =========================
 
-  Padding _projectNameForm(String currentVal) {
+  Padding _projectNameForm() {
     return Padding(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: CustomTextForm(
           label: 'Nama Proyek',
           mustBeFilled: true,
-          initialValue: currentVal,
+          initialValue: _projectDetails.projectName,
           onChanged: (val) {
             _chooseProjectDetailsElement('Nama Proyek', val);
           },
         ));
   }
 
-  Padding _deadlineForm(DateTime currentVal) {
-    if (currentVal != null)
-      _dateController.text = _dateFormatter.format(currentVal);
+  Padding _deadlineForm() {
     return Padding(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: TextFormField(
           readOnly: true,
           controller: _dateController,
-          onTap: () => _handleDatePicker(currentVal),
+          onTap: _handleDatePicker,
           decoration: formFieldDecoration('Deadline'),
           validator: (val) => (val.isEmpty) ? 'Data tidak boleh kosong.' : null,
         ));
   }
 
-  _handleDatePicker(DateTime currentVal) async {
+  _handleDatePicker() async {
     final DateTime date = await showDatePicker(
       context: context,
-      initialDate: currentVal ?? _projectDetails.dateDeadline ?? DateTime.now(),
+      initialDate: _projectDetails.dateDeadline ?? DateTime.now(),
       firstDate: DateTime.now(),
       lastDate: DateTime(2100),
     );
@@ -113,52 +116,52 @@ class _ProjectInformationState extends State<ProjectInformation> {
     _dateController.text = _dateFormatter.format(_projectDetails.dateDeadline);
   }
 
-  Padding _addressForm(String currentVal) {
+  Padding _addressForm() {
     return Padding(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: CustomTextForm(
           label: 'Alamat',
           mustBeFilled: false,
-          initialValue: currentVal,
+          initialValue: _projectDetails.address,
           onChanged: (val) {
             _chooseProjectDetailsElement('Alamat', val);
           },
         ));
   }
 
-  Padding _clientNameForm(String currentVal) {
+  Padding _clientNameForm() {
     return Padding(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: CustomTextForm(
           label: 'Nama Klien',
           mustBeFilled: false,
-          initialValue: currentVal,
+          initialValue: _projectDetails.clientName,
           onChanged: (val) {
             _chooseProjectDetailsElement('Nama Klien', val);
           },
         ));
   }
 
-  Padding _clientEmailForm(String currentVal) {
+  Padding _clientEmailForm() {
     return Padding(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: CustomTextForm(
           label: 'Email Klien',
           mustBeFilled: false,
-          initialValue: currentVal,
+          initialValue: _projectDetails.clientEmail,
           onChanged: (val) {
             _chooseProjectDetailsElement('Email Klien', val);
           },
         ));
   }
 
-  Padding _clientPhoneForm(String currentVal) {
+  Padding _clientPhoneForm() {
     return Padding(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: CustomTextForm(
           label: 'Nomor Telepon Klien',
           mustBeFilled: false,
-          initialValue: currentVal,
+          initialValue: _projectDetails.clientPhone,
           onChanged: (val) {
             _chooseProjectDetailsElement('Nomor Telepon Klien', val);
           },
@@ -187,14 +190,15 @@ class _ProjectInformationState extends State<ProjectInformation> {
     });
   }
 
-  Padding _nextButton(ProjectDetailsModel currentModel) {
+  Padding _nextButton() {
     return Padding(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: CustomButton(
-          prompt: 'Selanjutnya',
-          onPressed: (currentModel.projectId == null)
+          prompt:
+              (_projectDetails.projectId != null) ? 'Simpan' : 'Selanjutnya',
+          onPressed: (_projectDetails.projectId == null)
               ? _moveToNewProjectMaterials
-              : () => _saveChanges(currentModel),
+              : () => _saveChanges(),
         ));
   }
 
@@ -206,34 +210,28 @@ class _ProjectInformationState extends State<ProjectInformation> {
       });
       Navigator.of(context).pushNamed(
         '/projectmaterials',
-        arguments: _projectDetails,
+        arguments: [_projectDetails],
       );
     }
   }
 
-  _saveChanges(ProjectDetailsModel currentModel) async {
+  _saveChanges() async {
     if (_formKey.currentState.validate()) {
       await DatabaseService(
               uid: AuthService().getCurrentUID(),
-              projectId: currentModel.projectId)
-          .writeProjectData(
+              docId: _projectDetails.projectId)
+          .writeDoc(
+        'accounts/$userID/projects/',
         {
-          'projectName':
-              _projectDetails.projectName ?? currentModel.projectName,
-          'address': _projectDetails.address ?? currentModel.address,
-          'addressGMap':
-              _projectDetails.addressGMap ?? currentModel.addressGMap,
-          'clientName': _projectDetails.clientName ?? currentModel.clientName,
-          'clientEmail':
-              _projectDetails.clientEmail ?? currentModel.clientEmail,
-          'clientPhone':
-              _projectDetails.clientPhone ?? currentModel.clientPhone,
-          'dateCreated':
-              _projectDetails.dateCreated ?? currentModel.dateCreated,
-          'dateDeadline':
-              _projectDetails.dateDeadline ?? currentModel.dateDeadline,
-          'isCompleted':
-              _projectDetails.isCompleted ?? currentModel.isCompleted,
+          'projectName': _projectDetails.projectName,
+          'address': _projectDetails.address,
+          'addressGMap': _projectDetails.addressGMap,
+          'clientName': _projectDetails.clientName,
+          'clientEmail': _projectDetails.clientEmail,
+          'clientPhone': _projectDetails.clientPhone,
+          'dateCreated': _projectDetails.dateCreated,
+          'dateDeadline': _projectDetails.dateDeadline,
+          'isCompleted': _projectDetails.isCompleted,
         },
       );
       Navigator.of(context).pop();

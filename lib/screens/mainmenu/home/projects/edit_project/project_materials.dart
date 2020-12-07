@@ -25,7 +25,13 @@ class _ProjectMaterialsState extends State<ProjectMaterials> {
   //========================= main function =========================
   @override
   Widget build(BuildContext context) {
-    ProjectDetailsModel details = ModalRoute.of(context).settings.arguments;
+    List<dynamic> input = ModalRoute.of(context).settings.arguments;
+    if (input.length > 1 && generatedList.length == 0) {
+      for (var element in input[1]) {
+        _addObject(element);
+      }
+      selectedMaterials = List.from(input[1]);
+    }
 
     return WillPopScope(
       onWillPop: () async => await onBackPressed(context),
@@ -43,7 +49,7 @@ class _ProjectMaterialsState extends State<ProjectMaterials> {
                 //widget-widget lain dipasang di sini
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: ProjectDetailsCard(child: details),
+                  child: ProjectDetailsCard(child: input[0]),
                 ),
                 Padding(
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
@@ -67,7 +73,7 @@ class _ProjectMaterialsState extends State<ProjectMaterials> {
                   child: CustomButton(
                       prompt: 'Simpan',
                       onPressed: () {
-                        _uploadData(details);
+                        _uploadData(input[0]);
                       }),
                 ),
                 Padding(
@@ -118,21 +124,25 @@ class _ProjectMaterialsState extends State<ProjectMaterials> {
               )
           ],
           onChanged: (value) {
-            if (unselectedMaterials.isEmpty) {
-              return;
-            }
-            setState(() {
-              selectedMaterials.add(value);
-              unselectedMaterials.removeWhere((element) => element == value);
-              generatedList.add(ProjectMaterialForm(
-                children: value,
-                returnValue: _getNewObject,
-              ));
-            });
+            _addObject(value);
           },
         ),
       ),
     );
+  }
+
+  _addObject(value) {
+    if (unselectedMaterials.isEmpty) {
+      return;
+    }
+    setState(() {
+      selectedMaterials.add(value);
+      unselectedMaterials.removeWhere((element) => element == value);
+      generatedList.add(ProjectMaterialForm(
+        children: value,
+        returnValue: _getNewObject,
+      ));
+    });
   }
 
   _getNewObject(MaterialModel newObject) {
@@ -151,18 +161,22 @@ class _ProjectMaterialsState extends State<ProjectMaterials> {
         child: CustomButton(
           prompt: 'Hapus',
           onPressed: () {
-            if (selectedMaterials.isEmpty) {
-              return;
-            }
-            setState(() {
-              unselectedMaterials.add(selectedMaterials.last);
-              selectedMaterials.removeLast();
-              generatedList.removeLast();
-            });
+            _deleteObject();
           },
         ),
       ),
     );
+  }
+
+  _deleteObject() {
+    if (selectedMaterials.isEmpty) {
+      return;
+    }
+    setState(() {
+      unselectedMaterials.add(selectedMaterials.last);
+      selectedMaterials.removeLast();
+      generatedList.removeLast();
+    });
   }
 
   _uploadData(ProjectDetailsModel projectDetails) async {
@@ -173,27 +187,31 @@ class _ProjectMaterialsState extends State<ProjectMaterials> {
     if (_formKey.currentState.validate() &&
         status &&
         selectedMaterials.isNotEmpty) {
-      String docId = await DatabaseService(
-        uid: AuthService().getCurrentUID(),
-      ).writeProjectData(
-        {
-          'projectName': projectDetails.projectName,
-          'address': projectDetails.address,
-          'addressGMap': projectDetails.addressGMap,
-          'clientName': projectDetails.clientName,
-          'clientEmail': projectDetails.clientEmail,
-          'clientPhone': projectDetails.clientPhone,
-          'dateCreated': projectDetails.dateCreated ?? DateTime.now(),
-          'dateDeadline': projectDetails.dateDeadline,
-          'isCompleted': projectDetails.isCompleted ?? false,
-        },
-      );
+      String docId = (projectDetails.projectId != null)
+          ? projectDetails.projectId
+          : await DatabaseService(
+              uid: AuthService().getCurrentUID(),
+            ).writeDoc(
+              'accounts/$userID/projects/',
+              {
+                'projectName': projectDetails.projectName,
+                'address': projectDetails.address,
+                'addressGMap': projectDetails.addressGMap,
+                'clientName': projectDetails.clientName,
+                'clientEmail': projectDetails.clientEmail,
+                'clientPhone': projectDetails.clientPhone,
+                'dateCreated': projectDetails.dateCreated ?? DateTime.now(),
+                'dateDeadline': projectDetails.dateDeadline,
+                'isCompleted': projectDetails.isCompleted ?? false,
+              },
+            );
+      //TODO: material yang dihapus belum bisa hilang dari database
       for (var element in selectedMaterials) {
         await DatabaseService(
           uid: AuthService().getCurrentUID(),
-          projectId: docId,
-        ).createProjectMaterialsData(
-          'materials_target',
+          docId: element.materialId,
+        ).writeDoc(
+          'accounts/$userID/projects/$docId/materials_target',
           {
             'name': element.name,
             'size': element.size,

@@ -25,7 +25,7 @@ SpeedDialChild addPictureButton(
 }
 
 SpeedDialChild editProjectButton(
-    BuildContext context, ProjectDetailsModel data) {
+    BuildContext context, ProjectDetailsModel information, var materials) {
   return SpeedDialChild(
     elevation: 10,
     backgroundColor: Theme.of(context).primaryColor,
@@ -33,7 +33,7 @@ SpeedDialChild editProjectButton(
     child: Icon(Icons.settings, color: AppColors().accent1),
     label: 'Edit Proyek',
     onTap: () {
-      chooseEditProject(context, data);
+      chooseEditProject(context, information, materials);
     },
   );
 }
@@ -51,15 +51,15 @@ SpeedDialChild deleteProjectButton(
           'Apakah anda yakin ingin menghapus proyek ini?');
       if (action == DialogAction.yes) {
         Navigator.of(context).pop();
-        await DatabaseService(uid: userID, projectId: details.projectId)
+        await DatabaseService(uid: userID, docId: details.projectId)
             .deleteProjectData();
       }
     },
   );
 }
 
-Future<void> chooseEditProject(
-    BuildContext context, ProjectDetailsModel data) async {
+Future<void> chooseEditProject(BuildContext context,
+    ProjectDetailsModel information, var materials) async {
   final action = await showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -74,8 +74,8 @@ Future<void> chooseEditProject(
                   onTap: () {
                     Navigator.of(context).pop();
                     Navigator.of(context).pop();
-                    Navigator.of(context)
-                        .pushNamed('/projectinformation', arguments: data);
+                    Navigator.of(context).pushNamed('/projectinformation',
+                        arguments: information);
                   },
                 ),
               ),
@@ -83,7 +83,11 @@ Future<void> chooseEditProject(
                 padding: const EdgeInsets.symmetric(vertical: 25.0),
                 child: GestureDetector(
                   child: Text('Material Proyek'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pushNamed('/projectmaterials',
+                        arguments: [information, materials]);
+                  },
                 ),
               ),
             ],
