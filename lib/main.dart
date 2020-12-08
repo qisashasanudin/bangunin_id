@@ -4,6 +4,7 @@ import 'package:bangunin_id/screens/mainmenu/home/projects/edit_project/project_
 import 'package:bangunin_id/screens/mainmenu/home/projects/view_project/project_details.dart';
 import 'package:bangunin_id/screens/mainmenu/home/tab_home.dart';
 import 'package:bangunin_id/screens/mainmenu/messages/tab_messages_and_notif.dart';
+import 'package:bangunin_id/screens/mainmenu/shop/tab_checkout.dart';
 import 'package:bangunin_id/screens/mainmenu/shop/tab_shop.dart';
 import 'package:bangunin_id/screens/mainmenu/settings/tab_settings.dart';
 import 'package:bangunin_id/shared/UI_components/loading_screen.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
           '/projectinformation': (context) => ProjectInformation(),
           '/projectmaterials': (context) => ProjectMaterials(),
           '/projectdetails': (context) => ProjectDetails(),
+          '/tabcheckout': (context) => CheckoutTab(),
         },
       ),
     );

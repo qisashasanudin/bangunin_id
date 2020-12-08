@@ -114,7 +114,9 @@ class _SettingsTabState extends State<SettingsTab> {
       leading: Icon(Icons.lock),
       title: Text('Ganti Password'),
       trailing: Icon(Icons.edit),
-      onTap: () async {},
+      onTap: () async {
+        Navigator.of(context).pushNamed('/tabcheckout');
+      },
     );
   }
 
