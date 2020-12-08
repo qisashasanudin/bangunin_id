@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bangunin_id/shared/UI_components/custom_appbar.dart';
-import 'package:bangunin_id/shared/page_templates/slide_up_panel.dart';
+import 'package:bangunin_id/shared/UI_components/custom_heading.dart';
 
 class CheckoutTab extends StatefulWidget {
   //Settings({Key key}) : super(key: key);
@@ -14,13 +13,16 @@ class _CheckoutTabState extends State<CheckoutTab> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.4,
+        elevation: 0.5,
         iconTheme: IconThemeData(color: Colors.black),
         title: Text('Checkout'),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            CustomHeading(
+              title: 'Your Order',
+            ),
             // widget-widget lain dimasukkan di sini
           ],
         ),
