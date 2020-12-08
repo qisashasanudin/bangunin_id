@@ -12,13 +12,19 @@ class _CheckoutTabState extends State<CheckoutTab> {
   //========================= main function =========================
   @override
   Widget build(BuildContext context) {
-    return SlideUpPanel(
-      children: [
-        CustomAppBar(
-          title: 'Checkout',
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0.4,
+        iconTheme: IconThemeData(color: Colors.black),
+        title: Text('Checkout'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // widget-widget lain dimasukkan di sini
+          ],
         ),
-        // widget-widget lain dimasukkan di sini
-      ],
+      ),
     );
   }
   //========================= main function =========================
