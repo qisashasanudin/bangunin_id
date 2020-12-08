@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/shared/UI_components/custom_heading.dart';
+import 'package:bangunin_id/screens/mainmenu/messages/tab_messages_and_notif.dart';
 
 class CheckoutTab extends StatefulWidget {
   //Settings({Key key}) : super(key: key);
@@ -78,7 +79,9 @@ class _CheckoutTabState extends State<CheckoutTab> {
               icon: Icon(Icons.shopping_bag),
               label: Text('Confirm Order'),
               color: Colors.orange[300],
-              onPressed: () {},
+              onPressed: () async {
+                Navigator.of(context).pushNamed('/messageandnotif');
+              },
             ),
             // widget-widget lain dimasukkan di sini
           ],
