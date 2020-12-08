@@ -69,10 +69,15 @@ class _CheckoutTabState extends State<CheckoutTab> {
                 'Delivery fee \n1.2 km', 'Rp.150.000,00', FontWeight.normal),
             _checkoutPrice('Tax', 'Rp.40.000,00', FontWeight.normal),
             _checkoutPrice('Total', 'Rp.2.150.000,00', FontWeight.w900),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5),
+            ),
             RaisedButton.icon(
-              padding: EdgeInsets.all(10.0),
-              icon: Icon(Icons.money),
+              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 80.0),
+              icon: Icon(Icons.shopping_bag),
               label: Text('Confirm Order'),
+              color: Colors.orange[300],
               onPressed: () {},
             ),
             // widget-widget lain dimasukkan di sini
