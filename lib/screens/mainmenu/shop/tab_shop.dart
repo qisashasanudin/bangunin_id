@@ -30,6 +30,11 @@ class _ShopTabState extends State<ShopTab> {
               categories(),
               SizedBox(height: 5),
               itemList(context),
+              //Scaffold(
+              //floatingActionButton: FloatingActionButton(
+              // onPressed: () {},
+              // child: Text('Checkout'),
+              // ),),
             ],
           ),
         ),
