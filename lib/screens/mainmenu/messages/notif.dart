@@ -33,26 +33,29 @@ class _NotifState extends State<Notif> {
         padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 5),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                new Text(
-                  judul,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 18,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  new Text(
+                    judul,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 18,
+                    ),
                   ),
-                ),
-                Text(
-                  deliver,
-                  style: TextStyle(
-                    color: Colors.greenAccent,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 16,
+                  Text(
+                    deliver,
+                    style: TextStyle(
+                      color: Colors.greenAccent,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
