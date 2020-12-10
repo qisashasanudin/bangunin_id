@@ -9,12 +9,12 @@ import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class ProjectInformation extends StatefulWidget {
+class ProjectReview extends StatefulWidget {
   @override
-  _ProjectInformationState createState() => _ProjectInformationState();
+  _ProjectReviewState createState() => _ProjectReviewState();
 }
 
-class _ProjectInformationState extends State<ProjectInformation> {
+class _ProjectReviewState extends State<ProjectReview> {
   final _formKey = GlobalKey<FormState>();
   final userID = AuthService().getCurrentUID();
 
