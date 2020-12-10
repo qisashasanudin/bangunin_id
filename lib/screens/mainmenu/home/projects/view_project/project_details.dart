@@ -67,13 +67,10 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                 ),
                 DefaultTabController(
                   length: 5,
-                  child: ListView(
-                    shrinkWrap: true,
-                    padding: EdgeInsets.zero,
-                    physics: NeverScrollableScrollPhysics(),
-                    children: <Widget>[
+                  child: Column(
+                    children: [
                       _weeksTab(),
-                      WeeklyProgress(items: materialsTarget),
+                      _weeksTabContents(context, materialsTarget),
                     ],
                   ),
                 ),
@@ -95,6 +92,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
       },
     );
   }
+
   //========================= main function =========================
 
   TabBar _weeksTab() {
@@ -114,4 +112,20 @@ class _ProjectDetailsState extends State<ProjectDetails> {
       onTap: (value) {},
     );
   }
+}
+
+Container _weeksTabContents(
+    BuildContext context, List<MaterialModel> materialsTarget) {
+  return Container(
+    height: MediaQuery.of(context).size.height + (20 * materialsTarget.length),
+    child: TabBarView(
+      children: [
+        WeeklyProgress(items: materialsTarget),
+        WeeklyProgress(items: materialsTarget),
+        WeeklyProgress(items: materialsTarget),
+        WeeklyProgress(items: materialsTarget),
+        WeeklyProgress(items: materialsTarget),
+      ],
+    ),
+  );
 }

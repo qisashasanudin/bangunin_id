@@ -13,7 +13,7 @@ class DynamicList extends StatefulWidget {
 }
 
 class _DynamicListState extends State<DynamicList> {
-  List<MaterialModel> unselectedObjects = List.from(materials);
+  List<MaterialModel> unselectedObjects = List.from(materialsDataset);
   List<MaterialModel> selectedObjects = [];
   List<ProjectMaterialForm> generatedList = [];
 
