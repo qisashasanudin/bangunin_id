@@ -3,23 +3,26 @@ import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   final String prompt;
+  final Icon icon;
   final Function() onPressed;
 
   const CustomButton({
     Key key,
-    @required this.onPressed,
+    this.icon,
     @required this.prompt,
+    @required this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      child: RaisedButton(
+      child: RaisedButton.icon(
+        icon: icon ?? Icon(Icons.check, color: AppColors().accent1),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         color: AppColors().primary,
-        child: Text(prompt, style: TextStyle(color: AppColors().accent1)),
+        label: Text(prompt, style: TextStyle(color: AppColors().accent1)),
         onPressed: () {
           onPressed();
         },

@@ -1,3 +1,5 @@
+import 'package:bangunin_id/shared/UI_components/app_colors.dart';
+import 'package:bangunin_id/shared/UI_components/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/shared/UI_components/custom_heading.dart';
 import 'package:bangunin_id/screens/mainmenu/messages/tab_messages_and_notif.dart';
@@ -74,15 +76,13 @@ class _CheckoutTabState extends State<CheckoutTab> {
               padding:
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5),
             ),
-            RaisedButton.icon(
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 80.0),
-              icon: Icon(Icons.shopping_bag),
-              label: Text('Confirm Order'),
-              color: Colors.orange[300],
-              onPressed: () async {
-                Navigator.of(context).pushNamed('/messageandnotif');
-              },
-            ),
+            CustomButton(
+                icon: Icon(Icons.shopping_bag, color: AppColors().accent1),
+                prompt: 'Konfirmasi Pesanan',
+                onPressed: () async {
+                  Navigator.pop(context);
+                  //TODO: arahkan ke tab notifikasi
+                }),
             // widget-widget lain dimasukkan di sini
           ],
         ),

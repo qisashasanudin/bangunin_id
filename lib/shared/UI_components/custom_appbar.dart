@@ -6,17 +6,20 @@ class CustomAppBar extends StatelessWidget {
   final bool searchButton;
   final bool sortButton;
   final bool cartButton;
+  final Function() onTapSearchButton;
+  final Function() onTapSortButton;
+  final Function() onTapCartButton;
 
   const CustomAppBar({
     Key key,
     @required this.title,
-    bool searchButton,
-    bool sortButton,
-    bool cartButton,
-  })  : this.searchButton = searchButton ?? false,
-        this.sortButton = sortButton ?? false,
-        this.cartButton = cartButton ?? false,
-        super(key: key);
+    this.searchButton,
+    this.sortButton,
+    this.cartButton,
+    this.onTapSearchButton,
+    this.onTapSortButton,
+    this.onTapCartButton,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,17 +31,23 @@ class CustomAppBar extends StatelessWidget {
         if (searchButton == true)
           IconButton(
             icon: Icon(Icons.search, color: Colors.grey),
-            onPressed: () {},
+            onPressed: () async {
+              onTapSearchButton();
+            },
           ),
         if (sortButton == true)
           IconButton(
             icon: Icon(Icons.sort, color: Colors.grey),
-            onPressed: () {},
+            onPressed: () async {
+              onTapSortButton();
+            },
           ),
         if (cartButton == true)
           IconButton(
             icon: Icon(Icons.shopping_cart, color: Colors.grey),
-            onPressed: () {},
+            onPressed: () async {
+              onTapCartButton();
+            },
           ),
       ],
     );

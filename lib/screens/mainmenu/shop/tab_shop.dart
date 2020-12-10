@@ -26,6 +26,9 @@ class _ShopTabState extends State<ShopTab> {
                 title: 'Beli Material',
                 searchButton: true,
                 cartButton: true,
+                onTapCartButton: () async {
+                  Navigator.of(context).pushNamed('/tabcheckout');
+                },
               ),
               categories(),
               SizedBox(height: 5),
