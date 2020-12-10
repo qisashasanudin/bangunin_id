@@ -21,6 +21,7 @@ class _ProjectInformationState extends State<ProjectInformation> {
   TextEditingController _dateController = TextEditingController();
   final DateFormat _dateFormatter = DateFormat('dd MMM yyyy');
   ProjectDetailsModel _projectDetails = ProjectDetailsModel();
+  bool loaded = false;
 
   @override
   void dispose() {
@@ -34,10 +35,11 @@ class _ProjectInformationState extends State<ProjectInformation> {
     ProjectDetailsModel currentValue =
         ModalRoute.of(context).settings.arguments ?? ProjectDetailsModel();
 
-    if (currentValue != ProjectDetailsModel()) {
+    if (currentValue.projectId != null && loaded == false) {
       _projectDetails = currentValue;
       _dateController.text =
           _dateFormatter.format(_projectDetails.dateDeadline ?? DateTime.now());
+      loaded = true;
     }
 
     return WillPopScope(
@@ -204,19 +206,6 @@ class _ProjectInformationState extends State<ProjectInformation> {
         ));
   }
 
-  // _moveToNewProjectMaterials() {
-  //   if (_formKey.currentState.validate()) {
-  //     setState(() {
-  //       _projectDetails.dateCreated = DateTime.now();
-  //       _projectDetails.isCompleted = false;
-  //     });
-  //     Navigator.of(context).pushNamed(
-  //       '/projectmaterials',
-  //       arguments: [_projectDetails],
-  //     );
-  //   }
-  // }
-
   _moveToNewProjectBoQ() {
     if (_formKey.currentState.validate()) {
       setState(() {
@@ -249,7 +238,7 @@ class _ProjectInformationState extends State<ProjectInformation> {
           'isCompleted': _projectDetails.isCompleted,
         },
       );
-      Navigator.of(context).pop();
+      Navigator.popUntil(context, ModalRoute.withName('/mainpage'));
     }
   }
 }

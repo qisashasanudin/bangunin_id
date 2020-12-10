@@ -9,15 +9,22 @@ class MaterialModel {
   String image;
 
   MaterialModel({
-    this.materialId,
-    this.name,
-    this.size,
-    this.type,
-    this.unit,
-    this.price,
-    this.amount,
-    this.image,
-  });
+    String materialId,
+    String name,
+    String size,
+    String type,
+    String unit,
+    double price,
+    int amount,
+    String image,
+  })  : this.materialId = materialId,
+        this.name = name ?? '',
+        this.size = size ?? '',
+        this.type = type ?? '',
+        this.unit = unit ?? '',
+        this.price = price ?? 0.0,
+        this.amount = amount,
+        this.image = image ?? '';
 }
 
 List<MaterialModel> materialsDataset = [

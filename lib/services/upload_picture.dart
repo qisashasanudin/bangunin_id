@@ -63,14 +63,14 @@ class UploadPicture {
   }
 
   openCamera() async {
-    Navigator.of(context).pop();
+    Navigator.pop(context);
     imageFile = await getImageFromExtApp(context, 'Camera');
     croppedImageFile = await cropImage(picker);
     await uploadImage(croppedImageFile);
   }
 
   openGallery() async {
-    Navigator.of(context).pop();
+    Navigator.pop(context);
     imageFile = await getImageFromExtApp(context, 'Gallery');
     croppedImageFile = await cropImage(picker);
     await uploadImage(croppedImageFile);

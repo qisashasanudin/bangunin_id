@@ -50,7 +50,7 @@ SpeedDialChild deleteProjectButton(
       final action = await PopUpDialog.yesNoDialog(context, 'Hapus Proyek',
           'Apakah anda yakin ingin menghapus proyek ini?');
       if (action == DialogAction.yes) {
-        Navigator.of(context).pop();
+        Navigator.pop(context);
         await DatabaseService(uid: userID, docId: details.projectId)
             .deleteProjectData();
       }
@@ -72,8 +72,7 @@ Future<void> chooseEditProject(BuildContext context,
                 child: GestureDetector(
                   child: Text('Rincian Proyek'),
                   onTap: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pop();
+                    Navigator.pop(context);
                     Navigator.of(context).pushNamed('/projectinformation',
                         arguments: information);
                   },
@@ -84,7 +83,7 @@ Future<void> chooseEditProject(BuildContext context,
                 child: GestureDetector(
                   child: Text('Material Proyek'),
                   onTap: () {
-                    Navigator.of(context).pop();
+                    Navigator.pop(context);
                     Navigator.of(context).pushNamed('/projectmaterials',
                         arguments: [information, materials]);
                   },

@@ -22,16 +22,17 @@ class _ProjectMaterialsState extends State<ProjectMaterials> {
   List<MaterialModel> selectedMaterials = [];
   List<ProjectMaterialForm> generatedList = [];
   String error = '';
+  bool loaded = false;
 
   //========================= main function =========================
   @override
   Widget build(BuildContext context) {
     List<dynamic> input = ModalRoute.of(context).settings.arguments;
-    if (input.length > 1 && generatedList.length == 0) {
+    if (input.length > 1 && loaded == false) {
       for (var element in input[1]) {
         _addObject(element);
       }
-      selectedMaterials = List.from(input[1]);
+      loaded = true;
     }
 
     return WillPopScope(
@@ -69,14 +70,7 @@ class _ProjectMaterialsState extends State<ProjectMaterials> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: CustomButton(
-                      prompt: 'Simpan',
-                      onPressed: () {
-                        _uploadData(input[0]);
-                      }),
-                ),
+                _nextButton(input),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
@@ -138,7 +132,10 @@ class _ProjectMaterialsState extends State<ProjectMaterials> {
     }
     setState(() {
       selectedMaterials.add(value);
-      unselectedMaterials.removeWhere((element) => element == value);
+      unselectedMaterials.removeWhere((oldObject) =>
+          oldObject.name == value.name &&
+          oldObject.type == value.type &&
+          oldObject.size == value.size);
       generatedList.add(ProjectMaterialForm(
         children: value,
         returnValue: _getNewObject,
@@ -179,6 +176,41 @@ class _ProjectMaterialsState extends State<ProjectMaterials> {
       selectedMaterials.removeLast();
       generatedList.removeLast();
     });
+  }
+
+  Padding _nextButton(List input) {
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: CustomButton(
+          prompt: (input.length > 1) ? 'Simpan' : 'Selanjutnya',
+          onPressed: (input.length > 1)
+              ? () async {
+                  _uploadData(input[0]);
+                }
+              : () {
+                  _moveToNewProjectReview(input[0]);
+                },
+        ));
+  }
+
+  _moveToNewProjectReview(ProjectDetailsModel projectDetails) {
+    bool status = true;
+    for (var i in generatedList) {
+      status = i.isValid() && status;
+    }
+
+    if (_formKey.currentState.validate() &&
+        status &&
+        selectedMaterials.isNotEmpty) {
+      Navigator.of(context).pushNamed(
+        '/projectreview',
+        arguments: [projectDetails, selectedMaterials],
+      );
+    } else {
+      setState(() {
+        error = 'Material tidak boleh kosong.';
+      });
+    }
   }
 
   _uploadData(ProjectDetailsModel projectDetails) async {
@@ -225,8 +257,7 @@ class _ProjectMaterialsState extends State<ProjectMaterials> {
           },
         );
       }
-      Navigator.of(context).pop();
-      Navigator.of(context).pop();
+      Navigator.pop(context);
     } else {
       setState(() {
         error = 'Material tidak boleh kosong.';
