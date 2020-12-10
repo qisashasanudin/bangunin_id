@@ -68,9 +68,7 @@ StreamBuilder createProjectButton(String userID) {
               (snapshot.data.data()['role'] == 'Mandor'))) {
         return FloatingActionButton.extended(
           elevation: 10,
-          onPressed: () async {
-            Navigator.of(context).pushNamed('/projectinformation');
-          },
+          onPressed: () => _popupToUploadCsv(context),
           label: Text(
             'Buat Proyek Baru',
             style: TextStyle(color: AppColors().accent1),
@@ -82,4 +80,34 @@ StreamBuilder createProjectButton(String userID) {
       }
     },
   );
+}
+
+Future<void> _popupToUploadCsv(BuildContext context) async {
+  final action = await showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Buat Proyek Baru'),
+        content: Text('Apakah anda sudah memiliki file BoQ?'),
+        actions: [
+          FlatButton(
+            child: Text('Import File .csv'),
+            onPressed: () {
+              Navigator.pop(context);
+              // TODO: upload file CSV
+              // Navigator.of(context).pushNamed('/projectinformation');
+            },
+          ),
+          FlatButton(
+            child: Text('Input Manual'),
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.of(context).pushNamed('/projectinformation');
+            },
+          ),
+        ],
+      );
+    },
+  );
+  return action;
 }
