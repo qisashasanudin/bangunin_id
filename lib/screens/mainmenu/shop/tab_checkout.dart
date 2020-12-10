@@ -1,5 +1,6 @@
 import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:bangunin_id/shared/UI_components/custom_button.dart';
+import 'package:bangunin_id/shared/UI_components/information_text_box.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/shared/UI_components/custom_heading.dart';
 
@@ -40,54 +41,23 @@ class _CheckoutTabState extends State<CheckoutTab> {
             _checkoutSummary('Pintu Toilet', 'Rp. 1.000.000,00', '5 pintu'),
             _checkoutSummary('Pipa Besi', 'Rp. 150.000,00', '50 pack'),
             _checkoutSummary('Semen Tiga Roda', 'Rp. 660.000,00', '10 pack'),
-            CustomHeading(
-              title: 'Summary',
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 5),
-            ),
-            Container(
-              padding: EdgeInsets.all(20.0),
-              child: Text(
-                'Harga tertera hanya merupakan estimasi, \n Barang tidak dapat dikembalikan setelah dibeli',
-                textAlign: TextAlign.center,
-              ),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(25.0),
-                  bottomRight: Radius.circular(25.0),
-                ),
-              ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5),
-            ),
+            CustomHeading(title: 'Summary'),
+            InformationTextBox(
+                text:
+                    'Harga tertera hanya merupakan estimasi, \n Barang tidak dapat dikembalikan setelah dibeli'),
             _checkoutPrice('Subtotal', 'Rp.1.960.000,00', FontWeight.normal),
             _checkoutPrice(
                 'Delivery fee \n1.2 km', 'Rp.150.000,00', FontWeight.normal),
             _checkoutPrice('Tax', 'Rp.40.000,00', FontWeight.normal),
             _checkoutPrice('Total', 'Rp.2.150.000,00', FontWeight.w900),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5),
-            ),
-            CustomButton(
-                icon: Icon(Icons.shopping_bag, color: AppColors().accent1),
-                prompt: 'Konfirmasi Pesanan',
-                onPressed: () async {
-                  Navigator.pop(context);
-                  //TODO: arahkan ke tab notifikasi
-                }),
+            _confirmButton(context),
             // widget-widget lain dimasukkan di sini
           ],
         ),
       ),
     );
   }
+
   //========================= main function =========================
 
   Container _checkoutSummary(String judul, String harga, String deliver) {
@@ -189,12 +159,13 @@ class _CheckoutTabState extends State<CheckoutTab> {
     );
   }
 
-  ListTile language() {
-    return ListTile(
-      leading: Icon(Icons.language),
-      title: Text('Bahasa'),
-      subtitle: Text('Indonesia'),
-      onTap: () {}, // command yang dilakukan jika tombol ditekan
-    );
+  CustomButton _confirmButton(BuildContext context) {
+    return CustomButton(
+        icon: Icon(Icons.shopping_bag, color: AppColors().accent1),
+        prompt: 'Konfirmasi Pesanan',
+        onPressed: () async {
+          Navigator.pop(context);
+          //TODO: arahkan ke tab notifikasi
+        });
   }
 }
