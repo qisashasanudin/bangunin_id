@@ -6,10 +6,10 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 class WeeklyProgress extends StatefulWidget {
   const WeeklyProgress({
     Key key,
-    @required this.items,
+    @required this.target,
   }) : super(key: key);
 
-  final List<MaterialModel> items;
+  final List<MaterialModel> target;
 
   @override
   _WeeklyProgressState createState() => _WeeklyProgressState();
@@ -47,9 +47,9 @@ class _WeeklyProgressState extends State<WeeklyProgress> {
           shrinkWrap: true,
           padding: EdgeInsets.zero,
           physics: NeverScrollableScrollPhysics(),
-          itemCount: widget.items.length,
+          itemCount: widget.target.length,
           itemBuilder: (_, index) {
-            return itemProgress(context, index, widget.items[index], 0.50);
+            return itemProgress(context, index, widget.target[index], 0.50);
           },
         ),
       ],
