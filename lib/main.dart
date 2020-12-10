@@ -1,5 +1,6 @@
 import 'package:bangunin_id/screens/main_page_wrapper.dart';
 import 'package:bangunin_id/screens/mainmenu/home/projects/edit_project/project_BoQ.dart';
+import 'package:bangunin_id/screens/mainmenu/home/projects/edit_project/project_Review.dart';
 import 'package:bangunin_id/screens/mainmenu/home/projects/edit_project/project_information.dart';
 import 'package:bangunin_id/screens/mainmenu/home/projects/edit_project/project_materials.dart';
 import 'package:bangunin_id/screens/mainmenu/home/projects/view_project/project_details.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
           '/projectmaterials': (context) => ProjectMaterials(),
           '/projectdetails': (context) => ProjectDetails(),
           '/tabcheckout': (context) => CheckoutTab(),
+          '/projectreview': (context) => ProjectReview(),
         },
       ),
     );
