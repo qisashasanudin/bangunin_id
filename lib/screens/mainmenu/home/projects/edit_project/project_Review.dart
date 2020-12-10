@@ -133,18 +133,17 @@ class _ProjectReviewState extends State<ProjectReview> {
               ),
               Divider(),
               _checkoutSummary(
-                  '01.1   PEKERJAAN PERSIAPAN', 'Rp. 150.000,00', ''),
+                  '', 'Rp. 150.000,00', '01.1   PEKERJAAN PERSIAPAN'),
 
-              _checkoutSummary(
-                  '01.2   STR', 'Rp. 100.000,00', 'I: Pekerjaan Struktur'),
+              _checkoutSummary('01.2   STRUKTUR', 'Rp. 100.000,00',
+                  '      I: Pekerjaan Struktur'),
               _checkoutSummary('01.3   PEKERJAAN DINDING', 'Rp. 20.000,00',
-                  'I: Pekerjaan Dinding Lantai 1'),
-              _checkoutSummary(
-                  '01.2   STRUKTUR', 'Rp. 150.000,00', 'I: Pekerjaan Struktur'),
-              _checkoutSummary(
-                  '01.2   STRUKTUR', 'Rp. 150.000,00', 'I: Pekerjaan Struktur'),
-              _checkoutSummary(
-                  '01.2   STRUKTUR', 'Rp. 150.000,00', 'I: Pekerjaan Struktur'),
+                  '      I: Pekerjaan Dinding Lantai 1'),
+              _checkoutSummary('01.4   PEK. LANTAI,PLAFON DAN JENDELA PINTU',
+                  'Rp. 250.000,00', '      I: Arsitek Lantai 1'),
+              _checkoutSummary('01.5   PEKERJAAN TOILET', 'Rp. 390.000,00',
+                  '      I: Pekerjaan Toilet LT 1(2 Ruang)'),
+              _checkoutSummary('01.7 PEKERJAAN ATAP', 'Rp. 150.000,00', ''),
 
               //widget-widget lain dipasang di sini
               Padding(
@@ -167,7 +166,7 @@ class _ProjectReviewState extends State<ProjectReview> {
   Container _checkoutSummary(String judul, String harga, String subtext) {
     return Container(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
+        padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
         child: Column(
           children: [
             Row(
@@ -185,7 +184,7 @@ class _ProjectReviewState extends State<ProjectReview> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0.0),
+                  const EdgeInsets.symmetric(horizontal: 0.0, vertical: 5.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
