@@ -118,7 +118,7 @@ class _ProjectReviewState extends State<ProjectReview> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   CustomHeading(
-                    title: 'Your Order',
+                    title: 'Detail Pekerjaan',
                   ),
                   Padding(
                     child: Text(
