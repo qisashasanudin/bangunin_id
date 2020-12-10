@@ -120,11 +120,11 @@ Container _weeksTabContents(
     height: 250 + (75.0 * materialsTarget.length),
     child: TabBarView(
       children: [
-        WeeklyProgress(items: materialsTarget),
-        WeeklyProgress(items: materialsTarget),
-        WeeklyProgress(items: materialsTarget),
-        WeeklyProgress(items: materialsTarget),
-        WeeklyProgress(items: materialsTarget),
+        WeeklyProgress(target: materialsTarget),
+        WeeklyProgress(target: materialsTarget),
+        WeeklyProgress(target: materialsTarget),
+        WeeklyProgress(target: materialsTarget),
+        WeeklyProgress(target: materialsTarget),
       ],
     ),
   );
