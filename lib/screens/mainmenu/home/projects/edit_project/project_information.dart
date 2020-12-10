@@ -34,7 +34,7 @@ class _ProjectInformationState extends State<ProjectInformation> {
     ProjectDetailsModel currentValue =
         ModalRoute.of(context).settings.arguments ?? ProjectDetailsModel();
 
-    if (_projectDetails == ProjectDetailsModel()) {
+    if (_projectDetails != currentValue) {
       _projectDetails = currentValue;
     }
 
@@ -197,20 +197,33 @@ class _ProjectInformationState extends State<ProjectInformation> {
           prompt:
               (_projectDetails.projectId != null) ? 'Simpan' : 'Selanjutnya',
           onPressed: (_projectDetails.projectId == null)
-              ? _moveToNewProjectMaterials
+              ? _moveToNewProjectBoQ
               : () => _saveChanges(),
         ));
   }
 
-  _moveToNewProjectMaterials() {
+  // _moveToNewProjectMaterials() {
+  //   if (_formKey.currentState.validate()) {
+  //     setState(() {
+  //       _projectDetails.dateCreated = DateTime.now();
+  //       _projectDetails.isCompleted = false;
+  //     });
+  //     Navigator.of(context).pushNamed(
+  //       '/projectmaterials',
+  //       arguments: [_projectDetails],
+  //     );
+  //   }
+  // }
+
+  _moveToNewProjectBoQ() {
     if (_formKey.currentState.validate()) {
       setState(() {
         _projectDetails.dateCreated = DateTime.now();
         _projectDetails.isCompleted = false;
       });
       Navigator.of(context).pushNamed(
-        '/projectmaterials',
-        arguments: [_projectDetails],
+        '/projectBoQ',
+        arguments: _projectDetails,
       );
     }
   }

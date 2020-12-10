@@ -63,7 +63,6 @@ class _ProjectInformationState extends State<ProjectInformation> {
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     child: Text('Informasi Tambahan (Opsional)')),
                 _addressForm(),
-                //TODO: BUAT OPSI UNTUK MENGISI ALAMAT DGN GOOGLE MAP
                 _clientNameForm(),
                 _clientEmailForm(),
                 _clientPhoneForm(),

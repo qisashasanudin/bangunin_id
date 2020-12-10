@@ -2,7 +2,6 @@ import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:bangunin_id/shared/UI_components/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:bangunin_id/shared/UI_components/custom_heading.dart';
-import 'package:bangunin_id/screens/mainmenu/messages/tab_messages_and_notif.dart';
 
 class CheckoutTab extends StatefulWidget {
   //Settings({Key key}) : super(key: key);

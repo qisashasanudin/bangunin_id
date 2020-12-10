@@ -9,12 +9,12 @@ import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class ProjectInformation extends StatefulWidget {
+class ProjectBoQ extends StatefulWidget {
   @override
-  _ProjectInformationState createState() => _ProjectInformationState();
+  _ProjectBoQState createState() => _ProjectBoQState();
 }
 
-class _ProjectInformationState extends State<ProjectInformation> {
+class _ProjectBoQState extends State<ProjectBoQ> {
   final _formKey = GlobalKey<FormState>();
   final userID = AuthService().getCurrentUID();
 
@@ -34,7 +34,7 @@ class _ProjectInformationState extends State<ProjectInformation> {
     ProjectDetailsModel currentValue =
         ModalRoute.of(context).settings.arguments ?? ProjectDetailsModel();
 
-    if (_projectDetails == ProjectDetailsModel()) {
+    if (_projectDetails != currentValue) {
       _projectDetails = currentValue;
     }
 
@@ -63,7 +63,6 @@ class _ProjectInformationState extends State<ProjectInformation> {
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     child: Text('Informasi Tambahan (Opsional)')),
                 _addressForm(),
-                //TODO: BUAT OPSI UNTUK MENGISI ALAMAT DGN GOOGLE MAP
                 _clientNameForm(),
                 _clientEmailForm(),
                 _clientPhoneForm(),
