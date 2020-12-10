@@ -43,6 +43,7 @@ class _ShopTabState extends State<ShopTab> {
         ),
         // widget-widget lain dimasukkan di sini
       ],
+      floatingButton: createProjectButton(context),
     );
   }
   //========================= main function =========================
@@ -79,5 +80,16 @@ Container itemList(BuildContext context) {
         CategoryC(),
       ],
     ),
+  );
+}
+
+FloatingActionButton createProjectButton(BuildContext context) {
+  return FloatingActionButton.extended(
+    elevation: 10,
+    icon: Icon(Icons.shopping_cart, color: AppColors().accent1),
+    label: Text('Checkout', style: TextStyle(color: AppColors().accent1)),
+    onPressed: () async {
+      Navigator.of(context).pushNamed('/tabcheckout');
+    },
   );
 }
