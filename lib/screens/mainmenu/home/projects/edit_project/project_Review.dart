@@ -106,6 +106,13 @@ class _ProjectReviewState extends State<ProjectReview> {
                   ],
                 ),
               ),
+              Divider(
+                height: 50,
+                color: Colors.orange[300],
+                thickness: 20,
+                indent: 15,
+                endIndent: 15,
+              ),
               _checkoutSummary('halo', 'test', 'test juga'),
               _checkoutSummary('halo', 'test', 'test juga'),
               _checkoutSummary('halo', 'test', 'test juga'),
