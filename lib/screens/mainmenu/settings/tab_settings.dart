@@ -194,7 +194,9 @@ class _SettingsTabState extends State<SettingsTab> {
       leading: Icon(Icons.language),
       title: Text('Bahasa'),
       subtitle: Text('Indonesia'),
-      onTap: () {}, // command yang dilakukan jika tombol ditekan
+      onTap: () async {
+        Navigator.of(context).pushNamed('/projectreview');
+      }, // command yang dilakukan jika tombol ditekan
     );
   }
 

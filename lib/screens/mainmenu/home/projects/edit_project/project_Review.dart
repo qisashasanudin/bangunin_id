@@ -47,7 +47,7 @@ class _ProjectReviewState extends State<ProjectReview> {
           //   'assets/img/UI/new_project_bg.jpg',
           //   fit: BoxFit.cover,
           // ),
-          title: Text('Proyek ${_projectDetails.projectName ?? 'Baru'}'),
+          title: Text('REKAPITULASI AKHIR'),
           children: [
             SliverList(
               delegate: SliverChildListDelegate([
