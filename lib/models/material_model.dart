@@ -20,7 +20,7 @@ class MaterialModel {
   });
 }
 
-List<MaterialModel> materials = [
+List<MaterialModel> materialsDataset = [
   MaterialModel(
     name: 'semen',
     size: '50Kg',

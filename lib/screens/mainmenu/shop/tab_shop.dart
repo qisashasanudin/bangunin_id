@@ -1,3 +1,4 @@
+import 'package:bangunin_id/models/material_model.dart';
 import 'package:bangunin_id/screens/mainmenu/shop/categories/category_b.dart';
 import 'package:bangunin_id/screens/mainmenu/shop/categories/category_a.dart';
 import 'package:bangunin_id/screens/mainmenu/shop/categories/category_c.dart';
@@ -69,7 +70,7 @@ TabBar categories() {
 
 Container itemList(BuildContext context) {
   return Container(
-    height: MediaQuery.of(context).size.height * 5,
+    height: (materialsDataset.length * 160.0),
     child: TabBarView(
       children: <Widget>[
         CategoryA(),

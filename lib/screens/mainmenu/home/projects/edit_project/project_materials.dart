@@ -17,7 +17,7 @@ class ProjectMaterials extends StatefulWidget {
 class _ProjectMaterialsState extends State<ProjectMaterials> {
   final _formKey = GlobalKey<FormState>();
   final userID = AuthService().getCurrentUID();
-  List<MaterialModel> unselectedMaterials = List.from(materials);
+  List<MaterialModel> unselectedMaterials = List.from(materialsDataset);
   List<MaterialModel> selectedMaterials = [];
   List<ProjectMaterialForm> generatedList = [];
   String error = '';

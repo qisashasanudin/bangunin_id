@@ -9,10 +9,10 @@ class CategoryB extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: ListView.builder(
-        physics: BouncingScrollPhysics(),
-        itemCount: materials.length,
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: materialsDataset.length,
         itemBuilder: (context, int index) {
-          return ItemCard(item: materials[index], index: index);
+          return ItemCard(item: materialsDataset[index], index: index);
         },
       ),
     );
