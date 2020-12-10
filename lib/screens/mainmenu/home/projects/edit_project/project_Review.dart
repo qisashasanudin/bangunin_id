@@ -132,8 +132,7 @@ class _ProjectReviewState extends State<ProjectReview> {
                 ],
               ),
               Divider(),
-              _checkoutSummary(
-                  '', 'Rp. 150.000,00', '01.1   PEKERJAAN PERSIAPAN'),
+              _checkout1line('Rp. 150.000,00', '01.1   PEKERJAAN PERSIAPAN'),
 
               _checkoutSummary('01.2   STRUKTUR', 'Rp. 100.000,00',
                   '      I: Pekerjaan Struktur'),
@@ -143,8 +142,7 @@ class _ProjectReviewState extends State<ProjectReview> {
                   'Rp. 250.000,00', '      I: Arsitek Lantai 1'),
               _checkoutSummary('01.5   PEKERJAAN TOILET', 'Rp. 390.000,00',
                   '      I: Pekerjaan Toilet LT 1(2 Ruang)'),
-              _checkoutSummary('01.7 PEKERJAAN ATAP', 'Rp. 150.000,00', ''),
-
+              _checkout1line('Rp. 150.000,00', '01.7 PEKERJAAN ATAP'),
               //widget-widget lain dipasang di sini
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -176,7 +174,7 @@ class _ProjectReviewState extends State<ProjectReview> {
                   judul,
                   style: TextStyle(
                     color: Colors.black,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.bold,
                     fontSize: 14,
                   ),
                 ),
@@ -194,6 +192,45 @@ class _ProjectReviewState extends State<ProjectReview> {
                     style: TextStyle(
                       color: Colors.black87,
                       fontWeight: FontWeight.normal,
+                      fontSize: 14,
+                    ),
+                  ),
+                  Text(
+                    harga,
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Divider(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container _checkout1line(String harga, String subtext) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 15.0),
+        child: Column(
+          children: [
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  new Text(
+                    subtext,
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.bold,
                       fontSize: 14,
                     ),
                   ),
