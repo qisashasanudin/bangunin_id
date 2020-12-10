@@ -36,6 +36,80 @@ class _ProjectReviewState extends State<ProjectReview> {
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: ProjectDetailsCard(child: input[0]),
               ),
+
+              Container(
+                margin: EdgeInsets.fromLTRB(15, 5, 15, 5),
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.blueGrey.withAlpha(50),
+                      //color: Colors.grey.withAlpha(50),
+                      offset: Offset(0, 0),
+                      blurRadius: 5,
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.white,
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Stack(
+                      children: <Widget>[
+                        Container(
+                          child: CircleAvatar(
+                            backgroundImage:
+                                AssetImage('assets/img/UI/character.png'),
+                            //NetworkImage(
+                            //'https://i.pravatar.cc/11$index'),
+                            minRadius: 35,
+                            backgroundColor: Colors.grey[200],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 10),
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Klien Bangunin ',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 5),
+                          ),
+                          Text(
+                            'Bagaimana keadaannya ?',
+                            style: TextStyle(
+                              color: Color(0xFFFF9900),
+                              fontSize: 14,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 5),
+                          ),
+                          Text(
+                            '1:00 AM',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
               //widget-widget lain dipasang di sini
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),

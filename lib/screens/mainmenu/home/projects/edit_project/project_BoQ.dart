@@ -35,6 +35,7 @@ class _ProjectBoQState extends State<ProjectBoQ> {
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: ProjectDetailsCard(child: input),
               ),
+              //Text('halo'),
               _nextButton(input),
             ]),
           ), //sliver-sliver lain ditulis di sini
