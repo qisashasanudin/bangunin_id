@@ -36,7 +36,6 @@ class _ProjectReviewState extends State<ProjectReview> {
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: ProjectDetailsCard(child: input[0]),
               ),
-
               Container(
                 margin: EdgeInsets.fromLTRB(15, 5, 15, 5),
                 padding: EdgeInsets.all(15),
@@ -59,7 +58,7 @@ class _ProjectReviewState extends State<ProjectReview> {
                         Container(
                           child: CircleAvatar(
                             backgroundImage:
-                                AssetImage('assets/img/UI/character.png'),
+                                AssetImage('assets/img/UI/logo.jpg'),
                             //NetworkImage(
                             //'https://i.pravatar.cc/11$index'),
                             minRadius: 35,
@@ -76,20 +75,19 @@ class _ProjectReviewState extends State<ProjectReview> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            'Klien Bangunin ',
+                            'Rekapitulasi Akhir ',
                             style: TextStyle(
                               color: Colors.black,
+                              fontSize: 14,
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
                             ),
                           ),
                           Padding(
                             padding: EdgeInsets.only(top: 5),
                           ),
                           Text(
-                            'Bagaimana keadaannya ?',
+                            'Pemilik Rumah : Ibu Dewi',
                             style: TextStyle(
-                              color: Color(0xFFFF9900),
                               fontSize: 14,
                             ),
                           ),
@@ -97,9 +95,8 @@ class _ProjectReviewState extends State<ProjectReview> {
                             padding: EdgeInsets.only(top: 5),
                           ),
                           Text(
-                            '1:00 AM',
+                            'No. Penawaran: 03/PNW/BANGUNIN/IV/2020',
                             style: TextStyle(
-                              color: Colors.grey,
                               fontSize: 12,
                             ),
                           )
@@ -109,7 +106,10 @@ class _ProjectReviewState extends State<ProjectReview> {
                   ],
                 ),
               ),
-
+              _checkoutSummary('halo', 'test', 'test juga'),
+              _checkoutSummary('halo', 'test', 'test juga'),
+              _checkoutSummary('halo', 'test', 'test juga'),
+              _checkoutSummary('halo', 'test', 'test juga'),
               //widget-widget lain dipasang di sini
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -127,6 +127,66 @@ class _ProjectReviewState extends State<ProjectReview> {
   }
 
   //========================= main function =========================
+
+  Container _checkoutSummary(String judul, String harga, String deliver) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 5),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                new Text(
+                  judul,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 18,
+                  ),
+                ),
+                Text(
+                  deliver,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  new Text(
+                    '5 Desember 2020 \ndari Tb Central Bangunan',
+                    style: TextStyle(
+                      color: Colors.black38,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                  Text(
+                    harga,
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Divider(),
+          ],
+        ),
+      ),
+    );
+  }
 
   _uploadData(ProjectDetailsModel projectDetails,
       List<MaterialModel> projectMaterials) async {
