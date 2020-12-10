@@ -117,7 +117,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 Container _weeksTabContents(
     BuildContext context, List<MaterialModel> materialsTarget) {
   return Container(
-    height: MediaQuery.of(context).size.height + (20 * materialsTarget.length),
+    height: 250 + (75.0 * materialsTarget.length),
     child: TabBarView(
       children: [
         WeeklyProgress(items: materialsTarget),
