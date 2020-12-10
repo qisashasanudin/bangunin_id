@@ -5,6 +5,7 @@ import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/UI_components/custom_button.dart';
 import 'package:bangunin_id/shared/UI_components/project_details_card.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
+import 'package:bangunin_id/shared/UI_components/custom_heading.dart';
 import 'package:flutter/material.dart';
 
 class ProjectReview extends StatefulWidget {
@@ -113,10 +114,27 @@ class _ProjectReviewState extends State<ProjectReview> {
                 indent: 15,
                 endIndent: 15,
               ),
-              _checkoutSummary('halo', 'test', 'test juga'),
-              _checkoutSummary('halo', 'test', 'test juga'),
-              _checkoutSummary('halo', 'test', 'test juga'),
-              _checkoutSummary('halo', 'test', 'test juga'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  CustomHeading(
+                    title: 'Your Order',
+                  ),
+                  Padding(
+                    child: Text(
+                      'Total',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15.0, horizontal: 20.0),
+                  ),
+                ],
+              ),
+              Divider(),
+              _checkoutSummary(
+                  '01.1   PEKERJAAN PERSIAPAN', 'Rp. 150.000,00', ''),
+
               //widget-widget lain dipasang di sini
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -135,10 +153,10 @@ class _ProjectReviewState extends State<ProjectReview> {
 
   //========================= main function =========================
 
-  Container _checkoutSummary(String judul, String harga, String deliver) {
+  Container _checkoutSummary(String judul, String harga, String subtext) {
     return Container(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 5),
+        padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
         child: Column(
           children: [
             Row(
@@ -149,32 +167,24 @@ class _ProjectReviewState extends State<ProjectReview> {
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.normal,
-                    fontSize: 18,
-                  ),
-                ),
-                Text(
-                  deliver,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontSize: 14,
                   ),
                 ),
               ],
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   new Text(
-                    '5 Desember 2020 \ndari Tb Central Bangunan',
+                    subtext,
                     style: TextStyle(
-                      color: Colors.black38,
+                      color: Colors.black87,
                       fontWeight: FontWeight.normal,
                       fontSize: 14,
-                      fontStyle: FontStyle.italic,
                     ),
                   ),
                   Text(
@@ -182,7 +192,7 @@ class _ProjectReviewState extends State<ProjectReview> {
                     style: TextStyle(
                       color: Colors.black87,
                       fontWeight: FontWeight.normal,
-                      fontSize: 18,
+                      fontSize: 14,
                     ),
                   ),
                 ],
