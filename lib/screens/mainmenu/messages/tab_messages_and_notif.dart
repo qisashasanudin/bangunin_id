@@ -54,7 +54,7 @@ TabBar categories() {
 
 Container itemList(BuildContext context) {
   return Container(
-    height: MediaQuery.of(context).size.height * 5,
+    height: MediaQuery.of(context).size.height,
     child: TabBarView(
       children: <Widget>[
         Messages(),
