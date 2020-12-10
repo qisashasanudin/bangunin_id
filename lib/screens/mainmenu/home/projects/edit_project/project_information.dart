@@ -36,6 +36,8 @@ class _ProjectInformationState extends State<ProjectInformation> {
 
     if (_projectDetails != currentValue) {
       _projectDetails = currentValue;
+      _dateController.text =
+          _dateFormatter.format(_projectDetails.dateDeadline);
     }
 
     return WillPopScope(
