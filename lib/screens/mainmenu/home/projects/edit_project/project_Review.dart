@@ -150,6 +150,12 @@ class _ProjectReviewState extends State<ProjectReview> {
               _checkouttotal(
                   '       Rp. 4.900.000,00', 'TOTAL PEMBULATAN + DISKON'),
               Divider(),
+              _checkout1line(
+                'Diajukan Oleh: Erlan Saputra Yudha\n                   Di Setujui Oleh: Ibu Dewi',
+                'Jakarta Selatan\n4 Desember 2020',
+              ),
+              _checkouttotal('       100.00', 'Luas Bangunan'),
+              _checkouttotal('       Rp0', 'Harga Satuan /m2'),
               //widget-widget lain dipasang di sini
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
