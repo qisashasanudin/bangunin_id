@@ -148,11 +148,17 @@ class _ProjectReviewState extends State<ProjectReview> {
               _checkout1line('Rp. 150.000,00', '01.13 PEKERJAAN LAIN-LAIN'),
               _checkouttotal('       Rp. 4.900.000,00', 'SUB TOTAL'),
               _checkouttotal(
-                  '       Rp. 4.900.000,00', 'TOTAL PEMBULATAN + DISKON'),
-              Divider(),
+                  '       Rp. 3.670.000,00', 'TOTAL PEMBULATAN + DISKON'),
+              Divider(
+                height: 50,
+              ),
               _checkout1line(
                 'Diajukan Oleh: Erlan Saputra Yudha\n                   Di Setujui Oleh: Ibu Dewi',
                 'Jakarta Selatan\n4 Desember 2020',
+              ),
+              Divider(
+                height: 20,
+                color: Colors.white,
               ),
               _checkouttotal('       100.00', 'Luas Bangunan'),
               _checkouttotal('       Rp0', 'Harga Satuan /m2'),
