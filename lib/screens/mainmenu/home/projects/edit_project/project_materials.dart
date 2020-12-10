@@ -2,6 +2,7 @@ import 'package:bangunin_id/models/material_model.dart';
 import 'package:bangunin_id/models/project_details_model.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
+import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:bangunin_id/shared/UI_components/custom_button.dart';
 import 'package:bangunin_id/shared/UI_components/on_back_pressed.dart';
 import 'package:bangunin_id/shared/UI_components/project_details_card.dart';
@@ -159,6 +160,7 @@ class _ProjectMaterialsState extends State<ProjectMaterials> {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: CustomButton(
+          icon: Icon(Icons.delete, color: AppColors().accent1),
           prompt: 'Hapus',
           onPressed: () {
             _deleteObject();
