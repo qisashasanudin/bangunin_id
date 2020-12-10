@@ -135,6 +135,17 @@ class _ProjectReviewState extends State<ProjectReview> {
               _checkoutSummary(
                   '01.1   PEKERJAAN PERSIAPAN', 'Rp. 150.000,00', ''),
 
+              _checkoutSummary(
+                  '01.2   STR', 'Rp. 100.000,00', 'I: Pekerjaan Struktur'),
+              _checkoutSummary('01.3   PEKERJAAN DINDING', 'Rp. 20.000,00',
+                  'I: Pekerjaan Dinding Lantai 1'),
+              _checkoutSummary(
+                  '01.2   STRUKTUR', 'Rp. 150.000,00', 'I: Pekerjaan Struktur'),
+              _checkoutSummary(
+                  '01.2   STRUKTUR', 'Rp. 150.000,00', 'I: Pekerjaan Struktur'),
+              _checkoutSummary(
+                  '01.2   STRUKTUR', 'Rp. 150.000,00', 'I: Pekerjaan Struktur'),
+
               //widget-widget lain dipasang di sini
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
