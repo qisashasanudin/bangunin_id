@@ -34,10 +34,10 @@ class _ProjectInformationState extends State<ProjectInformation> {
     ProjectDetailsModel currentValue =
         ModalRoute.of(context).settings.arguments ?? ProjectDetailsModel();
 
-    if (_projectDetails != currentValue) {
+    if (currentValue != ProjectDetailsModel()) {
       _projectDetails = currentValue;
       _dateController.text =
-          _dateFormatter.format(_projectDetails.dateDeadline);
+          _dateFormatter.format(_projectDetails.dateDeadline ?? DateTime.now());
     }
 
     return WillPopScope(

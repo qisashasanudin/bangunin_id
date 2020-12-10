@@ -36,6 +36,8 @@ class _ProjectBoQState extends State<ProjectBoQ> {
 
     if (_projectDetails != currentValue) {
       _projectDetails = currentValue;
+      _dateController.text =
+          _dateFormatter.format(_projectDetails.dateDeadline);
     }
 
     return WillPopScope(
