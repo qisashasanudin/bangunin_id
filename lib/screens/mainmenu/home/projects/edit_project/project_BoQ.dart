@@ -34,10 +34,26 @@ class _ProjectBoQState extends State<ProjectBoQ> {
               //widget-widget lain dipasang di sini
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15),
-                child: ProjectDetailsCard(child: input),
+                //child: ProjectDetailsCard(child: input),
+                child: CustomHeading(
+                  title: 'Rincian Anggaran Biaya \nPekerjaan Pembangunan Rumah',
+                ),
               ),
-              CustomHeading(
-                title: 'Detail Pekerjaan',
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                //child: ProjectDetailsCard(child: input),
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      'Halo saya ingin tahu',
+                      style: TextStyle(
+                        color: Colors.black87,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               //Text('halo'),
               _nextButton(input),
