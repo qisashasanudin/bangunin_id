@@ -4,6 +4,7 @@ import 'package:bangunin_id/shared/UI_components/custom_button.dart';
 import 'package:bangunin_id/shared/UI_components/project_details_card.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:flutter/material.dart';
+import 'package:bangunin_id/shared/UI_components/custom_heading.dart';
 
 class ProjectBoQ extends StatefulWidget {
   @override
@@ -26,7 +27,7 @@ class _ProjectBoQState extends State<ProjectBoQ> {
         //   'assets/img/UI/new_project_bg.jpg',
         //   fit: BoxFit.cover,
         // ),
-        title: Text('BoQ Proyek ${input.projectName ?? 'Baru'}'),
+        title: Text('BoQ ${input.projectName ?? 'Baru'}'),
         children: [
           SliverList(
             delegate: SliverChildListDelegate([
@@ -34,6 +35,9 @@ class _ProjectBoQState extends State<ProjectBoQ> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: ProjectDetailsCard(child: input),
+              ),
+              CustomHeading(
+                title: 'Detail Pekerjaan',
               ),
               //Text('halo'),
               _nextButton(input),
