@@ -49,25 +49,21 @@ class _ProjectBoQState extends State<ProjectBoQ> {
                     Divider(
                       color: Colors.white,
                     ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        '01.1 Pekerjaan Persiapan',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
+              _judul('01.1 Pekerjaan Persiapan'),
               _formFill('A Koordinasi Keamanan', 'ls'),
               _formFill('B Pembersihan Lokasi', 'm2'),
               _formFill('C Uragan Tanah', 'm3'),
               _formFill('D Mobilisasi dan demobilisasi', 'ls'),
               _formFill('E Bedeng Tukang', 'ls'),
+              _judul('01.2 Pekerjaan Struktur'),
+              _formFill('A Galian Tanah pondasi', 'm3'),
+              _formFill('B Galian Tanah Sloof', 'm3'),
+              _formFill('C Pasir urug bawah fondasi\n t = 5 cm', 'm3'),
+              _formFill('D Pasir urug bawah sloof\n t = 5 cm', 'm3'),
+              _formFill('E Kolom beton Bertulang K1', 'm3'),
               //Text('halo'),
               _nextButton(input),
             ]),
@@ -78,6 +74,24 @@ class _ProjectBoQState extends State<ProjectBoQ> {
   }
 
   //========================= main function =========================
+
+  Padding _judul(String judul) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: Text(
+          judul,
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
+        ),
+      ),
+    );
+  }
+
   Padding _nextButton(ProjectDetailsModel input) {
     return Padding(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
