@@ -43,18 +43,40 @@ class _ProjectBoQState extends State<ProjectBoQ> {
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 //child: ProjectDetailsCard(child: input),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Text(
-                      'Halo saya ingin tahu',
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 14,
+                    _tabledetail(),
+                    Divider(
+                      color: Colors.white,
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        '01.1 Pekerjaan Persiapan',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
                       ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          '01.1 Pekerjaan Persiapan',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ),
+
               //Text('halo'),
               _nextButton(input),
             ]),
@@ -74,6 +96,42 @@ class _ProjectBoQState extends State<ProjectBoQ> {
             _moveToNewProjectMaterials(input);
           },
         ));
+  }
+
+  Container _tabledetail() {
+    return Container(
+      color: Colors.orangeAccent,
+      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            'NO  Detail Pekerjaan',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
+          ),
+          Text(
+            'Volume',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
+          ),
+          Text(
+            'Unit',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   _moveToNewProjectMaterials(ProjectDetailsModel input) {
