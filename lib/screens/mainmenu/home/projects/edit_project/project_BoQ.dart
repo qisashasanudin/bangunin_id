@@ -60,23 +60,14 @@ class _ProjectBoQState extends State<ProjectBoQ> {
                         ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          '01.1 Pekerjaan Persiapan',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.normal,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
-
+              _formFill('A Koordinasi Keamanan', 'ls'),
+              _formFill('B Pembersihan Lokasi', 'm2'),
+              _formFill('C Uragan Tanah', 'm3'),
+              _formFill('D Mobilisasi dan demobilisasi', 'ls'),
+              _formFill('E Bedeng Tukang', 'ls'),
               //Text('halo'),
               _nextButton(input),
             ]),
@@ -96,6 +87,43 @@ class _ProjectBoQState extends State<ProjectBoQ> {
             _moveToNewProjectMaterials(input);
           },
         ));
+  }
+
+  Padding _formFill(String detail, String unit) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            detail,
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.normal,
+              fontSize: 14,
+            ),
+          ),
+          Container(
+            width: 100.0,
+            height: 30.0,
+            child: TextField(
+              decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black))),
+            ),
+          ),
+          Text(
+            unit,
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.normal,
+              fontSize: 14,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Container _tabledetail() {
