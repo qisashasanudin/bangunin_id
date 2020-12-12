@@ -1,6 +1,7 @@
 import 'package:bangunin_id/models/project_details_model.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/shared/UI_components/custom_button.dart';
+import 'package:bangunin_id/shared/UI_components/custom_text_form.dart';
 import 'package:bangunin_id/shared/UI_components/project_details_card.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:flutter/material.dart';
@@ -53,17 +54,17 @@ class _ProjectBoQState extends State<ProjectBoQ> {
                 ),
               ),
               _judul('01.1 Pekerjaan Persiapan'),
-              _formFill('A Koordinasi Keamanan', 'ls'),
-              _formFill('B Pembersihan Lokasi', 'm2'),
-              _formFill('C Uragan Tanah', 'm3'),
-              _formFill('D Mobilisasi dan demobilisasi', 'ls'),
-              _formFill('E Bedeng Tukang', 'ls'),
+              _formFill('A. Koordinasi Keamanan', 'ls'),
+              _formFill('B. Pembersihan Lokasi', 'm2'),
+              _formFill('C. Uragan Tanah', 'm3'),
+              _formFill('D. Mobilisasi dan demobilisasi', 'ls'),
+              _formFill('E. Bedeng Tukang', 'ls'),
               _judul('01.2 Pekerjaan Struktur'),
-              _formFill('A Galian Tanah pondasi', 'm3'),
-              _formFill('B Galian Tanah Sloof', 'm3'),
-              _formFill('C Pasir urug bawah fondasi\n t = 5 cm', 'm3'),
-              _formFill('D Pasir urug bawah sloof\n t = 5 cm', 'm3'),
-              _formFill('E Kolom beton Bertulang K1', 'm3'),
+              _formFill('A. Galian Tanah pondasi', 'm3'),
+              _formFill('B. Galian Tanah Sloof', 'm3'),
+              _formFill('C. Pasir urug bawah fondasi\n t = 5 cm', 'm3'),
+              _formFill('D. Pasir urug bawah sloof\n t = 5 cm', 'm3'),
+              _formFill('E. Kolom beton Bertulang K1', 'm3'),
               //Text('halo'),
               _nextButton(input),
             ]),
@@ -107,32 +108,42 @@ class _ProjectBoQState extends State<ProjectBoQ> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Text(
-            detail,
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
+          Flexible(
+            flex: 5,
+            fit: FlexFit.tight,
+            child: Container(
+              padding: const EdgeInsets.only(right: 10),
+              child: Text(
+                detail,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 14,
+                ),
+              ),
             ),
           ),
-          Container(
-            width: 100.0,
-            height: 30.0,
-            child: TextField(
-              decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black))),
-            ),
+          Flexible(
+            flex: 4,
+            fit: FlexFit.tight,
+            child: CustomTextForm(
+                label: null, mustBeFilled: false, onChanged: (val) {}),
           ),
-          Text(
-            unit,
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
+          Flexible(
+            flex: 1,
+            fit: FlexFit.tight,
+            child: Container(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                unit,
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 14,
+                ),
+              ),
             ),
           ),
         ],
