@@ -90,8 +90,12 @@ Future<void> _popupToUploadCsv(BuildContext context) async {
         title: Text('Buat Proyek Baru'),
         content: Text('Apakah anda sudah memiliki file BoQ?'),
         actions: [
-          FlatButton(
-            child: Text('Import File .csv'),
+          RaisedButton(
+            color: Colors.green,
+            child: Text(
+              'Import File .csv',
+              style: TextStyle(color: AppColors().accent1),
+            ),
             onPressed: () {
               Navigator.pop(context);
               // TODO: upload file CSV
@@ -99,7 +103,10 @@ Future<void> _popupToUploadCsv(BuildContext context) async {
             },
           ),
           FlatButton(
-            child: Text('Input Manual'),
+            child: Text(
+              'Input Manual',
+              style: TextStyle(color: AppColors().accent2),
+            ),
             onPressed: () {
               Navigator.pop(context);
               Navigator.of(context).pushNamed('/projectinformation');
