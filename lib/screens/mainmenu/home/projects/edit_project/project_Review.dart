@@ -33,10 +33,10 @@ class _ProjectReviewState extends State<ProjectReview> {
         children: [
           SliverList(
             delegate: SliverChildListDelegate([
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: ProjectDetailsCard(child: input[0]),
-              ),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: 15),
+              //   child: ProjectDetailsCard(child: input[0]),
+              // ),
               Container(
                 margin: EdgeInsets.fromLTRB(15, 5, 15, 5),
                 padding: EdgeInsets.all(15),

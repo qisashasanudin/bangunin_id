@@ -106,8 +106,7 @@ class UploadPicture {
   }
 
   Future cropImage(picker) async {
-    File cropped = (imageFile.path ==
-            '/accounts/$userID/profilePicture/profilePicture.jpg')
+    File cropped = (attribute == 'profilePicture')
         ? await ImageCropper.cropImage(
             sourcePath: imageFile.path,
             aspectRatioPresets: [CropAspectRatioPreset.square],
