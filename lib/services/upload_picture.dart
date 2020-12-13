@@ -140,8 +140,11 @@ class UploadPicture {
     await FirebaseStorage.instance.ref().child(storagePath).putFile(source);
     String imageURL =
         await StorageService().getNetworkImageURL(context, storagePath);
-    (attribute == 'profilePicture')
-        ? await DatabaseService().writeData(userID, table, attribute, imageURL)
-        : await DatabaseService().writeData(docId, table, attribute, imageURL);
+    await DatabaseService().writeData(
+      (attribute == 'profilePicture') ? userID : docId,
+      table,
+      attribute,
+      imageURL,
+    );
   }
 }
