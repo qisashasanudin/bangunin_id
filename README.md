@@ -7,5 +7,8 @@ A Software Engineering Project made by:
 
 ## Screenshots:
 
-![](/assets/Screenshots/ss1.png) 
-![](/assets/Screenshots/ss2.png)
+![](/assets/Screenshots/1.png) 
+![](/assets/Screenshots/2.png)
+![](/assets/Screenshots/3.png) 
+![](/assets/Screenshots/4.png)
+![](/assets/Screenshots/5.png)
