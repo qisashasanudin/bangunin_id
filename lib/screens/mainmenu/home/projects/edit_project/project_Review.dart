@@ -3,7 +3,6 @@ import 'package:bangunin_id/models/project_details_model.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
 import 'package:bangunin_id/shared/UI_components/custom_button.dart';
-import 'package:bangunin_id/shared/UI_components/project_details_card.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:bangunin_id/shared/UI_components/custom_heading.dart';
 import 'package:flutter/material.dart';

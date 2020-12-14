@@ -53,16 +53,22 @@ class _ProjectMaterialFormState extends State<ProjectMaterialForm> {
   }
   //========================= main function =========================
 
-  Padding materialType() {
-    return Padding(
-      padding: EdgeInsets.all(10),
-      child: Text(
-          '${widget.children.name} ${widget.children.size ?? ''} ${widget.children.type ?? ''}'),
+  Flexible materialType() {
+    return Flexible(
+      flex: 5,
+      fit: FlexFit.tight,
+      child: Container(
+        padding: EdgeInsets.all(10),
+        child: Text(
+            '${widget.children.name} ${widget.children.size ?? ''} ${widget.children.type ?? ''}'),
+      ),
     );
   }
 
   Flexible materialAmount() {
     return Flexible(
+      flex: 4,
+      fit: FlexFit.tight,
       child: TextFormField(
         keyboardType: TextInputType.number,
         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -79,10 +85,17 @@ class _ProjectMaterialFormState extends State<ProjectMaterialForm> {
     );
   }
 
-  Padding materialUnit() {
-    return Padding(
-      padding: EdgeInsets.all(10.0),
-      child: Text('${widget.children.unit}'),
+  Flexible materialUnit() {
+    return Flexible(
+      flex: 3,
+      fit: FlexFit.tight,
+      child: Container(
+        padding: EdgeInsets.all(10.0),
+        child: Text(
+          '${widget.children.unit}',
+          textAlign: TextAlign.right,
+        ),
+      ),
     );
   }
 }
