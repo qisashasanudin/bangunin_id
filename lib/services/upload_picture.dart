@@ -106,8 +106,7 @@ class UploadPicture {
   }
 
   Future cropImage(picker) async {
-    File cropped = (imageFile.path ==
-            '/accounts/$userID/profilePicture/profilePicture.jpg')
+    File cropped = (attribute == 'profilePicture')
         ? await ImageCropper.cropImage(
             sourcePath: imageFile.path,
             aspectRatioPresets: [CropAspectRatioPreset.square],
@@ -141,6 +140,11 @@ class UploadPicture {
     await FirebaseStorage.instance.ref().child(storagePath).putFile(source);
     String imageURL =
         await StorageService().getNetworkImageURL(context, storagePath);
-    await DatabaseService().writeData(docId, table, attribute, imageURL);
+    await DatabaseService().writeData(
+      (attribute == 'profilePicture') ? userID : docId,
+      table,
+      attribute,
+      imageURL,
+    );
   }
 }
