@@ -65,7 +65,6 @@ class _ProjectBoQState extends State<ProjectBoQ> {
               _formFill('C. Pasir urug bawah fondasi\n t = 5 cm', 'm3'),
               _formFill('D. Pasir urug bawah sloof\n t = 5 cm', 'm3'),
               _formFill('E. Kolom beton Bertulang K1', 'm3'),
-              //Text('halo'),
               _nextButton(input),
             ]),
           ), //sliver-sliver lain ditulis di sini
