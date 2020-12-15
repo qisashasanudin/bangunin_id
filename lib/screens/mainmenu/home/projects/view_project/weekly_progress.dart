@@ -31,9 +31,9 @@ class _WeeklyProgressState extends State<WeeklyProgress> {
             children: <Widget>[
               myArticles("assets/img/UI/home_bg_default4.jpg",
                   "Perbaikan Atap Rumah", "perbaikan atap rumah"),
-              myArticles("assets/img/UI/home_bg_default4.jpg",
+              myArticles("assets/img/UI/home_bg_default1.jpg",
                   "Perbaikan depan rumah", "perbaikan depan rumah"),
-              myArticles("assets/img/UI/home_bg_default4.jpg",
+              myArticles("assets/img/UI/home_bg_default2.jpg",
                   "Perbaikan depan rumah", "perbaikan depan rumah"),
               myArticles("assets/img/UI/home_bg_default4.jpg",
                   "Perbaikan depan rumah", "perbaikan depan rumah"),
