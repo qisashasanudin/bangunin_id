@@ -25,6 +25,16 @@ class _WeeklyProgressState extends State<WeeklyProgress> {
       physics: NeverScrollableScrollPhysics(),
       children: [
         Container(
+          height: 200,
+          width: 200,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/img/UI/persen1.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Container(
           height: 250,
           child: ListView(
             scrollDirection: Axis.horizontal,
