@@ -29,8 +29,8 @@ class _WeeklyProgressState extends State<WeeklyProgress> {
           width: 200,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/img/UI/persen1.png"),
-              fit: BoxFit.cover,
+              image: AssetImage("assets/img/UI/character.png"),
+              fit: BoxFit.contain,
             ),
           ),
         ),
