@@ -202,6 +202,46 @@ List<BoQCategoryModel> boqDataset = [
       name: 'Pasang Plin keramik',
       unit: 'm2',
     ),
+    BoQModel(
+      name: 'Pasang Keramik Teras Depan',
+      unit: 'm2',
+    ),
+    BoQModel(
+      name: 'Pasang Plin keramik',
+      unit: 'm2',
+    ),
+    BoQModel(
+      name: 'Pasang Keramik Toilet',
+      unit: 'm2',
+    ),
+    BoQModel(
+      name: 'Pasang Plin keramik',
+      unit: 'm2',
+    ),
+    BoQModel(
+      name: 'Pasang Keramik Gudang',
+      unit: 'm2',
+    ),
+    BoQModel(
+      name: 'Pasang Plin keramik',
+      unit: 'm2',
+    ),
+    BoQModel(
+      name: 'Pasang Keramik R. Keluarga',
+      unit: 'm2',
+    ),
+    BoQModel(
+      name: 'Pasang Plin keramik',
+      unit: 'm2',
+    ),
+    BoQModel(
+      name: 'Pasang Keramik Teras Belakang',
+      unit: 'm2',
+    ),
+    BoQModel(
+      name: 'Pasang Plin keramik',
+      unit: 'm2',
+    ),
   ]),
   BoQCategoryModel(categoryName: 'Toilet', contents: [
     BoQModel(name: 'Pekerjaan Toilet LT 1 (2 Ruang)', unit: 'judul'),
