@@ -78,7 +78,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
             ),
             //sliver-sliver lain ditulis di sini
           ],
-          floatingButton: SpeedDial(
+          floatingActionButton: SpeedDial(
             animatedIcon: AnimatedIcons.menu_close,
             foregroundColor: AppColors().accent1,
             elevation: 10,

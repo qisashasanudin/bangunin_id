@@ -70,7 +70,6 @@ class _ProjectMaterialsState extends State<ProjectMaterials> {
                     ],
                   ),
                 ),
-                _nextButton(input),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
@@ -78,9 +77,11 @@ class _ProjectMaterialsState extends State<ProjectMaterials> {
                     style: TextStyle(color: Colors.red, fontSize: 14.0),
                   ),
                 ),
+                SizedBox(height: 50),
               ]),
             ), //sliver-sliver lain ditulis di sini
           ],
+          floatingActionButton: _nextButton(input),
         ),
       ),
     );
@@ -178,19 +179,20 @@ class _ProjectMaterialsState extends State<ProjectMaterials> {
     });
   }
 
-  Padding _nextButton(List input) {
-    return Padding(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        child: CustomButton(
-          prompt: (input.length > 1) ? 'Simpan' : 'Selanjutnya',
-          onPressed: (input.length > 1)
-              ? () async {
-                  _uploadData(input[0]);
-                }
-              : () {
-                  _moveToNewProjectReview(input[0]);
-                },
-        ));
+  FloatingActionButton _nextButton(List input) {
+    return FloatingActionButton.extended(
+      elevation: 10,
+      backgroundColor: Theme.of(context).primaryColor,
+      label: Text((input.length > 1) ? 'Simpan' : 'Selanjutnya',
+          style: TextStyle(color: AppColors().accent1)),
+      onPressed: (input.length > 1)
+          ? () async {
+              _uploadData(input[0]);
+            }
+          : () {
+              _moveToNewProjectReview(input[0]);
+            },
+    );
   }
 
   _moveToNewProjectReview(ProjectDetailsModel projectDetails) {

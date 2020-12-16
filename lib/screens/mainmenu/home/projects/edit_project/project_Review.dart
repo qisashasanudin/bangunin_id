@@ -329,7 +329,6 @@ class _ProjectReviewState extends State<ProjectReview> {
                 'isCompleted': projectDetails.isCompleted ?? false,
               },
             );
-      //TODO: material yang dihapus belum bisa hilang dari database
       for (var element in projectMaterials) {
         await DatabaseService(
           uid: AuthService().getCurrentUID(),

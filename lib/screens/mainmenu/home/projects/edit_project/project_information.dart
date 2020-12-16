@@ -1,10 +1,10 @@
 import 'package:bangunin_id/models/project_details_model.dart';
 import 'package:bangunin_id/services/auth.dart';
 import 'package:bangunin_id/services/database.dart';
+import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:bangunin_id/shared/UI_components/custom_text_form.dart';
 import 'package:bangunin_id/shared/UI_components/on_back_pressed.dart';
 import 'package:bangunin_id/shared/UI_components/form_field_decoration.dart';
-import 'package:bangunin_id/shared/UI_components/custom_button.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -71,11 +71,12 @@ class _ProjectInformationState extends State<ProjectInformation> {
                 _clientNameForm(),
                 _clientEmailForm(),
                 _clientPhoneForm(),
-                _nextButton(),
+                SizedBox(height: 70),
               ]),
             ),
             //sliver-sliver lain ditulis di sini
           ],
+          floatingActionButton: _nextButton(),
         ),
       ),
     );
@@ -194,16 +195,17 @@ class _ProjectInformationState extends State<ProjectInformation> {
     });
   }
 
-  Padding _nextButton() {
-    return Padding(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        child: CustomButton(
-          prompt:
-              (_projectDetails.projectId != null) ? 'Simpan' : 'Selanjutnya',
-          onPressed: (_projectDetails.projectId == null)
-              ? _moveToNewProjectBoQ
-              : () => _saveChanges(),
-        ));
+  FloatingActionButton _nextButton() {
+    return FloatingActionButton.extended(
+      elevation: 10,
+      backgroundColor: Theme.of(context).primaryColor,
+      label: Text(
+          (_projectDetails.projectId != null) ? 'Simpan' : 'Selanjutnya',
+          style: TextStyle(color: AppColors().accent1)),
+      onPressed: (_projectDetails.projectId == null)
+          ? _moveToNewProjectBoQ
+          : () => _saveChanges(),
+    );
   }
 
   _moveToNewProjectBoQ() {

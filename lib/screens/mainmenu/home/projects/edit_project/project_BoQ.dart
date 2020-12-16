@@ -1,6 +1,7 @@
+import 'package:bangunin_id/models/BoQ_model.dart';
 import 'package:bangunin_id/models/project_details_model.dart';
 import 'package:bangunin_id/services/auth.dart';
-import 'package:bangunin_id/shared/UI_components/custom_button.dart';
+import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:bangunin_id/shared/UI_components/custom_text_form.dart';
 import 'package:bangunin_id/shared/UI_components/on_back_pressed.dart';
 import 'package:bangunin_id/shared/page_templates/sliver_page.dart';
@@ -15,6 +16,7 @@ class ProjectBoQ extends StatefulWidget {
 class _ProjectBoQState extends State<ProjectBoQ> {
   final _formKey = GlobalKey<FormState>();
   final userID = AuthService().getCurrentUID();
+  final currentBoQDataset = List.from(boqDataset);
 
   //========================= main function =========================
   @override
@@ -30,7 +32,7 @@ class _ProjectBoQState extends State<ProjectBoQ> {
           //   'assets/img/UI/new_project_bg.jpg',
           //   fit: BoxFit.cover,
           // ),
-          title: Text('BoQ ${input.projectName ?? 'Baru'}'),
+          title: Text('BoQ Proyek ${input.projectName ?? 'Baru'}'),
           children: [
             SliverList(
               delegate: SliverChildListDelegate([
@@ -43,142 +45,53 @@ class _ProjectBoQState extends State<ProjectBoQ> {
                         'Rincian Anggaran Biaya \nPekerjaan Pembangunan Rumah',
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  //child: ProjectDetailsCard(child: input),
+                DefaultTabController(
+                  length: currentBoQDataset.length,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      _tabledetail(),
-                      Divider(
-                        color: Colors.white,
+                    children: [
+                      TabBar(
+                        isScrollable: true,
+                        labelColor: Theme.of(context).primaryColor,
+                        labelStyle: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                        unselectedLabelColor: Colors.grey,
+                        unselectedLabelStyle: TextStyle(fontSize: 16),
+                        tabs: <Widget>[
+                          for (var element in currentBoQDataset)
+                            Tab(child: Text(element.categoryName)),
+                        ],
                       ),
+                      Container(
+                        height: MediaQuery.of(context).size.height,
+                        child: TabBarView(
+                          children: [
+                            for (var element in currentBoQDataset)
+                              ListView(
+                                shrinkWrap: true,
+                                padding: EdgeInsets.zero,
+                                physics: NeverScrollableScrollPhysics(),
+                                children: [
+                                  _tabledetail(),
+                                  for (var item in element.contents)
+                                    (item.unit != 'judul')
+                                        ? _formFill(item)
+                                        : _judul(item.name),
+                                ],
+                              ),
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ),
-                _judul('01.1 Pekerjaan Persiapan'),
-                _formFill('A. Koordinasi Keamanan', 'ls'),
-                _formFill('B. Pembersihan Lokasi', 'm2'),
-                _formFill('C. Uragan Tanah', 'm3'),
-                _formFill('D. Mobilisasi dan demobilisasi', 'ls'),
-                _formFill('E. Bedeng Tukang', 'ls'),
-                _judul('01.2 Pekerjaan Struktur'),
-                _formFill('A. Galian Tanah pondasi', 'm3'),
-                _formFill('B. Galian Tanah Sloof', 'm3'),
-                _formFill('C. Pasir urug bawah fondasi t = 5 cm', 'm3'),
-                _formFill('D. Pasir urug bawah sloof t = 5 cm', 'm3'),
-                _formFill('E. Kolom beton Bertulang K1', 'm3'),
-                _judul('01.3 Pekerjaan Dinding'),
-                _judul('I Pekerjaan Dinding Lantai 1'),
-                _formFill('A. Pasangan bata (1 : 2)', 'm2'),
-                _formFill('B. Pasangan bata roster', 'm2'),
-                _formFill('C. Plester (1 : 3)', 'm2'),
-                _formFill('D. Acian', 'm2'),
-                _judul('01.4 Lantai, Plafon dan Jendela Pintu'),
-                _judul('Lantai 1'),
-                _formFill('A. Rangka Plafond Besi holo', 'm2'),
-                _formFill('B. Plafond gypsum 9mm', 'm2'),
-                _formFill('C. Cat Plafond', 'm2'),
-                _formFill('D. Pasang Plin Keramik', 'm2'),
-                _formFill('Pasang Keramik teras depan', 'm2'),
-                _formFill('Pasang Keramik Toilet', 'm2'),
-                _formFill('Pasang Keramik Gudang', 'm2'),
-                _formFill('Pasang Plin Keramik', 'm2'),
-                _formFill('Pasang Keramik Teras Belakang', 'm2'),
-                _formFill('Pasang Pintu KM uPVC', 'bh'),
-                _formFill('Pasang Pintu uPVC sldiing', 'bh'),
-                _judul('01.5 Toilet'),
-                _judul('I Pekerjaan Toilet Lantai 1 (2 Ruang'),
-                _formFill('A. Pasang Keramik Dinding', 'm2'),
-                _formFill('D. Closet Duduk toto Standart', 'set'),
-                _formFill('F. Wastafel Toto Standart', 'bh'),
-                _formFill('G. Stop Kran Toto', 'bh'),
-                _judul('01.7 Pekerjaan Atap'),
-                _formFill('Rangka atap baja ringan', 'm2'),
-                _formFill('Penutup atap Genteng Atap Utama', 'm2'),
-                _judul('01.8 Pekerjaan Plumbing'),
-                _formFill('A. Talang PVC 4" diameter', 'm'),
-                _formFill('B. RD (Roof Drain) 4"', 'bh'),
-                _formFill('C. PVC pipe class AW ex. Wavin 1 1/2" diamter', 'm'),
-                _formFill('D. Pipa air panas \nWavin size 1/2" diameter', 'm'),
-                _judul('01.12 Pekerjaan Listrik'),
-                _formFill('A. instalasi lampu downlight', 'titik'),
-                _formFill('B. instalasi stop kontak', 'titik'),
-                _formFill('D. Box Panel listrik', 'bh'),
-                _formFill('E. Jaringan (MCB)', 'bh'),
-                _formFill('F. Instalasi TV saklar panasonic', 'titik'),
-                _formFill('G. Instalasi Telp saklar panasonic', 'titik'),
-                _judul('01.14 Lain-lain'),
-                _formFill('H. Rumput gajah mini', 'm2'),
-                _formFill('H. Anti rayap', 'm2'),
-                _formFill('Paving Block', 'm2'),
-                _nextButton(input),
-                _judul('01.1 Pekerjaan Persiapan'),
-                _formFill('A. Koordinasi Keamanan', 'ls'),
-                _formFill('B. Pembersihan Lokasi', 'm2'),
-                _formFill('C. Uragan Tanah', 'm3'),
-                _formFill('D. Mobilisasi dan demobilisasi', 'ls'),
-                _formFill('E. Bedeng Tukang', 'ls'),
-                _judul('01.2 Pekerjaan Struktur'),
-                _formFill('A. Galian Tanah pondasi', 'm3'),
-                _formFill('B. Galian Tanah Sloof', 'm3'),
-                _formFill('C. Pasir urug bawah fondasi\n t = 5 cm', 'm3'),
-                _formFill('D. Pasir urug bawah sloof\n t = 5 cm', 'm3'),
-                _formFill('E. Kolom beton Bertulang K1', 'm3'),
-                _judul('01.3 Pekerjaan Dinding'),
-                _judul('I Pekerjaan Dinding Lantai 1'),
-                _formFill('A Pasangan bata (1 : 2)', 'm2'),
-                _formFill('B Pasangan bata roster', 'm2'),
-                _formFill('C Plester (1 : 3)', 'm2'),
-                _formFill('D Acian', 'm2'),
-                _judul('01.4 Lantai, Plafon dan Jendela Pintu'),
-                _judul('Lantai 1'),
-                _formFill('A Rangka Plafond Besi holo', 'm2'),
-                _formFill('B Plafond gypsum 9mm', 'm2'),
-                _formFill('C Cat Plafond', 'm2'),
-                _formFill('D Pasang Plin Keramik', 'm2'),
-                _formFill('Pasang Keramik teras depan', 'm2'),
-                _formFill('Pasang Keramik Toilet', 'm2'),
-                _formFill('Pasang Keramik Gudang', 'm2'),
-                _formFill('Pasang Plin Keramik', 'm2'),
-                _formFill('Pasang Keramik Teras Belakang', 'm2'),
-                _formFill('Pasang Pintu KM uPVC', 'bh'),
-                _formFill('Pasang Pintu uPVC sldiing', 'bh'),
-                _judul('01.5 Toilet'),
-                _judul('I Pekerjaan Toilet Lantai 1 (2 Ruang'),
-                _formFill('A Pasang Keramik Dinding', 'm2'),
-                _formFill('D Closet Duduk toto Standart', 'set'),
-                _formFill('F Wastafel Toto Standart', 'bh'),
-                _formFill('G Stop Kran Toto', 'bh'),
-                _judul('01.7 Pekerjaan Atap'),
-                _formFill('Rangka atap baja ringan', 'm2'),
-                _formFill('Penutup atap Genteng Atap Utama', 'm2'),
-                _judul('01.8 Pekerjaan Plumbing'),
-                _formFill('A Talang PVC 4" diameter', 'm'),
-                _formFill('B RD (Roof Drain) 4"', 'bh'),
-                _formFill(
-                    'C PVC pipe class AW ex.\n Wavin 1 1/2" diamter', 'm'),
-                _formFill('D Pipa air panas \nWavin size 1/2" diameter', 'm'),
-                _judul('01.12 Pekerjaan Listrik'),
-                _formFill('A instalasi lampu downlight', 'titik'),
-                _formFill('B instalasi stop kontak', 'titik'),
-                _formFill('D Box Panel listrik', 'bh'),
-                _formFill('E Jaringan (MCB)', 'bh'),
-                _formFill('F Instalasi TV saklar panasonic', 'titik'),
-                _formFill('G Instalasi Telp saklar panasonic', 'titik'),
-                _judul('01.14 Lain-lain'),
-                _formFill('H Rumput gajah mini', 'm2'),
-                _formFill('H Anti rayap', 'm2'),
-                _formFill('Paving Block', 'm2'),
-                _nextButton(input),
               ]),
             ), //sliver-sliver lain ditulis di sini
           ],
+          floatingActionButton: _nextButton(input),
         ),
       ),
     );
   }
-
   //========================= main function =========================
 
   Padding _judul(String judul) {
@@ -198,18 +111,18 @@ class _ProjectBoQState extends State<ProjectBoQ> {
     );
   }
 
-  Padding _nextButton(ProjectDetailsModel input) {
-    return Padding(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        child: CustomButton(
-          prompt: 'Selanjutnya',
-          onPressed: () {
-            _moveToNewProjectMaterials(input);
-          },
-        ));
+  FloatingActionButton _nextButton(ProjectDetailsModel input) {
+    return FloatingActionButton.extended(
+      elevation: 10,
+      backgroundColor: Theme.of(context).primaryColor,
+      label: Text('Selanjutnya', style: TextStyle(color: AppColors().accent1)),
+      onPressed: () {
+        _moveToNewProjectMaterials(input);
+      },
+    );
   }
 
-  Padding _formFill(String detail, String unit) {
+  Padding _formFill(BoQModel item) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
       child: Row(
@@ -220,7 +133,7 @@ class _ProjectBoQState extends State<ProjectBoQ> {
             child: Container(
               padding: const EdgeInsets.only(right: 10),
               child: Text(
-                detail,
+                item.name,
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.normal,
@@ -233,7 +146,13 @@ class _ProjectBoQState extends State<ProjectBoQ> {
             flex: 4,
             fit: FlexFit.tight,
             child: CustomTextForm(
-                label: null, mustBeFilled: false, onChanged: (val) {}),
+                label: null,
+                mustBeFilled: false,
+                onChanged: (val) {
+                  setState(() {
+                    item.amount = int.parse(val);
+                  });
+                }),
           ),
           Flexible(
             flex: 1,
@@ -241,7 +160,7 @@ class _ProjectBoQState extends State<ProjectBoQ> {
             child: Container(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
-                unit,
+                item.unit,
                 textAlign: TextAlign.right,
                 style: TextStyle(
                   color: Colors.black,
@@ -256,38 +175,41 @@ class _ProjectBoQState extends State<ProjectBoQ> {
     );
   }
 
-  Container _tabledetail() {
-    return Container(
-      color: Colors.orangeAccent,
-      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(
-            'NO  Detail Pekerjaan',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
+  Padding _tabledetail() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+      child: Container(
+        color: Colors.orangeAccent,
+        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(
+              'NO  Detail Pekerjaan',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
             ),
-          ),
-          Text(
-            'Volume',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
+            Text(
+              'Jumlah',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
             ),
-          ),
-          Text(
-            'Unit',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
+            Text(
+              'Unit',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

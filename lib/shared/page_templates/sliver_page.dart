@@ -9,7 +9,8 @@ class SliverPage extends StatefulWidget {
     List<Widget> children,
     this.title,
     this.backgroundImage,
-    this.floatingButton,
+    this.floatingActionButton,
+    this.floatingActionButtonLocation,
     List<Widget> persistentFooterButtons,
   })  : this.children = children ?? [],
         this.persistentFooterButtons = persistentFooterButtons ?? [],
@@ -18,7 +19,8 @@ class SliverPage extends StatefulWidget {
   final List<Widget> children;
   final Text title;
   final Image backgroundImage;
-  final Widget floatingButton;
+  final Widget floatingActionButton;
+  final FloatingActionButtonLocation floatingActionButtonLocation;
   final List<Widget> persistentFooterButtons;
 
   @override
@@ -47,7 +49,8 @@ class _SliverPageState extends State<SliverPage> {
           for (var element in widget.children) element,
         ],
       ),
-      floatingActionButton: widget.floatingButton,
+      floatingActionButton: widget.floatingActionButton,
+      floatingActionButtonLocation: widget.floatingActionButtonLocation,
       persistentFooterButtons: widget.persistentFooterButtons,
     );
   }
