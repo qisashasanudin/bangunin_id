@@ -204,7 +204,23 @@ List<BoQCategoryModel> boqDataset = [
     ),
   ]),
   BoQCategoryModel(categoryName: 'Toilet', contents: [
-    BoQModel(),
+    BoQModel(name: 'Pekerjaan Toilet LT 1 (2 Ruang)', unit: 'judul'),
+    BoQModel(
+      name: 'Pasang Keramik Dinding',
+      unit: 'm2',
+    ),
+    BoQModel(
+      name: 'Closet Duduk Toto Standart',
+      unit: 'set',
+    ),
+    BoQModel(
+      name: 'Wastafel Toto Standart',
+      unit: 'bh',
+    ),
+    BoQModel(
+      name: 'Stop Kran Toto',
+      unit: 'bh',
+    ),
   ]),
   BoQCategoryModel(categoryName: 'Atap', contents: [
     BoQModel(),
