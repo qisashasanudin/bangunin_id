@@ -185,7 +185,23 @@ List<BoQCategoryModel> boqDataset = [
     ),
   ]),
   BoQCategoryModel(categoryName: 'Lantai, Plafon, Jendela Pintu', contents: [
-    BoQModel(),
+    BoQModel(name: 'LANTAI 1', unit: 'judul'),
+    BoQModel(
+      name: 'Rangka Plafond Besi Holo',
+      unit: 'm2',
+    ),
+    BoQModel(
+      name: 'Plafond gypsum 9 mm',
+      unit: 'm2',
+    ),
+    BoQModel(
+      name: 'Lis Plafond Gypsum 15 cm',
+      unit: 'm',
+    ),
+    BoQModel(
+      name: 'Pasang Plin keramik',
+      unit: 'm2',
+    ),
   ]),
   BoQCategoryModel(categoryName: 'Toilet', contents: [
     BoQModel(),
