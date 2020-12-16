@@ -223,15 +223,76 @@ List<BoQCategoryModel> boqDataset = [
     ),
   ]),
   BoQCategoryModel(categoryName: 'Atap', contents: [
-    BoQModel(),
+    BoQModel(name: 'Atap', unit: 'judul'),
+    BoQModel(
+      name: 'Rangka atap baja ringan',
+      unit: 'm2',
+    ),
+    BoQModel(
+      name: 'Penutup atap genteng utama',
+      unit: 'm2',
+    ),
+    BoQModel(
+      name: 'Pek. Dak talang dan topian',
+      unit: 'm3',
+    ),
   ]),
   BoQCategoryModel(categoryName: 'Plumbing', contents: [
-    BoQModel(),
+    BoQModel(name: 'Instalasi Air Hujan', unit: 'judul'),
+    BoQModel(
+      name: 'Talang PVC 4" diameter',
+      unit: 'm2',
+    ),
+    BoQModel(
+      name: 'RD (Roof Drain) 4"',
+      unit: 'm2',
+    ),
+    BoQModel(name: 'Instalasi Air Kotor', unit: 'judul'),
+    BoQModel(
+      name: 'PVC pipe class AW ex. Wavin 4" diameter',
+      unit: 'm',
+    ),
+    BoQModel(
+      name: 'PVC pipe class AW ex. Wavin 3" diameter',
+      unit: 'm2',
+    ),
+    BoQModel(
+      name: 'PVC pipe class AW ex. Wavin 1 1/2" diameter',
+      unit: 'm2',
+    ),
   ]),
   BoQCategoryModel(categoryName: 'Listrik', contents: [
-    BoQModel(),
+    BoQModel(name: 'Pekerjaan listrik', unit: 'judul'),
+    BoQModel(
+      name: 'Instalasi titik lampu downlight 4"',
+      unit: 'titik',
+    ),
+    BoQModel(
+      name: 'Instalasi stop kontak Panasonic',
+      unit: 'titik',
+    ),
+    BoQModel(
+      name: 'jaringan MCB',
+      unit: 'bh',
+    ),
+    BoQModel(
+      name: 'Box panel listrik',
+      unit: 'bh',
+    ),
   ]),
   BoQCategoryModel(categoryName: 'Lain-lain', contents: [
-    BoQModel(),
+    BoQModel(name: 'lain-lain', unit: 'judul'),
+    BoQModel(
+      name: 'Rumput gajah mini',
+      unit: 'm2',
+    ),
+    BoQModel(
+      name: 'Anti rayap',
+      unit: 'm2',
+    ),
+    BoQModel(
+      name: 'Paving Block',
+      unit: 'm2',
+    ),
   ]),
 ];
