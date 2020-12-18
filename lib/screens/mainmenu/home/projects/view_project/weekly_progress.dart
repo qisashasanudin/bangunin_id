@@ -24,6 +24,7 @@ class _WeeklyProgressState extends State<WeeklyProgress> {
       padding: EdgeInsets.zero,
       physics: NeverScrollableScrollPhysics(),
       children: [
+        Padding(padding: EdgeInsets.all(10)),
         Text(
           'Progress Proyek:   50%',
           textAlign: TextAlign.center,
@@ -41,6 +42,7 @@ class _WeeklyProgressState extends State<WeeklyProgress> {
             ),
           ),
         ),
+        Divider(),
         Container(
           height: 250,
           child: ListView(
@@ -82,7 +84,7 @@ Container myArticles(String imageVal, String heading, String subHeading) {
       padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 5),
       child: Card(
         clipBehavior: Clip.antiAlias,
-        elevation: 10,
+        elevation: 2,
         shadowColor: Color(0x802196F3),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Column(
