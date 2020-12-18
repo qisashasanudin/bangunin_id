@@ -1,4 +1,5 @@
 import 'package:bangunin_id/models/material_model.dart';
+import 'package:bangunin_id/screens/mainmenu/home/projects/view_project/stacked_bar_chart.dart';
 import 'package:bangunin_id/shared/UI_components/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -31,16 +32,24 @@ class _WeeklyProgressState extends State<WeeklyProgress> {
           style: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
         ),
-        Container(
-          padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-          height: 200,
-          width: 200,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/img/UI/newfile.jpg"),
-              fit: BoxFit.contain,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Flexible(
+              child: Container(
+                height: 200,
+                child: Image.asset(
+                  "assets/img/UI/persen2.png",
+                  fit: BoxFit.contain,
+                ),
+              ),
             ),
-          ),
+            Container(
+              width: 100,
+              height: 200,
+              child: StackedBarChart.withSampleData(),
+            ),
+          ],
         ),
         Divider(),
         Container(
