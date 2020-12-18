@@ -24,21 +24,19 @@ class _WeeklyProgressState extends State<WeeklyProgress> {
       padding: EdgeInsets.zero,
       physics: NeverScrollableScrollPhysics(),
       children: [
+        Text(
+          'Progress Proyek:   50%',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
+        ),
         Container(
           padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
           height: 200,
           width: 200,
-          child: Text(
-            'Progress Proyek:   50%',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.normal,
-                fontSize: 20),
-          ),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/img/UI/persen1.png"),
+              image: AssetImage("assets/img/UI/newfile.jpg"),
               fit: BoxFit.contain,
             ),
           ),
